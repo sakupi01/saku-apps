@@ -3,9 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "exports": {
-        "./button": "./src/button.tsx",
-        "./card": "./src/card.tsx",
-        "./code": "./src/code.tsx"
+        ".": "./src/index.ts"
     },
     "scripts": {
         "test:unit": "jest --config jest.config.ts",
@@ -22,17 +20,29 @@
         "cmp:gen": "npx hygen cmp new",
         "storybook": "storybook dev -p 6006",
         "build:storybook": "storybook build",
-        "generate:component": "turbo gen react-component"
+        "gen": "turbo gen react-component",
+        "build-storybook": "storybook build"
     },
     "devDependencies": {
         "@biomejs/biome": "1.5.3",
         "@repo/biome-config": "*",
         "@repo/typescript-config": "*",
+        "@storybook/addon-essentials": "^8.0.0-beta.2",
+        "@storybook/addon-interactions": "^8.0.0-beta.2",
+        "@storybook/addon-links": "^8.0.0-beta.2",
+        "@storybook/addon-mdx-gfm": "^8.0.0-beta.2",
+        "@storybook/addon-onboarding": "^1.0.11",
+        "@storybook/blocks": "^8.0.0-beta.2",
+        "@storybook/react": "^8.0.0-beta.2",
+        "@storybook/react-vite": "^8.0.0-beta.2",
+        "@storybook/test": "^8.0.0-beta.2",
         "@turbo/gen": "^1.11.3",
         "@types/node": "^20.10.6",
         "@types/react": "^18.2.46",
         "@types/react-dom": "^18.2.18",
         "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "storybook": "^8.0.0-beta.2",
         "typescript": "^5.3.3"
     }
 }
