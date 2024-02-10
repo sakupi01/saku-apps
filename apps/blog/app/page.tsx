@@ -1,6 +1,4 @@
-import { Button } from "@repo/ui/button";
-import { Card } from "@repo/ui/card";
-import { Code } from "@repo/ui/code";
+import { Button, Card, Code, Test } from "@repo/ui";
 import Image from "next/image";
 import styles from "./page.module.css";
 
@@ -81,6 +79,8 @@ export default function Page(): JSX.Element {
       <Button appName="web" className={styles.button}>
         Click me!
       </Button>
+
+      <Test />
 
       <div className={styles.hero}>
         <div className={styles.heroContent}>
