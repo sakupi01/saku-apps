@@ -1,0 +1,14 @@
+{
+    "linter": {
+        "rules": {
+            "correctness": {
+                "noUnusedVariables": "error",
+                "useHookAtTopLevel": "error",
+                "useExhaustiveDependencies": "error"
+            },
+            "style": {
+                "noNamespace": "error"
+            }
+        }
+    }
+}

@@ -1,13 +1,11 @@
 {
-    "name": "@repo/ui",
-    "version": "0.0.0",
+    "name": "blog",
+    "version": "1.0.0",
     "private": true,
-    "exports": {
-        "./button": "./src/button.tsx",
-        "./card": "./src/card.tsx",
-        "./code": "./src/code.tsx"
-    },
     "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
         "test:unit": "jest --config jest.config.ts",
         "test:update": "jest --config jest.config.ts --updateSnapshot",
         "test:watch": "jest --config jest.config.ts --watchAll",
@@ -17,22 +15,27 @@
         "check:lint": "bunx biome lint .",
         "check:typecheck": "tsc --noEmit",
         "check:lint-format": "bunx biome check .",
-        "check": "bun run check:typecheck & bunx biome check .",
+        "check": "bun run check:typecheck & bunx @biomejs/biome check --apply  **/*.ts **/*.tsx",
         "ui:gen": "npx hygen ui new",
         "cmp:gen": "npx hygen cmp new",
-        "storybook": "storybook dev -p 6006",
-        "build:storybook": "storybook build",
-        "generate:component": "turbo gen react-component"
+        "storybook": "EXPO_PUBLIC_STORYBOOK_ENABLED='true' storybook dev -p 6006",
+        "storybook:generate": "sb-rn-get-stories",
+        "storybook:watch": "sb-rn-watcher",
+        "build:storybook": "storybook build"
+    },
+    "dependencies": {
+        "@repo/ui": "*",
+        "next": "^14.0.4",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
     },
     "devDependencies": {
-        "@biomejs/biome": "1.5.3",
+        "@next/eslint-plugin-next": "^14.0.4",
         "@repo/biome-config": "*",
         "@repo/typescript-config": "*",
-        "@turbo/gen": "^1.11.3",
         "@types/node": "^20.10.6",
         "@types/react": "^18.2.46",
         "@types/react-dom": "^18.2.18",
-        "react": "^18.2.0",
         "typescript": "^5.3.3"
     }
 }

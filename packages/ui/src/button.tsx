@@ -11,6 +11,7 @@ interface ButtonProps {
 export const Button = ({ children, className, appName }: ButtonProps) => {
   return (
     <button
+      type="submit"
       className={className}
       onClick={() => alert(`Hello from your ${appName} app!`)}
     >
