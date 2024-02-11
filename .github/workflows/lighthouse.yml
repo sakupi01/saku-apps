@@ -48,5 +48,8 @@ jobs:
           key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
           restore-keys: ${{ runner.os }}-bun
 
+      - name: Build
+        run: bun run build
+      
       - name: 🌟Run Lighthouse CI
-        run: bun run build && lhci autorun
+        run: bun add -g @lhci/cli@0.13.x && lhci autorun
