@@ -1,9 +1,6 @@
 name: Release Storybook to GitHubPages
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 permissions:
     contents: read
