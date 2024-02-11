@@ -11,17 +11,11 @@
         "test:watch": "jest --config jest.config.ts --watchAll",
         "test:debug": "jest --config jest.config.ts --runInBand",
         "test": "bun run test:unit",
-        "check:format": "bunx biome format --write .",
-        "check:lint": "bunx biome lint .",
+        "check:format": "bunx biome format --changed --write .",
+        "check:lint": "bunx biome lint --changed --apply .",
         "check:typecheck": "tsc --noEmit",
-        "check:lint-format": "bunx biome check .",
-        "check": "bun run check:typecheck & bunx @biomejs/biome check --apply  **/*.ts **/*.tsx",
-        "ui:gen": "npx hygen ui new",
-        "cmp:gen": "npx hygen cmp new",
-        "storybook": "EXPO_PUBLIC_STORYBOOK_ENABLED='true' storybook dev -p 6006",
-        "storybook:generate": "sb-rn-get-stories",
-        "storybook:watch": "sb-rn-watcher",
-        "build:storybook": "storybook build"
+        "check:lint-format": "bunx biome check --changed --apply .",
+        "check": "bun run check:typecheck & bunx biome check --changed --apply ."
     },
     "dependencies": {
         "@repo/ui": "*",
@@ -31,7 +25,6 @@
     },
     "devDependencies": {
         "@next/eslint-plugin-next": "^14.0.4",
-        "@repo/biome-config": "*",
         "@repo/typescript-config": "*",
         "@types/node": "^20.10.6",
         "@types/react": "^18.2.46",

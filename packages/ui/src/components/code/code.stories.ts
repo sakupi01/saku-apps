@@ -1,20 +1,18 @@
-import { Meta, StoryObj } from '@storybook/react'
-import { Code } from './code';
+import { Meta, StoryObj } from "@storybook/react";
+import { Code } from "./code";
 
 const meta = {
   title: "Code",
   component: Code,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
-  argTypes: {
-  },
+  argTypes: {},
 } satisfies Meta<typeof Code>;
 
-
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
