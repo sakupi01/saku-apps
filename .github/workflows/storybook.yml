@@ -26,8 +26,14 @@ jobs:
         with:
             bun-version: latest
 
-      - name: Install dependencies
-        run: bun install
+      #👇 Add Storybook build and deploy to GitHub Pages as a step in the workflow
+      - name: Publish Storybook
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.1
+        with:
+          install_command: bun install
+          build_command: bun run build:storybook
+          path: ./packages/ui/storybook-static
+          checkout: false # def
 
       - name: Cache bun dependencies
         uses: actions/cache@v3
@@ -40,11 +46,3 @@ jobs:
       - name: Install dependencies if cache invalid
         if: steps.bun-cache.outputs.cache-hit != 'true'
         run: bun i --frozen-lockfile
-
-      #👇 Add Storybook build and deploy to GitHub Pages as a step in the workflow
-      - name: Publish Storybook
-        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.1
-        with:
-          build_command: bun run build:storybook
-          path: ./packages/ui/storybook-static
-          checkout: false # def
