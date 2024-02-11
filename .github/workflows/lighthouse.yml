@@ -53,3 +53,5 @@ jobs:
       
       - name: 🌟Run Lighthouse CI
         run: bun add -g @lhci/cli@0.13.x && lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
