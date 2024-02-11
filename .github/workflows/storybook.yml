@@ -2,18 +2,10 @@ name: Release Storybook to GitHubPages
 
 on: [push]
 
-permissions:
-    contents: read
-    pages: write
-    id-token: write
-
 jobs:
   release:
-    name: Publish Storybook
+    name: Project Build
     runs-on: ubuntu-latest
-    env:
-        TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-        TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
     steps:
       - name: Checkout Commit
@@ -26,14 +18,8 @@ jobs:
         with:
             bun-version: latest
 
-      #👇 Add Storybook build and deploy to GitHub Pages as a step in the workflow
-      - name: Publish Storybook
-        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.2
-        with:
-          install_command: bun install
-          build_command: bun run build:storybook
-          path: ./packages/ui/storybook-static
-          checkout: false # def
+      - name: Install dependencies
+        run: bun install
 
       - name: Cache bun dependencies
         uses: actions/cache@v3
@@ -46,3 +32,12 @@ jobs:
       - name: Install dependencies if cache invalid
         if: steps.bun-cache.outputs.cache-hit != 'true'
         run: bun i --frozen-lockfile
+
+      - name: Build storybook of @repo/ui
+        run: bun run build:storybook
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./packages/ui/storybook-static
