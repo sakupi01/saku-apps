@@ -15,7 +15,8 @@
         "check:lint": "bunx biome lint --changed --apply .",
         "check:typecheck": "tsc --noEmit",
         "check:lint-format": "bunx biome check --changed --apply .",
-        "check": "bun run check:typecheck & bunx biome check --apply . --no-errors-on-unmatched"
+        "check": "bun run check:typecheck & bunx biome check --apply . --no-errors-on-unmatched",
+        "setup": "./bin/setup.sh"
     },
     "dependencies": {
         "@repo/ui": "*",
