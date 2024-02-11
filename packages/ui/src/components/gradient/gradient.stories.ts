@@ -1,22 +1,19 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Button } from "./button";
+import { Gradient } from "./gradient";
 
 const meta = {
-  title: "Button",
-  component: Button,
+  title: "Gradient",
+  component: Gradient,
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },
   argTypes: {},
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof Gradient>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {
-    children: "Hello world!",
-    appName: "app",
-  },
+  args: {},
 };
