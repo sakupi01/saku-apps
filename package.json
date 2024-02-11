@@ -3,39 +3,43 @@
     "private": true,
     "scripts": {
         "build": "turbo build",
+        "build:storybook": "turbo build:storybook",
         "dev": "turbo dev",
         "lint": "turbo check:lint",
         "format": "turbo check:format",
         "lf": "turbo check:lint-format",
         "typecheck": "turbo check:typecheck",
-        "checkAll": "turbo check:lint-format",
+        "checkAll": "turbo check",
+        "storybook": "turbo storybook",
         "test:unit": "jest --config jest.config.ts",
         "test:update": "jest --config jest.config.ts --updateSnapshot",
         "test:watch": "jest --config jest.config.ts --watchAll",
         "test:debug": "jest --config jest.config.ts --runInBand",
         "test": "bun run test:unit",
-        "check:format": "bunx biome format --write .",
-        "check:lint": "bunx biome lint --apply .",
+        "check:format": "bunx biome format --changed --write .",
+        "check:lint": "bunx biome lint --changed --apply .",
         "check:typecheck": "tsc --noEmit",
-        "check:lint-format": "bunx biome check --apply .",
-        "check": "bun run check:typecheck & bunx biome check .",
-        "ui:gen": "npx hygen ui new",
-        "cmp:gen": "npx hygen cmp new",
-        "storybook": "storybook dev -p 6006",
-        "build:storybook": "storybook build"
+        "check:lint-format": "bunx biome check --changed --apply .",
+        "check": "bun run check:typecheck & bunx biome check --apply . --no-errors-on-unmatched",
+        "prepare": "husky"
     },
     "devDependencies": {
         "@biomejs/biome": "1.5.3",
-        "@repo/biome-config": "*",
         "@repo/typescript-config": "*",
         "turbo": "latest"
     },
     "engines": {
-        "node": ">=18"
+        "node": ">=20"
     },
     "packageManager": "bun@1.0.25",
     "workspaces": [
         "apps/*",
         "packages/*"
-    ]
+    ],
+    "dependencies": {
+        "husky": "^9.0.10"
+    },
+    "volta": {
+        "node": "20.11.0"
+    }
 }

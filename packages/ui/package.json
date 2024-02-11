@@ -15,7 +15,7 @@
         "check:lint": "bunx biome lint --changed --apply .",
         "check:typecheck": "tsc --noEmit",
         "check:lint-format": "bunx biome check --changed --apply .",
-        "check": "bun run check:typecheck & bunx biome check --changed --apply .",
+        "check": "bun run check:typecheck & bunx biome check --apply . --no-errors-on-unmatched",
         "ui:gen": "npx hygen ui new",
         "cmp:gen": "npx hygen cmp new",
         "storybook": "storybook dev -p 6006",
