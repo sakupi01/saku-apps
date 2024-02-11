@@ -1,0 +1,79 @@
+name: 'Check'
+
+on: [push]
+
+jobs:
+  # Install and cache npm dependencies
+  install-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Commit
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Cache bun dependencies
+        uses: actions/cache@v3
+        id: bun-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: ${{ runner.os }}-bun
+
+      - name: Install dependencies if cache invalid
+        if: steps.bun-cache.outputs.cache-hit != 'true'
+        run: bun i --frozen-lockfile
+
+# This job is for checking the code style, type and lint errors.
+  check-all: 
+    needs: install-dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Commit
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Restore bun dependencies
+        id: bun-cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: ${{ runner.os }}-bun
+
+      - name: 💅🏻 Type Check, Lint and format
+        run: bun run checkAll 
+
+# This job is for executing tests.
+  # test: 
+  #   needs: install-dependencies
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout Commit
+  #       uses: actions/checkout@v4
+
+  #     - name: Setup Bun
+  #       uses: oven-sh/setup-bun@v1
+  #       with:
+  #         bun-version: latest
+
+  #     - name: Restore bun dependencies
+  #       id: bun-cache
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: node_modules
+  #         key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+  #         restore-keys: ${{ runner.os }}-bun
+
+  #     - name: 🧪 Test
+  #       run: bun run test 
