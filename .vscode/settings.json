@@ -12,5 +12,6 @@
     "source.formatDocument": "explicit",
     "source.organizeImports": "explicit"
   },
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "cSpell.words": ["clsx"]
 }
