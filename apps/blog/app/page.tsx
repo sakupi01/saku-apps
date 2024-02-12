@@ -1,12 +1,9 @@
 import { Button, Test } from "@repo/ui";
-import { EntryCollection } from "contentful";
 import Link from "next/link";
 import { TypePageBlogPostSkeleton } from "../@types/contentful";
 import { client } from "../libs/contentfulClient";
 
-const getBlogEntries = async (): Promise<
-  EntryCollection<TypePageBlogPostSkeleton>
-> => {
+const getBlogEntries = async () => {
   const entries = await client.getEntries<TypePageBlogPostSkeleton>({
     content_type: "pageBlogPost",
   });
