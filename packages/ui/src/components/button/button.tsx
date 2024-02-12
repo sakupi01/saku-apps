@@ -14,7 +14,7 @@ export const Button = ({ children, className, appName }: ButtonProps) => {
     <button
       type="submit"
       className={clsx(
-        "ui-px-4 ui-py-2 ui-text-white ui-bg-red-500 ui-rounded-md ui-shadow-md",
+        "px-4 py-2 text-black bg-green-500 rounded-md shadow-md hover:bg-blue-500",
         className,
       )}
       onClick={() => alert(`Hello from your ${appName} app!`)}

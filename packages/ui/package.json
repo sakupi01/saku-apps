@@ -5,12 +5,14 @@
     "sideEffects": [
         "**/*.css"
     ],
+    "main": "src/index.ts",
     "exports": {
         ".": "./src/index.ts",
         "./styles.css": "./dist/index.css"
     },
     "scripts": {
         "build": "tailwindcss -i ./src/styles.css -o dist/index.css",
+        "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch",
         "test:unit": "jest --config jest.config.ts",
         "test:update": "jest --config jest.config.ts --updateSnapshot",
         "test:watch": "jest --config jest.config.ts --watchAll",
