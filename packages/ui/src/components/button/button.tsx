@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { ReactNode } from "react";
 
-interface ButtonProps {
+export interface ButtonProps {
   children: ReactNode;
   className?: string;
   appName: string;
@@ -14,7 +14,7 @@ export const Button = ({ children, className, appName }: ButtonProps) => {
     <button
       type="submit"
       className={clsx(
-        "px-4 py-2 text-white bg-blue-500 rounded-md shadow-md",
+        "ui-px-4 ui-py-2 ui-text-white ui-bg-red-500 ui-rounded-md ui-shadow-md",
         className,
       )}
       onClick={() => alert(`Hello from your ${appName} app!`)}
