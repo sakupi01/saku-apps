@@ -16,16 +16,19 @@
     "check:typecheck": "tsc --noEmit",
     "check:lint-format": "bunx biome check --changed --apply .",
     "check": "bun run check:typecheck & bunx biome check --apply . --no-errors-on-unmatched",
+    "gen:co": "cf-content-types-generator -X -s $CONTENTFUL_SPACE_ID -t $CONTENTFUL_MANAGEMENT_API_ACCESS_TOKEN -o @types/contentful",
     "setup": "./bin/setup.sh"
   },
   "dependencies": {
     "@repo/ui": "*",
+    "cf-content-types-generator": "^2.14.0",
+    "contentful": "^10.6.21",
     "next": "^14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@graphql-typed-document-node/core": "^3.2.0",
+    "@contentful/rich-text-types": "^16.3.4",
     "@next/eslint-plugin-next": "^14.0.4",
     "@repo/tailwind-config": "*",
     "@repo/typescript-config": "*",

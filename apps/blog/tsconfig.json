@@ -1,6 +1,8 @@
 {
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
     "plugins": [
       {
         "name": "next"
@@ -18,9 +20,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "./fuse/introspection.ts"
+    "./fuse/introspection.ts",
+    "getContentfulEnvironment.mts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
