@@ -5,6 +5,7 @@
         "build": "turbo build",
         "start": "turbo start",
         "build:storybook": "turbo build:storybook",
+        "clean:workspaces": "turbo clean",
         "dev": "turbo dev",
         "lint": "turbo check:lint",
         "format": "turbo check:format",
