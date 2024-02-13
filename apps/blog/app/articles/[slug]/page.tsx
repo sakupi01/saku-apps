@@ -1,5 +1,4 @@
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { CtfImage } from "@repo/ui";
+import { CtfImage, CtfRt } from "@repo/ui";
 import { ICtfImage } from "../../../../../@types";
 import { TypePageBlogPostSkeleton } from "../../../../../@types/contentful";
 import { assertNonNullable } from "../../../libs/assertNonNullable";
@@ -25,6 +24,10 @@ export default async function PostPage(props: PostPageProps) {
   };
   const blogPost = await fetchBlogPost(slug);
   const { featuredImage, title, content, publishedDate } = blogPost.fields;
+  console.log("*****");
+  console.log(content.content[7]);
+  console.log("*****");
+
   // NOTE: ICtfImageの型であるが、生成された方では推論できないので、as unknown as ICtfImageとする
   const ctfImageResource: ICtfImage = featuredImage as unknown as ICtfImage;
 
@@ -48,9 +51,8 @@ export default async function PostPage(props: PostPageProps) {
             day: "numeric",
           })}
         </p>
-        <div className="[&>p]:mb-8 [&>h2]:font-extrabold">
-          {documentToReactComponents(content)}
-        </div>
+
+        <CtfRt content={content} />
       </div>
     </main>
   );

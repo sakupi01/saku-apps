@@ -1,6 +1,6 @@
 import { Button, Test } from "@repo/ui";
 import Link from "next/link";
-import { TypePageBlogPostSkeleton } from "../@types/contentful";
+import { TypePageBlogPostSkeleton } from "../../../@types/contentful";
 import { client } from "../libs/contentfulClient";
 
 const getBlogEntries = async () => {
