@@ -13,6 +13,7 @@ export interface TypePageBlogPostFields {
     featuredImage: EntryFieldTypes.AssetLink;
     content: EntryFieldTypes.RichText;
     relatedBlogPosts?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypePageBlogPostSkeleton>>;
+    body: EntryFieldTypes.Text;
 }
 
 export type TypePageBlogPostSkeleton = EntrySkeletonType<TypePageBlogPostFields, "pageBlogPost">;
