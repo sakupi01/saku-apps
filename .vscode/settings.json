@@ -13,5 +13,6 @@
     "source.organizeImports": "explicit"
   },
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.words": ["clsx"]
+  "cSpell.words": ["clsx"],
+  "markuplint.enable": true
 }
