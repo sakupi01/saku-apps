@@ -3,7 +3,7 @@ import { join } from "path";
 import { Article } from "@/interfaces/article";
 import matter from "gray-matter";
 
-const articlesDirectory = join(process.cwd(), "_articles");
+const articlesDirectory = join(process.cwd(), "../../articles/_articles/");
 
 export function getArticleSlugs() {
   return fs.readdirSync(articlesDirectory);
