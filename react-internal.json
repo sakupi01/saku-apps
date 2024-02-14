@@ -8,6 +8,9 @@
             },
             "style": {
                 "noNamespace": "error"
+            },
+            "security": {
+                "noDangerouslySetInnerHtml": "off"
             }
         }
     }

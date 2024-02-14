@@ -1,0 +1,16 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "allowCompoundWords": true,
+  "ignorePaths": [
+    ".git",
+    "_articles/preview.md",
+    ".gitignore",
+    ".cspell.json",
+    ".markdownlint-cli2.jsonc",
+    ".textlintrc.json",
+    "node_modules",
+    "package.json",
+    "bun.lockb"
+  ]
+}
