@@ -8,9 +8,7 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "editor.codeActionsOnSave": {
-    "source.organizeImports.biome": "explicit",
-    "source.formatDocument": "explicit",
-    "source.organizeImports": "explicit"
+    "source.organizeImports.biome": "explicit"
   },
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "cSpell.words": ["clsx"],

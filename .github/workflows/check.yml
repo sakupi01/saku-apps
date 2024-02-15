@@ -61,6 +61,37 @@ jobs:
 
       - name: 💅🏻 Type Check, Lint and format
         run: bun run checkAll 
+  pa11y-ci: 
+    needs: install-dependencies
+    runs-on: ubuntu-latest
+    env:
+     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+     TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+    steps:
+      - name: Checkout Commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Restore bun dependencies
+        id: bun-cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: ${{ runner.os }}-bun
+      
+      - name: Build
+        run: bun run build
+
+      - name: 🐣 Pa11y Test
+        run: bun run start & sleep 3; bun run check:pa11y
 
 # This job is for executing tests.
   # test: 
