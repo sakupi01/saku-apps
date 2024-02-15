@@ -1,4 +1,4 @@
-import { getArticleBySlug } from "@/libs/getApi";
+import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { notFound } from "next/navigation";
@@ -8,6 +8,15 @@ type Params = {
     slug: string;
   };
 };
+
+// Return a list of `params` to populate the [slug] dynamic segment
+export async function generateStaticParams() {
+  const slugs = getArticleSlugs();
+
+  return slugs.map((slug) => ({
+    slug: slug,
+  }));
+}
 
 export default async function Article({ params }: Params) {
   const article = getArticleBySlug(params.slug);
