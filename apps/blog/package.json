@@ -16,6 +16,7 @@
         "check:typecheck": "tsc --noEmit",
         "check:lint-format": "bunx biome check --changed --apply .",
         "check:markuplint": "markuplint \"./app/**/*.{jsx,tsx}\"",
+        "check:pa11y": "pa11y-ci --config .pa11yci.json",
         "check": "bun check:typecheck & bunx biome check --apply . --no-errors-on-unmatched & bun check:markuplint",
         "setup": "./bin/setup.sh"
     },
