@@ -10,6 +10,7 @@
         "lint": "turbo check:lint",
         "format": "turbo check:format",
         "lf": "turbo check:lint-format",
+        "pa11y": "turbo check:pa11y",
         "typecheck": "turbo check:typecheck",
         "checkAll": "turbo check",
         "storybook": "turbo storybook",
