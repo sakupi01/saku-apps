@@ -25,7 +25,7 @@ const config: Omit<Config, "content"> = {
         highlight: "#6fdaf340",
         primary: {
           DEFAULT: "#FAEDD2",
-          subtle: "#FAF7F0",
+          subtle: "#FAF4ED",
         },
         button: {
           primary: {

@@ -126,4 +126,21 @@ div[data-rehype-pretty-code-title] {
 .tag{
     @apply text-sm font-medium text-left text-tag;
   }
-  
+.markdown table {
+  @apply w-full my-6 border border-slate-200;
+}
+.markdown th {
+  @apply text-basic font-semibold border-r border-slate-200 p-2 bg-primary-subtle;
+}
+.markdown td {
+  @apply text-basic border-r border-slate-200 p-2;
+}
+.markdown thead tr {
+  @apply border-b border-slate-200;
+}
+.markdown tbody tr {
+  @apply border-b border-slate-200;
+}
+.markdown tbody tr:last-child {
+  @apply border-none;
+}
