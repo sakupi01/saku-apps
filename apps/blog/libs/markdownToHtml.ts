@@ -5,13 +5,13 @@
 
 import { h } from "hastscript";
 import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
 import { remark } from "remark";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import remarkToc from "remark-toc";
-import rehypeSlug from "rehype-slug";
 import { visit } from "unist-util-visit";
 
 export default async function markdownToHtml(markdown: string) {
