@@ -1,15 +1,15 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Test } from "./test";
+import { Typography } from "./markdown-typography";
 
 const meta = {
-  title: "Test",
-  component: Test,
+  title: "Markdown Typography",
+  component: Typography,
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },
   argTypes: {},
-} satisfies Meta<typeof Test>;
+} satisfies Meta<typeof Typography>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

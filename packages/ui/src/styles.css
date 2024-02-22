@@ -1,3 +1,88 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body ul {
+    @apply list-disc pl-10 indent-2 my-4;
+}
+body ol {
+    @apply list-decimal pl-10 indent-2 my-4;
+}
+.markdown h1{
+    @apply text-5xl font-bold text-left text-basic my-10;
+  }
+.markdown h2{
+    @apply text-3xl font-semibold text-left text-basic my-8;
+  }
+.markdown h3{
+    @apply text-2xl font-semibold text-left text-basic my-6;
+  }
+.markdown h4{
+    @apply text-xl font-semibold text-left text-basic my-4;
+  }
+.markdown h5{
+    @apply text-lg font-medium text-left text-basic my-2;
+  }
+.markdown h6{
+    @apply text-base font-medium text-left text-basic my-2;
+  }
+.markdown p{
+    @apply text-base text-left text-basic leading-9 tracking-wide ;
+  }
+.markdown blockquote{
+    @apply py-2 px-4 mx-4 my-4 border-s-4 border-backquote text-base italic text-left text-basic antialiased;
+  }
+
+.markdown li{
+    @apply text-base text-left text-basic;
+  }
+  
+.markdown code{
+    @apply text-sm font-bold text-left text-basic px-1.5 py-[3px] rounded-[3px] bg-primary-subtle;
+  }
+
+.markdown pre{
+    @apply text-sm font-bold text-left text-basic px-1.5 py-[3px] rounded-[3px] bg-primary-subtle my-6;
+  }
+
+.markdown strong{
+    @apply text-base font-bold text-basic; 
+  }
+
+.markdown em{
+    @apply text-base italic text-basic;
+  }
+
+.markdown del{
+    @apply text-base line-through text-left text-basic;
+  }
+
+.markdown hr{
+    @apply border-spacing-x-0.5 border-break my-8;
+  }
+
+.markdown img{
+    @apply w-full h-auto;
+  }
+
+.markdown b{
+    @apply text-base font-normal text-left text-basic;
+  }
+
+.markdown a{
+    @apply text-base font-normal text-left text-link after:content-['_↗'];
+  }
+  
+.large{
+    @apply text-lg font-semibold text-left text-basic;
+  }
+.small{
+    @apply text-sm font-medium text-left text-basic;
+  }
+.subtle{
+    @apply text-sm text-left text-subtle;
+  }
+.tag{
+    @apply text-sm font-medium text-left text-tag;
+  }
+  
