@@ -22,8 +22,27 @@ Pluto is a dwarf planet in the Kuiper belt.
 1. List1
 2. List2
 
-[[spoiler | my title]]
-| content
+:::note{.warning}
+注意書きです
+:::
+
+:::note{.message}
+注意書きです
+:::
+
+:::note{.info}
+infoです
+:::
+
+:::details
+詳細です
+詳細です
+詳細です
+
+詳細です
+詳細です
+詳細です
+:::
 
 ## テストタイトル２つめ
 
