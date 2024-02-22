@@ -36,15 +36,56 @@ body ol {
 .markdown li{
     @apply text-base text-left text-basic;
   }
+
+.markdown figure[data-rehype-pretty-code-figure] {
+  @apply my-5;
+}
   
+.markdown figure[data-rehype-pretty-code-figure] > pre {
+    @apply overflow-x-auto px-2 py-2 my-2 rounded-md; 
+  }
+
+  figure[data-rehype-pretty-code-figure]
+  > div[data-rehype-pretty-code-title]
+  + pre {
+  @apply -mt-[1px]
+}
+
+div[data-rehype-pretty-code-title] {
+  @apply block w-fit
+    rounded-t
+    bg-primary-subtle px-2 py-2 text-sm leading-none text-gray-600;
+}
+.markdown span[data-highlighted-line] {
+    @apply  bg-highlight rounded-md;
+  }
+
 .markdown code{
-    @apply text-sm font-bold text-left text-basic px-1.5 py-[3px] rounded-[3px] bg-primary-subtle;
+  @apply text-sm font-bold text-left text-basic px-1.5 py-[3px] rounded-[3px] border-l-[3px] border-none;
+}
+
+.markdown span[data-line]{
+  @apply leading-6;
+}
+
+  code[data-line-numbers] {
+    @apply [counter-reset:lineNumber];
   }
 
-.markdown pre{
-    @apply text-sm font-bold text-left text-basic px-1.5 py-[3px] rounded-[3px] bg-primary-subtle my-6;
+  code[data-line-numbers] > span[data-line]::before {
+    @apply mr-3 inline-block w-4 text-right text-gray-400
+      content-[counter(lineNumber)]
+      [counter-increment:lineNumber];
   }
-
+  
+.markdown code[data-line-numbers-max-digits="2"] > span[data-line]::before {
+  width: 2rem;
+}
+  
+.markdown code[data-line-numbers-max-digits="3"] > span[data-line]::before {
+  width: 3rem;
+}
+  
 .markdown strong{
     @apply text-base font-bold text-basic; 
   }

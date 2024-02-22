@@ -22,6 +22,7 @@ const config: Omit<Config, "content"> = {
         backquote: "#E3E3E3",
         break: "#EDE8DF",
         link: "#6b9aff",
+        highlight: "#6fdaf340",
         primary: {
           DEFAULT: "#FAEDD2",
           subtle: "#FAF7F0",
@@ -105,7 +106,7 @@ const config: Omit<Config, "content"> = {
       },
       fontSize: {
         xs: ["0.75rem", { lineHeight: "1rem" }],
-        sm: ["0.875rem", { lineHeight: "1.25rem" }],
+        sm: ["0.875rem", { lineHeight: "1.35rem" }],
         base: ["1rem", { lineHeight: "1.5rem" }],
         lg: ["1.125rem", { lineHeight: "1.75rem" }],
         xl: ["1.25rem", { lineHeight: "1.75rem" }],
