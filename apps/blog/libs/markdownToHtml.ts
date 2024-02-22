@@ -1,10 +1,9 @@
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeStringify from "rehype-stringify";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
-import remarkToc from "remark-toc";
-import rehypeSlug from "rehype-slug";
-import rehypePrettyCode from "rehype-pretty-code";
 import remarkRehype from "remark-rehype";
-import rehypeStringify from "rehype-stringify";
+import remarkToc from "remark-toc";
 
 export default async function markdownToHtml(markdown: string) {
   const result = await remark()
