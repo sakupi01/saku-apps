@@ -11,6 +11,7 @@ import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import remarkToc from "remark-toc";
+import rehypeSlug from "rehype-slug";
 import { visit } from "unist-util-visit";
 
 export default async function markdownToHtml(markdown: string) {
@@ -25,6 +26,7 @@ export default async function markdownToHtml(markdown: string) {
       maxDepth: 3,
     })
     .use(remarkRehype)
+    .use(rehypeSlug)
     .use(rehypePrettyCode, {
       theme: "rose-pine-dawn",
       keepBackground: true,
