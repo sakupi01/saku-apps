@@ -7,7 +7,6 @@ import remarkToc from "remark-toc";
 
 export default async function markdownToHtml(markdown: string) {
   const result = await remark()
-    .use(remarkRehype)
     .use(remarkGfm)
     .use(remarkToc, {
       heading: "目次",
@@ -15,6 +14,7 @@ export default async function markdownToHtml(markdown: string) {
       tight: false,
       maxDepth: 3,
     })
+    .use(remarkRehype)
     .use(rehypePrettyCode, {
       theme: "rose-pine-dawn",
       keepBackground: true,
