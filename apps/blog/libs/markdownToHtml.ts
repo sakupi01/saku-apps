@@ -35,8 +35,7 @@ export default async function markdownToHtml(markdown: string) {
 
   return result.toString();
 }
-// This plugin is an example to turn `::note` into divs, passing arbitrary
-// attributes.
+
 function myRemarkPlugin() {
   /**
    * @param {import('mdast').Root} tree
@@ -69,7 +68,3 @@ function myRemarkPlugin() {
     });
   };
 }
-//           <details open>
-//   <summary>Hello</summary>
-//   World!
-// </details>
