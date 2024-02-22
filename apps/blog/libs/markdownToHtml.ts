@@ -53,13 +53,15 @@ function myRemarkPlugin() {
         node.type === "textDirective"
       ) {
         if (node.name === "note") {
-          const data = node.data || {};
+          // biome-ignore lint/suspicious/noAssignInExpressions: <As described https://github.com/remarkjs/remark-directive?tab=readme-ov-file#use>
+          const data = node.data || (node.data = {});
           const tagName = node.type === "textDirective" ? "span" : "div";
 
           data.hName = tagName;
           data.hProperties = h(tagName, node.attributes || {}).properties;
         } else {
-          const data = node.data || {};
+          // biome-ignore lint/suspicious/noAssignInExpressions: <As described https://github.com/remarkjs/remark-directive?tab=readme-ov-file#use>
+          const data = node.data || (node.data = {});
           data.hName = "details";
           data.hProperties = h("details", node.attributes || {}).properties;
         }
