@@ -34,9 +34,9 @@ export default async function Article({ params }: Params) {
         <Thumbnail
           title={article.title}
           date={article.date}
-          beginColor={`from-${article.beginColor}`}
-          middleColor={`via-${article.middleColor}`}
-          endColor={`to-${article.endColor}`}
+          beginColor={article.beginColor}
+          middleColor={article.middleColor}
+          endColor={article.endColor}
           tags={article.tags}
         />
       </div>

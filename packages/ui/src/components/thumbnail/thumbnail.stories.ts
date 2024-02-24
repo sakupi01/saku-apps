@@ -17,8 +17,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     title: "title",
-    date: new Date().toISOString().split("T")[0],
-    excerpt: "excerpt",
+    date: new Date().toISOString().split("T")[0] ?? "",
     beginColor: "#FEAC5E",
     middleColor: "#C779D0",
     endColor: "#4BC0C8",

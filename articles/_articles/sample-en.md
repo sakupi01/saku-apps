@@ -5,9 +5,9 @@ coverImage: "/assets/blog/preview/cover.jpg"
 date: "2020-03-16"
 ogImage:
   url: "/vercel.jpg"
-beginColor: 'red-200'
-middleColor: 'yellow-200'
-endColor: 'blue-200'
+beginColor: 'from-red-200'
+middleColor: 'via-yellow-200'
+endColor: 'to-blue-200'
 ---
 
 ## Lorem Ipsum Preview

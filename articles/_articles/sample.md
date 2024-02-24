@@ -5,9 +5,9 @@ coverImage: "/assets/blog/preview/cover.jpg"
 date: "2020-03-16"
 ogImage:
   url: "/vercel.jpg"
-beginColor: '[#FEAC5E]'
-middleColor: '[#C779D0]'
-endColor: '[#4BC0C8]'
+beginColor: 'from-[#FEAC5E]'
+middleColor: 'via-[#C779D0]'
+endColor: 'to-[#4BC0C8]'
 tags: ['react', 'javascript', 'tech']
 ---
 # Pluto
