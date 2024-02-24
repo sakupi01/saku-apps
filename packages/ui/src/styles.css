@@ -47,7 +47,10 @@ body iframe {
 }
   
 .markdown figure[data-rehype-pretty-code-figure] > pre {
-    @apply overflow-x-auto px-2 py-2 my-2 rounded-md; 
+    @apply overflow-x-auto px-2 py-2 my-2 rounded-md border border-neutral-200; 
+  }
+.markdown figure[data-rehype-pretty-code-figure] span[data-line] {
+    @apply !border-none !shadow-none; 
   }
 
   figure[data-rehype-pretty-code-figure]
@@ -61,16 +64,16 @@ div[data-rehype-pretty-code-title] {
     rounded-t
     bg-primary-subtle px-2 py-2 text-sm leading-none text-gray-600;
 }
-.markdown span[data-highlighted-line] {
+.markdown figure[data-rehype-pretty-code-figure] span[data-highlighted-line] {
     @apply  bg-highlight rounded-md;
   }
 
 .markdown code{
-  @apply text-sm font-bold text-left text-basic px-1.5 py-[3px] rounded-[3px] border-l-[3px] border-none;
+  @apply text-sm font-bold text-left px-1.5 py-[3px] rounded-[3px] border-l-[3px] border-none;
 }
 
 .markdown span[data-line]{
-  @apply leading-6;
+  @apply leading-6 px-1.5 py-[3px] rounded-[5px] border border-neutral-200 shadow-sm;
 }
 
   code[data-line-numbers] {
@@ -104,7 +107,7 @@ div[data-rehype-pretty-code-title] {
   }
 
 .markdown hr{
-    @apply border-spacing-x-0.5 border-break my-8;
+    @apply border-spacing-x-0.5 border-neutral-200 my-8;
   }
 
 .markdown b{
@@ -128,19 +131,19 @@ div[data-rehype-pretty-code-title] {
     @apply text-sm font-medium text-left text-tag;
   }
 .markdown table {
-  @apply w-full my-6 border border-slate-200;
+  @apply w-full my-6 border border-neutral-200;
 }
 .markdown th {
-  @apply text-basic font-semibold border-r border-slate-200 p-2 bg-primary-subtle;
+  @apply text-basic font-semibold border-r border-neutral-200 p-2 bg-primary-subtle;
 }
 .markdown td {
-  @apply text-basic border-r border-slate-200 p-2;
+  @apply text-basic border-r border-neutral-200 p-2;
 }
 .markdown thead tr {
-  @apply border-b border-slate-200;
+  @apply border-b border-neutral-200;
 }
 .markdown tbody tr {
-  @apply border-b border-slate-200;
+  @apply border-b border-neutral-200;
 }
 .markdown tbody tr:last-child {
   @apply border-none;

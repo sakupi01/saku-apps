@@ -22,7 +22,7 @@ const config: Omit<Config, "content"> = {
         backquote: "#E3E3E3",
         break: "#EDE8DF",
         link: "#6b9aff",
-        highlight: "#6fdaf340",
+        highlight: "#fdeedec4",
         primary: {
           DEFAULT: "#FAEDD2",
           subtle: "#FAF4ED",
