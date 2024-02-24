@@ -1,4 +1,4 @@
-declare namespace rlc {
+declare module rlc {
   interface Options {
     /**
      * Cache image for `next/image` (`bool`, default:`false`)
