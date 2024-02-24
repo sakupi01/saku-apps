@@ -9,4 +9,7 @@ export type Article = {
   };
   content: string;
   preview?: boolean;
+  beginColor: string;
+  middleColor: string;
+  endColor: string;
 };

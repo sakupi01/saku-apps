@@ -5,6 +5,9 @@ coverImage: "/assets/blog/preview/cover.jpg"
 date: "2020-03-16T05:35:07.322Z"
 ogImage:
   url: "/vercel.jpg"
+beginColor: '#FEAC5E'
+middleColor: '#C779D0'
+endColor: '#4BC0C8'
 ---
 
 ## Lorem Ipsum Preview
