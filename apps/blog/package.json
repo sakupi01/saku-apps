@@ -23,11 +23,14 @@
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",
     "@next/mdx": "^14.1.0",
+    "@remark-embedder/core": "^3.0.2",
+    "@remark-embedder/transformer-oembed": "^3.0.0",
     "@repo/ui": "*",
     "@vercel/speed-insights": "^1.0.9",
     "gray-matter": "^4.0.3",
     "isomorphic-dompurify": "^2.3.0",
     "next": "^14.0.4",
+    "open-graph-scraper": "^6.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rehype-pretty-code": "^0.13.0",
@@ -36,6 +39,7 @@
     "remark": "^15.0.1",
     "remark-directive": "^3.0.0",
     "remark-gfm": "^4.0.0",
+    "remark-link-card": "git+https://github.com/saku-1101/remark-link-card.git",
     "remark-rehype": "^11.1.0",
     "remark-toc": "^9.0.0",
     "shiki": "^1.1.6"

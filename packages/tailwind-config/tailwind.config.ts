@@ -57,10 +57,20 @@ const config: Omit<Config, "content"> = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
+        "flip-diagonal-2-fwd": {
+          "0%": {
+            transform: "translateZ(0) rotate3d(-1, 1, 0, 0deg)",
+          },
+          to: {
+            transform: "translateZ(160px) rotate3d(-1, 1, 0, 180deg)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "flip-diagonal-2-fwd":
+          "flip-diagonal-2-fwd 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955)   both",
         none: "none",
         spin: "spin 1s linear infinite",
         ping: "ping 1s cubic-bezier(0, 0, 0.2, 1) infinite",
