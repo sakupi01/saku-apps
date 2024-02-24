@@ -3,6 +3,9 @@
 import * as DOMPurify from "isomorphic-dompurify";
 
 export function sanitizeHtml(dirtyHtml: string) {
-  const clean = DOMPurify.sanitize(dirtyHtml);
+  const clean = DOMPurify.sanitize(dirtyHtml, {
+    ADD_TAGS: ["iframe"],
+    ADD_ATTR: ["allow", "allowfullscreen", "frameborder", "scrolling"],
+  });
   return clean;
 }
