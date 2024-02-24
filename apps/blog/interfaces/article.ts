@@ -12,4 +12,5 @@ export type Article = {
   beginColor: string;
   middleColor: string;
   endColor: string;
+  tags?: string[];
 };

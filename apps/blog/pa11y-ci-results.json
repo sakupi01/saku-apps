@@ -1,10 +1,10 @@
 {
-    "total": 3,
-    "passes": 3,
-    "errors": 0,
-    "results": {
-        "http://localhost:3000/": [],
-        "http://localhost:3000/articles/sample-en": [],
-        "http://localhost:3000/articles/sample": []
-    }
+  "total": 3,
+  "passes": 3,
+  "errors": 0,
+  "results": {
+    "http://localhost:3000/": [],
+    "http://localhost:3000/articles/sample-en": [],
+    "http://localhost:3000/articles/sample": []
+  }
 }

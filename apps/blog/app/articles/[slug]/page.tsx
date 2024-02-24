@@ -1,6 +1,7 @@
 import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
+import { Thumbnail } from "@repo/ui";
 import { notFound } from "next/navigation";
 
 type Params = {
@@ -29,6 +30,16 @@ export default async function Article({ params }: Params) {
 
   return (
     <main>
+      <div className="max-w-2xl mx-auto">
+        <Thumbnail
+          title={article.title}
+          date={article.date}
+          beginColor={`from-${article.beginColor}`}
+          middleColor={`via-${article.middleColor}`}
+          endColor={`to-${article.endColor}`}
+          tags={article.tags}
+        />
+      </div>
       <article className="mb-32">
         <div className="max-w-2xl mx-auto">
           <div
