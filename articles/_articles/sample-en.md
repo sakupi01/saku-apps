@@ -8,6 +8,7 @@ ogImage:
 beginColor: 'from-red-200'
 middleColor: 'via-yellow-200'
 endColor: 'to-blue-200'
+tags: ['react', 'javascript', 'tech']
 ---
 
 ## Lorem Ipsum Preview

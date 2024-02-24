@@ -38,7 +38,7 @@ export default async function Article({ params }: Params) {
   });
 
   const renderTags = tagWithId?.map((tag) => (
-    <Link href={"/"}>
+    <Link href={`/tag/${tag.name}`}>
       <span key={tag.id} className="tag mr-3">
         {tag.name}
       </span>
@@ -51,9 +51,9 @@ export default async function Article({ params }: Params) {
         <Thumbnail
           title={article.title}
           date={article.date}
-          beginColor={article.beginColor}
-          middleColor={article.middleColor}
-          endColor={article.endColor}
+          beginColor={`${article.beginColor}`}
+          middleColor={`${article.middleColor}`}
+          endColor={`${article.endColor}`}
           tags={renderTags}
         />
       </div>

@@ -1,16 +1,31 @@
-import { getAllArticles } from "@/libs/getApi";
+import { getAllArticleTags, getAllArticlesByTag } from "@/libs/getApi";
 import { ArticleListItem } from "@repo/ui";
 import Link from "next/link";
+import { Suspense } from "react";
 
-export default async function Page() {
-  const allArticles = getAllArticles();
+type Params = {
+  params: {
+    slug: string;
+  };
+};
+// Return a list of `params` to populate the [slug] dynamic segment
+export async function generateStaticParams() {
+  const slugs = getAllArticleTags();
+
+  return slugs.map((slug) => ({
+    slug: slug,
+  }));
+}
+
+export default async function Page({ params }: Params) {
+  const article = getAllArticlesByTag(params.slug);
   return (
     <main className="flex min-h-screen min-w-screen flex-col items-center justify-center p-24">
       <h1 className="text-5xl font-bold text-left text-basic my-10">
         Articles
       </h1>
       <div className="max-w-2xl min-w-[800px] mx-auto">
-        {allArticles.map((article) => {
+        {article.map((article) => {
           const tagWithId = article.tags?.map((tag) => {
             const id = Math.random().toString(32).substring(2);
             return {

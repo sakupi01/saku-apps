@@ -9,6 +9,13 @@ export function getArticleSlugs() {
   return fs.readdirSync(articlesDirectory);
 }
 
+export function getAllArticleTags() {
+  const articles = getAllArticles();
+  const tags = articles.map((article) => article.tags).flat();
+
+  return tags.filter((tag) => tag !== undefined);
+}
+
 export function getArticleBySlug(slug: string) {
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = join(articlesDirectory, `${realSlug}.md`);
@@ -25,4 +32,12 @@ export function getAllArticles(): Article[] {
     // sort articles by date in descending order
     .sort((article1, article2) => (article1.date > article2.date ? -1 : 1));
   return articles;
+}
+
+export function getAllArticlesByTag(tag: string): Article[] {
+  const articles = getAllArticles();
+  const filteredArticles = articles.filter((article) => {
+    return article.tags && article.tags.includes(tag);
+  });
+  return filteredArticles;
 }
