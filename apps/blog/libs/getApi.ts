@@ -11,7 +11,7 @@ export function getArticleSlugs() {
 
 export function getAllArticleTags() {
   const articles = getAllArticles();
-  const tags = articles.map((article) => article.tags).flat();
+  const tags = articles.flatMap((article) => article.tags);
 
   return tags.filter((tag) => tag !== undefined);
 }
@@ -37,7 +37,7 @@ export function getAllArticles(): Article[] {
 export function getAllArticlesByTag(tag: string): Article[] {
   const articles = getAllArticles();
   const filteredArticles = articles.filter((article) => {
-    return article.tags && article.tags.includes(tag);
+    return article.tags?.includes(tag);
   });
   return filteredArticles;
 }

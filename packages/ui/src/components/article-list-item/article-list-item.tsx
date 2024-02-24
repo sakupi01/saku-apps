@@ -19,7 +19,7 @@ export const ArticleListItem = ({
   tags,
 }: ArticleListItemProps) => {
   return (
-    <>
+    <object>
       <div className="w-full py-10 px-2 flex items-center gap-6 rounded-md hover:bg-neutral-50">
         <div className="flex justify-center items-center p-5 rounded-lg bg-primary-subtle shadow">
           <div
@@ -36,6 +36,6 @@ export const ArticleListItem = ({
         </div>
       </div>
       <Divider />
-    </>
+    </object>
   );
 };

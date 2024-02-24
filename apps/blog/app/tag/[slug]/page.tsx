@@ -1,7 +1,6 @@
 import { getAllArticleTags, getAllArticlesByTag } from "@/libs/getApi";
 import { ArticleListItem } from "@repo/ui";
 import Link from "next/link";
-import { Suspense } from "react";
 
 type Params = {
   params: {
