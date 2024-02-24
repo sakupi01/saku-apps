@@ -2,6 +2,7 @@ import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { Thumbnail } from "@repo/ui";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 type Params = {
@@ -28,6 +29,22 @@ export default async function Article({ params }: Params) {
 
   const content = await markdownToHtml(article.content);
 
+  const tagWithId = article.tags?.map((tag) => {
+    const id = Math.random().toString(32).substring(2);
+    return {
+      id: id,
+      name: tag,
+    };
+  });
+
+  const renderTags = tagWithId?.map((tag) => (
+    <Link href={"/"}>
+      <span key={tag.id} className="tag mr-3">
+        {tag.name}
+      </span>
+    </Link>
+  ));
+
   return (
     <main>
       <div className="max-w-2xl mx-auto">
@@ -37,7 +54,7 @@ export default async function Article({ params }: Params) {
           beginColor={article.beginColor}
           middleColor={article.middleColor}
           endColor={article.endColor}
-          tags={article.tags}
+          tags={renderTags}
         />
       </div>
       <article className="mb-32">
