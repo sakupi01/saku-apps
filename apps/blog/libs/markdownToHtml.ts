@@ -12,10 +12,10 @@ import rehypeStringify from "rehype-stringify";
 import { remark } from "remark";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
+import rlc from "remark-link-card";
 import remarkRehype from "remark-rehype";
 import remarkToc from "remark-toc";
 import { visit } from "unist-util-visit";
-import rlc from "remark-link-card";
 
 export default async function markdownToHtml(markdown: string) {
   const result = await remark()
