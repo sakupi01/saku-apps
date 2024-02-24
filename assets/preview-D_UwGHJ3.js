@@ -1,0 +1,1 @@
+import{j as e}from"./jsx-runtime-DRTy3Uxn.js";import"./index-BBkUAzwr.js";const t={parameters:{actions:{argTypesRegex:"^on[A-Z].*"},controls:{matchers:{color:/(background|color)$/i,date:/Date$/i}}},decorators:[r=>e.jsx("main",{className:"flex min-h-screen min-w-screen flex-col items-center justify-center p-24",children:e.jsx(r,{})})]};export{t as default};
