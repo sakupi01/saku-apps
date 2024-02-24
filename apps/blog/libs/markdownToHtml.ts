@@ -72,7 +72,7 @@ const myRemarkPlugin = () => {
    * @returns {undefined}
    *   Nothing.
    */
-  //@ts-ignore
+  // @ts-expect-error
   return (tree) => {
     visit(tree, (node) => {
       if (
@@ -90,8 +90,9 @@ const myRemarkPlugin = () => {
         } else {
           // biome-ignore lint/suspicious/noAssignInExpressions: <As described https://github.com/remarkjs/remark-directive?tab=readme-ov-file#use>
           const data = node.data || (node.data = {});
-          data.hName = "details";
-          data.hProperties = h("details", node.attributes || {}).properties;
+          const tagName = "details";
+          data.hName = tagName;
+          data.hProperties = h(tagName, node.attributes || {}).properties;
         }
       }
     });
