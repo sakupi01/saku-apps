@@ -8,6 +8,11 @@ body ul {
 body ol {
     @apply list-decimal pl-10 indent-2 my-4;
 }
+
+body iframe {
+  @apply my-8;
+}
+
 .markdown h1{
     @apply text-5xl font-bold text-left text-basic my-10;
   }
@@ -102,16 +107,12 @@ div[data-rehype-pretty-code-title] {
     @apply border-spacing-x-0.5 border-break my-8;
   }
 
-.markdown img{
-    @apply w-full h-auto;
-  }
-
 .markdown b{
     @apply text-base font-normal text-left text-basic;
   }
 
 .markdown a{
-    @apply text-base font-normal text-left text-link after:content-['_↗'];
+    @apply text-base font-normal text-left text-link underline after:content-['↗'];
   }
   
 .large{
@@ -143,4 +144,44 @@ div[data-rehype-pretty-code-title] {
 }
 .markdown tbody tr:last-child {
   @apply border-none;
+}
+
+.rlc-container {
+  @apply  w-full h-32 my-8 text-basic !no-underline rounded flex items-start shadow-md after:!content-[''] transition-all duration-200 ease-in-out;
+}
+
+.rlc-container:hover{
+  @apply shadow-lg bg-neutral-50 scale-105;
+}
+
+.rlc-info {
+  @apply h-full w-4/6 px-3 py-4 flex flex-col shrink justify-between overflow-hidden text-left;
+}
+
+.rlc-title {
+  @apply text-xl text-basic whitespace-nowrap overflow-hidden text-ellipsis no-underline ;
+}
+
+.rlc-description {
+  @apply text-sm overflow-hidden leading-4 h-8 text-subtle no-underline;
+}
+
+.rlc-url-container {
+  @apply flex items-center gap-[5px];
+}
+
+.markdown img .rlc-favicon {
+  @apply w-[16px] h-[16px] mr-[2px];
+}
+
+.rlc-url {
+  @apply text-link text-sm whitespace-nowrap overflow-hidden text-ellipsis;
+}
+
+.rlc-image-container {
+  @apply w-2/6 h-full overflow-y-hidden flex-1 basis-[100px];
+}
+
+.rlc-image {
+  @apply object-cover w-full h-full rounded-br rounded-tr;
 }
