@@ -1,3 +1,219 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body ul {
+    @apply list-disc pl-10 indent-2 my-4;
+}
+body ol {
+    @apply list-decimal pl-10 indent-2 my-4;
+}
+
+body iframe {
+  @apply my-8;
+}
+
+.markdown h1{
+    @apply text-5xl font-bold text-left text-basic my-10;
+  }
+.markdown h2{
+    @apply text-3xl font-semibold text-left text-basic my-8;
+  }
+.markdown h3{
+    @apply text-2xl font-semibold text-left text-basic my-6;
+  }
+.markdown h4{
+    @apply text-xl font-semibold text-left text-basic my-4;
+  }
+.markdown h5{
+    @apply text-lg font-medium text-left text-basic my-2;
+  }
+.markdown h6{
+    @apply text-base font-medium text-left text-basic my-2;
+  }
+.markdown p{
+    @apply text-base text-left text-basic leading-9 tracking-wide ;
+  }
+.markdown blockquote{
+    @apply py-2 px-4 mx-4 my-4 border-s-4 border-backquote text-base italic text-left text-basic antialiased;
+  }
+
+.markdown li{
+    @apply text-base text-left text-basic;
+  }
+
+.markdown figure[data-rehype-pretty-code-figure] {
+  @apply my-5;
+}
+  
+.markdown figure[data-rehype-pretty-code-figure] > pre {
+    @apply overflow-x-auto px-2 py-2 my-2 rounded-md border border-neutral-200; 
+  }
+.markdown figure[data-rehype-pretty-code-figure] span[data-line] {
+    @apply !border-none !shadow-none; 
+  }
+
+  figure[data-rehype-pretty-code-figure]
+  > div[data-rehype-pretty-code-title]
+  + pre {
+  @apply -mt-[1px]
+}
+
+div[data-rehype-pretty-code-title] {
+  @apply block w-fit
+    rounded-t
+    bg-primary-subtle px-2 py-2 text-sm leading-none text-gray-600;
+}
+.markdown figure[data-rehype-pretty-code-figure] span[data-highlighted-line] {
+    @apply  bg-highlight rounded-md;
+  }
+
+.markdown code{
+  @apply text-sm font-bold text-left px-1.5 py-[3px] rounded-[3px] border-l-[3px] border-none;
+}
+
+.markdown span[data-line]{
+  @apply leading-6 px-1.5 py-[3px] rounded-[5px] border border-neutral-200 shadow-sm;
+}
+
+  code[data-line-numbers] {
+    @apply [counter-reset:lineNumber];
+  }
+
+  code[data-line-numbers] > span[data-line]::before {
+    @apply mr-3 inline-block w-4 text-right text-gray-400
+      content-[counter(lineNumber)]
+      [counter-increment:lineNumber];
+  }
+  
+.markdown code[data-line-numbers-max-digits="2"] > span[data-line]::before {
+  width: 2rem;
+}
+  
+.markdown code[data-line-numbers-max-digits="3"] > span[data-line]::before {
+  width: 3rem;
+}
+  
+.markdown strong{
+    @apply text-base font-bold text-basic; 
+  }
+
+.markdown em{
+    @apply text-base italic text-basic;
+  }
+
+.markdown del{
+    @apply text-base line-through text-left text-basic;
+  }
+
+.markdown hr{
+    @apply border-spacing-x-0.5 border-neutral-200 my-8;
+  }
+
+.markdown b{
+    @apply text-base font-normal text-left text-basic;
+  }
+
+.markdown a{
+    @apply text-base font-normal text-left text-link underline after:content-['↗'];
+  }
+  
+.large{
+    @apply text-lg font-semibold text-left text-basic;
+  }
+.small{
+    @apply text-sm font-medium text-left text-basic;
+  }
+.subtle{
+    @apply text-sm text-left text-subtle;
+  }
+.tag{
+    @apply text-sm font-medium text-left text-tag;
+  }
+.markdown table {
+  @apply w-full my-6 border border-neutral-200;
+}
+.markdown th {
+  @apply text-basic font-semibold border-r border-neutral-200 p-2 bg-primary-subtle;
+}
+.markdown td {
+  @apply text-basic border-r border-neutral-200 p-2;
+}
+.markdown thead tr {
+  @apply border-b border-neutral-200;
+}
+.markdown tbody tr {
+  @apply border-b border-neutral-200;
+}
+.markdown tbody tr:last-child {
+  @apply border-none;
+}
+
+.rlc-container {
+  @apply  w-full h-32 my-8 text-basic !no-underline rounded flex items-start shadow-md after:!content-[''] transition-all duration-200 ease-in-out;
+}
+
+.rlc-container:hover{
+  @apply shadow-lg bg-neutral-50 scale-105;
+}
+
+.rlc-info {
+  @apply h-full w-4/6 px-3 py-4 flex flex-col shrink justify-between overflow-hidden text-left;
+}
+
+.rlc-title {
+  @apply text-xl text-basic whitespace-nowrap overflow-hidden text-ellipsis no-underline ;
+}
+
+.rlc-description {
+  @apply text-sm overflow-hidden leading-4 h-8 text-subtle no-underline;
+}
+
+.rlc-url-container {
+  @apply flex items-center gap-[5px];
+}
+
+.markdown img .rlc-favicon {
+  @apply w-[16px] h-[16px] mr-[2px];
+}
+
+.rlc-url {
+  @apply text-link text-sm whitespace-nowrap overflow-hidden text-ellipsis;
+}
+
+.rlc-image-container {
+  @apply w-2/6 h-full overflow-y-hidden flex-1 basis-[100px];
+}
+
+.rlc-image {
+  @apply object-cover w-full h-full rounded-br rounded-tr;
+}
+
+.warning {
+  @apply flex p-4 my-5 text-red-800 rounded-lg bg-red-50;
+}
+.warning p{
+  @apply  text-red-800;
+}
+
+.message {
+  @apply flex p-4 my-5 text-green-800 rounded-lg bg-green-50;
+}
+.message p{
+  @apply  text-green-800;
+}
+
+.info {
+  @apply flex p-4 my-5 text-blue-800 rounded-md bg-blue-50;
+}
+.info p{
+  @apply  text-blue-800;
+}
+
+.markdown details{
+  @apply flex p-2 my-5 text-basic rounded-md border border-neutral-200 shadow-sm transition-all duration-200 ease-in-out hover:bg-primary-subtle;
+}
+
+details[open]{
+  @apply bg-primary-subtle;
+}
