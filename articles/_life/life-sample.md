@@ -1,14 +1,14 @@
 ---
-title: "サンプル"
+title: "Life-サンプル"
 excerpt: "テスト用の記事"
 coverImage: "/assets/blog/preview/cover.jpg"
 date: "2020-03-16"
 ogImage:
   url: "/vercel.jpg"
-beginColor: 'from-[#FEAC5E]'
-middleColor: 'via-[#C779D0]'
-endColor: 'to-[#4BC0C8]'
-tags: ['react', 'javascript', 'tech']
+beginColor: 'from-purple-300'
+middleColor: 'via-yellow-200'
+endColor: 'to-green-300'
+tags: ['life']
 ---
 # Pluto
 
@@ -83,7 +83,7 @@ puts 'Hello, World'
 
 文章です*文章です文章です*文章です文章です**文章です文章です**文章です文章です~~文章です文章です~~文章です文章です文章です文章です。`[1, 2, 3]{:js}`
 
-[リンク](http://localhost:3000/articles/article0)
+[リンク](http://localhost:3000/dev/articles/article0)
 
 > 引用文です引用文です引用文です引用文です引用文です
 ---
