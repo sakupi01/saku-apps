@@ -32,6 +32,10 @@ const config: Omit<Config, "content"> = {
             DEFAULT: "#F0F0F0",
             hover: "#2D2613",
           },
+          secondary: {
+            DEFAULT: "white",
+            hover: "#2D2613",
+          },
           subtle: {
             DEFAULT: "#FAF7F0",
             hover: "#FAEDD2",

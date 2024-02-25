@@ -3,7 +3,7 @@ import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { Thumbnail, Toc } from "@repo/ui";
-import { ArrowUpCircle, Github } from "lucide-react";
+import { ArrowUpCircle, ChevronLeft, Github } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "../../../../../packages/ui/src/components/button/button";
@@ -53,9 +53,11 @@ export default async function Article({ params }: Params) {
 
   return (
     <main>
-      <div className="max-w-2xl mx-auto py-5">
+      <div className="max-w-2xl mx-auto pt-20">
         <Link href={"/"}>
-          <Button>back</Button>
+          <Button intent="square-icon" size="square">
+            <ChevronLeft />
+          </Button>
         </Link>
         <Thumbnail
           title={article.title}
