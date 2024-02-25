@@ -20,7 +20,6 @@ import { visit } from "unist-util-visit";
 
 export default async function markdownToHtml(markdown: string) {
   const result = await remark()
-    // @ts-expect-error
     .use(remarkEmbedder, {
       transformers: [CodeSandboxTransformer, oembedTransformer],
     })
@@ -31,7 +30,8 @@ export default async function markdownToHtml(markdown: string) {
     .use(remarkToc, {
       heading: "目次",
       ordered: true,
-      tight: false,
+      tight: true,
+      prefix: "user-content-",
       maxDepth: 3,
     })
     .use(collapse, {
@@ -39,7 +39,9 @@ export default async function markdownToHtml(markdown: string) {
       summary: (str: string) => str,
     })
     .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeSlug)
+    .use(rehypeSlug, {
+      prefix: "user-content-",
+    })
     .use(rehypePrettyCode, {
       theme: "github-light",
       keepBackground: true,
@@ -47,7 +49,6 @@ export default async function markdownToHtml(markdown: string) {
     })
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(markdown);
-
   return result.toString();
 }
 

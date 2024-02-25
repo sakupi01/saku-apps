@@ -1,3 +1,4 @@
+import generateToc from "@/libs/generateToc";
 import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
@@ -28,6 +29,7 @@ export default async function Article({ params }: Params) {
   }
 
   const content = await markdownToHtml(article.content);
+  const toc = await generateToc(article.content);
 
   const tagWithId = article.tags?.map((tag) => {
     const id = Math.random().toString(32).substring(2);
@@ -67,6 +69,7 @@ export default async function Article({ params }: Params) {
           />
         </div>
       </article>
+      <div className="sidebar-index"></div>
     </main>
   );
 }
