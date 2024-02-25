@@ -1,4 +1,7 @@
-import { getAllArticleTags, getAllArticlesByTag } from "@/libs/getApi";
+import {
+  getAllTechArticleTags,
+  getAllTechArticlesByTag,
+} from "@/libs/getTechApi";
 import { ArticleListItem } from "@repo/ui";
 import Link from "next/link";
 
@@ -9,7 +12,7 @@ type Params = {
 };
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-  const slugs = getAllArticleTags();
+  const slugs = getAllTechArticleTags();
 
   return slugs.map((slug) => ({
     slug: slug,
@@ -17,9 +20,9 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: Params) {
-  const article = getAllArticlesByTag(params.slug);
+  const article = getAllTechArticlesByTag(params.slug);
   return (
-    <main className="flex min-h-screen min-w-screen flex-col items-center justify-center p-24">
+    <main className="flex min-w-screen flex-col items-center justify-center p-24">
       <h1 className="text-5xl font-bold text-left text-basic my-10">
         Articles
       </h1>

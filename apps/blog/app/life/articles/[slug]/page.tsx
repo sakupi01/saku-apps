@@ -1,5 +1,5 @@
 import generateToc from "@/libs/generateToc";
-import { getTechArticleBySlug, getTechArticleSlugs } from "@/libs/getTechApi";
+import { getLifeArticleBySlug, getLifeArticleSlugs } from "@/libs/getLifeApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { Button, Thumbnail, Toc } from "@repo/ui";
@@ -15,7 +15,7 @@ type Params = {
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-  const slugs = getTechArticleSlugs();
+  const slugs = getLifeArticleSlugs();
 
   return slugs.map((slug) => ({
     slug: slug,
@@ -23,7 +23,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Article({ params }: Params) {
-  const article = getTechArticleBySlug(params.slug);
+  const article = getLifeArticleBySlug(params.slug);
 
   if (!article) {
     return notFound();
@@ -43,7 +43,7 @@ export default async function Article({ params }: Params) {
   });
 
   const renderTags = tagWithId?.map((tag) => (
-    <Link href={`/dev/tag/${tag.name}`}>
+    <Link href={`/life/tag/${tag.name}`}>
       <span key={tag.id} className="tag mr-3">
         {tag.name}
       </span>

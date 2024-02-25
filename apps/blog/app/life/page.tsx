@@ -1,9 +1,9 @@
-import { getAllTechArticles } from "@/libs/getTechApi";
+import { getAllLifeArticles } from "@/libs/getLifeApi";
 import { ArticleListItem } from "@repo/ui";
 import Link from "next/link";
 
 export default async function Page() {
-  const allArticles = getAllTechArticles();
+  const allArticles = getAllLifeArticles();
   return (
     <main className="flex min-w-screen flex-col items-center justify-center p-24">
       <h1 className="text-5xl font-bold text-left text-basic my-10">
@@ -20,7 +20,7 @@ export default async function Page() {
           });
 
           const renderTags = tagWithId?.map((tag) => (
-            <Link href={`/dev/tag/${tag.name}`}>
+            <Link href={`/life/tag/${tag.name}`}>
               <span key={tag.id} className="tag mr-3">
                 {tag.name}
               </span>
@@ -28,7 +28,7 @@ export default async function Page() {
           ));
 
           return (
-            <Link href={`/dev/articles/${article.slug}`}>
+            <Link href={`/life/articles/${article.slug}`}>
               <ArticleListItem
                 title={article.title}
                 excerpt={article.excerpt}
