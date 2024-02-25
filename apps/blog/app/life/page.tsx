@@ -10,7 +10,7 @@ export default async function Page() {
         Articles
       </h1>
       <div className="max-w-2xl mx-auto">
-        {allArticles.map((article, index) => {
+        {allArticles.map((article) => {
           const tagWithId = article.tags?.map((tag) => {
             const id = Math.random().toString(32).substring(2);
             return {
