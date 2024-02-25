@@ -17,7 +17,7 @@ export const Thumbnail = ({
 }: ThumbnailProps) => {
   return (
     <div
-      className={`w-full p-4 my-10 rounded-lg bg-gradient-to-r ${beginColor} ${middleColor} ${endColor}`}
+      className={`w-full p-4 mt-5 mb-10 rounded-lg bg-gradient-to-r ${beginColor} ${middleColor} ${endColor}`}
     >
       <div className="w-full  text-basic rounded-lg p-10 bg-white shadow-sm">
         {tags && tags}
