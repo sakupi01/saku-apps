@@ -2,11 +2,10 @@ import generateToc from "@/libs/generateToc";
 import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
-import { Thumbnail, Toc } from "@repo/ui";
+import { Thumbnail, Toc, Button } from "@repo/ui";
 import { ArrowUpCircle, ChevronLeft, Github } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Button } from "../../../../../packages/ui/src/components/button/button";
 
 type Params = {
   params: {
