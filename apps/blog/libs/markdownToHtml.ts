@@ -10,13 +10,13 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
 import { remark } from "remark";
+import collapse from "remark-collapse";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
 import rlc from "remark-link-card";
 import remarkRehype from "remark-rehype";
 import remarkToc from "remark-toc";
 import { visit } from "unist-util-visit";
-import collapse from "remark-collapse";
 
 export default async function markdownToHtml(markdown: string) {
   const result = await remark()

@@ -1,20 +1,20 @@
 declare module "mdast-util-heading-range" {
   function heading(
-    node: any,
-    test: any,
-    callback: (start: any, nodes: any, end: any) => any[],
+    node: Node,
+    test: string,
+    callback: (start: Node, nodes: Node, end: Node) => Node[],
   ): void;
   export = heading;
 }
 
 declare module "mdast-util-to-string" {
-  function toString(node: any): string;
+  function toString(node: Node): string;
   export = toString;
 }
 
 declare module "remarkCollapse" {
   interface Options {
-    test: any;
+    test: string;
     summary?: string | (() => string);
   }
 }
