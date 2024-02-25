@@ -220,3 +220,7 @@ div[data-rehype-pretty-code-title] {
 details[open]{
   @apply bg-primary-subtle;
 }
+
+.toc {
+  @apply p-4 my-10 min-w-[250px] text-basic rounded-md bg-primary-subtle shadow-sm;
+}

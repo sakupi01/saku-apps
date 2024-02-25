@@ -7,11 +7,6 @@ declare module "mdast-util-heading-range" {
   export = heading;
 }
 
-declare module "mdast-util-to-string" {
-  function toString(node: Node): string;
-  export = toString;
-}
-
 declare module "remarkCollapse" {
   interface Options {
     test: string;

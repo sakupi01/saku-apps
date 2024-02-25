@@ -6,13 +6,9 @@ export default function addID(node, nodes) {
   nodes[id] = (nodes[id] || 0) + 1;
   node.data = node.data || {
     hProperties: {
-      id:
-        "user-content-" +
-        `${id}${nodes[id] > 1 ? ` ${nodes[id] - 1}` : ""}`
-          .replace(/[^a-zA-Z\d\s-]/g, "")
-          .split(" ")
-          .join("-")
-          .toLowerCase(),
+      id: `${id}${nodes[id] > 1 ? ` ${nodes[id] - 1}` : ""}`
+        .split(" ")
+        .join("-"),
     },
   };
 }

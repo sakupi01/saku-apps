@@ -2,7 +2,7 @@ import generateToc from "@/libs/generateToc";
 import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
-import { Thumbnail } from "@repo/ui";
+import { Thumbnail, Toc } from "@repo/ui";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -28,8 +28,10 @@ export default async function Article({ params }: Params) {
     return notFound();
   }
 
-  const content = await markdownToHtml(article.content);
-  const toc = await generateToc(article.content);
+  const [content, toc] = await Promise.all([
+    markdownToHtml(article.content),
+    generateToc(article.content),
+  ]);
 
   const tagWithId = article.tags?.map((tag) => {
     const id = Math.random().toString(32).substring(2);
@@ -58,18 +60,21 @@ export default async function Article({ params }: Params) {
           endColor={`${article.endColor}`}
           tags={renderTags}
         />
-      </div>
-      <article className="mb-32">
-        <div className="max-w-2xl mx-auto">
-          <div
-            className="markdown"
-            // https://biomejs.dev/ja/linter/rules/no-dangerously-set-inner-html/
-            // `sanitizeHtml`によりサニタイズ済みのDOMを渡すので、`dangerouslySetInnerHTML`を許容する
-            dangerouslySetInnerHTML={{ __html: sanitizeHtml(content) }}
-          />
+        <div className="flex justify-start items-start gap-10">
+          <article className="mb-32">
+            <div className="max-w-2xl mx-auto">
+              <div
+                className="markdown"
+                // https://biomejs.dev/ja/linter/rules/no-dangerously-set-inner-html/
+                // `sanitizeHtml`によりサニタイズ済みのDOMを渡すので、`dangerouslySetInnerHTML`を許容する
+                dangerouslySetInnerHTML={{ __html: sanitizeHtml(content) }}
+              />
+            </div>
+          </article>
+          {/* biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents> */}
+          <Toc nodes={toc as any[]} />
         </div>
-      </article>
-      <div className="sidebar-index"></div>
+      </div>
     </main>
   );
 }

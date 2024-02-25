@@ -31,7 +31,6 @@ export default async function markdownToHtml(markdown: string) {
       heading: "目次",
       ordered: true,
       tight: true,
-      prefix: "user-content-",
       maxDepth: 3,
     })
     .use(collapse, {
@@ -39,9 +38,7 @@ export default async function markdownToHtml(markdown: string) {
       summary: (str: string) => str,
     })
     .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeSlug, {
-      prefix: "user-content-",
-    })
+    .use(rehypeSlug)
     .use(rehypePrettyCode, {
       theme: "github-light",
       keepBackground: true,
