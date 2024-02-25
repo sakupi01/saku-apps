@@ -20,6 +20,7 @@ import { visit } from "unist-util-visit";
 
 export default async function markdownToHtml(markdown: string) {
   const result = await remark()
+    // @ts-expect-error
     .use(remarkEmbedder, {
       transformers: [CodeSandboxTransformer, oembedTransformer],
     })
