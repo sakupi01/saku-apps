@@ -10,7 +10,7 @@ export default async function Page() {
         Articles
       </h1>
       <div className="max-w-2xl mx-auto">
-        {allArticles.map((article) => {
+        {allArticles.map((article, index) => {
           const tagWithId = article.tags?.map((tag) => {
             const id = Math.random().toString(32).substring(2);
             return {
@@ -20,22 +20,21 @@ export default async function Page() {
           });
 
           const renderTags = tagWithId?.map((tag) => (
-            <Link href={`/dev/tag/${tag.name}`}>
-              <span key={tag.id} className="tag mr-3">
-                {tag.name}
-              </span>
+            <Link href={`/dev/tag/${tag.name}`} key={tag.id}>
+              <span className="tag mr-3">{tag.name}</span>
             </Link>
           ));
 
           return (
-            <Link href={`/dev/articles/${article.slug}`}>
+            <Link href={`/dev/articles/${article.slug}`} key={article.slug}>
               <ArticleListItem
                 title={article.title}
                 excerpt={article.excerpt}
                 date={article.date}
-                beginColor={`${article.beginColor}`}
-                middleColor={`${article.middleColor}`}
-                endColor={`${article.endColor}`}
+                beginColor={article.beginColor}
+                middleColor={article.middleColor}
+                endColor={article.endColor}
+                colors={`${article.beginColor} ${article.middleColor} ${article.endColor}`}
                 tags={renderTags}
               />
             </Link>

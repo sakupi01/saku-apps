@@ -10,7 +10,7 @@ export default async function Page() {
         Articles
       </h1>
       <div className="max-w-2xl mx-auto">
-        {allArticles.map((article) => {
+        {allArticles.map((article, index) => {
           const tagWithId = article.tags?.map((tag) => {
             const id = Math.random().toString(32).substring(2);
             return {
@@ -20,15 +20,13 @@ export default async function Page() {
           });
 
           const renderTags = tagWithId?.map((tag) => (
-            <Link href={`/life/tag/${tag.name}`}>
-              <span key={tag.id} className="tag mr-3">
-                {tag.name}
-              </span>
+            <Link href={`/life/tag/${tag.name}`} key={tag.id}>
+              <span className="tag mr-3">{tag.name}</span>
             </Link>
           ));
 
           return (
-            <Link href={`/life/articles/${article.slug}`}>
+            <Link href={`/life/articles/${article.slug}`} key={article.slug}>
               <ArticleListItem
                 title={article.title}
                 excerpt={article.excerpt}

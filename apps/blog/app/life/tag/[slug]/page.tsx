@@ -37,15 +37,13 @@ export default async function Page({ params }: Params) {
           });
 
           const renderTags = tagWithId?.map((tag) => (
-            <Link href={`/life/tag/${tag.name}`}>
-              <span key={tag.id} className="tag mr-3">
-                {tag.name}
-              </span>
+            <Link href={`/life/tag/${tag.name}`} key={tag.id}>
+              <span className="tag mr-3">{tag.name}</span>
             </Link>
           ));
 
           return (
-            <Link href={`/life/articles/${article.slug}`}>
+            <Link href={`/life/articles/${article.slug}`} key={article.slug}>
               <ArticleListItem
                 title={article.title}
                 excerpt={article.excerpt}
