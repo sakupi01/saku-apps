@@ -2,7 +2,7 @@ import generateToc from "@/libs/generateToc";
 import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
-import { Thumbnail, Toc, Button } from "@repo/ui";
+import { Button, Thumbnail, Toc } from "@repo/ui";
 import { ArrowUpCircle, ChevronLeft, Github } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
