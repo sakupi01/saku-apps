@@ -1,1 +1,0 @@
-import{j as r}from"./jsx-runtime-DRTy3Uxn.js";const e=()=>r.jsx("hr",{className:"border-spacing-x-0.5 border-neutral-200 my-2 w-full"});e.__docgenInfo={description:"",methods:[],displayName:"Divider"};export{e as D};
