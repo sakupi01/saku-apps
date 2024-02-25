@@ -1,7 +1,7 @@
 import sharedConfig from "@repo/tailwind-config";
 import type { Config } from "tailwindcss";
 
-const config: Pick<Config, "content" | "presets" | "mode"> = {
+const config: Pick<Config, "content" | "presets" | "mode" | "safelist"> = {
   mode: "jit",
   content: {
     relative: true,
@@ -14,6 +14,17 @@ const config: Pick<Config, "content" | "presets" | "mode"> = {
     ],
   },
   presets: [sharedConfig],
+  safelist: [
+    {
+      pattern: /to-./,
+    },
+    {
+      pattern: /via-./,
+    },
+    {
+      pattern: /from-./,
+    },
+  ],
 };
 
 export default config;

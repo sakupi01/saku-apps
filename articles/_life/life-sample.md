@@ -5,9 +5,9 @@ coverImage: "/assets/blog/preview/cover.jpg"
 date: "2020-03-16"
 ogImage:
   url: "/vercel.jpg"
-beginColor: 'from-[#FEAC5E]'
-middleColor: 'via-[#C779D0]'
-endColor: 'to-[#4BC0C8]'
+beginColor: 'from-purple-300'
+middleColor: 'via-yellow-200'
+endColor: 'to-green-300'
 tags: ['life']
 ---
 # Pluto

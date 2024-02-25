@@ -5,9 +5,9 @@ coverImage: "/assets/blog/preview/cover.jpg"
 date: "2020-03-16"
 ogImage:
   url: "/vercel.jpg"
-beginColor: 'from-[#FEAC5E]'
-middleColor: 'via-yellow-200'
-endColor: 'to-blue-200'
+beginColor: 'from-red-400'
+middleColor: 'via-blue-300'
+endColor: 'to-yellow-500'
 tags: ['react', 'javascript', 'tech']
 ---
 

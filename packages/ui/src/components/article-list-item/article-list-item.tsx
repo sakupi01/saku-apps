@@ -1,21 +1,18 @@
+import clsx from "clsx";
 import { ReactNode } from "react";
 import { Divider } from "../divider/divider";
 type ArticleListItemProps = {
   title: string;
   excerpt: string;
   date: string;
-  beginColor: string;
-  middleColor: string;
-  endColor: string;
+  colors?: string;
   tags?: ReactNode[];
 };
 export const ArticleListItem = ({
   title,
   excerpt,
   date,
-  beginColor,
-  middleColor,
-  endColor,
+  colors,
   tags,
 }: ArticleListItemProps) => {
   return (
@@ -23,7 +20,10 @@ export const ArticleListItem = ({
       <div className="w-full py-10 px-2 flex items-center gap-6 rounded-md hover:bg-neutral-50">
         <div className="flex justify-center items-center p-5 rounded-lg bg-primary-subtle shadow">
           <div
-            className={`w-[50px] h-[50px] rounded-[50px] shadow-md bg-gradient-to-r ${beginColor} ${middleColor} ${endColor}`}
+            className={clsx(
+              "w-[50px] h-[50px] rounded-[50px] shadow-md bg-gradient-to-r",
+              colors,
+            )}
           />
         </div>
         <div className="flex flex-col justify-between gap-2">
@@ -32,7 +32,7 @@ export const ArticleListItem = ({
             {title}
           </h2>
           <p className="subtle">{excerpt}</p>
-          <p className="text-sm text-gray-500">{date}</p>
+          <p className="text-sm text-subtle">{date}</p>
         </div>
       </div>
       <Divider />

@@ -48,9 +48,7 @@ export default async function Page({ params }: Params) {
                 title={article.title}
                 excerpt={article.excerpt}
                 date={article.date}
-                beginColor={`${article.beginColor}`}
-                middleColor={`${article.middleColor}`}
-                endColor={`${article.endColor}`}
+                colors={`${article.beginColor} ${article.middleColor} ${article.endColor}`}
                 tags={renderTags}
               />
             </Link>
