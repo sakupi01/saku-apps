@@ -1,7 +1,7 @@
 "use client";
+import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import clsx from "clsx";
 import { useMemo } from "react";
 
 export default function LocationIndicatorLink({
@@ -19,7 +19,7 @@ export default function LocationIndicatorLink({
   return (
     <Link
       href={href}
-      className={clsx(`text-2xl font-semibold text-left hover:text-blossom`, {
+      className={clsx("text-2xl font-semibold text-left hover:text-blossom", {
         "text-blossom": isActive,
         "text-basic": !isActive,
       })}

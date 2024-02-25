@@ -1,7 +1,7 @@
-import Link from "next/link";
-import Image from "next/image";
-import LocationIndicatorLink from "./location-indicator-link";
 import { Github, Rss } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import LocationIndicatorLink from "./location-indicator-link";
 
 export default function NavigationBar() {
   return (
