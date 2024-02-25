@@ -3,8 +3,10 @@ import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { Thumbnail, Toc } from "@repo/ui";
+import { ArrowUpCircle, Github } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Button } from "../../../../../packages/ui/src/components/button/button";
 
 type Params = {
   params: {
@@ -51,7 +53,10 @@ export default async function Article({ params }: Params) {
 
   return (
     <main>
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto py-5">
+        <Link href={"/"}>
+          <Button>back</Button>
+        </Link>
         <Thumbnail
           title={article.title}
           date={article.date}
@@ -60,9 +65,9 @@ export default async function Article({ params }: Params) {
           endColor={`${article.endColor}`}
           tags={renderTags}
         />
-        <div className="flex justify-start items-start gap-10">
-          <article className="mb-32">
-            <div className="max-w-2xl mx-auto">
+        <div className="w-full flex justify-center items-start gap-10">
+          <article className="w-full grow shrink-0 mb-32">
+            <div className="w-full">
               <div
                 className="markdown"
                 // https://biomejs.dev/ja/linter/rules/no-dangerously-set-inner-html/
@@ -71,8 +76,30 @@ export default async function Article({ params }: Params) {
               />
             </div>
           </article>
-          {/* biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents> */}
-          <Toc nodes={toc as any[]} />
+          <Toc
+            // biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents>
+            nodes={toc as any[]}
+            githubLink={
+              <a
+                href={`https://github.com/saku-1101/saku-apps/blob/main/articles/_articles/${params.slug}.md`}
+                className="w-full flex items-center justify-start gap-2 text-subtle hover:underline hover:text-basic"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Githubで修正を提案する
+                <Github />
+              </a>
+            }
+            backToTopLink={
+              <Link
+                href="#top"
+                className="w-full flex items-center justify-start gap-2 text-subtle hover:underline hover:text-basic"
+              >
+                ページの先頭に戻る
+                <ArrowUpCircle />
+              </Link>
+            }
+          />
         </div>
       </div>
     </main>

@@ -6,10 +6,10 @@ import { ReactNode } from "react";
 export interface ButtonProps {
   children: ReactNode;
   className?: string;
-  appName: string;
+  onClick?: () => void;
 }
 
-export const Button = ({ children, className, appName }: ButtonProps) => {
+export const Button = ({ children, className, onClick }: ButtonProps) => {
   return (
     <button
       type="submit"
@@ -17,7 +17,7 @@ export const Button = ({ children, className, appName }: ButtonProps) => {
         "px-4 py-2 text-base bg-button-primary rounded-md shadow-md hover:bg-button-primary-hover hover:text-white",
         className,
       )}
-      onClick={() => alert(`Hello from your ${appName} app!`)}
+      onClick={onClick}
     >
       {children}
     </button>

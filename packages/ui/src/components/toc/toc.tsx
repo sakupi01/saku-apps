@@ -1,15 +1,27 @@
 "use client";
 
-import clsx from "clsx";
+import { ReactNode } from "react";
+import { Divider } from "../divider/divider";
 import useHighlighted from "./hooks/useHighlighted";
 
-// biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents>
-export const Toc = ({ nodes }: { nodes: any[] }) => {
+export const Toc = ({
+  nodes,
+  githubLink,
+  backToTopLink,
+  //  biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents>
+}: { nodes: any[]; githubLink: ReactNode; backToTopLink: ReactNode }) => {
   if (!nodes?.length) {
     return null;
   }
 
-  return <div className={"toc"}>{renderNodes(nodes)}</div>;
+  return (
+    <div className="flex flex-col gap-2 sticky top-2">
+      <div className={"toc"}>{renderNodes(nodes)}</div>
+      <Divider />
+      {githubLink}
+      {backToTopLink}
+    </div>
+  );
 };
 
 // biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents>
@@ -28,20 +40,20 @@ function renderNodes(nodes: any[]) {
   );
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents>
 const TOCLink = ({ node }: { node: any }) => {
   const id: string = node.data.hProperties.id;
   useHighlighted();
   return (
-    <a
-      href={`#${id}`}
+    <button
+      type="button"
       onClick={(e) => {
         e.preventDefault();
         const element = document.getElementById(id);
-        element &&
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        element?.scrollIntoView({ behavior: "smooth", block: "start" });
       }}
     >
-      {node.value}
-    </a>
+      <a href={`#${id}`}>{node.value}</a>
+    </button>
   );
 };

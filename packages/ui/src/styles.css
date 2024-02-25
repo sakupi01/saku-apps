@@ -222,7 +222,7 @@ details[open]{
 }
 
 .toc {
-  @apply p-4 my-10 min-w-[250px] text-basic rounded-md border border-neutral-200 shadow-sm  sticky top-2;
+  @apply p-4 mt-10 min-w-[250px] text-basic rounded-md border border-neutral-200 shadow-sm;
 }
 
 .toc a {
