@@ -10,6 +10,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
 import { remark } from "remark";
+import collapse from "remark-collapse";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
 import rlc from "remark-link-card";
@@ -30,8 +31,12 @@ export default async function markdownToHtml(markdown: string) {
     .use(remarkToc, {
       heading: "目次",
       ordered: true,
-      tight: false,
+      tight: true,
       maxDepth: 3,
+    })
+    .use(collapse, {
+      test: "目次",
+      summary: (str: string) => str,
     })
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeSlug)
@@ -42,7 +47,6 @@ export default async function markdownToHtml(markdown: string) {
     })
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(markdown);
-
   return result.toString();
 }
 
