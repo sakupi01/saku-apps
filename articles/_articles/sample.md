@@ -83,7 +83,7 @@ puts 'Hello, World'
 
 文章です*文章です文章です*文章です文章です**文章です文章です**文章です文章です~~文章です文章です~~文章です文章です文章です文章です。`[1, 2, 3]{:js}`
 
-[リンク](http://localhost:3000/articles/article0)
+[リンク](http://localhost:3000/dev/articles/article0)
 
 > 引用文です引用文です引用文です引用文です引用文です
 ---
