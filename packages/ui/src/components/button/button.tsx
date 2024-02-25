@@ -1,7 +1,7 @@
 "use client";
 
+import { type VariantProps, cva } from "class-variance-authority";
 import clsx from "clsx";
-import { cva, type VariantProps } from "class-variance-authority";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
