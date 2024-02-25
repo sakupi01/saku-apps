@@ -1,8 +1,8 @@
-import { toString } from "mdast-util-to-string";
+import { toString as tSFunc } from "mdast-util-to-string";
 
 export default function transformNode(node, output, indexMap) {
   const transformedNode = {
-    value: toString(node),
+    value: tSFunc(node),
     depth: node.depth,
     data: node.data,
     children: [],

@@ -14,6 +14,6 @@
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
-    "remark": "^15.0.1"
+    "mdast-util-to-string": "^4.0.0"
   }
 }
