@@ -128,7 +128,10 @@ div[data-rehype-pretty-code-title] {
     @apply text-sm text-left text-subtle;
   }
 .tag{
-    @apply text-sm font-medium text-left text-tag;
+    @apply text-sm p-1 font-medium rounded text-left text-tag hover:underline hover:bg-neutral-100;
+  }
+.date{
+    @apply text-base font-medium text-left text-tag ;
   }
 .markdown table {
   @apply w-full my-6 border border-neutral-200;

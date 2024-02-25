@@ -2,9 +2,13 @@
 title: "Preview Mode for Static Generation"
 excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus."
 coverImage: "/assets/blog/preview/cover.jpg"
-date: "2020-03-16T05:35:07.322Z"
+date: "2020-03-16"
 ogImage:
   url: "/vercel.jpg"
+beginColor: 'from-red-200'
+middleColor: 'via-yellow-200'
+endColor: 'to-blue-200'
+tags: ['react', 'javascript', 'tech']
 ---
 
 ## Lorem Ipsum Preview

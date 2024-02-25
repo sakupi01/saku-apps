@@ -1,21 +1,10 @@
 {
   "total": 3,
-  "passes": 2,
-  "errors": 1,
+  "passes": 3,
+  "errors": 0,
   "results": {
     "http://localhost:3000/": [],
     "http://localhost:3000/articles/sample-en": [],
-    "http://localhost:3000/articles/sample": [
-      {
-        "code": "WCAG2AA.Principle2.Guideline2_4.2_4_1.H64.1",
-        "type": "error",
-        "typeCode": 1,
-        "message": "Iframe element requires a non-empty title attribute that identifies the frame.",
-        "context": "<iframe allowfullscreen=\"\" frameborder=\"0\" style=\"aspect-ratio:710/399; border:0; padding:0; margin:0; background:transparent;\" height=\"399\" width=\"710\" src=\"//speakerdeck.com/player/08d7d3b233444c489a7812ddec70ef81\" class=\"speakerdeck-iframe\" id=\"ta...",
-        "selector": "#talk_frame_1148884",
-        "runner": "htmlcs",
-        "runnerExtras": {}
-      }
-    ]
+    "http://localhost:3000/articles/sample": []
   }
 }

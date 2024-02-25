@@ -2,9 +2,13 @@
 title: "サンプル"
 excerpt: "テスト用の記事"
 coverImage: "/assets/blog/preview/cover.jpg"
-date: "2020-03-16T05:35:07.322Z"
+date: "2020-03-16"
 ogImage:
   url: "/vercel.jpg"
+beginColor: 'from-[#FEAC5E]'
+middleColor: 'via-[#C779D0]'
+endColor: 'to-[#4BC0C8]'
+tags: ['react', 'javascript', 'tech']
 ---
 # Pluto
 
