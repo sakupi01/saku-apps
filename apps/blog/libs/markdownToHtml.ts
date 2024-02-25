@@ -16,6 +16,7 @@ import rlc from "remark-link-card";
 import remarkRehype from "remark-rehype";
 import remarkToc from "remark-toc";
 import { visit } from "unist-util-visit";
+import collapse from "remark-collapse";
 
 export default async function markdownToHtml(markdown: string) {
   const result = await remark()
@@ -32,6 +33,10 @@ export default async function markdownToHtml(markdown: string) {
       ordered: true,
       tight: false,
       maxDepth: 3,
+    })
+    .use(collapse, {
+      test: "目次",
+      summary: (str: string) => str,
     })
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeSlug)
