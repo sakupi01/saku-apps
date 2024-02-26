@@ -18,7 +18,7 @@ export const ArticleListItemLife = ({
   tags,
 }: ArticleListItemProps) => {
   return (
-    <object data={`${title}のリストアイテム`}>
+    <article>
       <div className="w-full py-10 px-2 flex items-center gap-6 rounded-md hover:bg-neutral-50">
         <Image
           src={url}
@@ -44,6 +44,6 @@ export const ArticleListItemLife = ({
         </div>
       </div>
       <Divider />
-    </object>
+    </article>
   );
 };

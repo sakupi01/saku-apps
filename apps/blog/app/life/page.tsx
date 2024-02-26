@@ -17,19 +17,17 @@ export default async function Page({
 
   return (
     <main className="flex min-w-screen flex-col items-center justify-center p-14 md:p-24">
-      <div className="max-w-2xl mx-auto">
+      <div className="w-full max-w-2xl mx-auto">
         <h1 className="w-full text-5xl font-bold text-left text-basic my-10">
           Articles
         </h1>
-        <div className="w-full max-w-2xl mx-auto">
-          <FilteredArticlesListContainer
-            query={query}
-            currentPage={currentPage}
-            category={CATEGORY}
-          />
-          <div className="mt-5 flex w-full justify-center">
-            <Pagination totalPages={totalPages} />
-          </div>
+        <FilteredArticlesListContainer
+          query={query}
+          currentPage={currentPage}
+          category={CATEGORY}
+        />
+        <div className="mt-5 flex w-full justify-center">
+          <Pagination totalPages={totalPages} />
         </div>
       </div>
     </main>
