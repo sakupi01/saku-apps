@@ -4,6 +4,7 @@ import { Article } from "@/interfaces/article";
 import matter from "gray-matter";
 
 const techArticlesDirectory = join(process.cwd(), "../../articles/_tech/");
+const ITEMS_PER_PAGE = 4;
 
 export function getTechArticleSlugs() {
   return fs.readdirSync(techArticlesDirectory);
@@ -40,4 +41,38 @@ export function getAllTechArticlesByTag(tag: string): Article[] {
     return article.tags?.includes(tag);
   });
   return filteredArticles;
+}
+
+export async function fetchArticlesByQuery({
+  query,
+  currentPage,
+}: { query: string; currentPage: number }) {
+  const articles = getAllTechArticles();
+  const filteredArticles = articles.filter((article) => {
+    return (
+      article.title.toLowerCase().includes(query.toLowerCase()) ||
+      article.excerpt.toLowerCase().includes(query.toLowerCase()) ||
+      article.tags?.some((tag) =>
+        tag.toLowerCase().includes(query.toLowerCase()),
+      )
+    );
+  });
+  const start = (currentPage - 1) * ITEMS_PER_PAGE;
+  const end = start + ITEMS_PER_PAGE;
+  const paginatedArticles = filteredArticles.slice(start, end);
+  return paginatedArticles;
+}
+
+export async function fetchArticlePages(query: string = "") {
+  const articles = getAllTechArticles();
+  const filteredArticles = articles.filter((article) => {
+    return (
+      article.title.toLowerCase().includes(query.toLowerCase()) ||
+      article.excerpt.toLowerCase().includes(query.toLowerCase()) ||
+      article.tags?.some((tag) =>
+        tag.toLowerCase().includes(query.toLowerCase()),
+      )
+    );
+  });
+  return Math.ceil(filteredArticles.length / ITEMS_PER_PAGE);
 }
