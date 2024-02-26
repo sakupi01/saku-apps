@@ -1,6 +1,6 @@
 import { fetchArticlePages } from "@/libs/getApi";
-import Pagination from "../_components/pagenation";
 import FilteredArticlesListContainer from "../_components/filtered-articles-list-container";
+import Pagination from "../_components/pagenation";
 
 const CATEGORY = "life" as const;
 export default async function Page({

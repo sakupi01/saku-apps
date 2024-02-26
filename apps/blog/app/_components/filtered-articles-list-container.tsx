@@ -1,7 +1,7 @@
 import { fetchArticlesByQuery } from "@/libs/getApi";
-import FilteredArticlesList from "./filtered-articles-list";
 import { Suspense } from "react";
 import Skeleton from "react-loading-skeleton";
+import FilteredArticlesList from "./filtered-articles-list";
 
 export default async function FilteredArticlesListContainer({
   query,
