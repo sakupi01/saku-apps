@@ -1,31 +1,39 @@
-import clsx from "clsx";
+import { Divider } from "@repo/ui";
+import Image from "next/image";
 import { ReactNode } from "react";
-import { Divider } from "../divider/divider";
 type ArticleListItemProps = {
   title: string;
   excerpt: string;
   date: string;
-  colors?: string;
+  url: string;
+  alt: string;
   tags?: ReactNode[];
 };
-export const ArticleListItem = ({
+export const ArticleListItemLife = ({
   title,
   excerpt,
   date,
-  colors,
+  url,
+  alt,
   tags,
 }: ArticleListItemProps) => {
   return (
     <article>
       <div className="w-full py-10 px-2 flex items-center gap-6 rounded-md hover:bg-neutral-50">
-        <div className="flex justify-center items-center p-5 rounded-lg bg-primary-subtle shadow">
-          <div
-            className={clsx(
-              "w-[50px] h-[50px] rounded-[50px] shadow-md bg-gradient-to-r",
-              colors,
-            )}
-          />
-        </div>
+        <Image
+          src={url}
+          alt={alt}
+          width={100}
+          height={100}
+          style={{
+            width: "100px",
+            aspectRatio: "1/1",
+            objectFit: "cover",
+            borderRadius: "0.5rem",
+            boxShadow:
+              "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          }}
+        />
         <div className="flex flex-col justify-between gap-2">
           <div className="flex">{tags && tags}</div>
           <h2 className="text-3xl font-semibold text-left text-basic">

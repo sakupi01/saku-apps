@@ -1,11 +1,14 @@
 import { Github, Rss } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
+import Skeleton from "react-loading-skeleton";
 import LocationIndicatorLink from "./location-indicator-link";
+import Search from "./search";
 
 export default function NavigationBar() {
   return (
-    <nav className="w-full flex justify-between items-center md:!flex-row flex-col md:px-10 px-5 py-5 md:gap-0 gap-3">
+    <nav className="w-full flex justify-between items-center lg:!flex-row flex-col md:px-10 px-5 py-5 md:gap-0 gap-3">
       <div className="flex flex-col md:!flex-row items-center justify-center md:gap-3 gap-5 ">
         <Link href="/" className="flex items-center gap-2">
           <Image
@@ -25,7 +28,10 @@ export default function NavigationBar() {
           <LocationIndicatorLink href="/about" linkName="About" />
         </div>
       </div>
-      <div className="flex justify-end items-center gap-2 md:gap-5">
+      <div className="flex justify-end items-center gap-5">
+        <Suspense fallback={<Skeleton height="50px" />}>
+          <Search placeholder="search..." />
+        </Suspense>
         <Link
           href="https://github.com/saku-1101/saku-apps"
           className="p-2 md:p-3 rounded-full  transition-all duration-600 ease-in-out flex items-center justify-center hover:text-blossom "

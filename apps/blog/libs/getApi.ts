@@ -3,9 +3,9 @@ import { join } from "path";
 import { Article } from "@/interfaces/article";
 import matter from "gray-matter";
 
-const techArticlesDirectory = join(process.cwd(), "../../articles/_tech/");
+const techArticlesDirectory = join(process.cwd(), "../../articles/_dev/");
 const lifeArticlesDirectory = join(process.cwd(), "../../articles/_life/");
-type Category = "life" | "tech";
+type Category = "life" | "dev";
 const ITEMS_PER_PAGE = 4;
 
 export function getArticleSlugs(which: Category) {
