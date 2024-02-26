@@ -2,7 +2,7 @@
 title: "Life-サンプル"
 excerpt: "テスト用の記事"
 coverImage: 
-  url: "/thumb.jpg"
+  url: "/IMG_0955.jpg"
   alt: 'サンプルのalt'
 date: "2020-03-16"
 tags: ['life', 'foreign']

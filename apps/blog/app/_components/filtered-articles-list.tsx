@@ -1,6 +1,7 @@
 import { Article } from "@/interfaces/article";
 import { ArticleListItem } from "@repo/ui";
 import Link from "next/link";
+import { ArticleListItemLife } from "./article-list-item-life";
 
 export default async function FilteredArticlesList({
   category,
@@ -31,13 +32,24 @@ export default async function FilteredArticlesList({
             href={`/${category}/articles/${article.slug}`}
             key={article.slug}
           >
-            <ArticleListItem
-              title={article.title}
-              excerpt={article.excerpt}
-              date={article.date}
-              colors={`${article.beginColor} ${article.middleColor} ${article.endColor}`}
-              tags={renderTags}
-            />
+            {category === "life" ? (
+              <ArticleListItemLife
+                title={article.title}
+                excerpt={article.excerpt}
+                date={article.date}
+                url={article.coverImage.url}
+                alt={article.coverImage.alt}
+                tags={renderTags}
+              />
+            ) : (
+              <ArticleListItem
+                title={article.title}
+                excerpt={article.excerpt}
+                date={article.date}
+                colors={`${article.beginColor} ${article.middleColor} ${article.endColor}`}
+                tags={renderTags}
+              />
+            )}
           </Link>
         );
       })}

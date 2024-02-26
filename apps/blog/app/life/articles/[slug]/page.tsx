@@ -1,13 +1,13 @@
+import ThumbnailLife from "@/app/_components/thumbnail-life";
 import generateToc from "@/libs/generateToc";
 import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { Button, Thumbnail, Toc } from "@repo/ui";
 import { ArrowUpCircle, ChevronLeft } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Image from "next/image";
-import ThumbnailLife from "@/app/_components/thumbnail-life";
 
 const CATEGORY = "life" as const;
 

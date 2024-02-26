@@ -18,12 +18,15 @@ export default function TunbnailLife({
       <Image
         src={url}
         alt={alt}
-        width={200}
-        height={150}
-        objectFit="cover"
-        className="w-full"
+        width={800}
+        height={450}
         style={{
+          width: "100%",
+          aspectRatio: "16/11",
           borderRadius: "0.5rem",
+          objectFit: "cover",
+          boxShadow:
+            "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
         }}
       />
       <div className="w-full  text-basic rounded-lg p-10">
