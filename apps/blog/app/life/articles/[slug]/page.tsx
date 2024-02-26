@@ -1,11 +1,13 @@
 import generateToc from "@/libs/generateToc";
-import { getLifeArticleBySlug, getLifeArticleSlugs } from "@/libs/getLifeApi";
+import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { Button, Thumbnail, Toc } from "@repo/ui";
 import { ArrowUpCircle, ChevronLeft, Github } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+const CATEGORY = "life" as const;
 
 type Params = {
   params: {
@@ -15,7 +17,7 @@ type Params = {
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-  const slugs = getLifeArticleSlugs();
+  const slugs = getArticleSlugs(CATEGORY);
 
   return slugs.map((slug) => ({
     slug: slug,
@@ -23,7 +25,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Article({ params }: Params) {
-  const article = getLifeArticleBySlug(params.slug);
+  const article = getArticleBySlug(params.slug, CATEGORY);
 
   if (!article) {
     return notFound();
@@ -51,7 +53,7 @@ export default async function Article({ params }: Params) {
   return (
     <main>
       <div className="max-w-2xl mx-auto pt-20">
-        <Link href={"/"}>
+        <Link href={"/life"}>
           <Button intent="square-icon" size="square">
             <ChevronLeft />
           </Button>
@@ -78,17 +80,6 @@ export default async function Article({ params }: Params) {
           <Toc
             // biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents>
             nodes={toc as any[]}
-            githubLink={
-              <a
-                href={`https://github.com/saku-1101/saku-apps/blob/main/articles/_articles/${params.slug}.md`}
-                className="w-full flex items-center justify-start gap-2 text-subtle hover:underline hover:text-basic"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Githubで修正を提案する
-                <Github />
-              </a>
-            }
             backToTopLink={
               <Link
                 href="#top"
