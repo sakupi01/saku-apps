@@ -1,11 +1,13 @@
 import generateToc from "@/libs/generateToc";
-import { getTechArticleBySlug, getTechArticleSlugs } from "@/libs/getTechApi";
+import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { Button, Thumbnail, Toc } from "@repo/ui";
 import { ArrowUpCircle, ChevronLeft, Github } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+const CATEGORY = "tech" as const;
 
 type Params = {
   params: {
@@ -15,7 +17,7 @@ type Params = {
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-  const slugs = getTechArticleSlugs();
+  const slugs = getArticleSlugs(CATEGORY);
 
   return slugs.map((slug) => ({
     slug: slug,
@@ -23,7 +25,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Article({ params }: Params) {
-  const article = getTechArticleBySlug(params.slug);
+  const article = getArticleBySlug(params.slug, CATEGORY);
 
   if (!article) {
     return notFound();

@@ -1,13 +1,10 @@
-import {
-  fetchArticlePages,
-  fetchArticlesByQuery,
-  getAllTechArticles,
-} from "@/libs/getTechApi";
+import { fetchArticlePages, fetchArticlesByQuery } from "@/libs/getApi";
 import { ArticleListItem } from "@repo/ui";
 import Link from "next/link";
 import { Suspense } from "react";
 import Pagination from "../_components/pagenation";
 
+const CATEGORY = "tech" as const;
 export default async function Page({
   searchParams,
 }: {
@@ -18,9 +15,13 @@ export default async function Page({
 }) {
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
-  const totalPages = await fetchArticlePages(query);
+  const totalPages = await fetchArticlePages(CATEGORY, query);
 
-  const filteredArticles = await fetchArticlesByQuery({ query, currentPage });
+  const filteredArticles = await fetchArticlesByQuery(
+    query,
+    currentPage,
+    CATEGORY,
+  );
   return (
     <main className="flex min-w-screen flex-col items-center justify-center p-24">
       <h1 className="text-5xl font-bold text-left text-basic my-10">

@@ -8,7 +8,7 @@ ogImage:
 beginColor: 'from-purple-300'
 middleColor: 'via-yellow-200'
 endColor: 'to-green-300'
-tags: ['react', 'javascript', 'tech']
+tags: ['javascript', 'tech']
 ---
 # Pluto
 
