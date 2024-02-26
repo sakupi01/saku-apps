@@ -18,17 +18,23 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }): JSX.Element {
+  const date = new Date();
   return (
     <html lang="en">
       <link
         rel="icon"
         // biome-ignore lint/style/noUnusedTemplateLiteral
         href={`data:image/svg+xml,\<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22\>\<text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:100px;%22\>🌸\</text\>\</svg\>`}
-      />
+      />{" "}
       <body className={inter.className}>
         <NavigationBar />
         {children}
         <SpeedInsights />
+        <div className="w-full text-center text-sm text-subtle py-4">
+          <small>
+            Copyright © {date.getFullYear()} saku 🌸 All rights reserved.
+          </small>
+        </div>
       </body>
     </html>
   );

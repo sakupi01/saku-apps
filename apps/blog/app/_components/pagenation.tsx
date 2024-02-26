@@ -21,8 +21,6 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
 
   return (
     <>
-      {/* NOTE: comment in this code when you get to this point in the course */}
-
       <div className="inline-flex">
         <PaginationArrow
           direction="left"
@@ -77,7 +75,7 @@ function PaginationNumber({
     {
       "rounded-l-md": position === "first" || position === "single",
       "rounded-r-md": position === "last" || position === "single",
-      "z-10 bg-blue-600 border-blue-600 text-white": isActive,
+      "z-10 bg-button-secondary border-basic text-base": isActive,
       "hover:bg-gray-100": !isActive && position !== "middle",
       "text-gray-300": position === "middle",
     },
@@ -112,7 +110,11 @@ function PaginationArrow({
   );
 
   const icon =
-    direction === "left" ? <ChevronLeftCircle /> : <ChevronRightCircle />;
+    direction === "left" ? (
+      <ChevronLeftCircle strokeWidth={1.5} />
+    ) : (
+      <ChevronRightCircle strokeWidth={1.5} />
+    );
 
   return isDisabled ? (
     <div className={className}>{icon}</div>
