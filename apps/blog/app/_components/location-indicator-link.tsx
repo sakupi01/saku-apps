@@ -20,7 +20,7 @@ export default function LocationIndicatorLink({
     <Link
       href={href}
       className={clsx(
-        "text-2xl font-semibold text-left hover:text-blossom transition-all duration-600 ease-in-out",
+        "md:text-2xl text-xl font-semibold text-left hover:text-blossom transition-all duration-600 ease-in-out",
         {
           "text-blossom": isActive,
           "text-basic": !isActive,
