@@ -22,7 +22,10 @@ export default async function FilteredArticlesListContainer({
       key={query + currentPage}
       fallback={<Skeleton count={5} height="150px" className="mb-4" />}
     >
-      <FilteredArticlesList filteredArticles={filteredArticles} />
+      <FilteredArticlesList
+        category={category}
+        filteredArticles={filteredArticles}
+      />
     </Suspense>
   );
 }

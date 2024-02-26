@@ -24,7 +24,7 @@ export default async function Page({
         <FilteredArticlesListContainer
           query={query}
           currentPage={currentPage}
-          category="dev"
+          category={CATEGORY}
         />
         <div className="mt-5 flex w-full justify-center">
           <Pagination totalPages={totalPages} />

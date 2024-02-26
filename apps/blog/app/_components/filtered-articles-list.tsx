@@ -1,11 +1,12 @@
 import { Article } from "@/interfaces/article";
-import { fetchArticlesByQuery } from "@/libs/getApi";
 import { ArticleListItem } from "@repo/ui";
 import Link from "next/link";
 
 export default async function FilteredArticlesList({
+  category,
   filteredArticles,
 }: {
+  category: "life" | "dev";
   filteredArticles: Article[];
 }) {
   return (
@@ -20,13 +21,16 @@ export default async function FilteredArticlesList({
         });
 
         const renderTags = tagWithId?.map((tag) => (
-          <Link href={`/dev/tag/${tag.name}`} key={tag.id}>
+          <Link href={`/${category}/tag/${tag.name}`} key={tag.id}>
             <span className="tag mr-3">{tag.name}</span>
           </Link>
         ));
 
         return (
-          <Link href={`/dev/articles/${article.slug}`} key={article.slug}>
+          <Link
+            href={`/${category}/articles/${article.slug}`}
+            key={article.slug}
+          >
             <ArticleListItem
               title={article.title}
               excerpt={article.excerpt}

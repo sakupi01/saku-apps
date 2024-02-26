@@ -3,9 +3,11 @@ import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { Button, Thumbnail, Toc } from "@repo/ui";
-import { ArrowUpCircle, ChevronLeft, Github } from "lucide-react";
+import { ArrowUpCircle, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Image from "next/image";
+import ThumbnailLife from "@/app/_components/thumbnail-life";
 
 const CATEGORY = "life" as const;
 
@@ -58,14 +60,14 @@ export default async function Article({ params }: Params) {
             <ChevronLeft />
           </Button>
         </Link>
-        <Thumbnail
+        <ThumbnailLife
+          url={article.coverImage.url}
+          alt={article.coverImage.alt}
           title={article.title}
           date={article.date}
-          beginColor={`${article.beginColor}`}
-          middleColor={`${article.middleColor}`}
-          endColor={`${article.endColor}`}
           tags={renderTags}
         />
+
         <div className="w-full flex justify-center items-start gap-10">
           <article className="w-full grow shrink-0 mb-32">
             <div className="w-full">
