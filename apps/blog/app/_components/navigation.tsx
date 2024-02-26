@@ -1,10 +1,10 @@
 import { Github, Rss } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import LocationIndicatorLink from "./location-indicator-link";
-import Search from "./search";
 import { Suspense } from "react";
 import Skeleton from "react-loading-skeleton";
+import LocationIndicatorLink from "./location-indicator-link";
+import Search from "./search";
 
 export default function NavigationBar() {
   return (
