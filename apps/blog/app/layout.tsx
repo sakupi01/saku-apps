@@ -2,9 +2,9 @@ import "@repo/ui/styles.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import "react-loading-skeleton/dist/skeleton.css";
 import NavigationBar from "./_components/navigation";
 import "./globals.css";
-import "react-loading-skeleton/dist/skeleton.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

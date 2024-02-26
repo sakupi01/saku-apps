@@ -2,8 +2,8 @@ import { fetchArticlePages, fetchArticlesByQuery } from "@/libs/getApi";
 import { ArticleListItem } from "@repo/ui";
 import Link from "next/link";
 import { Suspense } from "react";
-import Pagination from "../_components/pagenation";
 import Skeleton from "react-loading-skeleton";
+import Pagination from "../_components/pagenation";
 
 const CATEGORY = "life" as const;
 export default async function Page({
