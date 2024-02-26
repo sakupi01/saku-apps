@@ -3,6 +3,7 @@ import { ArticleListItem } from "@repo/ui";
 import Link from "next/link";
 import { Suspense } from "react";
 import Pagination from "../_components/pagenation";
+import Skeleton from "react-loading-skeleton";
 
 const CATEGORY = "tech" as const;
 export default async function Page({
@@ -28,7 +29,7 @@ export default async function Page({
         Articles
       </h1>
       <div className="max-w-2xl mx-auto">
-        <Suspense key={query + currentPage} fallback={<>loading...</>}>
+        <Suspense key={query + currentPage} fallback={<Skeleton count={5} />}>
           {filteredArticles.map((article) => {
             const tagWithId = article.tags?.map((tag) => {
               const id = Math.random().toString(32).substring(2);

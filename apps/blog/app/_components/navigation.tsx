@@ -2,6 +2,7 @@ import { Github, Rss } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import LocationIndicatorLink from "./location-indicator-link";
+import Search from "./search";
 
 export default function NavigationBar() {
   return (
@@ -26,6 +27,7 @@ export default function NavigationBar() {
         </div>
       </div>
       <div className="flex justify-end items-center gap-5">
+        <Search placeholder="search..." />
         <Link
           href="https://github.com/saku-1101/saku-apps"
           className="p-3 rounded-full  transition-all duration-600 ease-in-out flex items-center justify-center hover:text-blossom"

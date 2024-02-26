@@ -2,6 +2,7 @@ import fs from "fs";
 import { join } from "path";
 import { Article } from "@/interfaces/article";
 import matter from "gray-matter";
+import { sleep } from "./utils";
 
 const techArticlesDirectory = join(process.cwd(), "../../articles/_tech/");
 const lifeArticlesDirectory = join(process.cwd(), "../../articles/_life/");
