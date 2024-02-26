@@ -24,6 +24,9 @@ const config: Pick<Config, "content" | "presets" | "mode" | "safelist"> = {
     {
       pattern: /from-./,
     },
+    {
+      pattern: /flex-./,
+    },
   ],
 };
 

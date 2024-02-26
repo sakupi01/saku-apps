@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default async function Page() {
   return (
-    <main className="flex min-w-screen flex-col items-center justify-center p-24">
+    <main className="flex min-w-screen min-h-screen flex-col items-center justify-center px-24">
       <div className="max-w-2xl mx-auto flex flex-col items-center">
         <Image
           src={"/icon.png"}

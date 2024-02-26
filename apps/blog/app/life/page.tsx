@@ -23,11 +23,11 @@ export default async function Page({
     CATEGORY,
   );
   return (
-    <main className="flex min-w-screen flex-col items-center justify-center p-24">
-      <h1 className="text-5xl font-bold text-left text-basic my-10">
-        Articles
-      </h1>
+    <main className="flex min-w-screen flex-col items-center justify-center p-14 md:p-24">
       <div className="max-w-2xl mx-auto">
+        <h1 className="w-full text-5xl font-bold text-left text-basic my-10">
+          Articles
+        </h1>
         <Suspense key={query + currentPage} fallback={<>loading...</>}>
           {filteredArticles.map((article) => {
             const tagWithId = article.tags?.map((tag) => {
