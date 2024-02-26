@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import LocationIndicatorLink from "./location-indicator-link";
 import Search from "./search";
+import { Suspense } from "react";
+import Skeleton from "react-loading-skeleton";
 
 export default function NavigationBar() {
   return (
@@ -27,7 +29,9 @@ export default function NavigationBar() {
         </div>
       </div>
       <div className="flex justify-end items-center gap-5">
-        <Search placeholder="search..." />
+        <Suspense fallback={<Skeleton height="50px" />}>
+          <Search placeholder="search..." />
+        </Suspense>
         <Link
           href="https://github.com/saku-1101/saku-apps"
           className="p-3 rounded-full  transition-all duration-600 ease-in-out flex items-center justify-center hover:text-blossom"
