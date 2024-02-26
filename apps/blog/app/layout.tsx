@@ -17,6 +17,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }): JSX.Element {
+  const date = new Date();
   return (
     <html lang="en">
       <link
@@ -28,6 +29,11 @@ export default function RootLayout({
         <NavigationBar />
         {children}
         <SpeedInsights />
+        <div className="w-full text-center text-sm text-subtle py-4">
+          <small>
+            Copyright © {date.getFullYear()} saku 🌸 All rights reserved.
+          </small>
+        </div>
       </body>
     </html>
   );
