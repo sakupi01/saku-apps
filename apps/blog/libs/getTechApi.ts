@@ -63,7 +63,7 @@ export async function fetchArticlesByQuery({
   return paginatedArticles;
 }
 
-export async function fetchArticlePages(query: string = "") {
+export async function fetchArticlePages(query = "") {
   const articles = getAllTechArticles();
   const filteredArticles = articles.filter((article) => {
     return (
