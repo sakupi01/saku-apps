@@ -80,7 +80,7 @@ export default async function Article({ params }: Params) {
             nodes={toc as any[]}
             githubLink={
               <a
-                href={`https://github.com/saku-1101/saku-apps/blob/main/articles/_articles/${params.slug}.md`}
+                href={`https://github.com/saku-1101/saku-apps/blob/main/articles/_tech/${params.slug}.md`}
                 className="w-full flex items-center justify-start gap-2 text-subtle hover:underline hover:text-basic"
                 target="_blank"
                 rel="noreferrer"

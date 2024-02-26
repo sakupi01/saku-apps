@@ -78,17 +78,6 @@ export default async function Article({ params }: Params) {
           <Toc
             // biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents>
             nodes={toc as any[]}
-            githubLink={
-              <a
-                href={`https://github.com/saku-1101/saku-apps/blob/main/articles/_articles/${params.slug}.md`}
-                className="w-full flex items-center justify-start gap-2 text-subtle hover:underline hover:text-basic"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Githubで修正を提案する
-                <Github />
-              </a>
-            }
             backToTopLink={
               <Link
                 href="#top"

@@ -4,6 +4,7 @@ import { Article } from "@/interfaces/article";
 import matter from "gray-matter";
 
 const techArticlesDirectory = join(process.cwd(), "../../articles/_tech/");
+const lifeArticlesDirectory = join(process.cwd(), "../../articles/_life/");
 const ITEMS_PER_PAGE = 4;
 
 export function getTechArticleSlugs() {

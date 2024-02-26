@@ -9,7 +9,7 @@ export const Toc = ({
   githubLink,
   backToTopLink,
   //  biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents>
-}: { nodes: any[]; githubLink: ReactNode; backToTopLink: ReactNode }) => {
+}: { nodes: any[]; githubLink?: ReactNode; backToTopLink: ReactNode }) => {
   if (!nodes?.length) {
     return null;
   }
@@ -18,7 +18,7 @@ export const Toc = ({
     <div className="flex flex-col gap-2 sticky top-2">
       <div className={"toc"}>{renderNodes(nodes)}</div>
       <Divider />
-      {githubLink}
+      {githubLink && githubLink}
       {backToTopLink}
     </div>
   );
