@@ -44,7 +44,7 @@ export default async function Page({ params, searchParams }: Params) {
       <h1 className="text-5xl font-bold text-left text-basic my-10">
         Articles
       </h1>
-      <div className="max-w-2xl mx-auto">
+      <div className="w-full max-w-2xl mx-auto">
         <Suspense key={query + currentPage} fallback={<>loading...</>}>
           {filteredArticles.map((article) => {
             const tagWithId = article.tags?.map((tag) => {
