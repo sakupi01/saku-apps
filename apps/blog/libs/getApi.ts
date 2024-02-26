@@ -40,10 +40,7 @@ export function getAllArticles(which: Category): Article[] {
   return articles;
 }
 
-export function getAllArticlesByTag(
-  tag: string = "",
-  which: Category,
-): Article[] {
+export function getAllArticlesByTag(tag = "", which: Category): Article[] {
   const articles = getAllArticles(which);
   const filteredArticles = articles.filter((article) => {
     return article.tags?.some((t) => t.toLowerCase().includes(tag));
@@ -55,7 +52,7 @@ export async function fetchArticlesByQuery(
   query: string,
   currentPage: number,
   which: Category,
-  tag: string = "",
+  tag = "",
 ) {
   const articles = getAllArticlesByTag(tag, which);
   const filteredArticles = articles.filter((article) => {

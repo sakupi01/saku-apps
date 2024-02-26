@@ -53,7 +53,7 @@ export default async function Article({ params }: Params) {
   return (
     <main>
       <div className="max-w-2xl mx-auto pt-20">
-        <Link href={"/"}>
+        <Link href={"/life"}>
           <Button intent="square-icon" size="square">
             <ChevronLeft />
           </Button>
