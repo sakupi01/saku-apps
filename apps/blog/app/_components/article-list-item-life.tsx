@@ -22,20 +22,23 @@ export const ArticleListItemLife = ({
 }: ArticleListItemProps) => {
   return (
     <div className="w-full py-10 px-2 flex items-center gap-6 rounded-md hover:bg-neutral-50">
-      <Image
-        src={url}
-        alt={alt}
-        width={100}
-        height={100}
-        style={{
-          width: "100px",
-          aspectRatio: "1/1",
-          objectFit: "cover",
-          borderRadius: "0.5rem",
-          boxShadow:
-            "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
-        }}
-      />
+      <div className="flex justify-center items-center rounded-lg shadow">
+        <Image
+          src={url}
+          alt={alt}
+          width={100}
+          height={100}
+          style={{
+            width: "100px",
+            aspectRatio: "1/1",
+            objectFit: "cover",
+            borderRadius: "0.5rem",
+            boxShadow:
+              "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          }}
+        />
+      </div>
+
       <div className="w-full flex flex-col justify-between gap-2">
         <div className="flex">{tags && tags}</div>
         <Link href={`/life/articles/${slug}`} className="w-full">
