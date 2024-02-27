@@ -16,7 +16,7 @@ export default async function Page({
   const totalPages = await fetchArticlePages(CATEGORY, query);
 
   return (
-    <main className="flex min-w-screen flex-col items-center justify-center p-14 md:p-24">
+    <main className="flex min-w-screen flex-col items-center justify-center p-5 md:p-24">
       <div className="w-full max-w-2xl mx-auto">
         <h1 className="text-5xl font-bold text-left text-basic my-10">
           Articles
