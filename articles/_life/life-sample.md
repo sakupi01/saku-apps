@@ -5,6 +5,7 @@ coverImage:
   url: "/IMG_0955.jpg"
   alt: 'サンプルのalt'
 date: "2020-03-16"
+category: 'life'
 tags: ['life', 'foreign']
 ---
 # Pluto

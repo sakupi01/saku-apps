@@ -8,6 +8,7 @@ ogImage:
 beginColor: 'from-red-400'
 middleColor: 'via-blue-300'
 endColor: 'to-yellow-500'
+category: 'dev'
 tags: ['react', 'javascript', 'tech']
 ---
 

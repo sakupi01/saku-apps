@@ -5,6 +5,7 @@ coverImage:
   url: "/thumb.jpg"
   alt: 'サンプルのalt'
 date: "2020-03-16"
+category: 'life'
 tags: ['life']
 ---
 

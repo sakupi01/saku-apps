@@ -12,5 +12,6 @@ export type Article = {
   beginColor?: string;
   middleColor?: string;
   endColor?: string;
+  category: "dev" | "life";
   tags?: string[];
 };
