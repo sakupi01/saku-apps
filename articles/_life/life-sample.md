@@ -4,7 +4,7 @@ excerpt: "テスト用の記事"
 coverImage: 
   url: "/IMG_0955.jpg"
   alt: 'サンプルのalt'
-date: "2020-03-16"
+date: "2024-2-27"
 category: 'life'
 tags: ['life', 'foreign']
 ---

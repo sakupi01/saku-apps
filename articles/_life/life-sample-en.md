@@ -4,7 +4,7 @@ excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo
 coverImage: 
   url: "/thumb.jpg"
   alt: 'サンプルのalt'
-date: "2020-03-16"
+date: "2024-2-27"
 category: 'life'
 tags: ['life']
 ---

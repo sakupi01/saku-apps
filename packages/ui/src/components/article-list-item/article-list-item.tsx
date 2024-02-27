@@ -33,7 +33,7 @@ export const ArticleListItem = ({
           <h2 className="text-3xl font-semibold text-left text-basic">
             {title}
           </h2>
-          <p className="subtle">{excerpt}</p>
+          <p className="subtle line-clamp-4">{excerpt}</p>
           <p className="text-sm text-subtle">{date}</p>
         </Link>
       </div>
