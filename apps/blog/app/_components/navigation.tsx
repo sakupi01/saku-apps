@@ -33,7 +33,7 @@ export default function NavigationBar() {
           <Search placeholder="search..." />
         </Suspense>
         <Link
-          href="https://github.com/saku-1101/saku-apps"
+          href="https://www.skr-blog.com/feed.xml"
           className="p-2 md:p-3 rounded-full  transition-all duration-600 ease-in-out flex items-center justify-center hover:text-blossom "
           target="_blank"
         >
