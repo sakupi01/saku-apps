@@ -18,9 +18,7 @@ export default async function Page() {
           <br />
           Webフロントエンドの世界にいることが多いです。
           <br />
-          今年からお仕事頑張ります。
-          <br />
-          旅とコーヒーが好きです。
+          旅と自然とコーヒーが好きです。
         </p>
       </div>
     </main>

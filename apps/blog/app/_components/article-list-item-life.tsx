@@ -1,7 +1,7 @@
 import { Divider } from "@repo/ui";
 import Image from "next/image";
-import { ReactNode } from "react";
 import Link from "next/link";
+import { ReactNode } from "react";
 type ArticleListItemProps = {
   title: string;
   excerpt: string;

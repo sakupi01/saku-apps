@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import { ReactNode } from "react";
 import Link from "next/link";
+import { ReactNode } from "react";
 type ArticleListItemProps = {
   title: string;
   excerpt: string;

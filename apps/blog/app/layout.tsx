@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "saku's blog",
-  description: "sakuの備忘録です",
+  description: "sakuのいろんな備忘録です",
 };
 
 export default function RootLayout({

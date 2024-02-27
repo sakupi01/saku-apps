@@ -44,6 +44,7 @@ export default async function Page({ params, searchParams }: Params) {
           query={query}
           currentPage={currentPage}
           category={CATEGORY}
+          tag={params.slug}
         />
         <div className="mt-5 flex w-full justify-center">
           <Pagination totalPages={totalPages} />

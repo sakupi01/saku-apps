@@ -7,15 +7,18 @@ export default async function FilteredArticlesListContainer({
   query,
   currentPage,
   category,
+  tag,
 }: {
   query: string;
   currentPage: number;
   category: "life" | "dev";
+  tag?: string;
 }) {
   const filteredArticles = await fetchArticlesByQuery(
     query,
     currentPage,
     category,
+    tag,
   );
   return (
     <Suspense

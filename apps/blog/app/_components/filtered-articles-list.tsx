@@ -35,7 +35,7 @@ export default async function FilteredArticlesList({
                 date={article.date}
                 url={article.coverImage.url}
                 alt={article.coverImage.alt}
-                tags={article.tags}
+                tags={renderTags}
                 slug={article.slug}
               />
             ) : (
