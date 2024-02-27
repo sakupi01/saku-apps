@@ -8,7 +8,7 @@ import Search from "./search";
 
 export default function NavigationBar() {
   return (
-    <nav className="w-full flex justify-between items-center lg:!flex-row flex-col md:px-10 px-5 py-5 md:gap-0 gap-3">
+    <nav className="w-full flex justify-between items-center lg:!flex-row flex-col md:px-10 px-5 py-5 md:gap-0 gap-6">
       <div className="flex flex-col md:!flex-row items-center justify-center md:gap-3 gap-5 ">
         <Link href="/" className="flex items-center gap-2">
           <Image
