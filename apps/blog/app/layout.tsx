@@ -9,8 +9,34 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "saku's blog",
+  metadataBase: new URL("https://skr-blog.com/"),
+  title: {
+    default: "saku's blog",
+    /** `next-seo`の`titleTemplate`に相当する機能 */
+    template: `%s - saku's blog`,
+  },
   description: "sakuのいろんな備忘録です",
+  openGraph: {
+    title: "saku's blog",
+    description: "sakuのいろんな備忘録です",
+    url: "https://skr-blog.com/",
+    siteName: "saku's blog",
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "saku's blog",
+    description: "sakuのいろんな備忘録です",
+    site: "@SakuOnTheWeb",
+    creator: "@SakuOnTheWeb",
+  },
+  // verification: {
+  //   google: "search console stuff",
+  // },
+  alternates: {
+    canonical: "https://skr-blog.com/",
+  },
 };
 
 export default function RootLayout({
@@ -21,11 +47,6 @@ export default function RootLayout({
   const date = new Date();
   return (
     <html lang="en">
-      <link
-        rel="icon"
-        // biome-ignore lint/style/noUnusedTemplateLiteral
-        href={`data:image/svg+xml,\<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22\>\<text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:100px;%22\>🌸\</text\>\</svg\>`}
-      />{" "}
       <body className={inter.className}>
         <NavigationBar />
         {children}
