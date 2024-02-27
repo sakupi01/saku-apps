@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default async function Page() {
   return (
-    <main className="flex min-w-screen min-h-screen flex-col items-center justify-center px-24">
+    <main className="flex min-w-screen  min-h-[70vh] md:min-h-[80vh] flex-col items-center justify-center px-24">
       <div className="max-w-2xl mx-auto flex flex-col items-center">
         <Image
           src={"/icon.png"}
@@ -18,9 +18,7 @@ export default async function Page() {
           <br />
           Webフロントエンドの世界にいることが多いです。
           <br />
-          今年からお仕事頑張ります。
-          <br />
-          旅とコーヒーが好きです。
+          旅と自然とコーヒーが好きです。
         </p>
       </div>
     </main>

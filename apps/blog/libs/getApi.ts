@@ -15,7 +15,7 @@ export function getArticleSlugs(which: Category) {
 }
 
 export function getAllArticleTags(which: Category) {
-  const articles = getAllArticles(which);
+  const articles = getAllArticlesByCategory(which);
   const tags = articles.flatMap((article) => article.tags);
 
   return tags.filter((tag) => tag !== undefined);
@@ -32,7 +32,7 @@ export function getArticleBySlug(slug: string, which: Category) {
   return { ...data, slug: realSlug, content } as Article;
 }
 
-export function getAllArticles(which: Category): Article[] {
+export function getAllArticlesByCategory(which: Category): Article[] {
   const slugs = getArticleSlugs(which);
   const articles = slugs
     .map((slug) => getArticleBySlug(slug, which))
@@ -40,8 +40,24 @@ export function getAllArticles(which: Category): Article[] {
   return articles;
 }
 
-export function getAllArticlesByTag(tag = "", which: Category): Article[] {
-  const articles = getAllArticles(which);
+export function getAllArticles(): Article[] {
+  const dev_slugs = getArticleSlugs("dev");
+  const life_slugs = getArticleSlugs("life");
+  const dev_articles = dev_slugs
+    .map((slug) => getArticleBySlug(slug, "dev"))
+    .sort((article1, article2) => (article1.date > article2.date ? -1 : 1));
+  const life_articles = life_slugs
+    .map((slug) => getArticleBySlug(slug, "life"))
+    .sort((article1, article2) => (article1.date > article2.date ? -1 : 1));
+  const articles = dev_articles.concat(life_articles);
+  return articles;
+}
+
+export function getAllArticlesByCategoryByTag(
+  tag = "",
+  which: Category,
+): Article[] {
+  const articles = getAllArticlesByCategory(which);
   const filteredArticles = articles.filter((article) => {
     return article.tags?.some((t) => t.toLowerCase().includes(tag));
   });
@@ -54,7 +70,7 @@ export async function fetchArticlesByQuery(
   which: Category,
   tag = "",
 ) {
-  const articles = getAllArticlesByTag(tag, which);
+  const articles = getAllArticlesByCategoryByTag(tag, which);
   const filteredArticles = articles.filter((article) => {
     return (
       article.title.toLowerCase().includes(query.toLowerCase()) ||
@@ -71,7 +87,7 @@ export async function fetchArticlesByQuery(
 }
 
 export async function fetchArticlePages(which: Category, query = "", tag = "") {
-  const articles = getAllArticlesByTag(tag, which);
+  const articles = getAllArticlesByCategoryByTag(tag, which);
   const filteredArticles = articles.filter((article) => {
     return (
       article.title.toLowerCase().includes(query.toLowerCase()) ||

@@ -15,7 +15,7 @@ export const Toc = ({
   }
 
   return (
-    <div className="flex flex-col gap-2 sticky top-2">
+    <div className="md:flex flex-col gap-2 sticky top-2 hidden md:visible">
       <div className={"toc"}>{renderNodes(nodes)}</div>
       <Divider />
       {githubLink && githubLink}

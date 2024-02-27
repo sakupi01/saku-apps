@@ -1,13 +1,12 @@
 import { Article } from "@/interfaces/article";
-import { ArticleListItem } from "@repo/ui";
+import { ArticleListItem, Divider } from "@repo/ui";
 import Link from "next/link";
+import { ReactNode } from "react";
 import { ArticleListItemLife } from "./article-list-item-life";
 
 export default async function FilteredArticlesList({
-  category,
   filteredArticles,
 }: {
-  category: "life" | "dev";
   filteredArticles: Article[];
 }) {
   return (
@@ -22,17 +21,14 @@ export default async function FilteredArticlesList({
         });
 
         const renderTags = tagWithId?.map((tag) => (
-          <Link href={`/${category}/tag/${tag.name}`} key={tag.id}>
+          <Link href={`/${article.category}/tag/${tag.name}`} key={tag.id}>
             <span className="tag mr-3">{tag.name}</span>
           </Link>
         ));
 
         return (
-          <Link
-            href={`/${category}/articles/${article.slug}`}
-            key={article.slug}
-          >
-            {category === "life" ? (
+          <>
+            {article.category === "life" ? (
               <ArticleListItemLife
                 title={article.title}
                 excerpt={article.excerpt}
@@ -40,6 +36,7 @@ export default async function FilteredArticlesList({
                 url={article.coverImage.url}
                 alt={article.coverImage.alt}
                 tags={renderTags}
+                slug={article.slug}
               />
             ) : (
               <ArticleListItem
@@ -48,11 +45,20 @@ export default async function FilteredArticlesList({
                 date={article.date}
                 colors={`${article.beginColor} ${article.middleColor} ${article.endColor}`}
                 tags={renderTags}
+                slug={article.slug}
               />
             )}
-          </Link>
+            <Divider />
+          </>
         );
       })}
     </>
   );
 }
+
+const Clickable = ({
+  onClick,
+  children,
+}: { onClick: () => void; children: ReactNode }) => {
+  return <div onClick={() => onClick}>{children}</div>;
+};
