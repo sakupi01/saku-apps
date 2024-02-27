@@ -36,9 +36,9 @@ export const ArticleListItemLife = ({
             "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
         }}
       />
-      <div className="flex flex-col justify-between gap-2">
+      <div className="w-full flex flex-col justify-between gap-2">
         <div className="flex">{tags && tags}</div>
-        <Link href={`/life/articles/${slug}`}>
+        <Link href={`/life/articles/${slug}`} className="w-full">
           <h2 className="text-3xl font-semibold text-left text-basic">
             {title}
           </h2>

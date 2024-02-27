@@ -27,9 +27,9 @@ export const ArticleListItem = ({
           )}
         />
       </div>
-      <div className="flex flex-col justify-between gap-2">
+      <div className="w-full flex flex-col justify-between gap-2">
         <div className="flex">{tags && tags}</div>
-        <Link href={`/dev/articles/${slug}`}>
+        <Link href={`/dev/articles/${slug}`} className="w-full">
           <h2 className="text-3xl font-semibold text-left text-basic">
             {title}
           </h2>
