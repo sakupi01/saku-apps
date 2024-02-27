@@ -6,7 +6,7 @@ beginColor: 'from-purple-300'
 middleColor: 'via-blue-200'
 endColor: 'to-pink-200'
 category: 'dev'
-tags: ['react', 'javascript', 'Next.js']
+tags: ['react', 'javascript', 'nextjs']
 ---
 # Pluto
 

@@ -23,6 +23,12 @@ export const metadata: Metadata = {
     siteName: "saku's blog",
     locale: "ja_JP",
     type: "website",
+    images: [
+      {
+        url: "https://skr-blog.com/opengraph-image.png",
+        alt: "saku's blog",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -30,6 +36,12 @@ export const metadata: Metadata = {
     description: "sakuのいろんな備忘録です",
     site: "@SakuOnTheWeb",
     creator: "@SakuOnTheWeb",
+    images: [
+      {
+        url: "https://skr-blog.com/twitter-image.png",
+        alt: "saku's blog",
+      },
+    ],
   },
   // verification: {
   //   google: "search console stuff",
