@@ -1,123 +1,94 @@
 ---
 title: "Next.jsでmarkdownを使用したSSGのブログを作成する"
-excerpt: "Next.jsのApp RouterでSSGをしながら、ブログを作成した過程をまとめます。markdownから"
+excerpt: "Next.jsのApp RouterでSSGをしながら、ブログを作成した過程をまとめます。"
 date: "2024-2-28"
 beginColor: 'from-purple-300'
 middleColor: 'via-blue-200'
 endColor: 'to-pink-200'
 category: 'dev'
-tags: ['react', 'javascript', 'nextjs', 'markdown']
-status: 'preview'
+tags: ['react', 'nextjs', 'turborepo', 'vercel']
+status: 'published'
 ---
-# Pluto
-
-Pluto is a dwarf planet in the Kuiper belt.
- 
 ## 目次
-## テストタイトル
 
-### テストのタイトル２つめ`useClient`
+## はじめに
+この記事では、ブログを開発するにあたって選定した技術やアプリの構成について軽くまとめます。
+技術的な詳細やチャレンジは後日また記事にしたいと考えています。
 
-文章です文章です文章です文章です文章です文章です文章です文章です文章です文章です文章です文章です文章です文章です文章です。
-文章です文章です文章です文章です文章です文章です文章です文章です文章です文章です文章です文章です文章です文章です文章です。
+## 使用技術
+今回このブログに使用されているおおまかな技術は以下のようになります。
 
-以下はリストです。
-1. List1
-2. List2
+https://github.com/saku-1101/saku-apps
 
-:::note{.warning}
-注意書きです
-:::
+#### 全体
+- Vercel
+- Turborepo
 
-:::note{.message}
-メモ書きです
-:::
+#### ブログアプリ：`/apps/blog`
+- Next.js (v14)
 
-:::note{.info}
-infoです
-:::
+#### 記事管理：`/articles`
+- マークダウンを管理
 
-:::details
-詳細です
-詳細です
-詳細です
+#### アプリで必要なパッケージ：`/packages`
+- サイドバー目次作成のためのHeadings切り出しパッケージ：`headings-extractor`
+  - JavaScript
+- TailwindCSSのグローバルconfigパッケージ：`tailwind-confing`
 
-```rb
-puts 'Hello, World'
+- TypeScriptのグローバルconfigパッケージ：`typescript-config`
+
+- 共通uiコンポーネントパッケージ：`ui`
+  - React
+  - Storybook
+
+## 技術選定理由
+簡単に選定した技術とそれらの選定理由を書いていきます。
+
+### Turborepo
+モノリポを個人開発でも導入してみたかったという興味がきっかけです。
+Turborepoは仕事やOSSでよく見るものの、実際にゼロから自分でプロジェクトを立ち上げるときに使用した経験がなく、モノリポに対するふわっとした理解が深まればいいなという願いを込めて選定しました。
+
+Turborepoでは、各workspaceに定義されたpackage.jsonのscriptsを、workspace間の依存関係を考慮した順番でビルドしてくれます。
+
+また、Turborepoを選定して大きく感じたメリットとして、ローカル・リモートキャッシュの恩恵を受けて効率的に開発できるなと感じています。
+
+ローカルキャッシュに関しては`turbo.json`にキャッシュファイル群を指定する設定を行うことで、キャッシュがある時のビルドが効率化されます。キャッシュを利用して、差分がある箇所のみのビルドを行うことができます。
+
+```json showLineNumbers {7} title="turbo.json"
+{
+    "$schema": "https://turbo.build/schema.json",
+    "globalDependencies": ["**/.env.*local"],
+    "pipeline": {
+        "build": {
+            "dependsOn": ["^build"],
+            "outputs": [".next/**", "!.next/cache/**"]
+        },
+        "test": {
+            "dependsOn": ["^build"]
+        },
+        ...
+    }
+    ...
+}
 ```
+さらに、リモートキャッシュを使用することでCIの高速化を図ることができます。
+今回はVercelをPaaSとして使用したので、Vercelのキャッシュサーバをそのまま利用することができ、CIでリモートキャッシュを比較的簡単に使用することができました。
 
-詳細です
-詳細です
-詳細です
-:::
+### Next.js
+まず、ブログアプリということで、初回レンダリングのパフォーマンス改善とSEOに対する強みが欲しかったので、ページのPre-RenderingができるReactフレームワークを使用したいと考えました。
+加えて、ブログアプリのため、SSGができるということも条件に入れたかったです。
+Next.jsであれば、Dynamic Routingであっても`generateStaticParams`を使用することでSSGをすることができます。
+さらに、Turborepoを使用するということで、Vercelにデプロイすることでキャッシュやその他の面で恩恵を受けやすい一面のあったNext.jsで事をすすめました。
+Next.jsのSSGアプリをVercelでホスティングすると、構築済みのHTMLファイルを都度アプリケーションサーバーから取得するのではなく、CDNにHTMLファイルのキャッシュを配置しておくことでパフォーマンスの最大化に近づけるということが比較的簡単に行えます。
 
-## テストタイトル２つめ
+## 感想
+今回は、ブログを開発するにあたって選定した技術について**狭く浅く**触れました。
 
-文章です文章です文章です\<br>文章です文章です文章です文章です文章です`code`文章です文章です文章です文章です文章です文章です文章です。
-文章です文章です文章です\<br>文章です文章です文章です文章です文章です`code`文章です文章です文章です文章です文章です文章です文章です。
-文章です文章です文章です\<br>文章です文章です文章です文章です文章です`code`文章です文章です文章です文章です文章です文章です文章です。
+VercelとTurborepoを使用すると、キャッシュを活かした開発を比較的簡単に行うことができます。
 
-https://zenn.dev/sandyman/articles/4d83443404fcc9
+また、Next.jsを使用することで
 
-[This](https://www.youtube.com/watch?v=dQw4w9WgXcQ) is a great YouTube video.
-Watch it here:
+Vercelすごい。
 
-<!-- https://youtu.be/RUMzGSvxCs4?si=Gs1e41TGDxKX6z1b
-
-https://codesandbox.io/s/css-variables-vs-themeprovider-df90h -->
-
-https://twitter.com/kentcdodds/status/783161196945944580
-
-https://www.instagram.com/p/C3nw9EphEre/?utm_source=ig_web_copy_link
-
-https://www.flickr.com/photos/pedrocaetano/27432477888
-
-https://blog.bitsrc.io/clean-frontend-architecture-2995c68702fb
-
-<!-- https://speakerdeck.com/aiji42/vrtturunodakuhosu-lost-pixelwoshao-jie-sitai?slide=7 -->
-
-```rb
-puts 'Hello, World'
-```
-
-文章です*文章です文章です*文章です文章です**文章です文章です**文章です文章です~~文章です文章です~~文章です文章です文章です文章です。`[1, 2, 3]{:js}`
-
-[リンク](http://localhost:3000/dev/articles/article0)
-
-> 引用文です引用文です引用文です引用文です引用文です
----
-👇code example is below.
-```js showLineNumbers {4} title="test-code.js" caption="テスト用のファイル" /v/#v /2/#v
-const v = [1, 2, 3, 4, 5];const v = [1, 2, 3, 4, 5];const v = [1, 2, 3, 4, 5];const v = [1, 2, 3, 4, 5];const v = [1, 2, 3, 4, 5];
-const v = [1, 2, 3, 4, 5];
-const v = [1, 2, 3, 4, 5];
-const v = [1, 2, 3, 4, 5];
-const v = [1, 2, 3, 4, 5];
-```
-
-***
-| TH | TH |
-| ---- | ---- |
-| TD | TD |
-| TD | TD |
-
-|th|th|th|
-|:---:|:---|---:|
-|td|td|td|
-|中央寄せ|左寄せ|右寄せ|
-
-![イメージです](/image.png)
-
-## テストタイトル3つめ
-
-文章です文章です文章です\<br>文章です文章です文章です文章です文章です`code`文章です文章です文章です文章です文章です文章です文章です。
-文章です文章です文章です\<br>文章です文章です文章です文章です文章です`code`文章です文章です文章です文章です文章です文章です文章です。
-文章です文章です文章です\<br>文章です文章です文章です文章です文章です`code`文章です文章です文章です文章です文章です文章です文章です。
-
-https://github.com/zenn-dev/zenn-editor/blob/570d294f17989ebf602203903550a8d24537f137/packages/zenn-content-css/README.md?plain=1#L10-L19
-
-<iframe frameborder="0" scrolling="no" style="width:100%; height:772px;" allow="clipboard-write" src="https://emgithub.com/iframe.html?target=https%3A%2F%2Fgithub.com%2Fsaku-1101%2Fhooks-demo-app%2Fblob%2Fd89be4f4031a7870f349f65ee114506389ba045a%2Fsrc%2Fui%2Ftimer.tsx%23L4-L35&style=a11y-light&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></iframe>
-
-https://gist.github.com/rectalogic/737b5e8394a02bf8f5aa54050ed81b4d.js
-
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12187.084520222796!2d-74.0182606!3d40.21415375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1708876363481!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+## 余談
+テストがないとかバグとかまだまだ改善しなければいけない部分があるので、追々やっていきたいです🤸🏻
