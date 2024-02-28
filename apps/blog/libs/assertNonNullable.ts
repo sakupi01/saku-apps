@@ -10,3 +10,15 @@ export const assertNonNullable: AssertIsNonNullable<unknown> = (value) => {
     throw new Error(ERROR_MESSAGE_NULLABLE);
   }
 };
+
+type AssertArrayIsNonNullable<Type> = (
+  array: Type[],
+) => asserts array is NonNullable<Type>[];
+
+export const assertArrayNonNullable: AssertArrayIsNonNullable<unknown> = (
+  array,
+) => {
+  if (array.some((value) => value === null || value === undefined)) {
+    throw new Error(ERROR_MESSAGE_NULLABLE);
+  }
+};

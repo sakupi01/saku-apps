@@ -7,6 +7,7 @@ coverImage:
 date: "2024-2-27"
 category: 'life'
 tags: ['life', 'foreign']
+status: 'published'
 ---
 # Pluto
 

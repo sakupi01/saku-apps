@@ -7,6 +7,7 @@ middleColor: 'via-blue-200'
 endColor: 'to-pink-200'
 category: 'dev'
 tags: ['react', 'javascript', 'nextjs']
+status: 'preview'
 ---
 # Pluto
 

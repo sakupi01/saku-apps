@@ -10,6 +10,7 @@ middleColor: 'via-yellow-200'
 endColor: 'to-green-300'
 category: 'dev'
 tags: ['javascript', 'tech']
+status: 'published'
 ---
 # Pluto
 

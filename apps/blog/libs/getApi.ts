@@ -2,6 +2,7 @@ import fs from "fs";
 import { join } from "path";
 import { Article } from "@/interfaces/article";
 import matter from "gray-matter";
+import { assertNonNullable } from "./assertNonNullable";
 
 const techArticlesDirectory = join(process.cwd(), "../../articles/_dev/");
 const lifeArticlesDirectory = join(process.cwd(), "../../articles/_life/");
@@ -29,14 +30,18 @@ export function getArticleBySlug(slug: string, which: Category) {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  return { ...data, slug: realSlug, content } as Article;
+  if (data.status !== "preview") {
+    return { ...data, slug: realSlug, content } as Article;
+  }
 }
 
 export function getAllArticlesByCategory(which: Category): Article[] {
   const slugs = getArticleSlugs(which);
   const articles = slugs
     .map((slug) => getArticleBySlug(slug, which))
+    .filter((article): article is Article => article !== undefined)
     .sort((article1, article2) => (article1.date > article2.date ? -1 : 1));
+
   return articles;
 }
 
@@ -45,9 +50,11 @@ export function getAllArticles(): Article[] {
   const life_slugs = getArticleSlugs("life");
   const dev_articles = dev_slugs
     .map((slug) => getArticleBySlug(slug, "dev"))
+    .filter((article): article is Article => article !== undefined)
     .sort((article1, article2) => (article1.date > article2.date ? -1 : 1));
   const life_articles = life_slugs
     .map((slug) => getArticleBySlug(slug, "life"))
+    .filter((article): article is Article => article !== undefined)
     .sort((article1, article2) => (article1.date > article2.date ? -1 : 1));
   const articles = dev_articles.concat(life_articles);
   return articles;
