@@ -3,9 +3,9 @@ import generateToc from "@/libs/generateToc";
 import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
-import { Button, Thumbnail, Toc } from "@repo/ui";
+import { Button, Toc } from "@repo/ui";
 import { ArrowUpCircle, ChevronLeft } from "lucide-react";
-import Image from "next/image";
+import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -16,6 +16,16 @@ type Params = {
     slug: string;
   };
 };
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const slug = params.slug;
+
+  const article = getArticleBySlug(slug, CATEGORY);
+
+  return {
+    title: article.title,
+  };
+}
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {

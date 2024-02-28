@@ -57,6 +57,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }): JSX.Element {
   const date = new Date();
+  console.log("running on server");
+
   return (
     <html lang="en">
       <body className={inter.className}>

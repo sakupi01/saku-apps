@@ -8,6 +8,10 @@
     "specs": {
         ".[jt]sx$": "@markuplint/react-spec"
     },
+    "excludeFiles": [
+        "./**/twitter-image.tsx",
+        "./**/opengraph-image.tsx"
+    ],
     "rules": {
         "attr-duplication": true,
         "attr-value-quotes": false,

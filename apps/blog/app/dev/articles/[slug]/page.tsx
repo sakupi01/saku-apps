@@ -4,6 +4,7 @@ import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { Button, Thumbnail, Toc } from "@repo/ui";
 import { ArrowUpCircle, ChevronLeft, Github } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -15,6 +16,16 @@ type Params = {
   };
 };
 
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const slug = params.slug;
+
+  const article = getArticleBySlug(slug, CATEGORY);
+
+  return {
+    title: article.title,
+  };
+}
+
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
   const slugs = getArticleSlugs(CATEGORY);
@@ -25,6 +36,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Article({ params }: Params) {
+  console.log("running on server");
   const article = getArticleBySlug(params.slug, CATEGORY);
 
   if (!article) {

@@ -1,7 +1,6 @@
 import { Article } from "@/interfaces/article";
 import { ArticleListItem, Divider } from "@repo/ui";
 import Link from "next/link";
-import { ReactNode } from "react";
 import { ArticleListItemLife } from "./article-list-item-life";
 
 export default async function FilteredArticlesList({
@@ -55,10 +54,3 @@ export default async function FilteredArticlesList({
     </>
   );
 }
-
-const Clickable = ({
-  onClick,
-  children,
-}: { onClick: () => void; children: ReactNode }) => {
-  return <div onClick={() => onClick}>{children}</div>;
-};
