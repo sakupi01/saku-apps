@@ -16,10 +16,10 @@ export const metadata: Metadata = {
     /** `next-seo`の`titleTemplate`に相当する機能 */
     template: `%s - saku's blog`,
   },
-  description: "sakuのいろんな備忘録です",
+  description: "sakuの備忘録",
   openGraph: {
     title: "saku's blog",
-    description: "sakuのいろんな備忘録です",
+    description: "sakuの備忘録",
     url: "https://skr-blog.com/",
     siteName: "saku's blog",
     locale: "ja_JP",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "saku's blog",
-    description: "sakuのいろんな備忘録です",
+    description: "sakuの備忘録",
     site: "@SakuOnTheWeb",
     creator: "@SakuOnTheWeb",
     images: [
@@ -60,6 +60,11 @@ export default function RootLayout({
   const date = new Date();
   return (
     <html lang="en">
+      <link
+        rel="icon"
+        // biome-ignore lint/style/noUnusedTemplateLiteral
+        href={`data:image/svg+xml,\<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22\>\<text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:100px;%22\>🌸\</text\>\</svg\>`}
+      />
       <body className={inter.className}>
         <NavigationBar />
         {children}

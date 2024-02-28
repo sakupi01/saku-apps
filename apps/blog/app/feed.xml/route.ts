@@ -5,7 +5,7 @@ const HOST = "https://www.skr-blog.com" as const;
 export async function GET() {
   const feed = new RSS({
     title: "saku's blog",
-    description: "sakuのいろんな備忘録です",
+    description: "sakuの備忘録",
     site_url: "https://www.skr-blog.com",
     feed_url: "https://www.skr-blog.com/feed.xml",
     copyright: "saku",
