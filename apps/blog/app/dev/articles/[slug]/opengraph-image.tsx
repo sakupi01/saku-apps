@@ -38,7 +38,7 @@ export default async function Image({ params: { slug } }: Props) {
     weight: 600,
   });
 
-  const tagWithId = article.tags?.map((tag) => {
+  const tagWithId = article?.tags?.map((tag) => {
     const id = Math.random().toString(32).substring(2);
     return {
       id: id,

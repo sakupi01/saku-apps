@@ -1,12 +1,12 @@
 ---
-title: "Next.jsでSSGのブログを作成する"
-excerpt: "Next.jsのApp Routerを使用してmarkdownから"
-date: "2024-2-27"
+title: "Next.jsでmarkdownを使用したSSGのブログを作成する"
+excerpt: "Next.jsのApp RouterでSSGをしながら、ブログを作成した過程をまとめます。markdownから"
+date: "2024-2-28"
 beginColor: 'from-purple-300'
 middleColor: 'via-blue-200'
 endColor: 'to-pink-200'
 category: 'dev'
-tags: ['react', 'javascript', 'nextjs']
+tags: ['react', 'javascript', 'nextjs', 'markdown']
 status: 'preview'
 ---
 # Pluto

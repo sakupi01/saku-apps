@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const article = getArticleBySlug(slug, CATEGORY);
 
   return {
-    title: article.title,
+    title: article?.title,
   };
 }
 

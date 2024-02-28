@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const article = getArticleBySlug(slug, CATEGORY);
 
   return {
-    title: article.title,
+    title: article?.title,
   };
 }
 
@@ -36,7 +36,6 @@ export async function generateStaticParams() {
 }
 
 export default async function Article({ params }: Params) {
-  console.log("running on server");
   const article = getArticleBySlug(params.slug, CATEGORY);
 
   if (!article) {
