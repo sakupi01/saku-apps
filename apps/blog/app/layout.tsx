@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "@repo/ui/styles.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
@@ -68,6 +69,7 @@ export default function RootLayout({
             Copyright © {date.getFullYear()} saku 🌸 All rights reserved.
           </small>
         </div>
+        <GoogleAnalytics gaId="G-KC1QTQK44J" />
       </body>
     </html>
   );
