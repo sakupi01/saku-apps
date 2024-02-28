@@ -9,10 +9,7 @@ category: 'life'
 tags: ['life', 'foreign']
 status: 'published'
 ---
-# Pluto
-
-Pluto is a dwarf planet in the Kuiper belt.
- 
+<!-- textlint-disable -->
 ## 目次
 ## テストタイトル
 
@@ -113,3 +110,4 @@ const v = [1, 2, 3, 4, 5];
 文章です文章です文章です\<br>文章です文章です文章です文章です文章です`code`文章です文章です文章です文章です文章です文章です文章です。
 文章です文章です文章です\<br>文章です文章です文章です文章です文章です`code`文章です文章です文章です文章です文章です文章です文章です。
 文章です文章です文章です\<br>文章です文章です文章です文章です文章です`code`文章です文章です文章です文章です文章です文章です文章です。
+<!-- textlint-enable -->

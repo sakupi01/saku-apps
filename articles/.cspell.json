@@ -4,7 +4,8 @@
   "allowCompoundWords": true,
   "ignorePaths": [
     ".git",
-    "_articles/preview.md",
+    "_dev/sample-en.md",
+    "_life/life-sample-en.md",
     ".gitignore",
     ".cspell.json",
     ".markdownlint-cli2.jsonc",
@@ -12,5 +13,6 @@
     "node_modules",
     "package.json",
     "bun.lockb"
-  ]
+  ],
+  "words": ["nextjs", "turborepo"]
 }

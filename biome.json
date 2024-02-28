@@ -1,40 +1,40 @@
 {
-    "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
-    "organizeImports": {
-        "enabled": true,
-        "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.yml"]
-    },
-    "linter": {
-        "enabled": true,
-        "rules": {
-            "recommended": true
-        }
-    },
-    "formatter": {
-        "indentStyle": "space"
-    },
-    "vcs": {
-        "enabled": true,
-        "clientKind": "git",
-        "useIgnoreFile": true,
-        "defaultBranch": "main"
-    },
-    "files": {
-        "include": [
-            "**/*.ts",
-            "**/*.tsx",
-            "**/*.json",
-            "**/*.js",
-            "**/*.jsx",
-            "**/*.css",
-            "**/*.md"
-        ],
-        "ignore": [
-            "apps/**",
-            "packages/**",
-            "dist/**",
-            "node_modules/**",
-            "coverage/**"
-        ]
+  "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+  "organizeImports": {
+    "enabled": true,
+    "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.yml"]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
     }
+  },
+  "formatter": {
+    "indentStyle": "space"
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  },
+  "files": {
+    "include": [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.json",
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.css",
+      "**/*.md"
+    ],
+    "ignore": [
+      "apps/**",
+      "packages/**",
+      "dist/**",
+      "node_modules/**",
+      "coverage/**"
+    ]
+  }
 }
