@@ -7,6 +7,7 @@ import { ArrowUpCircle, ChevronLeft, Github } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ShareLinks from "../../../_components/share";
 
 const CATEGORY = "dev" as const;
 
@@ -23,6 +24,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   return {
     title: article?.title,
+    description: article?.title,
   };
 }
 
@@ -113,6 +115,11 @@ export default async function Article({ params }: Params) {
             }
           />
         </div>
+        <ShareLinks
+          title={article.title}
+          category={CATEGORY}
+          slug={params.slug}
+        />
       </div>
     </main>
   );
