@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply break-words
+}
 body ul {
     @apply list-disc pl-10 indent-2 my-4;
 }
@@ -14,16 +17,16 @@ body iframe {
 }
 
 .markdown h1{
-    @apply text-5xl font-bold text-left text-basic my-10;
+    @apply md:text-5xl text-3xl font-bold text-left text-basic my-10;
   }
 .markdown h2{
-    @apply text-3xl font-semibold text-left text-basic my-8;
+    @apply md:text-3xl  text-2xl font-semibold text-left text-basic my-8;
   }
 .markdown h3{
-    @apply text-2xl font-semibold text-left text-basic my-6;
+    @apply md:text-2xl text-xl font-semibold text-left text-basic my-6;
   }
 .markdown h4{
-    @apply text-xl font-semibold text-left text-basic my-4;
+    @apply md:text-xl text-lg font-semibold text-left text-basic my-4;
   }
 .markdown h5{
     @apply text-lg font-medium text-left text-basic my-2;
