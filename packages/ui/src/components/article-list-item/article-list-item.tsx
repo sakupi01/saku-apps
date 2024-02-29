@@ -27,13 +27,13 @@ export const ArticleListItem = ({
           )}
         />
       </div>
-      <div className="w-full flex flex-col justify-between gap-2">
-        <div className="flex">{tags && tags}</div>
+      <div className="w-full">
+        <div className="flex flex-wrap">{tags && tags}</div>
         <Link href={`/dev/articles/${slug}`} className="w-full">
-          <h2 className="text-3xl font-semibold text-left text-basic">
+          <h2 className="md:text-3xl text-2xl font-semibold text-left text-basic">
             {title}
           </h2>
-          <p className="subtle line-clamp-4">{excerpt}</p>
+          <p className="subtle line-clamp-4 w-full">{excerpt}</p>
           <p className="text-sm text-subtle">{date}</p>
         </Link>
       </div>

@@ -20,8 +20,8 @@ export const Thumbnail = ({
       className={`w-full p-4 mt-5 mb-10 rounded-lg bg-gradient-to-r ${beginColor} ${middleColor} ${endColor}`}
     >
       <div className="w-full  text-basic rounded-lg p-10 bg-white shadow-sm">
-        {tags && tags}
-        <h1 className="text-5xl font-bold text-left text-basic my-10">
+        <div className="flex flex-wrap">{tags && tags}</div>
+        <h1 className="md:text-5xl text-3xl font-bold text-left text-basic my-10">
           {title}
         </h1>
         <p className="date">{date}</p>
