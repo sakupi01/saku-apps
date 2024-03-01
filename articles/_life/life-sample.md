@@ -23,14 +23,17 @@ status: 'published'
 2. List2
 
 :::note{.warning}
+🚧 注意
 注意書きです
 :::
 
 :::note{.message}
+📝 Memo
 メモ書きです
 :::
 
 :::note{.info}
+ℹ️ Info
 infoです
 :::
 

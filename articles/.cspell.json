@@ -14,5 +14,9 @@
     "package.json",
     "bun.lockb"
   ],
-  "words": ["nextjs", "turborepo"]
+  "words": [
+    "Cybozu",
+    "nextjs",
+    "turborepo"
+  ]
 }
