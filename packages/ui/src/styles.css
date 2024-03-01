@@ -12,6 +12,14 @@ body ol {
     @apply list-decimal pl-10 indent-2 my-4;
 }
 
+body li {
+    @apply my-2;
+}
+
+body em{
+  @apply block w-full text-base italic text-basic text-center;
+}
+
 body iframe {
   @apply my-8;
 }
@@ -35,7 +43,7 @@ body iframe {
     @apply text-base font-medium text-left text-basic my-2;
   }
 .markdown p{
-    @apply text-base text-left text-basic leading-9 tracking-wide ;
+    @apply text-base text-left text-basic leading-9 tracking-wide my-3;
   }
 .markdown blockquote{
     @apply py-2 px-4 mx-4 my-4 border-s-4 border-backquote text-base italic text-left text-basic antialiased;
@@ -101,10 +109,6 @@ div[data-rehype-pretty-code-title] {
     @apply text-base font-bold text-basic; 
   }
 
-.markdown em{
-    @apply text-base italic text-basic;
-  }
-
 .markdown del{
     @apply text-base line-through text-left text-basic;
   }
@@ -146,9 +150,6 @@ div[data-rehype-pretty-code-title] {
   @apply text-basic border-r border-neutral-200 p-2;
 }
 .markdown thead tr {
-  @apply border-b border-neutral-200;
-}
-.markdown tbody tr {
   @apply border-b border-neutral-200;
 }
 .markdown tbody tr:last-child {
@@ -217,11 +218,7 @@ div[data-rehype-pretty-code-title] {
 }
 
 .markdown details{
-  @apply flex p-2 my-5 text-basic rounded-md border border-neutral-200 shadow-sm transition-all duration-200 ease-in-out hover:bg-primary-subtle;
-}
-
-details[open]{
-  @apply bg-primary-subtle;
+  @apply flex p-2 my-5 text-basic rounded-md border border-neutral-200 shadow-sm ;
 }
 
 .toc {
