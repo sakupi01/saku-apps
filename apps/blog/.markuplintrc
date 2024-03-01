@@ -10,7 +10,8 @@
     },
     "excludeFiles": [
         "./**/twitter-image.tsx",
-        "./**/opengraph-image.tsx"
+        "./**/opengraph-image.tsx",
+        "./app/_components/share.tsx"
     ],
     "rules": {
         "attr-duplication": true,

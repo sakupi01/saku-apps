@@ -1,3 +1,4 @@
+import ShareLinks from "@/app/_components/share";
 import ThumbnailLife from "@/app/_components/thumbnail-life";
 import generateToc from "@/libs/generateToc";
 import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
@@ -24,6 +25,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   return {
     title: article?.title,
+    description: article?.title,
   };
 }
 
@@ -103,6 +105,11 @@ export default async function Article({ params }: Params) {
             }
           />
         </div>
+        <ShareLinks
+          title={article.title}
+          category={CATEGORY}
+          slug={params.slug}
+        />
       </div>
     </main>
   );

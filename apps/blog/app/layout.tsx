@@ -10,7 +10,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://skr-blog.com/"),
+  metadataBase: new URL("https://www.skr-blog.com/"),
   title: {
     default: "saku's blog",
     /** `next-seo`の`titleTemplate`に相当する機能 */
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "saku's blog",
     description: "sakuの備忘録",
-    url: "https://skr-blog.com/",
+    url: "https://www.skr-blog.com/",
     siteName: "saku's blog",
     locale: "ja_JP",
     type: "website",
     images: [
       {
-        url: "https://skr-blog.com/opengraph-image.png",
+        url: "https://www.skr-blog.com/opengraph-image.png",
         alt: "saku's blog",
       },
     ],
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     creator: "@SakuOnTheWeb",
     images: [
       {
-        url: "https://skr-blog.com/twitter-image.png",
+        url: "https://www.skr-blog.com/twitter-image.png",
         alt: "saku's blog",
       },
     ],
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   //   google: "search console stuff",
   // },
   alternates: {
-    canonical: "https://skr-blog.com/",
+    canonical: "https://www.skr-blog.com/",
   },
 };
 

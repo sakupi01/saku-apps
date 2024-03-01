@@ -61,6 +61,7 @@ const button = cva("button", {
       small: ["text-sm", "py-1", "px-2"],
       medium: ["text-base", "py-2", "px-4"],
       square: ["text-base", "py-2", "px-2"],
+      round: ["text-base", "py-2", "px-2"],
     },
   },
   defaultVariants: {

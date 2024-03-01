@@ -10,7 +10,7 @@ export default async function Page() {
           width="200"
           height="200"
         />
-        <h1 className="text-5xl font-bold text-left text-basic my-10">
+        <h1 className="text-4xl md:text-5xl font-bold text-left text-basic my-10">
           sakuです
         </h1>
         <p className="text-base text-left text-basic leading-9 tracking-wide ">
