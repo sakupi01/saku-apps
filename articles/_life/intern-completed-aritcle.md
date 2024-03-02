@@ -118,6 +118,7 @@ kintoneのような大規模プロダクトの刷新でも、このようにペ�
 
 - 一覧画面の刷新(追加・編集・複製・削除・DnDなど)
 ![一覧画面](/image-2.png)
+*一覧画面*
 - フォーム画面(アプリ作成画面の図参照)の一部フィールドの刷新
 
 ## チームでの開発
@@ -211,8 +212,7 @@ QAの方と自動テスト観点のすり合わせを行なうときは、QAの�
 :::note{.message}
 📝 Memo
 <br/>
-抽象化やコード設計に関してはデザインパターンが大きく関与しており、すべてではないですが、以下の記事でまとめています。
-https://zenn.dev/cybozu_frontend/articles/design-patterns-in-react
+抽象化やコード設計に関してはデザインパターンが大きく関与しており、すべてではないですが、Zennで書いた[Reactデザインパターンについての記事](https://zenn.dev/cybozu_frontend/articles/design-patterns-in-react)でまとめています。
 <!-- textlint-disable -->
 :::
 <!-- textlint-enable -->
@@ -259,6 +259,7 @@ https://zenn.dev/cybozu_frontend/articles/design-patterns-in-react
 誰かに伝える目的<記憶の保存という感じの書き方でだらだらとなってしまいましたが、この記事がチーム開発に関する解像度を少しでもあげるものになれば幸いです。
 
 学生時代にこんなに恵まれた環境を経験できたことをとても幸せに感じていますし、４月から入社したらもっともりもり頑張っていきたいと思います🐣🔥
+
 
 新人研修で他の同期と会えたり、開発本部の講座受けられるのも楽しみ！
 
