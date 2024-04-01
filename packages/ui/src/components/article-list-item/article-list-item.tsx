@@ -18,7 +18,7 @@ export const ArticleListItem = ({
   slug,
 }: ArticleListItemProps) => {
   return (
-    <div className="w-full grid grid-rows-[5_minmax(0px,_1fr)] grid-cols-[100px_minmax(0px,_1fr)] gap-6 rounded-md hover:bg-neutral-50">
+    <div className="w-full grid grid-rows-[5_minmax(0px,_1fr)] grid-cols-[100px_minmax(0px,_1fr)] gap-x-6 rounded-md hover:bg-neutral-50">
       <div className="ml-2 row-start-3 row-end-4 col-start-1 col-end-2 aspect-square flex justify-center items-center self-center rounded-lg bg-primary-subtle shadow">
         <div
           className={clsx(
@@ -42,7 +42,7 @@ export const ArticleListItem = ({
         href={`/dev/articles/${slug}`}
         className="pb-10 pr-2 grid grid-rows-subgrid grid-cols-subgrid row-start-1 row-end-6 col-start-1 col-end-3"
       >
-        <h2 className="grid grid-rows-subgrid row-start-3 row-end-4 col-end-[-1] md:text-3xl text-2xl font-semibold text-left text-basic">
+        <h2 className="grid grid-rows-subgrid row-start-3 col-end-[-1] md:text-3xl text-2xl font-semibold text-left text-basic">
           {title}
         </h2>
         <p className="grid grid-rows-subgrid grid-cols-subgrid row-start-4 row-end-5 col-end-[-1] subtle line-clamp-4 w-full">
