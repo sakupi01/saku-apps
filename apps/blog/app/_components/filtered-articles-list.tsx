@@ -23,7 +23,7 @@ export default async function FilteredArticlesList({
           <Link
             href={`/${article.category}/tag/${tag.name}`}
             key={tag.id}
-            className="pointer-events-auto"
+            className="pointer-events-auto z-10"
           >
             <span className="tag mr-3">{tag.name}</span>
           </Link>
