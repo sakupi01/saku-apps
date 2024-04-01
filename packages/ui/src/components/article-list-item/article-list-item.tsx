@@ -1,12 +1,12 @@
 import clsx from "clsx";
 import Link from "next/link";
-import { ReactNode } from "react";
+
 type ArticleListItemProps = {
   title: string;
   excerpt: string;
   date: string;
   colors?: string;
-  tags?: ReactNode[];
+  tags?: { id: string; name: string }[];
   slug: string;
 };
 export const ArticleListItem = ({
@@ -28,7 +28,15 @@ export const ArticleListItem = ({
         />
       </div>
       <div className="pt-10 pr-2 row-start-1 row-end-2 col-start-2 col-end-3 flex flex-wrap pointer-events-none">
-        {tags && tags}
+        {tags?.map((tag) => (
+          <Link
+            href={`/dev/tag/${tag.name}`}
+            key={tag.id}
+            className="pointer-events-auto z-10"
+          >
+            <span className="tag mr-3">{tag.name}</span>
+          </Link>
+        ))}
       </div>
       <Link
         href={`/dev/articles/${slug}`}

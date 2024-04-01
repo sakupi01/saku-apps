@@ -1,14 +1,13 @@
-import { Divider } from "@repo/ui";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
+
 type ArticleListItemProps = {
   title: string;
   excerpt: string;
   date: string;
   url: string;
   alt: string;
-  tags?: ReactNode[];
+  tags?: { id: string; name: string }[];
   slug: string;
 };
 export const ArticleListItemLife = ({
@@ -40,7 +39,15 @@ export const ArticleListItemLife = ({
       </div>
 
       <div className="pt-10 pr-2 row-start-1 row-end-2 col-start-2 col-end-3 flex flex-wrap pointer-events-none">
-        {tags && tags}
+        {tags?.map((tag) => (
+          <Link
+            href={`/life/tag/${tag.name}`}
+            key={tag.id}
+            className="pointer-events-auto z-10"
+          >
+            <span className="tag mr-3">{tag.name}</span>
+          </Link>
+        ))}
       </div>
       <Link
         href={`/life/articles/${slug}`}
