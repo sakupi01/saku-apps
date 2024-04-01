@@ -18,8 +18,8 @@ export const ArticleListItem = ({
   slug,
 }: ArticleListItemProps) => {
   return (
-    <div className="w-full py-10 px-2 flex items-center gap-6 rounded-md hover:bg-neutral-50">
-      <div className="flex justify-center items-center p-5 rounded-lg bg-primary-subtle shadow">
+    <div className="w-full py-10 px-2 grid grid-rows-[5_minmax(0px,_1fr)] grid-cols-[100px_minmax(0px,_1fr)] gap-6 rounded-md hover:bg-neutral-50">
+      <div className="row-span-5  aspect-square flex justify-center items-center self-center rounded-lg bg-primary-subtle shadow">
         <div
           className={clsx(
             "w-[50px] h-[50px] rounded-[50px] shadow-md bg-gradient-to-r",
@@ -27,9 +27,14 @@ export const ArticleListItem = ({
           )}
         />
       </div>
-      <div className="w-full">
-        <div className="flex flex-wrap">{tags && tags}</div>
-        <Link href={`/dev/articles/${slug}`} className="w-full">
+      <div className="grid grid-rows-subgrid row-span-5 col-start-2">
+        <div className="row-start-2 col-start-1 col-end-2 flex flex-wrap pointer-events-none">
+          {tags && tags}
+        </div>
+        <Link
+          href={`/dev/articles/${slug}`}
+          className="grid grid-rows-subgrid row-span-5 col-start-1 col-end-2"
+        >
           <h2 className="md:text-3xl text-2xl font-semibold text-left text-basic">
             {title}
           </h2>

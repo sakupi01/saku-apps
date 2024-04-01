@@ -20,7 +20,11 @@ export default async function FilteredArticlesList({
         });
 
         const renderTags = tagWithId?.map((tag) => (
-          <Link href={`/${article.category}/tag/${tag.name}`} key={tag.id}>
+          <Link
+            href={`/${article.category}/tag/${tag.name}`}
+            key={tag.id}
+            className="pointer-events-auto"
+          >
             <span className="tag mr-3">{tag.name}</span>
           </Link>
         ));
