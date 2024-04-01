@@ -1,6 +1,5 @@
 import { Article } from "@/interfaces/article";
 import { ArticleListItem, Divider } from "@repo/ui";
-import Link from "next/link";
 import { ArticleListItemLife } from "./article-list-item-life";
 
 export default async function FilteredArticlesList({
@@ -19,12 +18,6 @@ export default async function FilteredArticlesList({
           };
         });
 
-        const renderTags = tagWithId?.map((tag) => (
-          <Link href={`/${article.category}/tag/${tag.name}`} key={tag.id}>
-            <span className="tag mr-3">{tag.name}</span>
-          </Link>
-        ));
-
         return (
           <>
             {article.category === "life" ? (
@@ -34,7 +27,7 @@ export default async function FilteredArticlesList({
                 date={article.date}
                 url={article.coverImage.url}
                 alt={article.coverImage.alt}
-                tags={renderTags}
+                tags={tagWithId}
                 slug={article.slug}
               />
             ) : (
@@ -43,7 +36,7 @@ export default async function FilteredArticlesList({
                 excerpt={article.excerpt}
                 date={article.date}
                 colors={`${article.beginColor} ${article.middleColor} ${article.endColor}`}
-                tags={renderTags}
+                tags={tagWithId}
                 slug={article.slug}
               />
             )}
