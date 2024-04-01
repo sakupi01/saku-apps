@@ -51,7 +51,7 @@ export const ArticleListItemLife = ({
       </div>
       <Link
         href={`/life/articles/${slug}`}
-        className="pb-10 pr-2 grid grid-rows-subgrid grid-cols-subgrid row-start-1 row-end-5 col-start-1 col-end-3"
+        className="pb-10 pr-2 grid grid-rows-subgrid grid-cols-subgrid row-start-1 row-end-6 col-start-1 col-end-3"
       >
         <h2 className="grid grid-rows-subgrid row-start-3 row-end-4 col-end-[-1] md:text-3xl text-2xl font-semibold text-left text-basic">
           {title}
