@@ -87,9 +87,9 @@ export default async function Article({ params }: Params) {
 
   return (
     <main>
-      <div className="max-w-2xl mx-auto md:pt-20 md:px-20 md:pb-0 p-5">
+      <div className="max-w-3xl mx-auto md:pt-20 md:px-20 md:pb-0 p-5">
         <Link href={"/dev"}>
-          <Button intent="square-icon" size="square">
+          <Button aria-label="back" intent="square-icon" size="square">
             <ChevronLeft />
           </Button>
         </Link>

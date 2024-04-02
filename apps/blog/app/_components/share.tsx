@@ -8,7 +8,7 @@ export default function ShareLinks({
 }: { title: string; category: "dev" | "life"; slug: string }) {
   return (
     <div className="flex justify-center gap-3">
-      <Button intent={"round-icon"} size={"round"}>
+      <Button aria-label="share" intent={"round-icon"} size={"round"}>
         <Link
           href={`https://twitter.com/intent/tweet?text=${title}%20-%20saku's%20blog&url=https://www.skr-blog.com/${category}/articles/${slug}`}
           target="_blank"
