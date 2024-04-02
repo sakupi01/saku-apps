@@ -24,8 +24,30 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const article = getArticleBySlug(slug, CATEGORY);
 
   return {
-    title: article?.title,
-    description: article?.title,
+    metadataBase: new URL("https://www.skr-blog.com"),
+    title: {
+      default: article?.title ?? "saku's blog",
+      template: `%s - saku's Lifeblog`,
+    },
+    description: "saku's Lifeblog",
+    openGraph: {
+      title: article?.title ?? "saku's blog",
+      description: "saku's Lifeblog",
+      url: "/",
+      siteName: "saku's blog",
+      locale: "ja_JP",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article?.title ?? "saku's blog",
+      description: "saku's Lifeblog",
+      site: "@SakuOnTheWeb",
+      creator: "@SakuOnTheWeb",
+    },
+    alternates: {
+      canonical: "/",
+    },
   };
 }
 
