@@ -17,7 +17,7 @@ const config: Omit<Config, "content"> = {
         },
         subtle: "#AFAFAF",
         blossom: "#BAA0B5",
-        tag: "#B8A47C",
+        tag: "#88744c",
         backquote: "#E3E3E3",
         break: "#EDE8DF",
         link: "#6b9aff",

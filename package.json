@@ -1,48 +1,49 @@
 {
-    "name": "saku-blog-app",
-    "private": true,
-    "scripts": {
-        "build": "turbo build",
-        "start": "turbo start",
-        "build:storybook": "turbo build:storybook",
-        "clean:workspaces": "turbo clean",
-        "dev": "turbo dev",
-        "lint": "turbo check:lint",
-        "format": "turbo check:format",
-        "lf": "turbo check:lint-format",
-        "pa11y": "turbo check:pa11y",
-        "typecheck": "turbo check:typecheck",
-        "checkAll": "turbo check",
-        "storybook": "turbo storybook",
-        "test:unit": "jest --config jest.config.ts",
-        "test:update": "jest --config jest.config.ts --updateSnapshot",
-        "test:watch": "jest --config jest.config.ts --watchAll",
-        "test:debug": "jest --config jest.config.ts --runInBand",
-        "test": "bun run test:unit",
-        "check:format": "bunx biome format --changed --write .",
-        "check:lint": "bunx biome lint --changed --apply .",
-        "check:typecheck": "tsc --noEmit",
-        "check:lint-format": "bunx biome check --changed --apply .",
-        "check": "bun run check:typecheck & bunx biome check --apply . --no-errors-on-unmatched",
-        "prepare": "husky"
-    },
-    "devDependencies": {
-        "@biomejs/biome": "1.5.3",
-        "@repo/typescript-config": "*",
-        "turbo": "latest"
-    },
-    "engines": {
-        "node": ">=20"
-    },
-    "packageManager": "bun@1.0.25",
-    "workspaces": [
-        "apps/*",
-        "packages/*"
-    ],
-    "dependencies": {
-        "husky": "^9.0.10"
-    },
-    "volta": {
-        "node": "20.11.1"
-    }
+  "name": "saku-blog-app",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "start": "turbo start",
+    "build:storybook": "turbo build:storybook",
+    "clean:workspaces": "turbo clean",
+    "dev": "turbo dev",
+    "lint": "turbo check:lint",
+    "format": "turbo check:format",
+    "lf": "turbo check:lint-format",
+    "pa11y": "turbo check:pa11y",
+    "typecheck": "turbo check:typecheck",
+    "checkAll": "turbo check",
+    "storybook": "turbo storybook",
+    "test:unit": "jest --config jest.config.ts",
+    "test:update": "jest --config jest.config.ts --updateSnapshot",
+    "test:watch": "jest --config jest.config.ts --watchAll",
+    "test:debug": "jest --config jest.config.ts --runInBand",
+    "test": "bun run test:unit",
+    "check:format": "bunx biome format --changed --write .",
+    "check:lint": "bunx biome lint --changed --apply .",
+    "check:typecheck": "tsc --noEmit",
+    "check:lint-format": "bunx biome check --changed --apply .",
+    "check": "bun run check:typecheck & bunx biome check --apply . --no-errors-on-unmatched",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.5.3",
+    "@repo/typescript-config": "workspace:*",
+    "turbo": "latest"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "bun@1.0.25",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "husky": "^9.0.10",
+    "pa11y-ci": "^3.1.0"
+  },
+  "volta": {
+    "node": "20.11.1"
+  }
 }

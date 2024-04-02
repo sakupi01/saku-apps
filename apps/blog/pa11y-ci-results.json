@@ -4,7 +4,7 @@
   "errors": 0,
   "results": {
     "http://localhost:3000/": [],
-    "http://localhost:3000/articles/sample-en": [],
-    "http://localhost:3000/articles/sample": []
+    "http://localhost:3000/dev/articles/sample-en": [],
+    "http://localhost:3000/dev/articles/sample": []
   }
 }
