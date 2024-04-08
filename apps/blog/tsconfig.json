@@ -5,7 +5,9 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "moduleResolution": "Node",
+    "module": "ESNext",
   },
   "include": [
     "next-env.d.ts",
