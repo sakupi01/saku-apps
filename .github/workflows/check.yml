@@ -3,23 +3,22 @@ name: 'Check'
 on: [push]
 
 jobs:
-  # Install and cache npm dependencies
   install-dependencies:
     runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
       - name: Checkout Commit
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
-
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-
       - name: Install dependencies
-        run: bun install
-
+        run: bun install --frozen-lockfile
       - name: Cache bun dependencies
         uses: actions/cache@v3
         id: bun-cache
@@ -28,9 +27,6 @@ jobs:
           key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
           restore-keys: ${{ runner.os }}-bun
 
-      - name: Install dependencies if cache invalid
-        if: steps.bun-cache.outputs.cache-hit != 'true'
-        run: bun i 
 # This job is for checking the code style, type and lint errors.
   check-all: 
     needs: install-dependencies
