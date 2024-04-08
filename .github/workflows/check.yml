@@ -18,7 +18,7 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: bun install --yarn
+        run: bun install
 
       - name: Cache bun dependencies
         uses: actions/cache@v3
@@ -30,8 +30,7 @@ jobs:
 
       - name: Install dependencies if cache invalid
         if: steps.bun-cache.outputs.cache-hit != 'true'
-        run: bun i --frozen-lockfile --yarn
-
+        run: bun i 
 # This job is for checking the code style, type and lint errors.
   check-all: 
     needs: install-dependencies
