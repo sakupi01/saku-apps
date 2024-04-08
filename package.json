@@ -24,11 +24,13 @@
     "check:typecheck": "tsc --noEmit",
     "check:lint-format": "bunx biome check --changed --apply .",
     "check": "bun run check:typecheck & bunx biome check --apply . --no-errors-on-unmatched",
-    "prepare": "husky"
+    "prepare": "husky",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
     "@repo/typescript-config": "workspace:*",
+    "patch-package": "^8.0.0",
     "turbo": "latest"
   },
   "engines": {

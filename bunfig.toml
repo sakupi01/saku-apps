@@ -1,0 +1,2 @@
+[install.lockfile]
+print = "yarn" # Whether to generate a non-Bun lockfile alongside bun.lockb
