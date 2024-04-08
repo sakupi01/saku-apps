@@ -1,4 +1,4 @@
-import headers from "./config/headers.js";
+import headers from "./config/headers.cjs";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
