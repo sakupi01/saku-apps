@@ -20,7 +20,7 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: bun install
+        run: bun install --yarn
 
       - name: Cache bun dependencies
         uses: actions/cache@v3
@@ -32,7 +32,7 @@ jobs:
 
       - name: Install dependencies if cache invalid
         if: steps.bun-cache.outputs.cache-hit != 'true'
-        run: bun i --frozen-lockfile
+        run: bun i --frozen-lockfile --yarn
 
   lighthouseci:
     needs: install-dependencies
