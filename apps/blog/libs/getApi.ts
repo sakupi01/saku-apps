@@ -3,6 +3,8 @@ import { join } from "path";
 import { Article } from "@/interfaces/article";
 import matter from "gray-matter";
 import { assertNonNullable } from "./assertNonNullable";
+import { ZennArticle, ZennArticleObj } from "@/interfaces/zenn";
+import { log } from "console";
 
 const techArticlesDirectory = join(process.cwd(), "../../articles/_dev/");
 const lifeArticlesDirectory = join(process.cwd(), "../../articles/_life/");
@@ -15,8 +17,8 @@ export function getArticleSlugs(which: Category) {
   return fs.readdirSync(articlesDirectory);
 }
 
-export function getAllArticleTags(which: Category) {
-  const articles = getAllArticlesByCategory(which);
+export async function getAllArticleTags(which: Category) {
+  const articles = await getAllArticlesByCategory(which);
   const tags = articles.flatMap((article) => article.tags);
 
   return tags.filter((tag) => tag !== undefined);
@@ -35,14 +37,59 @@ export function getArticleBySlug(slug: string, which: Category) {
   }
 }
 
-export function getAllArticlesByCategory(which: Category): Article[] {
+export const getZennArticleByCategory = async (
+  which: Category,
+): Promise<Article[] | undefined> => {
+  try {
+    const res = await fetch(
+      `https://zenn.dev/api/articles?username=s_a_k_u&order=latest&article_type=${
+        which == "dev" ? "tech" : "idea"
+      }`,
+    );
+    const zennArticleObj = (await res.json()) as ZennArticleObj;
+    // convert ZennArticle to Article
+    const articleCompatibleZennArticle = (
+      articles: ZennArticle[],
+    ): Article[] => {
+      return articles.map((article) => {
+        return {
+          slug: article.slug,
+          title: article.title,
+          date: article.published_at.toString(),
+          coverImage: {
+            url: article.user.avatar_small_url,
+            alt: article.user.name,
+          },
+          excerpt: article.title,
+          content: "",
+          preview: false,
+          beginColor: "#fff",
+          middleColor: "#fff",
+          endColor: "#fff",
+          category: which,
+          tags: [""],
+        };
+      });
+    };
+
+    return articleCompatibleZennArticle(zennArticleObj.articles);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export async function getAllArticlesByCategory(
+  which: Category,
+): Promise<Article[]> {
   const slugs = getArticleSlugs(which);
   const articles = slugs
     .map((slug) => getArticleBySlug(slug, which))
-    .filter((article): article is Article => article !== undefined)
+    .filter((article): article is Article => article !== undefined);
+  const zennArticles = await getZennArticleByCategory(which);
+  const squashedArticles = articles
+    .concat(zennArticles ?? [])
     .sort((article1, article2) => (article1.date > article2.date ? -1 : 1));
-
-  return articles;
+  return squashedArticles;
 }
 
 export function getAllArticles(): Article[] {
@@ -60,11 +107,11 @@ export function getAllArticles(): Article[] {
   return articles;
 }
 
-export function getAllArticlesByCategoryByTag(
+export async function getAllArticlesByCategoryByTag(
   tag = "",
   which: Category,
-): Article[] {
-  const articles = getAllArticlesByCategory(which);
+): Promise<Article[]> {
+  const articles = await getAllArticlesByCategory(which);
   const filteredArticles = articles.filter((article) => {
     return article.tags?.some((t) => t.toLowerCase().includes(tag));
   });
@@ -77,7 +124,7 @@ export async function fetchArticlesByQuery(
   which: Category,
   tag = "",
 ) {
-  const articles = getAllArticlesByCategoryByTag(tag, which);
+  const articles = await getAllArticlesByCategoryByTag(tag, which);
   const filteredArticles = articles.filter((article) => {
     return (
       article.title.toLowerCase().includes(query.toLowerCase()) ||
@@ -94,7 +141,7 @@ export async function fetchArticlesByQuery(
 }
 
 export async function fetchArticlePages(which: Category, query = "", tag = "") {
-  const articles = getAllArticlesByCategoryByTag(tag, which);
+  const articles = await getAllArticlesByCategoryByTag(tag, which);
   const filteredArticles = articles.filter((article) => {
     return (
       article.title.toLowerCase().includes(query.toLowerCase()) ||

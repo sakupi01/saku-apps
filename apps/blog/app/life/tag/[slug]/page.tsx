@@ -22,7 +22,7 @@ type Params = {
 };
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-  const slugs = getAllArticleTags(CATEGORY);
+  const slugs = await getAllArticleTags(CATEGORY);
 
   return slugs.map((slug) => ({
     slug: slug,
