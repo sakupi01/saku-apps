@@ -1,0 +1,15 @@
+diff --git a/node_modules/@codspeed/vitest-plugin/package.json b/node_modules/@codspeed/vitest-plugin/package.json
+index f51062b..01feba0 100644
+--- a/node_modules/@codspeed/vitest-plugin/package.json
++++ b/node_modules/@codspeed/vitest-plugin/package.json
+@@ -11,9 +11,7 @@
+   "module": "./dist/index.mjs",
+   "types": "./dist/index.d.ts",
+   "exports": {
+-    ".": {
+-      "import": "./dist/index.mjs"
+-    }
++    ".": "./dist/index.mjs"
+   },
+   "type": "module",
+   "files": [
