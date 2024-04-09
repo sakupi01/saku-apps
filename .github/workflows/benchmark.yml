@@ -48,15 +48,7 @@ jobs:
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-
-      - name: Restore bun dependencies
-        id: bun-cache
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: ${{ runner.os }}-bun
-
+          
       - name: Run benchmarks
         uses: CodSpeedHQ/action@v2
         with:
