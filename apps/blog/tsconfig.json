@@ -7,7 +7,7 @@
     },
     "jsx": "preserve",
     "moduleResolution": "Node",
-    "module": "ESNext",
+    "module": "ESNext"
   },
   "include": [
     "next-env.d.ts",
