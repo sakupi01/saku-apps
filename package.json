@@ -16,10 +16,10 @@
         "checkAll": "turbo check",
         "storybook": "turbo storybook",
         "bench": "vitest bench",
-        "test:unit": "jest --config jest.config.ts",
-        "test:update": "jest --config jest.config.ts --updateSnapshot",
-        "test:watch": "jest --config jest.config.ts --watchAll",
-        "test:debug": "jest --config jest.config.ts --runInBand",
+        "test:unit": "vitest --config vitest.config.ts",
+        "test:update": "vitest --config vitest.config.ts --updateSnapshot",
+        "test:watch": "vitest --config vitest.config.ts --watchAll",
+        "test:debug": "vitest --config vitest.config.ts --runInBand",
         "test": "bun run test:unit",
         "check:format": "bunx biome format --changed --write .",
         "check:lint": "bunx biome lint --changed --apply .",
@@ -31,9 +31,11 @@
     },
     "devDependencies": {
         "@biomejs/biome": "1.5.3",
+        "@codspeed/vitest-plugin": "^3.1.0",
         "@repo/typescript-config": "workspace:*",
         "patch-package": "^8.0.0",
-        "turbo": "latest"
+        "turbo": "latest",
+        "vitest": "^1.4.0"
     },
     "engines": {
         "node": ">=20"
@@ -44,10 +46,8 @@
         "packages/*"
     ],
     "dependencies": {
-        "@codspeed/vitest-plugin": "^3.1.0",
         "husky": "^9.0.10",
-        "pa11y-ci": "^3.1.0",
-        "vitest": "^1.4.0"
+        "pa11y-ci": "^3.1.0"
     },
     "volta": {
         "node": "20.11.1"
