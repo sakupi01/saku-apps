@@ -52,5 +52,6 @@ jobs:
       - name: Run benchmarks
         uses: CodSpeedHQ/action@v2
         with:
+          working-directory: ./apps/blog
           run: bun vitest bench
           token: ${{ secrets.CODSPEED_TOKEN }}
