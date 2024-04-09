@@ -48,9 +48,9 @@ jobs:
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-          
+
       - name: Run benchmarks
         uses: CodSpeedHQ/action@v2
         with:
-          run: bun vitest bench
+          run: bunx vitest bench --config ./apps/blog/vitest.config.js
           token: ${{ secrets.CODSPEED_TOKEN }}

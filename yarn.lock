@@ -4125,7 +4125,6 @@ bl@^4.0.3, bl@^4.1.0:
   version "workspace:apps/blog"
   resolved "workspace:apps/blog"
   devDependencies:
-    "@codspeed/vitest-plugin" "^3.1.0"
     "@graphql-typed-document-node/core" "^3.2.0"
     "@markuplint/jsx-parser" "^4.1.0"
     "@markuplint/react-spec" "^4.0.1"

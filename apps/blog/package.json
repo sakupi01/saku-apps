@@ -54,7 +54,6 @@
     "use-debounce": "^10.0.0"
   },
   "devDependencies": {
-    "@codspeed/vitest-plugin": "^3.1.0",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@markuplint/jsx-parser": "^4.1.0",
     "@markuplint/react-spec": "^4.0.1",
