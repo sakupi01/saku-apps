@@ -52,5 +52,5 @@ jobs:
       - name: Run benchmarks
         uses: CodSpeedHQ/action@v2
         with:
-          run: bun vitest bench --config ./vitest.config.js
+          run: bunx vitest bench --config ./vitest.config.js
           token: ${{ secrets.CODSPEED_TOKEN }}
