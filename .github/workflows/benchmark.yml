@@ -27,8 +27,6 @@ jobs:
           bun-version: latest
       - name: Install dependencies
         run: bun install
-      - name: Add vitest
-        run: bun add -D @codspeed/vitest-plugin vitest
       - name: Cache bun dependencies
         uses: actions/cache@v3
         id: bun-cache
@@ -50,9 +48,12 @@ jobs:
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
+      
+      - name: Add vitest
+        run: bun add @codspeed/vitest-plugin vitest
 
       - name: Run benchmarks
         uses: CodSpeedHQ/action@v2
         with:
-          run: bun vitest bench
+          run: bun bench
           token: ${{ secrets.CODSPEED_TOKEN }}
