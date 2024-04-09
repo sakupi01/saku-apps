@@ -15,6 +15,7 @@
         "typecheck": "turbo check:typecheck",
         "checkAll": "turbo check",
         "storybook": "turbo storybook",
+        "bench": "bun vitest bench",
         "test:unit": "jest --config jest.config.ts",
         "test:update": "jest --config jest.config.ts --updateSnapshot",
         "test:watch": "jest --config jest.config.ts --watchAll",
