@@ -5,7 +5,7 @@ type ThumbnailProps = {
   beginColor: string;
   middleColor: string;
   endColor: string;
-  tags?: ReactNode[];
+  tags: ReactNode[];
 };
 export const Thumbnail = ({
   title,

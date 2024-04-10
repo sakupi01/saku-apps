@@ -3,8 +3,8 @@ title: "Next.jsでSSGとmarkdownを使用したブログアプリを作成する
 excerpt: "Next.jsのApp RouterでSSGを用いてブログを作成した過程を狭く浅くまとめます。使用技術や技術選定の話が中心です。"
 date: "2024-2-28"
 beginColor: 'from-purple-300'
-middleColor: 'via-blue-200'
-endColor: 'to-pink-200'
+middleColor: 'via-yellow-200'
+endColor: 'to-green-300'
 category: 'dev'
 tags: ['react', 'nextjs', 'turborepo', 'vercel']
 status: 'published'

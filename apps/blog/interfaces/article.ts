@@ -13,5 +13,5 @@ export type Article = {
   middleColor?: string;
   endColor?: string;
   category: "dev" | "life";
-  tags?: string[];
+  tags: string[];
 };

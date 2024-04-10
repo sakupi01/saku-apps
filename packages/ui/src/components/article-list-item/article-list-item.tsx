@@ -6,7 +6,7 @@ type ArticleListItemProps = {
   excerpt: string;
   date: string;
   colors?: string;
-  tags?: { id: string; name: string }[];
+  tags: { id: string; name: string }[];
   slug: string;
 };
 export const ArticleListItem = ({
@@ -17,8 +17,14 @@ export const ArticleListItem = ({
   tags,
   slug,
 }: ArticleListItemProps) => {
+  const isZenn = tags[0]?.name === "zenn";
   return (
-    <div className="w-full grid grid-rows-[5_minmax(0px,_1fr)] grid-cols-[100px_minmax(0px,_1fr)] gap-x-6 rounded-md hover:bg-neutral-50">
+    <div
+      className={clsx(
+        "w-full grid grid-rows-[5_minmax(0px,_1fr)] grid-cols-[100px_minmax(0px,_1fr)] gap-x-6 rounded-md transition-colors duration-300 ",
+        isZenn ? "hover:bg-blue-50" : "hover:bg-neutral-50",
+      )}
+    >
       <div className="ml-2 row-start-3 row-end-4 col-start-1 col-end-2 aspect-square flex justify-center items-center self-center rounded-lg bg-primary-subtle shadow">
         <div
           className={clsx(
@@ -28,7 +34,7 @@ export const ArticleListItem = ({
         />
       </div>
       <div className="pt-10 pr-2 row-start-1 row-end-2 col-start-2 col-end-3 flex flex-wrap pointer-events-none">
-        {tags?.map((tag) => (
+        {tags.map((tag) => (
           <Link
             href={`/dev/tag/${tag.name}`}
             key={tag.id}
@@ -39,7 +45,11 @@ export const ArticleListItem = ({
         ))}
       </div>
       <Link
-        href={`/dev/articles/${slug}`}
+        href={
+          isZenn
+            ? `https://zenn.dev/s_a_k_u/articles/${slug}`
+            : `/dev/articles/${slug}`
+        }
         className="pb-10 pr-2 grid grid-rows-subgrid grid-cols-subgrid row-start-1 row-end-6 col-start-1 col-end-3"
       >
         <h2 className="grid grid-rows-subgrid row-start-3 col-end-[-1] md:text-3xl text-2xl font-semibold text-left text-basic">

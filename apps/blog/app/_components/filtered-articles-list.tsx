@@ -10,7 +10,7 @@ export default async function FilteredArticlesList({
   return (
     <>
       {filteredArticles.map((article) => {
-        const tagWithId = article.tags?.map((tag) => {
+        const tagWithId = article.tags.map((tag) => {
           const id = Math.random().toString(32).substring(2);
           return {
             id: id,

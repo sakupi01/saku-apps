@@ -10,7 +10,7 @@ export default function TunbnailLife({
   url: string;
   alt: string;
   title: string;
-  tags?: ReactNode[];
+  tags: ReactNode[];
   date: string;
 }) {
   return (
