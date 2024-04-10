@@ -68,7 +68,7 @@ export const getZennArticleByCategory = async (
             middleColor: "via-blue-200",
             endColor: "to-violet-300",
             category: which,
-            tags: [""],
+            tags: ["zenn"],
           };
         });
     };
@@ -117,7 +117,7 @@ export async function getAllArticlesByCategoryByTag(
 ): Promise<Article[]> {
   const articles = await getAllArticlesByCategory(which);
   const filteredArticles = articles.filter((article) => {
-    return article.tags?.some((t) => t.toLowerCase().includes(tag));
+    return article.tags.some((t) => t.toLowerCase().includes(tag));
   });
   return filteredArticles;
 }
@@ -133,7 +133,7 @@ export async function fetchArticlesByQuery(
     return (
       article.title.toLowerCase().includes(query.toLowerCase()) ||
       article.excerpt.toLowerCase().includes(query.toLowerCase()) ||
-      article.tags?.some((tag) =>
+      article.tags.some((tag) =>
         tag.toLowerCase().includes(query.toLowerCase()),
       )
     );
@@ -150,7 +150,7 @@ export async function fetchArticlePages(which: Category, query = "", tag = "") {
     return (
       article.title.toLowerCase().includes(query.toLowerCase()) ||
       article.excerpt.toLowerCase().includes(query.toLowerCase()) ||
-      article.tags?.some((tag) =>
+      article.tags.some((tag) =>
         tag.toLowerCase().includes(query.toLowerCase()),
       )
     );

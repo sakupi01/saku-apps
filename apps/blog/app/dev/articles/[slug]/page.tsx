@@ -71,7 +71,7 @@ export default async function Article({ params }: Params) {
     generateToc(article.content),
   ]);
 
-  const tagWithId = article.tags?.map((tag) => {
+  const tagWithId = article.tags.map((tag) => {
     const id = Math.random().toString(32).substring(2);
     return {
       id: id,

@@ -11,6 +11,6 @@
     "source.organizeImports.biome": "explicit"
   },
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.words": ["clsx"],
+  "cSpell.words": ["clsx", "Zenn"],
   "markuplint.enable": true
 }

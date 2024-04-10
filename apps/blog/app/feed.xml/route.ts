@@ -21,7 +21,7 @@ export async function GET() {
       date: article.date,
       description: article.excerpt,
       author: "saku",
-      categories: article.tags?.map((tag) => tag) || [],
+      categories: article.tags.map((tag) => tag) || [],
     });
   });
   return new Response(feed.xml({ indent: true }), {
