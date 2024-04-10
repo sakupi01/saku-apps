@@ -1,10 +1,10 @@
+import { log } from "console";
 import fs from "fs";
 import { join } from "path";
 import { Article } from "@/interfaces/article";
-import matter from "gray-matter";
-import { assertNonNullable } from "./assertNonNullable";
 import { ZennArticle, ZennArticleObj } from "@/interfaces/zenn";
-import { log } from "console";
+import matter from "gray-matter";
+import { convertDateToYYYYMMDD } from "./convertDate";
 
 const techArticlesDirectory = join(process.cwd(), "../../articles/_dev/");
 const lifeArticlesDirectory = join(process.cwd(), "../../articles/_life/");
@@ -42,34 +42,35 @@ export const getZennArticleByCategory = async (
 ): Promise<Article[] | undefined> => {
   try {
     const res = await fetch(
-      `https://zenn.dev/api/articles?username=s_a_k_u&order=latest&article_type=${
-        which == "dev" ? "tech" : "idea"
-      }`,
+      `https://zenn.dev/api/articles?username=s_a_k_u&order=latest`,
     );
     const zennArticleObj = (await res.json()) as ZennArticleObj;
     // convert ZennArticle to Article
     const articleCompatibleZennArticle = (
       articles: ZennArticle[],
     ): Article[] => {
-      return articles.map((article) => {
-        return {
-          slug: article.slug,
-          title: article.title,
-          date: article.published_at.toString(),
-          coverImage: {
-            url: article.user.avatar_small_url,
-            alt: article.user.name,
-          },
-          excerpt: article.title,
-          content: "",
-          preview: false,
-          beginColor: "#fff",
-          middleColor: "#fff",
-          endColor: "#fff",
-          category: which,
-          tags: [""],
-        };
-      });
+      const article_type = which === "dev" ? "tech" : "idea";
+      return articles
+        .filter((article) => article.article_type === article_type)
+        .map((article) => {
+          return {
+            slug: article.slug,
+            title: article.title,
+            date: convertDateToYYYYMMDD(article.published_at.toString()),
+            coverImage: {
+              url: article.user.avatar_small_url,
+              alt: article.user.name,
+            },
+            excerpt: `Zennで執筆した「${article.title}」に関する記事です`,
+            content: "",
+            preview: false,
+            beginColor: "from-sky-200",
+            middleColor: "via-blue-200",
+            endColor: "to-violet-300",
+            category: which,
+            tags: [""],
+          };
+        });
     };
 
     return articleCompatibleZennArticle(zennArticleObj.articles);
@@ -88,7 +89,10 @@ export async function getAllArticlesByCategory(
   const zennArticles = await getZennArticleByCategory(which);
   const squashedArticles = articles
     .concat(zennArticles ?? [])
-    .sort((article1, article2) => (article1.date > article2.date ? -1 : 1));
+    .sort(
+      (article1, article2) =>
+        Date.parse(article2.date) - Date.parse(article1.date),
+    );
   return squashedArticles;
 }
 
