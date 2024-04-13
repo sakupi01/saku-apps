@@ -17,6 +17,7 @@
         "storybook": "turbo storybook",
         "test:unit": "turbo test:unit",
         "bench": "turbo bench",
+        "coverage": "turbo coverage",
         "test:update": "vitest --config vitest.config.ts --updateSnapshot",
         "test:watch": "vitest --config vitest.config.ts --watchAll",
         "test:debug": "vitest --config vitest.config.ts --runInBand",

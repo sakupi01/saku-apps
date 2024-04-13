@@ -18,6 +18,7 @@
         "check": {},
         "test:unit": {},
         "bench": {},
+        "coverage": {},
         "storybook": {},
         "build:storybook": {},
         "dev": {
