@@ -11,7 +11,7 @@
         "test:update": "vitest --config vitest.config.ts --updateSnapshot",
         "test:watch": "vitest --config vitest.config.ts --watchAll",
         "test:debug": "vitest --config vitest.config.ts --runInBand",
-        "test": "bun run test:unit",
+        "bench": "vitest bench",
         "check:format": "bunx biome format --changed --write .",
         "check:lint": "bunx biome lint --changed --apply .",
         "check:typecheck": "tsc --noEmit",

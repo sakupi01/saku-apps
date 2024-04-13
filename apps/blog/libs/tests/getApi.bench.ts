@@ -1,6 +1,10 @@
-import { readdirSync, readFileSync } from "fs";
+import { readFileSync, readdirSync } from "fs";
 import { Mock, bench, describe, expect, test, vitest } from "vitest";
-import { getArticleBySlug, getArticleSlugs } from "../getApi";
+import {
+  getArticleBySlug,
+  getArticleSlugs,
+  getZennArticleByCategory,
+} from "../getApi";
 import { ARTICLE, WHICH } from "./constants/unitTestConstants";
 
 vitest.mock("fs");
@@ -25,6 +29,12 @@ describe("getApi", () => {
         ARTICLE.content.replace(/^\n/g, "\n"),
       );
       getArticleBySlug(ARTICLE.slug, WHICH.life.name);
+    });
+  });
+
+  describe("getZennArticleByCategory", () => {
+    test("カテゴリを受け取り、Zenn記事のデータを返し、カテゴリの記事を抽出し、ブログの記事の型に合わせる", async () => {
+      await getZennArticleByCategory("dev");
     });
   });
 });

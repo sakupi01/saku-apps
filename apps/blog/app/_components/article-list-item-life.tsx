@@ -1,4 +1,4 @@
-import { assertNonNullable } from "@repo/ui/src/libs/assertNonNullable";
+import { assertNonNullable } from "@/libs/assertNonNullable";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";

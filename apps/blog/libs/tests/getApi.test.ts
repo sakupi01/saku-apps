@@ -1,6 +1,10 @@
 import { readFileSync, readdirSync } from "fs";
 import { Mock, describe, expect, test, vitest } from "vitest";
-import { getArticleBySlug, getArticleSlugs } from "../getApi";
+import {
+  getArticleBySlug,
+  getArticleSlugs,
+  getZennArticleByCategory,
+} from "../getApi";
 import { ARTICLE, WHICH } from "./constants/unitTestConstants";
 import { unitTestUtils } from "./utils/unitTestUtils";
 
@@ -46,6 +50,15 @@ describe("getApi", () => {
 
       expect(readdirSync).toHaveBeenCalledWith(lifeArticlesDirectory);
       expect(readFileSync).toHaveBeenCalledWith(fullPath, "utf8");
+    });
+  });
+
+  describe("getZennArticleByCategory", () => {
+    test("カテゴリを受け取り、Zenn記事のデータを返し、カテゴリの記事を抽出し、ブログの記事の型に合わせる", async () => {
+      const devZennArticle = await getZennArticleByCategory("dev");
+
+      // MEMO: Zennの記事が取得できなかったときはcatchで、undefinedが返る
+      expect(devZennArticle).not.toBeUndefined();
     });
   });
 });
