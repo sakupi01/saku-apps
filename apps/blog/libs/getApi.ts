@@ -3,8 +3,8 @@ import { join } from "path";
 import { Article } from "@/interfaces/article";
 import { ZennArticle, ZennArticleObj } from "@/interfaces/zenn";
 import matter from "gray-matter";
-import { convertDateToYYYYMMDD } from "./convertDate";
 import { assertNonNullable } from "./assertNonNullable";
+import { convertDateToYYYYMMDD } from "./convertDate";
 
 const techArticlesDirectory = join(process.cwd(), "../../articles/_dev/");
 const lifeArticlesDirectory = join(process.cwd(), "../../articles/_life/");

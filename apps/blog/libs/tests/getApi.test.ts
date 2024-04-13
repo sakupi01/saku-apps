@@ -1,8 +1,8 @@
-import { describe, expect, Mock, test, vitest } from "vitest";
+import { readFileSync, readdirSync } from "fs";
+import { Mock, describe, expect, test, vitest } from "vitest";
 import { getArticleBySlug, getArticleSlugs } from "../getApi";
-import { readdirSync, readFileSync } from "fs";
-import { unitTestUtils } from "./utils/unitTestUtils";
 import { ARTICLE, WHICH } from "./constants/unitTestConstants";
+import { unitTestUtils } from "./utils/unitTestUtils";
 
 vitest.mock("fs");
 
@@ -38,7 +38,6 @@ describe("getApi", () => {
         ARTICLE.content.replace(/^\n/g, "\n"),
       );
       const lifeArticle = getArticleBySlug(ARTICLE.slug, WHICH.life.name);
-      console.log(lifeArticle);
 
       expect(lifeArticle).toEqual({
         slug: "test1",
