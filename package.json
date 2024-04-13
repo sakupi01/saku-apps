@@ -16,6 +16,7 @@
         "checkAll": "turbo check",
         "storybook": "turbo storybook",
         "test:unit": "turbo test:unit",
+        "test:e2e": "playwright test",
         "bench": "turbo bench",
         "coverage": "turbo coverage",
         "test:update": "vitest --config vitest.config.ts --updateSnapshot",
