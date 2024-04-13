@@ -79,6 +79,7 @@ export const getZennArticleByCategory = async (
   }
 };
 
+// MEMO: 現状使用していない
 export async function getAllArticlesByCategory(
   which: Category,
 ): Promise<Article[]> {

@@ -1,6 +1,7 @@
 import { readFileSync, readdirSync } from "fs";
 import { Mock, describe, expect, test, vitest } from "vitest";
 import {
+  getAllArticles,
   getArticleBySlug,
   getArticleSlugs,
   getZennArticleByCategory,
@@ -59,6 +60,24 @@ describe("getApi", () => {
 
       // MEMO: Zennの記事が取得できなかったときはcatchで、undefinedが返る
       expect(devZennArticle).not.toBeUndefined();
+    });
+  });
+
+  // MEMO: このテストはgetArticleBySlugに依存している
+  describe("getAllArticles", () => {
+    test("すべての記事を取得する", () => {
+      const allArticles = getAllArticles();
+
+      expect(allArticles).toEqual([
+        {
+          slug: "test1",
+          content: ARTICLE.content,
+        },
+        {
+          slug: "test1",
+          content: ARTICLE.content,
+        },
+      ]);
     });
   });
 });
