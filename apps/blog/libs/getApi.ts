@@ -1,10 +1,10 @@
-import { log } from "console";
 import fs from "fs";
 import { join } from "path";
 import { Article } from "@/interfaces/article";
 import { ZennArticle, ZennArticleObj } from "@/interfaces/zenn";
 import matter from "gray-matter";
 import { convertDateToYYYYMMDD } from "./convertDate";
+import { assertNonNullable } from "./assertNonNullable";
 
 const techArticlesDirectory = join(process.cwd(), "../../articles/_dev/");
 const lifeArticlesDirectory = join(process.cwd(), "../../articles/_life/");
@@ -41,9 +41,9 @@ export const getZennArticleByCategory = async (
   which: Category,
 ): Promise<Article[] | undefined> => {
   try {
-    const res = await fetch(
-      `https://zenn.dev/api/articles?username=s_a_k_u&order=latest`,
-    );
+    const zennUrl = process.env.ZENN_URL;
+    assertNonNullable(zennUrl);
+    const res = await fetch(zennUrl);
     const zennArticleObj = (await res.json()) as ZennArticleObj;
     // convert ZennArticle to Article
     const articleCompatibleZennArticle = (

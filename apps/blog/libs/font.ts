@@ -1,13 +1,3 @@
-/**
- * Google FontsのCSSファイルから、
- * フォントURL `src: url(ここ) format(truetype OR opentype)` を探し、
- * 見つかればfetchしてArrayBufferにして返す
- * @see https://github.com/kvnang/workers-og/blob/main/packages/workers-og/src/font.ts
- * @see https://zenn.dev/uzimaru0000/articles/satori-workers
- *
- * 調べてみると、next/fontも同じようなことをしている
- * @see https://github.com/vercel/next.js/blob/canary/packages/font/src/google/find-font-files-in-css.ts
- */
 export async function loadGoogleFont({
   family,
   weight,

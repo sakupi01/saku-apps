@@ -1,0 +1,52 @@
+import { describe, expect, Mock, test, vitest } from "vitest";
+import { getArticleBySlug, getArticleSlugs } from "../getApi";
+import { readdirSync, readFileSync } from "fs";
+import { unitTestUtils } from "./utils/unitTestUtils";
+import { ARTICLE, WHICH } from "./constants/unitTestConstants";
+
+vitest.mock("fs");
+
+describe("getApi", () => {
+  describe("getArticleSlugs", () => {
+    test("lifeカテゴリの時/articles/_life内ファイルのslugを文字列配列として返す", () => {
+      (readdirSync as Mock).mockReturnValue(["test1.md", "test-2.md"]);
+      const { getArticlesDirectory } = unitTestUtils;
+      const lifeArticlesDirectory = getArticlesDirectory(WHICH.life.dir);
+      const lifeSlugs = getArticleSlugs(WHICH.life.name);
+      expect(lifeSlugs).toEqual(["test1.md", "test-2.md"]);
+      expect(readdirSync).toHaveBeenCalledWith(lifeArticlesDirectory);
+    });
+    test("devカテゴリの時/articles/_dev内ファイルのslugを文字列配列として返す", () => {
+      (readdirSync as Mock).mockReturnValue(["test1.md", "test-2.md"]);
+      const { getArticlesDirectory } = unitTestUtils;
+      const devArticlesDirectory = getArticlesDirectory(WHICH.dev.dir);
+      const devSlugs = getArticleSlugs(WHICH.dev.name);
+      expect(devSlugs).toEqual(["test1.md", "test-2.md"]);
+      expect(readdirSync).toHaveBeenCalledWith(devArticlesDirectory);
+    });
+  });
+
+  describe("getArticleBySlug", () => {
+    test("slugを受け取り、その記事のデータを返す", () => {
+      const { getArticlesDirectory } = unitTestUtils;
+      const lifeArticlesDirectory = getArticlesDirectory(WHICH.life.dir);
+
+      const fullPath = `${lifeArticlesDirectory}${ARTICLE.slug}.md`;
+
+      (readdirSync as Mock).mockReturnValue(["test1.md"]);
+      (readFileSync as Mock).mockReturnValue(
+        ARTICLE.content.replace(/^\n/g, "\n"),
+      );
+      const lifeArticle = getArticleBySlug(ARTICLE.slug, WHICH.life.name);
+      console.log(lifeArticle);
+
+      expect(lifeArticle).toEqual({
+        slug: "test1",
+        content: ARTICLE.content,
+      });
+
+      expect(readdirSync).toHaveBeenCalledWith(lifeArticlesDirectory);
+      expect(readFileSync).toHaveBeenCalledWith(fullPath, "utf8");
+    });
+  });
+});
