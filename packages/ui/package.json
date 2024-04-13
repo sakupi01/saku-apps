@@ -13,11 +13,6 @@
     "scripts": {
         "build": "tailwindcss -i ./src/styles.css -o dist/index.css",
         "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch",
-        "test:unit": "jest --config jest.config.ts",
-        "test:update": "jest --config jest.config.ts --updateSnapshot",
-        "test:watch": "jest --config jest.config.ts --watchAll",
-        "test:debug": "jest --config jest.config.ts --runInBand",
-        "test": "bun run test:unit",
         "check:format": "bunx biome format --changed --write .",
         "check:lint": "bunx biome lint --changed --apply .",
         "check:typecheck": "tsc --noEmit",
