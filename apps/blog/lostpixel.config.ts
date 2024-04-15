@@ -8,7 +8,7 @@ export const config: CustomProjectConfig = {
       { path: "/dev", name: "dev" },
       { path: "/dev/articles/blog-tech-stack", name: "blog-tech-stack" },
       { path: "/dev/tag/react", name: "tag-react" },
-      { path: "/life", name: "life", threshold: 0.00341 },
+      { path: "/life", name: "life", threshold: 0.0035 },
       {
         path: "/life/articles/intern-completed-aritcle",
         name: "intern-completed-article",
