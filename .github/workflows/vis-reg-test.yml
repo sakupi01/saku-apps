@@ -37,7 +37,7 @@ jobs:
         run: bun run build
 
       - name: Start App
-        run: cd ${{ matrix.config.package }} && ${{ matrix.config.command }} &
+        run: cd ${{ matrix.config.package }} && ${{ matrix.config.command }} & sleep 3;
 
       - name: Lost Pixel
         uses: lost-pixel/lost-pixel@v3.8.0
