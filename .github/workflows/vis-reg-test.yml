@@ -9,7 +9,7 @@ jobs:
             - {
                 package: "apps/blog",
                 name: "Lost Pixel for blog page",
-                command: "bun run start &",
+                command: "bun run start",
               }
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -71,7 +71,7 @@ jobs:
         run: cd ../../ && bun run build
 
       - name: Start App
-        run: ${{ matrix.config.command }}
+        run: cd . && ${{ matrix.config.command }} &
       
       - name: Check where I am
         run: pwd
