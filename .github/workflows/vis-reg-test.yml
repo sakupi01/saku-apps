@@ -39,6 +39,11 @@ jobs:
       - name: Start App
         run: cd ${{ matrix.config.package }} && ${{ matrix.config.command }} & sleep 3;
 
+      - name: Check app health
+        run: |
+          curl http://localhost:3000
+          echo $?
+
       - name: Lost Pixel
         uses: lost-pixel/lost-pixel@v3.8.0
         env:
