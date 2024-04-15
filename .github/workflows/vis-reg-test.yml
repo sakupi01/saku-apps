@@ -9,7 +9,7 @@ jobs:
             - {
                 package: "apps/blog",
                 name: "Lost Pixel for blog page",
-                command: "bun run start",
+                command: "bun run start &",
               }
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
