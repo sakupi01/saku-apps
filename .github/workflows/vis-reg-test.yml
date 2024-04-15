@@ -41,7 +41,7 @@ jobs:
 
       - name: Check app health
         run: |
-          curl http://localhost:3000
+          curl http://localhost:3000/about
           echo $?
 
       - name: Lost Pixel
