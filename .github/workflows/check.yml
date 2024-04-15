@@ -89,7 +89,7 @@ jobs:
         run: bun run build
 
       - name: 🐣 Pa11y Test
-        run: bun run start & sleep 3; bun pa11y
+        run: bun run start && sleep 3; bun pa11y
 
 # This job is for executing tests.
   # test: 
