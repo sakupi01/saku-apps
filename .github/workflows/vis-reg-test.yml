@@ -1,7 +1,7 @@
 on: [push]
 
 jobs:
-  install-dependencies:
+  build:
     runs-on: ubuntu-latest
     strategy:
         matrix:
@@ -33,49 +33,12 @@ jobs:
           key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
           restore-keys: ${{ runner.os }}-bun
 
-  vrt:
-    needs: install-dependencies
-    runs-on: ubuntu-latest
-    defaults:
-        run:
-          working-directory: ./apps/blog
-    strategy:
-        matrix:
-          config:
-            - {
-                package: "apps/blog",
-                name: "Lost Pixel for blog page",
-                command: "bun run start",
-              }
-
-    steps:
-      - name: Checkout Commit
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-
-      - name: Restore bun dependencies
-        id: bun-cache
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: ${{ runner.os }}-bun
-     
       - name: Build
-        run: cd ../../ && bun run build
+        run: bun run build
 
       - name: Start App
-        run: cd . && ${{ matrix.config.command }} &
+        run: cd ${{ matrix.config.package }} && ${{ matrix.config.command }} & 
       
-      - name: Check where I am
-        run: pwd
-        
       - name: Lost Pixel
         uses: lost-pixel/lost-pixel@v3.16.0
         env:
