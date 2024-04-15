@@ -1,3 +1,5 @@
+name: Visual Regression Test
+
 on: [push]
 
 jobs:

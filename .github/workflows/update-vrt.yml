@@ -1,7 +1,15 @@
-on: workflow_dispatch
+# https://zenn.dev/aiji42/articles/6656072a954a9b
+name: Visual Regression Testing Update By PR Comment
+
+on:
+  issue_comment:
+    types: [created, edited]
 
 jobs:
   lost-pixel-update:
+    # PR中のコメントに /update-vrt と入力するとアクションが発動する
+    if: contains(github.event.comment.html_url, '/pull/') && startsWith(github.event.comment.body, '/update-vrt')
+    name: 📸 Lost Pixel Baseline Update By PR Comment
     runs-on: ubuntu-latest
     strategy:
         matrix:
@@ -11,23 +19,28 @@ jobs:
                 name: "Lost Pixel for blog page",
                 command: "bun run start",
               }
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     permissions:
-        contents: write
-        pull-requests: read
+      contents: write
+      pull-requests: read
     steps:
-      - name: Checkout Commit
-        uses: actions/checkout@v4
-        with:
-         fetch-depth: 2
+      - name: Get upstream branch
+        id: upstreambranch
+        run: |
+          PR=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }})
+          echo "branchname=$(echo $PR | jq -r '.head.ref')" >> $GITHUB_OUTPUT
+          - name: Checkout Commit
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 2
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
-         bun-version: latest
+          bun-version: latest
+      
       - name: Install dependencies
         run: bun install
+    
       - name: Cache bun dependencies
         uses: actions/cache@v3
         id: bun-cache
@@ -40,15 +53,16 @@ jobs:
         run: bun run build
 
       - name: Start App
-        run: cd ${{ matrix.config.package }} && ${{ matrix.config.command }} & 
-    
+        run: cd ${{ matrix.config.package }} && ${{ matrix.config.command }} &   
+
       - name: Lost Pixel
+        id: lostpixel
         uses: lost-pixel/lost-pixel@v3.16.0
         env:
           LOST_PIXEL_MODE: update
           LOST_PIXEL_DISABLE_TELEMETRY: 1
           LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
-
+          
       - name: Commit and Push
         uses: stefanzweifel/git-auto-commit-action@v5
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
