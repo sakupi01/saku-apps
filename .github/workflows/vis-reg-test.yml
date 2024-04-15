@@ -3,6 +3,14 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          config:
+            - {
+                package: "apps/blog",
+                name: "Lost Pixel for blog page",
+                command: "bun run start",
+              }
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
@@ -28,8 +36,10 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Serve
-        run: bun run start &
+      - name: Start App
+        run: cd ${{ matrix.config.package }} && ${{ matrix.config.command }} &
 
       - name: Lost Pixel
         uses: lost-pixel/lost-pixel@v3.8.0
+        env:
+            LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
