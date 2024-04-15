@@ -16,8 +16,7 @@ export const config: CustomProjectConfig = {
       { path: "/life/tag/poem", name: "poem" },
     ],
     // IP should be localhost when running locally & 172.17.0.1 when running in GitHub action
-
-    baseUrl: "http://localhost:3000",
+    baseUrl: "http://172.17.0.1:3000",
   },
   // OSS mode
   imagePathBaseline: "./tests/vrt/baseline-images",
