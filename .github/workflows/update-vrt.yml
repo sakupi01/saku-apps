@@ -8,7 +8,7 @@ on:
 jobs:
   lost-pixel-update:
     # PR中のコメントに /update-vrt と入力するとアクションが発動する
-    if: (github.event.issue.pull_request != null) && startsWith(github.event.comment.body, '/update-vrt')
+    if: contains(github.event.comment.html_url, '/pull/') && startsWith(github.event.comment.body, '/update-vrt')
     name: 📸 Lost Pixel Baseline Update By PR Comment
     runs-on: ubuntu-latest
     strategy:
@@ -28,10 +28,10 @@ jobs:
         run: |
           PR=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }})
           echo "branchname=$(echo $PR | jq -r '.head.ref')" >> $GITHUB_OUTPUT
-          - name: Checkout Commit
-          uses: actions/checkout@v4
-          with:
-            fetch-depth: 2
+      - name: Checkout Commit
+        uses: actions/checkout@v4
+        with:
+         fetch-depth: 2
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
