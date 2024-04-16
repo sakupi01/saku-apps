@@ -1,3 +1,4 @@
+# https://zenn.dev/aiji42/articles/6656072a954a9b
 name: Visual Regression Testing Update By PR Comment
 
 on:
@@ -10,6 +11,14 @@ jobs:
     if: contains(github.event.comment.html_url, '/pull/') && startsWith(github.event.comment.body, '/update-vrt')
     name: 📸 Lost Pixel Baseline Update By PR Comment
     runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          config:
+            - {
+                package: "apps/blog",
+                name: "Lost Pixel for blog page",
+                command: "bun run start",
+              }
     permissions:
       contents: write
       pull-requests: read
@@ -19,13 +28,41 @@ jobs:
         run: |
           PR=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }})
           echo "branchname=$(echo $PR | jq -r '.head.ref')" >> $GITHUB_OUTPUT
-      # 省略(チェックアウトしたりStorybookをビルドしたりする)     
+      - name: Checkout Commit
+        uses: actions/checkout@v4
+        with:
+         fetch-depth: 2
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      
+      - name: Install dependencies
+        run: bun install
+    
+      - name: Cache bun dependencies
+        uses: actions/cache@v3
+        id: bun-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: ${{ runner.os }}-bun
+
+      - name: Build
+        run: bun run build
+
+      - name: Start App
+        run: cd ${{ matrix.config.package }} && ${{ matrix.config.command }} &   
+
       - name: Lost Pixel
         id: lostpixel
-        uses: lost-pixel/lost-pixel@v3.8.2
+        uses: lost-pixel/lost-pixel@v3.16.0
         env:
           LOST_PIXEL_MODE: update
           LOST_PIXEL_DISABLE_TELEMETRY: 1
+          LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
+          
       - name: Commit and Push
         uses: stefanzweifel/git-auto-commit-action@v5
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
