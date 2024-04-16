@@ -20,6 +20,8 @@
         "check:pa11y": "bunx pa11y-ci --config .pa11yci.json",
         "check:pa11y-result": "bunx pa11y-ci --config .pa11yci.json --json > pa11y-ci-results.json",
         "check": "bun check:typecheck & bunx biome check --apply . --no-errors-on-unmatched & bun check:markuplint",
+        "lost-pixel": "lost-pixel",
+        "lost-pixel:update": "lost-pixel update",
         "setup": "./bin/setup.sh"
     },
     "dependencies": {
@@ -65,6 +67,7 @@
         "@types/react-dom": "^18.2.18",
         "@types/rss": "^0.0.32",
         "autoprefixer": "^10.4.17",
+        "lost-pixel": "^3.16.0",
         "markuplint": "^4.1.0",
         "postcss": "^8.4.35",
         "react-icons": "^5.0.1",
@@ -75,5 +78,8 @@
         "fs": false,
         "os": false,
         "path": false
+    },
+    "volta": {
+        "node": "20.11.1"
     }
 }
