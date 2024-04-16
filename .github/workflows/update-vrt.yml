@@ -2,13 +2,13 @@
 name: Visual Regression Testing Update By PR Comment
 
 on:
-  pull_request_comment:
+  issue_comment:
     types: [created, edited]
 
 jobs:
   lost-pixel-update:
     # PR中のコメントに /update-vrt と入力するとアクションが発動する
-    if: contains(github.event.comment.html_url, '/pull/') && startsWith(github.event.comment.body, '/update-vrt')
+    if: (github.event.issue.pull_request != null) && startsWith(github.event.comment.body, '/update-vrt')
     name: 📸 Lost Pixel Baseline Update By PR Comment
     runs-on: ubuntu-latest
     strategy:
