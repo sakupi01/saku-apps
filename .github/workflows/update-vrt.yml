@@ -2,7 +2,7 @@
 name: Visual Regression Testing Update By PR Comment
 
 on:
-  issue_comment:
+  pull_request_comment:
     types: [created, edited]
 
 jobs:
