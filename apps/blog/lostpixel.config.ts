@@ -20,9 +20,9 @@ export const config: CustomProjectConfig = {
     baseUrl: "http://172.17.0.1:3000",
   },
   // OSS mode
-  imagePathBaseline: "./tests/vrt/baseline-images",
-  imagePathCurrent: "./tests/vrt/current-images",
-  imagePathDifference: "./tests/vrt/difference-images",
+  imagePathBaseline: "./apps/blog/tests/vrt/baseline-images",
+  imagePathCurrent: "./apps/blog/tests/vrt/current-images",
+  imagePathDifference: "./apps/blog/tests/vrt/difference-images",
   generateOnly: true,
   failOnDifference: true,
 };
