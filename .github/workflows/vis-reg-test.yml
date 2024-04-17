@@ -76,5 +76,9 @@ jobs:
         uses: lost-pixel/lost-pixel@v3.16.0
         env:
             LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
-  
+
+      - uses: actions/upload-artifact@v3
+        with:
+            name: lost-pixel-artefacts
+            path: ./apps/blog/tests/vrt
 

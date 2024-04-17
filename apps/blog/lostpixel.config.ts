@@ -17,12 +17,20 @@ export const config: CustomProjectConfig = {
     ],
     // IP should be localhost when running locally & 172.17.0.1 when running in GitHub action
 
-    baseUrl: "http://172.17.0.1:3000",
+    baseUrl: process.env.LOCAL
+      ? "http://localhost:3000"
+      : "http://172.17.0.1:3000",
   },
   // OSS mode
-  imagePathBaseline: "./apps/blog/tests/vrt/baseline-images",
-  imagePathCurrent: "./apps/blog/tests/vrt/current-images",
-  imagePathDifference: "./apps/blog/tests/vrt/difference-images",
+  imagePathBaseline: process.env.LOCAL
+    ? "./tests/vrt/baseline-images"
+    : "./apps/blog/tests/vrt/baseline-images",
+  imagePathCurrent: process.env.LOCAL
+    ? "./tests/vrt/current-images"
+    : "./apps/blog/tests/vrt/current-images",
+  imagePathDifference: process.env.LOCAL
+    ? "./tests/vrt/difference-images"
+    : "./apps/blog/tests/vrt/difference-images",
   generateOnly: true,
   failOnDifference: true,
 };

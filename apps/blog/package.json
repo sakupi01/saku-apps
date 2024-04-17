@@ -20,8 +20,8 @@
         "check:pa11y": "bunx pa11y-ci --config .pa11yci.json",
         "check:pa11y-result": "bunx pa11y-ci --config .pa11yci.json --json > pa11y-ci-results.json",
         "check": "bun check:typecheck & bunx biome check --apply . --no-errors-on-unmatched & bun check:markuplint",
-        "lost-pixel": "lost-pixel",
-        "lost-pixel:update": "lost-pixel update",
+        "lost-pixel": "LOCAL=true lost-pixel",
+        "lost-pixel:update": "LOCAL=true lost-pixel update",
         "setup": "./bin/setup.sh"
     },
     "dependencies": {
