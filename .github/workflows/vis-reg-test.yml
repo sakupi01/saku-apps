@@ -5,14 +5,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-        matrix:
-          config:
-            - {
-                package: "apps/blog",
-                name: "Lost Pixel for blog page",
-                command: "bun run start",
-              }
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
@@ -34,14 +26,54 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
           restore-keys: ${{ runner.os }}-bun
+  lost-pixel:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          config:
+            - {
+                package: "apps/blog",
+                name: "Lost Pixel for blog page",
+                command: "bun run start",
+              }
+    defaults:
+        run:
+            working-directory: ${{ matrix.config.package }}
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+    steps:
+      - name: Checkout Commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Restore bun dependencies
+        id: bun-cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: ${{ runner.os }}-bun
 
       - name: Build
         run: bun run build
 
+      - name: Check where
+        run: pwd
+
       - name: Start App
         run: cd ${{ matrix.config.package }} && ${{ matrix.config.command }} & 
-      
+    
       - name: Lost Pixel
         uses: lost-pixel/lost-pixel@v3.16.0
         env:
             LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
+  
+
