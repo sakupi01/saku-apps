@@ -70,7 +70,7 @@ jobs:
 
 
       - name: Start App
-        run: ${{ matrix.config.command }}
+        run: cd . && ${{ matrix.config.command }} &
     
       - name: Lost Pixel
         uses: lost-pixel/lost-pixel@v3.16.0
