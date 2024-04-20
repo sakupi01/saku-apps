@@ -34,5 +34,5 @@ export const config: CustomProjectConfig = {
     ? "./tests/vrt/difference-images"
     : "./apps/blog/tests/vrt/difference-images",
   generateOnly: true,
-  failOnDifference: false,
+  failOnDifference: true,
 };
