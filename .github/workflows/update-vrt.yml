@@ -22,6 +22,9 @@ jobs:
     defaults:
         run:
             working-directory: ${{ matrix.config.package }}
+    env:
+        TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+        TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     permissions:
       contents: write
       pull-requests: read
@@ -57,6 +60,9 @@ jobs:
 
       - name: Start App
         run: cd . && ${{ matrix.config.command }} &   
+        
+      - name: Where
+        run: pwd
 
       - name: Lost Pixel
         id: lostpixel
