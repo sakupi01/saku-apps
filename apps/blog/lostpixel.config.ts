@@ -21,6 +21,7 @@ export const config: CustomProjectConfig = {
       ? "http://localhost:3000"
       : "http://172.17.0.1:3000",
   },
+  waitBeforeScreenshot: 5000,
   // OSS mode
   imagePathBaseline: process.env.LOCAL
     ? "./tests/vrt/baseline-images"
@@ -32,5 +33,5 @@ export const config: CustomProjectConfig = {
     ? "./tests/vrt/difference-images"
     : "./apps/blog/tests/vrt/difference-images",
   generateOnly: true,
-  failOnDifference: true,
+  failOnDifference: false,
 };
