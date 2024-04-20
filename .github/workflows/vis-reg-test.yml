@@ -75,6 +75,8 @@ jobs:
       - name: Lost Pixel
         uses: lost-pixel/lost-pixel@v3.16.0
         env:
+            LOST_PIXEL_MODE: update
+            LOST_PIXEL_DISABLE_TELEMETRY: 1
             LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
 
       - uses: actions/upload-artifact@v3
