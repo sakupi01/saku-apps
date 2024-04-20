@@ -19,6 +19,9 @@ jobs:
                 name: "Lost Pixel for blog page",
                 command: "bun run start",
               }
+    defaults:
+        run:
+            working-directory: ${{ matrix.config.package }}
     permissions:
       contents: write
       pull-requests: read
@@ -50,15 +53,16 @@ jobs:
           restore-keys: ${{ runner.os }}-bun
 
       - name: Build
-        run: bun run build
+        run: cd .. && bun run build
 
       - name: Start App
-        run: cd ${{ matrix.config.package }} && ${{ matrix.config.command }} &   
+        run: cd . && ${{ matrix.config.command }} &   
 
       - name: Lost Pixel
         id: lostpixel
         uses: lost-pixel/lost-pixel@v3.16.0
         env:
+          LOST_PIXEL_MODE: update
           LOST_PIXEL_DISABLE_TELEMETRY: 1
           LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
           
