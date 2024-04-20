@@ -6,22 +6,11 @@ on:
     types: [created, edited]
 
 jobs:
-  lost-pixel-update:
+  prepare:
     # PR中のコメントに /update-vrt と入力するとアクションが発動する
     if: contains(github.event.comment.html_url, '/pull/') && startsWith(github.event.comment.body, '/update-vrt')
     name: 📸 Lost Pixel Baseline Update By PR Comment
     runs-on: ubuntu-latest
-    strategy:
-        matrix:
-          config:
-            - {
-                package: "apps/blog",
-                name: "Lost Pixel for blog page",
-                command: "bun run start",
-              }
-    defaults:
-        run:
-            working-directory: ${{ matrix.config.package }}
     env:
         TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
         TURBO_TEAM: ${{ vars.TURBO_TEAM }}
@@ -32,48 +21,60 @@ jobs:
       - name: Get upstream branch
         id: upstreambranch
         run: |
-          cd ../../ && PR=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }})
+          PR=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }})
           echo "branchname=$(echo $PR | jq -r '.head.ref')" >> $GITHUB_OUTPUT
-      - name: Checkout Commit
-        uses: actions/checkout@v4
-        with:
-         fetch-depth: 2
+  lost-pixel:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+            config:
+            - {
+                package: "apps/blog",
+                name: "Lost Pixel for blog page",
+                command: "bun run start",
+                }
+    defaults:
+        run:
+            working-directory: ${{ matrix.config.package }}
+    env:
+        TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+        TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+    steps:
+        - name: Checkout Commit
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 2
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      
-      - name: Install dependencies
-        run: bun install
-    
-      - name: Cache bun dependencies
-        uses: actions/cache@v3
-        id: bun-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: ${{ runner.os }}-bun
+        - name: Setup Bun
+          uses: oven-sh/setup-bun@v1
+          with:
+            bun-version: latest
 
-      - name: Build
-        run: cd .. && bun run build
+        - name: Restore bun dependencies
+          id: bun-cache
+          uses: actions/cache@v3
+          with:
+            path: node_modules
+            key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+            restore-keys: ${{ runner.os }}-bun
 
-      - name: Start App
-        run: cd . && ${{ matrix.config.command }} &   
+        - name: Build
+          run: cd .. && bun run build
+
+        - name: Start App
+          run: cd . && ${{ matrix.config.command }} &
+
+        - name: Lost Pixel
+          id: lostpixel
+          uses: lost-pixel/lost-pixel@v3.16.0
+          env:
+            LOST_PIXEL_MODE: update
+            LOST_PIXEL_DISABLE_TELEMETRY: 1
+            LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
         
-      - name: Where
-        run: pwd
-
-      - name: Lost Pixel
-        id: lostpixel
-        uses: lost-pixel/lost-pixel@v3.16.0
-        env:
-          LOST_PIXEL_MODE: update
-          LOST_PIXEL_DISABLE_TELEMETRY: 1
-          LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
-          
-      - name: Commit and Push
-        uses: stefanzweifel/git-auto-commit-action@v5
-        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
-        with:
-          commit_message: update lost-pixel baselines
+        - name: Commit and Push
+          uses: stefanzweifel/git-auto-commit-action@v5
+          if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
+          with:
+            commit_message: update lost-pixel baselines
