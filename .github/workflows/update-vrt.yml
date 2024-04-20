@@ -32,7 +32,7 @@ jobs:
       - name: Get upstream branch
         id: upstreambranch
         run: |
-          PR=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }})
+          cd ../../ && PR=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }})
           echo "branchname=$(echo $PR | jq -r '.head.ref')" >> $GITHUB_OUTPUT
       - name: Checkout Commit
         uses: actions/checkout@v4
