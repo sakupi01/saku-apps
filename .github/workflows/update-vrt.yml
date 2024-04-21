@@ -1,4 +1,4 @@
-# https://zenn.dev/aiji42/articles/6656072a954a9b 
+# https://zenn.dev/aiji42/articles/6656072a954a9b
 name: Visual Regression Testing Update By PR Comment
 
 on:
@@ -29,13 +29,25 @@ jobs:
         working-directory: ${{ matrix.config.package }}
 
     steps:
+      - name: Get branch name
+        uses: xt0rted/pull-request-comment-branch@v2
+        id: comment-branch
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout Commit
         uses: actions/checkout@v3
         with:
+          ref: ${{ steps.comment-branch.outputs.head_ref }}
           fetch-depth: 0 # 全ブランチの履歴を取得
 
-      - name: Setup Bun  
+      # ここから追加・変更
+      - name: Setup Git User
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'github-actions@github.com'
+
+      - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
@@ -45,10 +57,10 @@ jobs:
 
       - name: Build UI
         working-directory: ./packages/ui
-        run: bun run build 
+        run: bun run build
 
       - name: Build App
-        run: cd ../../ && bun run build 
+        run: cd ../../ && bun run build
 
       - name: Start App
         run: cd . && ${{ matrix.config.command }} &
@@ -60,7 +72,7 @@ jobs:
           LOST_PIXEL_MODE: update
           LOST_PIXEL_DISABLE_TELEMETRY: 1
           LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
-      
+
       - name: Lost Pixel
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         uses: lost-pixel/lost-pixel@v3.16.0
@@ -72,13 +84,33 @@ jobs:
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         run: sudo chown -R $USER:$USER .
 
+      - name: Create new branch
+        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
+        run: |
+          git checkout -b lost-pixel-update/${{ steps.comment-branch.outputs.head_ref }}
+
+      - name: Add untracked files
+        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
+        run: |
+          git add .
+
+      - name: Create commit
+        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
+        run: |
+          git commit -m "Update VRT baseline images" || echo "No changes to commit"
+
+      - name: Push changes
+        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
+        run: |
+          git push origin lost-pixel-update/${{ steps.comment-branch.outputs.head_ref }}
+
       - name: Create Pull Request
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          delete-branch: true
-          commit-message: Update VRT baseline images
-          branch: lost-pixel-update/${{ github.ref_name }}
-          title: 'Lost Pixel update - ${{ github.ref_name }}'
-          body: Automated baseline update PR created by Lost Pixel
+        run: |
+          gh pr create --base ${{ steps.comment-branch.outputs.head_ref }} \
+                       --head lost-pixel-update/${{ steps.comment-branch.outputs.head_ref }} \
+                       --label update-lost-pixel \
+                       --title 'Lost Pixel Update - ${{ steps.comment-branch.outputs.head_ref }}' \
+                       --body 'Automated baseline update created by Lost Pixel'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
