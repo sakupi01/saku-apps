@@ -21,7 +21,7 @@ body em{
 }
 
 body iframe {
-  @apply my-8;
+  @apply my-8 w-full;
 }
 
 .markdown h1{
