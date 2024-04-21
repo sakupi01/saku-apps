@@ -1,6 +1,6 @@
 ---
 title: "Lost PixelとGithub Actionsを用いたVRTの具体例"
-excerpt: "撮影したスナップショットをGithub上で管理し、PR上で差分検知を行うことで、意図せぬビジュアルのデグレを防いでくれるLost Pixelの具体的な使用例の話です"
+excerpt: "撮影したスナップショットをGithub上で管理し、PR上で差分検知を行うことで、意図せぬビジュアルのデグレを防いでくれるLost Pixelの具体的な運用方法についてです"
 date: "2024-4-21"
 beginColor: 'from-cyan-200'
 middleColor: 'via-emerald-300'
@@ -20,24 +20,96 @@ status: 'published'
 
 https://speakerdeck.com/aiji42/vrtturunodakuhosu-lost-pixelwoshao-jie-sitai
 
-普段は専らChromaticユーザなのですが、個人開発の際無料枠の上限にヒットして痛い目にあった過去があるので、今回個人ブログではLost PixelでVRTを行うことにしてみました。
+普段は専ら[Chromatic](https://www.chromatic.com/)ユーザなのですが、個人開発の際無料枠の上限にヒットして痛い目にあった過去があるので、今回個人ブログではLost PixelでVRTを行うことにしてみました。
 
-[#vrt4選](https://twitter.com/hashtag/VRT4%E9%81%B8)では詳細な実装やVRTの一連の流れまで述べられていなかったので、現在私が実践している具体的なVRTの流れをまとめてみました。
+[#vrt4選](https://twitter.com/hashtag/VRT4%E9%81%B8)では詳細な実装やVRTの一連の流れまで述べられていなかったかつ、まだ国内であまり普及しておらず、発表者の方のスライド以外で日本語文献が見つからなかったため、今回はLost Pixelを用いた具体的なVRTの運用方法をまとめてみました。
 
 ## 前提
-今回このブログに使用されているおおまかな技術は以下のようになります。
+前提として、このブログは`/apps/blog`にNext.js製のブログアプリを含むモノリポ構成でできています。
 
 https://www.skr-blog.com/dev/articles/blog-tech-stack
 
-`/apps/blog`にNext.js製のブログアプリを含むモノリポ構成です。
 
-今回はこのブログアプリ部分にLost Pixelを用いたVRTを施していきます。
+今回はこの`apps/blog`(ブログアプリ部分)にLost Pixelを用いたVRTを施していきます。
 
 ## Lost Pixelとは
-重複した説明になってしまいそうなため、ここでは簡単な説明に止めて、詳細はスライドやZennの記事に譲りたいと思います。
+Lost Pixelとは、VRT(Visual Regression Test, ビジュアル回帰テスト)を行うためのツールです。
+
+https://www.lost-pixel.com/
+
+重複した説明が発生するため、ここでは簡単な説明に止めて詳細は[スライド](https://speakerdeck.com/aiji42/vrtturunodakuhosu-lost-pixelwoshao-jie-sitai)や[Zennの記事](https://zenn.dev/aiji42/articles/6656072a954a9b)に譲りたいと思います。
+
+## 運用までの流れ
+main, feat/lost-pixelがあるとする
+
+### セットアップ
+
+#### 0. ローカルで差分確認する
+
+#### 1. baselineをupdateする
+
+#### 2. もう一度差分確認をする
+
+base-images
+current-images 
+diff-images 0
+
+#### 3. Workflowを作成する
+このCI workflowを作成するのに多くの時間を消費しました。私はCIにとても弱いです。
+
+CIスパスパ作れる人々かっこいい。。。
+
+##### 3.1 差分確認のためのWorkflow(vis-reg-test.yml)
+
+##### 3.2 baseline更新のためのWorkflow(update-vrt.yml)
 
 
+#### 4. update-vrt.ymlをmainブランチに取り込む
 
+
+#### 5. `feat/lost-pixel`のPRを作成する
+
+#### 6. vis-reg-test.ymlを回す
+
+##### 6.1 Failのとき 
+`/update-vrt`とPRにコメントします。すると、先ほど定義した`update-vrt.yml`のワークフローがトリガーされます。
+
+:::note{.warning}
+❗ Warning
+<br/>
+issue_commentはメインブランちーーー
+:::
+
+これにより、baselineのupdateをするためのブランチ`lost-pixel-update/[base-pr-name]`がコメントを入れたPR(ここでは`feat/lost-pixel`)から生える形で作成され、タイトルが「Lost Pixel Update - [base-branch-name]」PRも作成されます。
+
+ここで、作成されたPRのChanges部分を確認することで、Github上で視覚的に見た目の変化を捉えることができます。
+
+👇微々たる変化。この場合、キャプチャタイミングや環境の差異が原因であると思われる。
+
+→[ステップ6.1.1へ]()
+
+
+👇見た目の大きな変化。この場合、コードベースに何らかの問題があると思われる。
+
+→[ステップ6.1.2へ]()
+
+###### 6.1.1 許容可能な見た目の変化のとき
+PRの差分を確認した結果、許容可能な見た目の変化の時は、コメント元のブランチ(`feat/lost-pixel`)のbaselineをアップデートしたいです。
+そうすることで、コメント元のブランチ(`feat/lost-pixel`)でもう一度`vis-reg-test.yml`のワークフローを回してテストをpassすることができるからです。
+
+なので、`lost-pixel-update/[base-pr-name]`ブランチの「Lost Pixel Update - [base-branch-name]」PRをマージしましょう！
+
+すると、コメント元のブランチ(`feat/lost-pixel`)でもう一度`vis-reg-test.yml`のワークフローが周り、今度はupdateされたbaselineとの比較が行われるため、テストをpassすることができます。
+
+→[ステップ6.2へ]()
+
+###### 6.1.2 許容不可能な見た目の変化のとき
+コメント元のブランチ(`feat/lost-pixel`)に戻って、見た目を揃えるための修正コミットを加え、再度pushします。
+
+→[ステップ6へ]()
+
+##### 6.2 Successのとき
+おめでとうございます！これで見た目が確認された変更をマージできます💯
 
 ```json showLineNumbers {7} title="turbo.json"
 {
@@ -56,52 +128,3 @@ https://www.skr-blog.com/dev/articles/blog-tech-stack
     ...
 }
 ```
-さらに、リモートキャッシュを使用することでCIの高速化を図ることができます。
-今回はVercelをPaaSとして使用したので、Vercelのキャッシュサーバーをそのまま利用でき、CIでリモートキャッシュを比較的簡単に使用できました。
-
-https://vercel.com/docs/monorepos/turborepo
-
-### Next.js
-まず、ブログアプリということで、初回レンダリングのパフォーマンス改善とSEOに対する強みが欲しかったので、ページのPre-RenderingができるReactフレームワークを使用したいと考えました。
-加えて、ブログアプリのため、リクエスト時ではなく、ビルド時に生成されたファイルを提供する、SSGができるということも条件に入れたかったです。
-<br/>
-<br/>
-各記事は`/dev/articles/[slug]/*.tsx`|`/life/articles/[slug]/*.tsx`で管理しているのですが、Next.jsであれば、こうしたDynamic Routesであっても`generateStaticParams`を使用することでSSGをできます。
-
-https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#generating-static-params
-
-さらに、Turborepoを使用するという背景も加わり、Vercelにデプロイすることでキャッシュやその他の面で恩恵を受けやすい一面のあったNext.jsで事を進めました。
-Next.jsのSSGアプリをVercelでホスティングすると、構築済みのHTMLファイルを都度アプリケーションサーバーから取得するのではなく、CDNにHTMLファイルのキャッシュを配置しておくことでパフォーマンスの最大化に近づけるということが比較的簡単に行なえます。
-<br/>
-<br/>
-これでNext.jsを使用するということは決まったのですが、正直前述の条件であればPages Routerで十分な気がしてきました。
-<br/>
-<br/>
-しかし、App Routerを使用することでReact Server ComponentsやSuspenseがデフォルトで使用できたり、それによるさらなるパフォーマンス改善が期待できたりしました。そこで、一旦App Routerでやってみて、不具合などで見切りがつきそうならPagesにしようという気持ちでApp Routerに舵を切りました。
-
-### 記事管理と提供
-記事の管理は`[root]/articles/**/*.md`でマークダウンとして管理しています。
-`*.md`ファイルの頭にfront matterというYAML形式でメタデータを記述できる手法を用いて、[gray-matter](https://www.npmjs.com/package/gray-matter)でYAMLを解析し、jsonデータとして取り出しています。
-<br/>
-<br/>
-markdown自体の解析・DOM構築、目次の生成には[remark](https://github.com/remarkjs/remark)、remarkの諸プラグイン、[remark-rehype](https://github.com/remarkjs/remark-rehype)、rehypeの諸プラグイン、rehype-stringifyを使用して、markdownをHTML stringで返却する関数を使用しています。
-<br/>
-<br/>
-<!-- textlint-disable -->
-少しまとめると、[remark](https://github.com/remarkjs/remark)でmarkdown→AST(mdast)に変換し、mdastのカスタマイズが可能な諸プラグインの処理を通し、[remark-rehype](https://github.com/remarkjs/remark-rehype)でAST(mdast)→AST(hast)に変換し、hastのカスタマイズが可能な諸プラグインの処理を通し、[rehype-stringify](https://www.npmjs.com/package/rehype-stringify)でHTML形式のテキストを出力しています。
-stringに変換されたHTMLは、最終的にはサニタイズしたのちに`dangerouslySetInnerHTML`を使用してブラウザDOMとしてレンダリングしています。
-<!-- textlint-enable -->
-
-## 感想
-今回は、ブログを開発するにあたって選定した技術について狭く浅く触れました。
-<br/>
-<br/>
-CMS使おうと思ってやっぱやめたってなった話とか、TailwindCSSと仲違いしそうになった話とか、技術的なチャレンジとか、色々書ききれてないことはまたまとめていきたいです🌸
-<br/>
-<br/>
-Vercelってすごい。
-
-## 余談
-<!-- textlint-disable -->
-テストがないとかリファクタできるとかまだまだ改善しなければいけない部分があるので、追々やっていきたいです🤸🏻
-<!-- textlint-enable -->
