@@ -48,7 +48,7 @@ jobs:
             restore-keys: ${{ runner.os }}-bun
 
         - name: Build
-          run: cd .. && bun run build
+          run: cd ../../ && bun run build
 
         - name: Start App
           run: cd . && ${{ matrix.config.command }} &
