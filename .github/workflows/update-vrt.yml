@@ -1,4 +1,4 @@
-# https://zenn.dev/aiji42/articles/6656072a954a9b
+# https://zenn.dev/aiji42/articles/6656072a954a9b 
 name: Visual Regression Testing Update By PR Comment
 
 on:
@@ -6,34 +6,36 @@ on:
     types: [created, edited]
 
 jobs:
+
   lost-pixel:
     # PR中のコメントに /update-vrt と入力するとアクションが発動する
     if: contains(github.event.comment.html_url, '/pull/') && startsWith(github.event.comment.body, '/update-vrt')
     name: 📸 Lost Pixel Baseline Update By PR Comment
     runs-on: ubuntu-latest
     env:
-        TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-        TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     permissions:
       contents: write
       pull-requests: write
+
     strategy:
-        matrix:
-            config:
-            - {
-                package: "apps/blog",
-                name: "Lost Pixel for blog page",
-                command: "bun run start",
-                }
+      matrix:
+        config:
+          - { package: "apps/blog", name: "Lost Pixel for blog page", command: "bun run start" }
+
     defaults:
-        run:
-            working-directory: ${{ matrix.config.package }}
+      run:
+        working-directory: ${{ matrix.config.package }}
+
     steps:
+
       - name: Checkout Commit
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 2
-      - name: Setup Bun
+          fetch-depth: 0 # 全ブランチの履歴を取得
+
+      - name: Setup Bun  
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
@@ -42,11 +44,11 @@ jobs:
         run: cd ../../ && bun install
 
       - name: Build UI
-        working-directory: ./packages/ui
-        run: bun run build 
+        working-directory: ./packages/ui  
+        run: bun run build
 
       - name: Build App
-        run: cd ../../ && bun run build 
+        run: cd ../../ && bun run build
 
       - name: Start App
         run: cd . && ${{ matrix.config.command }} &
@@ -58,14 +60,25 @@ jobs:
           LOST_PIXEL_MODE: update
           LOST_PIXEL_DISABLE_TELEMETRY: 1
           LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
-        
+
+      - name: Add untracked files
+        if: ${{ steps.lostpixel.conclusion == 'failure' }}  
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'github-actions@github.com'
+          git add apps/blog/tests/vrt/
+
+      - name: Create commit
+        if: ${{ steps.lostpixel.conclusion == 'failure' }}
+        run: |
+          git commit -m "Update VRT baseline images"
+
       - name: Create Pull Request
+        if: ${{ steps.lostpixel.conclusion == 'failure' }}
         uses: peter-evans/create-pull-request@v4
-        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: update lost-pixel baselines
-          delete-branch: true
-          branch: 'lost-pixel-update/${{ github.ref_name }}'
+          commit-message: Update VRT baseline images
+          branch: lost-pixel-update/${{ github.ref_name }}
           title: 'Lost Pixel update - ${{ github.ref_name }}'
           body: Automated baseline update PR created by Lost Pixel
