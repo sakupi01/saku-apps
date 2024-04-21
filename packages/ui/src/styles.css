@@ -37,10 +37,10 @@ body iframe {
     @apply md:text-xl text-lg font-semibold text-left text-basic my-4;
   }
 .markdown h5{
-    @apply text-lg font-medium text-left text-basic my-2;
+    @apply text-lg font-semibold  text-left text-basic my-2;
   }
 .markdown h6{
-    @apply text-base font-medium text-left text-basic my-2;
+    @apply text-base font-semibold text-left text-basic my-2;
   }
 .markdown p{
     @apply text-base text-left text-basic leading-9 tracking-wide my-3;
