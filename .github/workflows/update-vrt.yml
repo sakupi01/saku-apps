@@ -16,7 +16,7 @@ jobs:
         TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     permissions:
       contents: write
-      pull-requests: read
+      pull-requests: write
     strategy:
         matrix:
             config:
