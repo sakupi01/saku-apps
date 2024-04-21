@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import Link from "next/link";
+import { assertNonNullable } from "../../libs/assertNonNullable";
 
 type ArticleListItemProps = {
   title: string;
@@ -18,12 +19,15 @@ export const ArticleListItem = ({
   slug,
 }: ArticleListItemProps) => {
   const isZenn = tags[0]?.name === "zenn";
+  const zennBaseUrl = process.env.ZENN_BASE_URL;
+  assertNonNullable(zennBaseUrl);
   return (
     <div
       className={clsx(
         "w-full grid grid-rows-[5_minmax(0px,_1fr)] grid-cols-[100px_minmax(0px,_1fr)] gap-x-6 rounded-md transition-colors duration-300 ",
         isZenn ? "hover:bg-blue-50" : "hover:bg-neutral-50",
       )}
+      role="listitem"
     >
       <div className="ml-2 row-start-3 row-end-4 col-start-1 col-end-2 aspect-square flex justify-center items-center self-center rounded-lg bg-primary-subtle shadow">
         <div
@@ -46,9 +50,7 @@ export const ArticleListItem = ({
       </div>
       <Link
         href={
-          isZenn
-            ? `https://zenn.dev/s_a_k_u/articles/${slug}`
-            : `/dev/articles/${slug}`
+          isZenn ? `${zennBaseUrl}/articles/${slug}` : `/dev/articles/${slug}`
         }
         className="pb-10 pr-2 grid grid-rows-subgrid grid-cols-subgrid row-start-1 row-end-6 col-start-1 col-end-3"
       >

@@ -8,7 +8,7 @@ export default async function FilteredArticlesList({
   filteredArticles: Article[];
 }) {
   return (
-    <>
+    <div role="list">
       {filteredArticles.map((article) => {
         const tagWithId = article.tags.map((tag) => {
           const id = Math.random().toString(32).substring(2);
@@ -44,6 +44,6 @@ export default async function FilteredArticlesList({
           </>
         );
       })}
-    </>
+    </div>
   );
 }

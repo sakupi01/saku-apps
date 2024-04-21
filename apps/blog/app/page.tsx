@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default async function Page() {
+export default function Page() {
   return (
     <main className="flex min-w-screen min-h-[70vh] md:min-h-[80vh]  flex-col items-center justify-center px-14 md:px-24">
       <div className="w-full h-full flex flex-col justify-center max-w-2xl mx-auto">

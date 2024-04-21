@@ -1,0 +1,15 @@
+// vitest.config.ts
+import codspeedPlugin from "file:///Users/s002996/Develop/saku-apps/node_modules/@codspeed/vitest-plugin/dist/index.mjs";
+import { defineConfig } from "file:///Users/s002996/Develop/saku-apps/node_modules/vitest/dist/config.js";
+var vitest_config_default = defineConfig({
+  plugins: [codspeedPlugin()],
+  test: {
+    benchmark: {
+      include: ["apps/blog/**/*.bench.(js|ts)"]
+    }
+  }
+});
+export {
+  vitest_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZXN0LmNvbmZpZy50cyJdLAogICJzb3VyY2VzQ29udGVudCI6IFsiY29uc3QgX192aXRlX2luamVjdGVkX29yaWdpbmFsX2Rpcm5hbWUgPSBcIi9Vc2Vycy9zMDAyOTk2L0RldmVsb3Avc2FrdS1hcHBzL2FwcHMvYmxvZ1wiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9maWxlbmFtZSA9IFwiL1VzZXJzL3MwMDI5OTYvRGV2ZWxvcC9zYWt1LWFwcHMvYXBwcy9ibG9nL3ZpdGVzdC5jb25maWcudHNcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfaW1wb3J0X21ldGFfdXJsID0gXCJmaWxlOi8vL1VzZXJzL3MwMDI5OTYvRGV2ZWxvcC9zYWt1LWFwcHMvYXBwcy9ibG9nL3ZpdGVzdC5jb25maWcudHNcIjtpbXBvcnQgY29kc3BlZWRQbHVnaW4gZnJvbSBcIkBjb2RzcGVlZC92aXRlc3QtcGx1Z2luXCI7XG5pbXBvcnQgeyBkZWZpbmVDb25maWcgfSBmcm9tIFwidml0ZXN0L2NvbmZpZ1wiO1xuXG5leHBvcnQgZGVmYXVsdCBkZWZpbmVDb25maWcoe1xuICBwbHVnaW5zOiBbY29kc3BlZWRQbHVnaW4oKV0sXG4gIHRlc3Q6IHtcbiAgICBiZW5jaG1hcms6IHtcbiAgICAgIGluY2x1ZGU6IFtcImFwcHMvYmxvZy8qKi8qLmJlbmNoLihqc3x0cylcIl0sXG4gICAgfSxcbiAgfSxcbn0pO1xuIl0sCiAgIm1hcHBpbmdzIjogIjtBQUFvVCxPQUFPLG9CQUFvQjtBQUMvVSxTQUFTLG9CQUFvQjtBQUU3QixJQUFPLHdCQUFRLGFBQWE7QUFBQSxFQUMxQixTQUFTLENBQUMsZUFBZSxDQUFDO0FBQUEsRUFDMUIsTUFBTTtBQUFBLElBQ0osV0FBVztBQUFBLE1BQ1QsU0FBUyxDQUFDLDhCQUE4QjtBQUFBLElBQzFDO0FBQUEsRUFDRjtBQUNGLENBQUM7IiwKICAibmFtZXMiOiBbXQp9Cg==

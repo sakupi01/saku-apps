@@ -19,18 +19,21 @@ export default function Search({ placeholder }: { placeholder: string }) {
     replace(`${pathname}?${params.toString()}`);
   }, 300);
   return (
-    <div className="relative flex flex-1 flex-shrink-0">
-      <label htmlFor="search" className="sr-only">
+    <form className="relative flex flex-1 flex-shrink-0" role="search">
+      <label htmlFor="search-input" className="sr-only">
         Search
       </label>
       <input
-        id="search"
+        id="search-input"
+        type="search"
+        name="search"
+        spellCheck={true}
         className="peer block w-full rounded-full bg-primary-subtle py-[10px] pl-10 text-sm outline-1 placeholder:text-subtle"
         placeholder={placeholder}
         onChange={(e) => handleSearch(e.target.value)}
         defaultValue={searchParams.get("query")?.toString()}
       />
       <SearchIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-subtle peer-focus:text-gray-900" />
-    </div>
+    </form>
   );
 }
