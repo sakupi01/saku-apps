@@ -9,23 +9,25 @@ function useHighlighted() {
     const headingsArray = Array.from(headings);
     const tocItemsArray = Array.from(tocItems);
 
-    const handleObserver = (entries: IntersectionObserverEntry[]) => {
+    const handleObserver: IntersectionObserverCallback = (entries) => {
       for (const entry of entries) {
         const currentTargetId = headingsArray.indexOf(entry.target);
         const currentElement = document.querySelector(".is-active");
+        // エントリが交差している場合
         if (entry.isIntersecting) {
+          // すでにis-activeクラスが付与されている要素があれば削除
           if (currentElement !== null) {
             currentElement.classList.remove("is-active");
           }
+          // 対象の要素にis-activeクラスを付与
           tocItemsArray[currentTargetId]?.classList.add("is-active");
         }
       }
     };
 
     observer.current = new IntersectionObserver(handleObserver, {
-      root: null, //ブラウザ画面をroot要素に
-      rootMargin: "0% 0px -90% 0px",
-      threshold: 0, //ターゲット要素が1pxでも交差したとき
+      rootMargin: "0px 0px -20% 0px",
+      threshold: 0,
     });
 
     for (const heading of headings) {
