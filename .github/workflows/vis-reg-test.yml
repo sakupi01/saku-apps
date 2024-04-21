@@ -78,9 +78,3 @@ jobs:
         env:
             LOST_PIXEL_DISABLE_TELEMETRY: 1
             LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
-
-      - name: Commit and Push
-        uses: stefanzweifel/git-auto-commit-action@v5
-        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
-        with:
-          commit_message: update lost-pixel images

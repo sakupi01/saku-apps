@@ -12,12 +12,10 @@ export const config: CustomProjectConfig = {
       {
         path: "/life/articles/intern-completed-aritcle",
         name: "intern-completed-article",
-        threshold: 0.0003,
       },
       { path: "/life/tag/poem", name: "poem", threshold: 0.006 },
     ],
     // IP should be localhost when running locally & 172.17.0.1 when running in GitHub action
-
     baseUrl: process.env.LOCAL
       ? "http://localhost:3000"
       : "http://172.17.0.1:3000",
