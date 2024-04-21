@@ -79,19 +79,19 @@ jobs:
         run: sudo chown -R $USER:$USER .
 
       - name: Add untracked files
-        if: ${{ steps.lostpixel.conclusion == 'failure' }}  
+        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'github-actions@github.com'
           git add .
 
       - name: Create commit
-        if: ${{ steps.lostpixel.conclusion == 'failure' }}
+        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         run: |
           git commit -m "Update VRT baseline images"
 
       - name: Create Pull Request
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
-        run: gh pr create -B ${{ steps.comment-branch.outputs.base_ref }} -H lost-pixel-update/${{ steps.comment-branch.outputs.head_ref }} --label update-lost-pixel --title 'Lost Pixel Update - ${{ steps.get_branch.outputs.branch }}' --body 'Automated baseline update created by Lost Pixel'
+        run: gh pr create -B ${{ steps.comment-branch.outputs.head_ref }} -H lost-pixel-update/${{ steps.comment-branch.outputs.head_ref }} --label update-lost-pixel --title 'Lost Pixel Update - ${{ steps.get_branch.outputs.branch }}' --body 'Automated baseline update created by Lost Pixel'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
