@@ -107,7 +107,7 @@ jobs:
       - name: Create Pull Request
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         run: |
-          gh pr create --base ${{ steps.comment-branch.outputs.base_ref }} \
+          gh pr create --base ${{ steps.comment-branch.outputs.head_ref }} \
                        --head lost-pixel-update/${{ steps.comment-branch.outputs.head_ref }} \
                        --label update-lost-pixel \
                        --title 'Lost Pixel Update - ${{ steps.comment-branch.outputs.head_ref }}' \
