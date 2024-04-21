@@ -32,6 +32,10 @@ export const config: CustomProjectConfig = {
       : "http://172.17.0.1:3000",
   },
   waitBeforeScreenshot: 5000,
+  timeouts: {
+    loadState: 50000,
+    networkRequests: 50000,
+  },
   // OSS mode
   imagePathBaseline: process.env.LOCAL
     ? "./tests/vrt/baseline-images"

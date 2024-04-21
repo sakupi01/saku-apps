@@ -1,6 +1,7 @@
 import { readFileSync, readdirSync } from "fs";
 import { Mock, bench, describe, expect, test, vitest } from "vitest";
 import {
+  getAllArticles,
   getArticleBySlug,
   getArticleSlugs,
   getZennArticleByCategory,
@@ -20,6 +21,13 @@ describe("getApi", () => {
         getArticleSlugs("life");
       },
     );
+    bench(
+      "devカテゴリの時/articles/_dev内ファイルのslugを文字列配列として返す",
+      () => {
+        (readdirSync as Mock).mockReturnValue(hugeArray);
+        getArticleSlugs("dev");
+      },
+    );
   });
 
   describe("getArticleBySlug", () => {
@@ -35,6 +43,16 @@ describe("getApi", () => {
   describe("getZennArticleByCategory", () => {
     test("カテゴリを受け取り、Zenn記事のデータを返し、カテゴリの記事を抽出し、ブログの記事の型に合わせる", async () => {
       await getZennArticleByCategory("dev");
+    });
+  });
+
+  describe("getAllArticles", () => {
+    bench("すべての記事を取得する", () => {
+      (readdirSync as Mock).mockReturnValue(["test1.md"]);
+      (readFileSync as Mock).mockReturnValue(
+        ARTICLE.content.replace(/^\n/g, "\n"),
+      );
+      getAllArticles();
     });
   });
 });
