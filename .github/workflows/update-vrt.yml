@@ -65,18 +65,6 @@ jobs:
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         run: sudo chown -R $USER:$USER .
 
-      - name: Add untracked files
-        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
-        run: |
-          git config --global user.name 'GitHub Actions'
-          git config --global user.email 'github-actions@github.com'
-          git add .
-
-      - name: Create commit
-        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
-        run: |
-          git commit -m "Update VRT baseline images"
-
       - name: Create Pull Request
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         uses: peter-evans/create-pull-request@v4
