@@ -73,6 +73,7 @@ jobs:
         run: cd . && ${{ matrix.config.command }} &
     
       - name: Lost Pixel
+        id: lostpixel
         uses: lost-pixel/lost-pixel@v3.16.0
         env:
             LOST_PIXEL_DISABLE_TELEMETRY: 1
