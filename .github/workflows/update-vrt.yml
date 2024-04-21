@@ -37,11 +37,16 @@ jobs:
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
+
       - name: Install dependencies
         run: cd ../../ && bun install
 
-      - name: Build
-        run: cd ../../ && bun run build
+      - name: Build UI
+        working-directory: ./packages/ui
+        run: bun run build 
+
+      - name: Build App
+        run: cd ../../ && bun run build 
 
       - name: Start App
         run: cd . && ${{ matrix.config.command }} &
