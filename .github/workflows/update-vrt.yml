@@ -61,7 +61,7 @@ jobs:
         
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
-        if: ${{ failure() && steps.lp.conclusion == 'failure' }}
+        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: update lost-pixel baselines
