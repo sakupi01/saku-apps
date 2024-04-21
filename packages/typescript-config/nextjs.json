@@ -4,7 +4,7 @@
   "extends": "./base.json",
   "compilerOptions": {
     "plugins": [{ "name": "next" }],
-    "moduleResolution": "Node",
+    "moduleResolution": "Node10",
     "module": "ESNext",
     "allowJs": true,
     "jsx": "react-jsx",
