@@ -44,20 +44,27 @@ jobs:
         run: cd ../../ && bun install
 
       - name: Build UI
-        working-directory: ./packages/ui  
-        run: bun run build
+        working-directory: ./packages/ui
+        run: bun run build 
 
       - name: Build App
-        run: cd ../../ && bun run build
+        run: cd ../../ && bun run build 
 
       - name: Start App
         run: cd . && ${{ matrix.config.command }} &
 
-      - name: Lost Pixel
+      - name: Lost Pixel Update
         id: lostpixel
         uses: lost-pixel/lost-pixel@v3.16.0
         env:
           LOST_PIXEL_MODE: update
+          LOST_PIXEL_DISABLE_TELEMETRY: 1
+          LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
+      
+      - name: Lost Pixel
+        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
+        uses: lost-pixel/lost-pixel@v3.16.0
+        env:
           LOST_PIXEL_DISABLE_TELEMETRY: 1
           LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
 
@@ -70,6 +77,7 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          delete-branch: true
           commit-message: Update VRT baseline images
           branch: lost-pixel-update/${{ github.ref_name }}
           title: 'Lost Pixel update - ${{ github.ref_name }}'
