@@ -40,8 +40,13 @@ jobs:
         with:
           ref: ${{ steps.comment-branch.outputs.head_ref }}
           fetch-depth: 0 # 全ブランチの履歴を取得
+          
+      - name: Create .env file
+        run: |
+              touch .env
+              echo "ZENN_URL=${{ secrets.ZENN_URL }}" >> .env
+              echo "ZENN_BASE_URL=${{ secrets.ZENN_BASE_URL }}" >> .env
 
-      # ここから追加・変更
       - name: Setup Git User
         run: |
           git config --global user.name 'GitHub Actions'
