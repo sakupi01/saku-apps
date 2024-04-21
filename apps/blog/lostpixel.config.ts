@@ -12,6 +12,7 @@ export const config: CustomProjectConfig = {
       {
         path: "/life/articles/intern-completed-aritcle",
         name: "intern-completed-article",
+        threshold: 0.0003,
       },
       { path: "/life/tag/poem", name: "poem", threshold: 0.006 },
     ],
