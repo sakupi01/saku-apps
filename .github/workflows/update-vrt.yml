@@ -29,10 +29,16 @@ jobs:
         working-directory: ${{ matrix.config.package }}
 
     steps:
+      - name: Get branch name
+        uses: xt0rted/pull-request-comment-branch@29fe0354c01b30fb3de76f193ab33abf8fe5ddb0 #1.2.0
+        id: get_branch
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout Commit
         uses: actions/checkout@v3
         with:
+          ref: ${{ steps.get_branch.outputs.branch }}
           fetch-depth: 0 # 全ブランチの履歴を取得
 
       - name: Setup Bun  
@@ -71,14 +77,9 @@ jobs:
       - name: Give Permission to untracked files
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         run: sudo chown -R $USER:$USER .
-
+      
       - name: Create Pull Request
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          delete-branch: true
-          commit-message: Update VRT baseline images
-          branch: lost-pixel-update/${{ github.ref_name }}
-          title: 'Lost Pixel update - ${{ github.ref_name }}'
-          body: Automated baseline update PR created by Lost Pixel
+        run: gh pr create -B ${{ steps.get_branch.outputs.branch }} -H lost-pixel-update/${{ steps.get_branch.outputs.branch }} --label update-lost-pixel --title 'Lost Pixel Update - ${{ steps.get_branch.outputs.branch }}' --body 'Automated baseline update created by Lost Pixel'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
