@@ -62,19 +62,19 @@ jobs:
           LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
 
       - name: Add untracked files
-        if: ${{ steps.lostpixel.conclusion == 'failure' }}  
+        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'github-actions@github.com'
           git add apps/blog/tests/vrt/
 
       - name: Create commit
-        if: ${{ steps.lostpixel.conclusion == 'failure' }}
+        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         run: |
           git commit -m "Update VRT baseline images"
 
       - name: Create Pull Request
-        if: ${{ steps.lostpixel.conclusion == 'failure' }}
+        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
