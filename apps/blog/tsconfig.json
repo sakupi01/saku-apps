@@ -14,7 +14,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "./fuse/introspection.ts",
-    "../../vitest.config.ts"
+    "vitest.config.ts"
   ],
   "exclude": ["node_modules"]
 }

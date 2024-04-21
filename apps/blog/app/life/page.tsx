@@ -1,8 +1,15 @@
 import { fetchArticlePages } from "@/libs/getApi";
+import { Metadata } from "next";
 import FilteredArticlesListContainer from "../_components/filtered-articles-list-container";
 import Pagination from "../_components/pagenation";
 
 const CATEGORY = "life" as const;
+
+export const metadata: Metadata = {
+  title: "saku's Lifeblog",
+  description: "sakuのLifeblog",
+};
+
 export default async function Page({
   searchParams,
 }: {
