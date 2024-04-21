@@ -63,6 +63,8 @@ https://docs.lost-pixel.com/user-docs/setup/project-configuration/modes#page-sho
 
 ベースはこれですが、今回はモノリポかつCIで使用することを加味して、以下のように変更を加えています。
 
+<details>
+
 ```ts showLineNumbers {7} title="lostpixel.config.ts"
 import { CustomProjectConfig } from "lost-pixel";
 
@@ -120,6 +122,7 @@ export const config: CustomProjectConfig = {
   failOnDifference: true,
 };
 ```
+</details>
 
 #### 0. ローカルで差分確認する
 それでは、早速手元の環境で差分を確認してみましょう！
@@ -139,6 +142,8 @@ diff-images 0
 CIスパスパ作れる人々かっこいい。。。
 
 ##### 3.1 差分確認のためのWorkflow(vis-reg-test.yml)
+<details>
+
 ```yaml showLineNumbers {7} title="vis-reg-test.yml"
 name: Visual Regression Test
 
@@ -228,7 +233,11 @@ jobs:
             LOST_PIXEL_DISABLE_TELEMETRY: 1
             LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
 ```
+</details>
+
 ##### 3.2 baseline更新のためのWorkflow(update-vrt.yml)
+<details>
+
 ```yaml showLineNumbers {7} title="update-vrt.yml"
 # https://zenn.dev/aiji42/articles/6656072a954a9b
 name: Visual Regression Testing Update By PR Comment
@@ -363,6 +372,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+</details>
 
 #### 4. update-vrt.ymlをmainブランチに取り込む
 
