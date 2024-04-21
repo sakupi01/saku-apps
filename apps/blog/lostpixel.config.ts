@@ -27,7 +27,6 @@ export const config: CustomProjectConfig = {
       },
     ],
     // IP should be localhost when running locally & 172.17.0.1 when running in GitHub action
-
     baseUrl: process.env.LOCAL
       ? "http://localhost:3000"
       : "http://172.17.0.1:3000",
