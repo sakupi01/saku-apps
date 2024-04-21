@@ -28,6 +28,7 @@ export default function TunbnailLife({
           boxShadow:
             "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
         }}
+        className="thumbnail"
       />
       <div className="w-full  text-basic rounded-lg p-10">
         <div className="flex flex-wrap">{tags && tags}</div>
