@@ -99,6 +99,11 @@ jobs:
         run: |
           git commit -m "Update VRT baseline images" || echo "No changes to commit"
 
+      - name: Push changes
+        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
+        run: |
+          git push origin lost-pixel-update/${{ steps.comment-branch.outputs.head_ref }}
+
       - name: Create Pull Request
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         run: |
