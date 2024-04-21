@@ -8,12 +8,12 @@ export const config: CustomProjectConfig = {
       { path: "/dev", name: "dev" },
       { path: "/dev/articles/blog-tech-stack", name: "blog-tech-stack" },
       { path: "/dev/tag/react", name: "tag-react" },
-      { path: "/life", name: "life" },
+      { path: "/life", name: "life", threshold: 0.004 },
       {
         path: "/life/articles/intern-completed-aritcle",
         name: "intern-completed-article",
       },
-      { path: "/life/tag/poem", name: "poem" },
+      { path: "/life/tag/poem", name: "poem", threshold: 0.006 },
     ],
     // IP should be localhost when running locally & 172.17.0.1 when running in GitHub action
 
@@ -21,7 +21,6 @@ export const config: CustomProjectConfig = {
       ? "http://localhost:3000"
       : "http://172.17.0.1:3000",
   },
-  threshold: 0.01,
   waitBeforeScreenshot: 5000,
   // OSS mode
   imagePathBaseline: process.env.LOCAL

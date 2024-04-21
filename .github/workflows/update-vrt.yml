@@ -6,7 +6,7 @@ on:
     types: [created, edited]
 
 jobs:
-  prepare:
+  lost-pixel:
     # PR中のコメントに /update-vrt と入力するとアクションが発動する
     if: contains(github.event.comment.html_url, '/pull/') && startsWith(github.event.comment.body, '/update-vrt')
     name: 📸 Lost Pixel Baseline Update By PR Comment
@@ -17,15 +17,6 @@ jobs:
     permissions:
       contents: write
       pull-requests: read
-    steps:
-      - name: Get upstream branch
-        id: upstreambranch
-        run: |
-          PR=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }})
-          echo "branchname=$(echo $PR | jq -r '.head.ref')" >> $GITHUB_OUTPUT
-  lost-pixel:
-    needs: prepare
-    runs-on: ubuntu-latest
     strategy:
         matrix:
             config:
@@ -37,9 +28,6 @@ jobs:
     defaults:
         run:
             working-directory: ${{ matrix.config.package }}
-    env:
-        TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-        TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
         - name: Checkout Commit
           uses: actions/checkout@v4
@@ -73,8 +61,13 @@ jobs:
             LOST_PIXEL_DISABLE_TELEMETRY: 1
             LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
         
-        - name: Commit and Push
-          uses: stefanzweifel/git-auto-commit-action@v5
-          if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
+        - name: Create Pull Request
+          uses: peter-evans/create-pull-request@v4
+          if: ${{ failure() && steps.lp.conclusion == 'failure' }}
           with:
-            commit_message: update lost-pixel baselines
+            token: ${{ secrets.GITHUB_TOKEN }}
+            commit-message: update lost-pixel baselines
+            delete-branch: true
+            branch: 'lost-pixel-update/${{ github.ref_name }}'
+            title: 'Lost Pixel update - ${{ github.ref_name }}'
+            body: Automated baseline update PR created by Lost Pixel
