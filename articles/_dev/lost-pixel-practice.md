@@ -459,16 +459,6 @@ jobs:
           LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
 
       # ☑️ Lost Pixel Updateで例外スローの場合
-      # 🟢 一度VRTを回して、Successを確認するとともにdifference-imagesを空にする
-      # 🟢 baseline-imagesを更新しつつ、difference-imagesを空にした状態でPRを作成するためにも、このステップは必要
-      - name: Lost Pixel
-        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
-        uses: lost-pixel/lost-pixel@v3.16.0
-        env:
-          LOST_PIXEL_DISABLE_TELEMETRY: 1
-          LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
-
-      # ☑️ Lost Pixel Updateで例外スローの場合
       # 🟢 git add するファイルに対して権限を与える
       - name: Give Permission to untracked files
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}

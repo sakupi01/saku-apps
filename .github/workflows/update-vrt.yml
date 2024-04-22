@@ -79,13 +79,6 @@ jobs:
           LOST_PIXEL_DISABLE_TELEMETRY: 1
           LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
 
-      - name: Lost Pixel
-        if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
-        uses: lost-pixel/lost-pixel@v3.16.0
-        env:
-          LOST_PIXEL_DISABLE_TELEMETRY: 1
-          LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
-
       - name: Give Permission to untracked files
         if: ${{ failure() && steps.lostpixel.conclusion == 'failure' }}
         run: sudo chown -R $USER:$USER .
