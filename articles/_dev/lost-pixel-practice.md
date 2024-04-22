@@ -6,7 +6,7 @@ beginColor: 'from-cyan-200'
 middleColor: 'via-emerald-300'
 endColor: 'to-amber-200'
 category: 'dev'
-tags: ['lost-pixel', 'vrt', 'testing', 'ci/cd']
+tags: ['lost-pixel', 'vrt', 'testing', 'cicd']
 status: 'published'
 ---
 ## 目次
