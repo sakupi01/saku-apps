@@ -8,6 +8,7 @@ export default function transformNode(node, output, indexMap) {
     children: [],
   };
 
+  // get heading 2 nodes
   if (node.depth === 2) {
     output.push(transformedNode);
     indexMap[node.depth] = transformedNode;
