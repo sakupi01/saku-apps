@@ -14,25 +14,21 @@ status: 'published'
 ## はじめに
 2月に開催された[#vrt4選](https://twitter.com/hashtag/VRT4%E9%81%B8)という勉強会に参加した際、その中で紹介されていたLost Pixelというツールに興味を持ちました。
 
-※OSSモードでもgithubで管理すれば差分を視覚的にわかりやすくしてくれる
-※pixcel→pixelね！！
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Lost Pixcel、OSSモード前提だとUIの差分が見た目で検知しにくい以外めちゃくちゃ魅力的かも<br>個人開発でTryしてみたみがある<a href="https://twitter.com/hashtag/VRT4%E9%81%B8?src=hash&amp;ref_src=twsrc%5Etfw">#VRT4選</a></p>&mdash; saku (@SakuOnTheWeb) <a href="https://twitter.com/SakuOnTheWeb/status/1760260787078357477?ref_src=twsrc%5Etfw">February 21, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 👇該当のスライド
 
 https://speakerdeck.com/aiji42/vrtturunodakuhosu-lost-pixelwoshao-jie-sitai
 
-普段は専ら[Chromatic](https://www.chromatic.com/)ユーザなのですが、個人開発の際無料枠の上限にヒットして痛い目にあった過去があるので、今回個人ブログではLost PixelでVRTを行うことにしてみました。
+普段は専ら[Chromatic](https://www.chromatic.com/)ユーザなのですが、個人開発の際、無料枠の上限にヒットして痛い目にあった過去があるので、今回個人ブログではLost PixelでVRTを行うことにしてみました💸
 
-[#vrt4選](https://twitter.com/hashtag/VRT4%E9%81%B8)では詳細な実装やVRTの一連の流れまで述べられていなかったかつ、まだ国内であまり普及しておらず、発表者の方のスライド以外で日本語文献が見つからなかったため、今回はLost Pixelを用いた具体的なVRTの運用方法をまとめてみました。
+[#vrt4選](https://twitter.com/hashtag/VRT4%E9%81%B8)では詳細な実装やVRTの一連の流れまで述べられていなかったかつ、Lost Pixelはまだあまり普及しておらず、発表者の方のスライド以外で使用例があまり見つからなかったため、今回はLost Pixelを用いた具体的なVRTの運用方法をまとめてみました。
 
 ## 前提
-前提として、このブログは`/apps/blog`にNext.js製のブログアプリを含むモノリポ構成でできています。
+前提として、Next.js製のブログアプリを含むモノリポ構成でできている、このブログアプリの`/apps/blog`マイクロサービスにVRTを施していきます。
+
+ブログアプリの全体像は以下の通りです。
 
 https://www.skr-blog.com/dev/articles/blog-tech-stack
 
-
-今回はこの`apps/blog`(ブログアプリ部分)にLost Pixelを用いたVRTを施していきます。
 
 ### Lost Pixelとは
 Lost Pixelとは、VRT(Visual Regression Test, ビジュアル回帰テスト)を行うためのツールです。
@@ -148,7 +144,7 @@ export const config: CustomProjectConfig = {
 ### ローカルで確認
 #### 0. ローカルで差分確認する
 `package.json`に以下のコマンドを追加します。
-[セットアップ]()で設定した`lostpixel.config.ts`の内容をよく見ると、環境変数の値によって設定値を変えている部分があるので、そこを加味したスクリプトにします。
+[セットアップ](http://localhost:3000/dev/articles/lost-pixel-practice#セットアップ)で設定した`lostpixel.config.ts`の内容をよく見ると、環境変数の値によって設定値を変えている部分があるので、そこを加味したスクリプトにします。
 
 ```json showLineNumbers {5, 6} title="./apps/blog/package.json"
 {
@@ -251,7 +247,7 @@ Sending anonymized telemetry data.
 #### 3. Workflowを作成する
 Github Actionsを用いてCIとして動かすためのWorkflowファイルを作成していきます。
 
-[運用シナリオ]()で述べた以下の流れを実現するために、次からの項目で`vis-reg-test.yml`と`update-lostpixel.yml`を作成します。
+[運用シナリオ](http://localhost:3000/dev/articles/lost-pixel-practice#運用シナリオ)で述べた以下の流れを実現するために、次からの項目で`vis-reg-test.yml`と`update-lostpixel.yml`を作成します。
 > - featureブランチ`feat/lost-pixel`のPRチェック時にGithub ActionsでLost Pixel OSSモードを用いたVRTを行う
 > - 差分が検出された場合は`/update-vrt`とPRにコメントを入れることで、ベースライン画像の更新PR`lost-pixel-update/> [base-pr-name]`を元ブランチ`feat/lost-pixel`から新たに作成する
 > - `lost-pixel-update/[base-pr-name]`のベースライン画像の差分をImage Diffを用いて確認・レビューし、マージする
@@ -537,80 +533,81 @@ jobs:
 </details>
 
 #### 4. update-vrt.ymlをmainブランチに取り込む
+実際にfeat/lost-pixelブランチのPRを作成して`vis-reg-test.yml`のワークフローを回す前に、運用の下準備として`update-vrt.yml`をmainブランチに取り込んでおきましょう。
 
+feat/lost-pixelブランチにそのまま`update-vrt.yml`をコミットしたい気持ちですが、このままではPRに`/update-vrt`をコメントしてもワークフローはトリガーされません。
 
-#### 5. `feat/lost-pixel`のPRを作成する
+`update-vrt.yml`のトリガーは「PRに`/update-vrt`をコメントする」ことで、pull requestのコメントが作成、編集されたときにワークフローを実行するために、`issue_comment`を利用しています。(`update-vrt.yml`の内容を参照)
+
+ここで気をつけたいのが、**トリガーするイベントが`issue_comment`のワークフローファイルがデフォルトブランチに存在しないと、PRにコメントしてもワークフローはトリガーされない**ということです。
+
+https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#issue_comment
+
+:::note{.info}
+注: このイベントは、ワークフローファイルがデフォルト ブランチにある場合にのみワークフローの実行をトリガーします。
+:::
+
+したがって、前もって`update-vrt.yml`をmainブランチにコミットしておきます。
 
 ### 運用する
 
 #### 6. vis-reg-test.ymlを回す
+`feat/lost-pixel`のPRを作成して`vis-reg-test.yml`で定義されているワークフローを回します。
+
+以下の6.**のステップで、ワークフローの実行結果によってとる行動を示します。
 
 ##### 6.1 Failのとき 
-`/update-vrt`とPRにコメントします。すると、先ほど定義した`update-vrt.yml`のワークフローがトリガーされます。
+**`/update-vrt`とPRにコメント**します。すると、先ほど定義した`update-vrt.yml`のワークフローがトリガーされます。
 
-:::note{.warning}
-❗ Warning
-<br/>
-issue_commentはメインブランちーーー
-:::
+これにより、baselineのupdateをするためのブランチlost-pixel-update/[base-pr-name]がコメントを入れたPRから生える形で作成されます。
 
-これにより、baselineのupdateをするためのブランチ`lost-pixel-update/[base-pr-name]`がコメントを入れたPR(ここでは`feat/lost-pixel`)から生える形で作成され、タイトルが「Lost Pixel Update - [base-branch-name]」PRも作成されます。
+***
 
-ここで、作成されたPRのChanges部分を確認することで、Github上で視覚的に見た目の変化を捉えることができます。
+次に、タイトルが「Lost Pixel Update - [base-branch-name]」PRも作成されます。
+
+早速、作成されたPRを見ていきましょう👀
+
+PRのChanges部分を確認することで、Github上で視覚的に見た目の変化を捉えることができます。
 
 👇微々たる変化。この場合、キャプチャタイミングや実行環境の差異が原因であると思われる。
 
-→[ステップ6.1.1へ]()
+→[ステップ6.1.1へ](http://localhost:3000/dev/articles/lost-pixel-practice#611-許容可能な見た目の変化のとき)
 
 
 👇見た目の大きな変化。この場合、コードベースに何らかの問題があると思われる。
 
-→[ステップ6.1.2へ]()
+→[ステップ6.1.2へ](http://localhost:3000/dev/articles/lost-pixel-practice#612-許容不可能な見た目の変化のとき)
 
 <br />
 
 ###### 6.1.1 許容可能な見た目の変化のとき
-PRの差分を確認した結果、許容可能な見た目の変化の時は、コメント元のブランチ(`feat/lost-pixel`)のbaselineをアップデートしたいです。
-そうすることで、コメント元のブランチ(`feat/lost-pixel`)でもう一度`vis-reg-test.yml`のワークフローを回してテストをpassすることができるからです。
+PRの差分を確認した結果、許容可能な見た目の変化の時は、コメント元のブランチ(feat/lost-pixel)に6.1で生成されたPRをマージしたいです。
 
-なので、`lost-pixel-update/[base-pr-name]`ブランチの「Lost Pixel Update - [base-branch-name]」PRをマージしましょう！
+そうすることで、コメント元のブランチのbaseline画像がアップデートされ、`vis-reg-test.yml`のワークフローのテストをpassすることができるはずです。
 
-すると、コメント元のブランチ(`feat/lost-pixel`)でもう一度`vis-reg-test.yml`のワークフローが周り、今度はupdateされたbaselineとの比較が行われるため、テストをpassすることができます。
+許容可能な見た目の変化だと確認できたら、6.1のPRをマージしましょう！
 
-→[ステップ6.2へ]()
+すると、コメント元のブランチ(feat/lost-pixel)でもう一度`vis-reg-test.yml`のワークフローが周り、今度はupdateされたbaselineとの比較が行われるため、テストをpassすることができます
+
+→[ステップ6.2へ](http://localhost:3000/dev/articles/lost-pixel-practice#62-successのとき)
 
 <br />
 
 ###### 6.1.2 許容不可能な見た目の変化のとき
-コメント元のブランチ(`feat/lost-pixel`)に戻って、見た目を揃えるための修正コミットを加え、再度pushします。
+コメント元のブランチ(feat/lost-pixel)に戻って、見た目を揃えるための修正コミットを加え、再度pushします。
 
-→[ステップ6へ]()
+→[ステップ6へ](http://localhost:3000/dev/articles/lost-pixel-practice#6-vis-reg-testymlを回す)
 
 ##### 6.2 Successのとき
 おめでとうございます！これで見た目が確認された変更をマージできます💯
 
-### 未解決部分
-今回、Next.js v14を使用しており、`next-font`を用いてフォントの最適化を行なっています。
-
-playwrightとmswの掛け合わせ？
-
-Lost Pixelは、内部的にPlaywrightを使用したキャプチャをしています。
+***
 
 ### まとめ
-```json showLineNumbers {7} title="turbo.json"
-{
-    "$schema": "https://turbo.build/schema.json",
-    "globalDependencies": ["**/.env.*local"],
-    "pipeline": {
-        "build": {
-            "dependsOn": ["^build"],
-            "outputs": [".next/**", "!.next/cache/**"]
-        },
-        "test": {
-            "dependsOn": ["^build"]
-        },
-        ...
-    }
-    ...
-}
-```
+
+Lost PixelとGithub Actionsを使用してVRTを運用するプロセスを具体例ベースでまとめました。
+
+日本語文献どころか、英語文献ですら具体的なユースケースが出てきにくいLost Pixelの使用で、詰まってしまうところも多かったので、備忘録としての役目も兼ねています。
+
+今回はページ単位でのキャプチャの差分比較でしたが、Storybookを用いたコンポーネント単位のユースケースも考えられ、コストフリーでVRTをする場合、Lost Pixelは有力な候補になりそうです。
+
