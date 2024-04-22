@@ -144,7 +144,7 @@ export const config: CustomProjectConfig = {
 ### ローカルで確認
 #### 0. ローカルで差分確認する
 `package.json`に以下のコマンドを追加します。
-[セットアップ](http://localhost:3000/dev/articles/lost-pixel-practice#セットアップ)で設定した`lostpixel.config.ts`の内容をよく見ると、環境変数の値によって設定値を変えている部分があるので、そこを加味したスクリプトにします。
+[セットアップ](https://www.skr-blog.com/dev/articles/lost-pixel-practice#セットアップ)で設定した`lostpixel.config.ts`の内容をよく見ると、環境変数の値によって設定値を変えている部分があるので、そこを加味したスクリプトにします。
 
 ```json showLineNumbers {5, 6} title="./apps/blog/package.json"
 {
@@ -247,7 +247,7 @@ Sending anonymized telemetry data.
 #### 3. Workflowを作成する
 Github Actionsを用いてCIとして動かすためのWorkflowファイルを作成していきます。
 
-[運用シナリオ](http://localhost:3000/dev/articles/lost-pixel-practice#運用シナリオ)で述べた以下の流れを実現するために、次からの項目で`vis-reg-test.yml`と`update-lostpixel.yml`を作成します。
+[運用シナリオ](https://www.skr-blog.com/dev/articles/lost-pixel-practice#運用シナリオ)で述べた以下の流れを実現するために、次からの項目で`vis-reg-test.yml`と`update-lostpixel.yml`を作成します。
 > - featureブランチ`feat/lost-pixel`のPRチェック時にGithub ActionsでLost Pixel OSSモードを用いたVRTを行う
 > - 差分が検出された場合は`/update-vrt`とPRにコメントを入れることで、ベースライン画像の更新PR`lost-pixel-update/> [base-pr-name]`を元ブランチ`feat/lost-pixel`から新たに作成する
 > - `lost-pixel-update/[base-pr-name]`のベースライン画像の差分をImage Diffを用いて確認・レビューし、マージする
@@ -573,13 +573,13 @@ PRのChanges部分を確認することで、Github上で視覚的に見た目�
 ![許容できる見た目の変化](/little-diff.gif)
 *フォントによるズレ(環境の差異として今回は許容)*
 
-→[ステップ6.1.1へ](http://localhost:3000/dev/articles/lost-pixel-practice#611-許容可能な見た目の変化のとき)
+→[ステップ6.1.1へ](https://www.skr-blog.com/dev/articles/lost-pixel-practice#611-許容可能な見た目の変化のとき)
 
 
 👇見た目の大きな変化。この場合、コードベースに何らかの問題があると思われる。
 ![許容できない見た目の変化](/large-diff.png)
 *zennの記事を表示する変更を加えた際、定義した環境変数が正しく読み込まれていなかったことによる不整合*
-→[ステップ6.1.2へ](http://localhost:3000/dev/articles/lost-pixel-practice#612-許容不可能な見た目の変化のとき)
+→[ステップ6.1.2へ](https://www.skr-blog.com/dev/articles/lost-pixel-practice#612-許容不可能な見た目の変化のとき)
 
 <br />
 
@@ -592,14 +592,14 @@ PRの差分を確認した結果、許容可能な見た目の変化の時は、
 
 すると、コメント元のブランチ(feat/lost-pixel)でもう一度`vis-reg-test.yml`のワークフローが周り、今度はupdateされたbaselineとの比較が行われるため、テストをpassすることができます
 
-→[ステップ6.2へ](http://localhost:3000/dev/articles/lost-pixel-practice#62-successのとき)
+→[ステップ6.2へ](https://www.skr-blog.com/dev/articles/lost-pixel-practice#62-successのとき)
 
 <br />
 
 ###### 6.1.2 許容不可能な見た目の変化のとき
 コメント元のブランチ(feat/lost-pixel)に戻って、見た目を揃えるための修正コミットを加え、再度pushします。
 
-→[ステップ6へ](http://localhost:3000/dev/articles/lost-pixel-practice#6-vis-reg-testymlを回す)
+→[ステップ6へ](https://www.skr-blog.com/dev/articles/lost-pixel-practice#6-vis-reg-testymlを回す)
 
 ##### 6.2 Successのとき
 おめでとうございます！これで見た目が確認された変更をマージできます💯
