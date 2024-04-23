@@ -32,7 +32,9 @@ function renderNodes(nodes: any[]) {
         return (
           <li key={node.data.hProperties.id}>
             {TOCLink({ node })}
-            {node.children?.length > 0 && renderNodes(node.children)}
+            {node.children?.length > 0 &&
+              node.depth < 3 &&
+              renderNodes(node.children)}
           </li>
         );
       })}
