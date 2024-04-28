@@ -1,4 +1,4 @@
-import { useRequestContext } from "hono/jsx-renderer";
+import { useRequestContext } from "@hono/react-renderer";
 import Counter from "../islands/counter";
 
 export default function SomeComponent() {

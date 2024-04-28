@@ -1,19 +1,13 @@
 import {} from "hono";
 
+import "@hono/react-renderer";
+
 type Head = {
   title?: string;
 };
 
-declare module "hono" {
-  interface Env {
-    Variables: {};
-    Bindings: {};
-  }
-  interface ContextRenderer {
-    // write the Renderer type definition for renderer.tsx
-    (
-      content: string | Promise<string>,
-      head?: Head,
-    ): Response | Promise<Response>;
+declare module "@hono/react-renderer" {
+  interface Props {
+    head?: Head;
   }
 }

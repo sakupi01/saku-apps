@@ -1,16 +1,28 @@
-import pages from '@hono/vite-cloudflare-pages'
-import honox from 'honox/vite'
-import client from 'honox/vite/client'
-import { defineConfig } from 'vite'
+import pages from "@hono/vite-cloudflare-pages";
+import honox from "honox/vite";
+import { defineConfig } from "vite";
 
 export default defineConfig(({ mode }) => {
-  if (mode === 'client') {
+  if (mode === "client") {
     return {
-      plugins: [client()]
-    }
+      build: {
+        rollupOptions: {
+          input: ["./app/client.ts"],
+          output: {
+            entryFileNames: "static/client.js",
+            chunkFileNames: "static/assets/[name]-[hash].js",
+            assetFileNames: "static/assets/[name].[ext]",
+          },
+        },
+        emptyOutDir: false,
+      },
+    };
   } else {
     return {
-      plugins: [honox(), pages()]
-    }
+      ssr: {
+        external: ["react", "react-dom"],
+      },
+      plugins: [honox(), pages()],
+    };
   }
-})
+});
