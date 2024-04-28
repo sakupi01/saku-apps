@@ -1,6 +1,7 @@
-import { Style } from 'hono/css'
-import { jsxRenderer } from 'hono/jsx-renderer'
-import { Script } from 'honox/server'
+// _renderer.tsx, which will load the /app/client.ts entry file for the client.
+import { Style } from "hono/css";
+import { jsxRenderer } from "hono/jsx-renderer";
+import { Script } from "honox/server";
 
 export default jsxRenderer(({ children, title }) => {
   return (
@@ -14,5 +15,5 @@ export default jsxRenderer(({ children, title }) => {
       </head>
       <body>{children}</body>
     </html>
-  )
-})
+  );
+});
