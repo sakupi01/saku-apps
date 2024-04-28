@@ -1,9 +1,10 @@
 import { css } from "hono/css";
 import { createRoute } from "honox/factory";
-import Counter from "../islands/counter";
+import SomeComponent from "../components/some-component";
 
 const className = css`
   font-family: sans-serif;
+  color: red;
 `;
 
 export default createRoute((c) => {
@@ -11,7 +12,7 @@ export default createRoute((c) => {
   return c.render(
     <div class={className}>
       <h1>Hello, {name}!</h1>
-      <Counter />
+      <SomeComponent />
     </div>,
     { title: name },
   );
