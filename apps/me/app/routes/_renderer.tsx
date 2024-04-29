@@ -1,4 +1,10 @@
 import { reactRenderer } from "@hono/react-renderer";
+import {
+  ColorModeScript,
+  ThemeSchemeScript,
+  defaultConfig,
+} from "@yamada-ui/react";
+import { UIProvider } from "@yamada-ui/react";
 
 export default reactRenderer(({ children, head }) => {
   return (
@@ -13,7 +19,19 @@ export default reactRenderer(({ children, head }) => {
         )}
         {head?.title ? <title>{head.title}</title> : ""}
       </head>
-      <body>{children}</body>
+      <ColorModeScript
+        type="cookie"
+        nonce="testing"
+        initialColorMode={defaultConfig.initialColorMode}
+      />
+      <ThemeSchemeScript
+        type="cookie"
+        nonce="testing"
+        initialThemeScheme={defaultConfig.initialThemeScheme}
+      />
+      <body>
+        <UIProvider>{children}</UIProvider>
+      </body>
     </html>
   );
 });

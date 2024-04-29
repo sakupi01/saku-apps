@@ -16,13 +16,23 @@ export default defineConfig(({ mode }) => {
         },
         emptyOutDir: false,
       },
+      resolve: {
+        alias: {
+          "@": "/app",
+        },
+      },
     };
   } else {
     return {
       ssr: {
-        external: ["react", "react-dom"],
+        external: ["react", "react-dom", "@yamada-ui/react"],
       },
       plugins: [honox(), pages()],
+      resolve: {
+        alias: {
+          "@": "/app",
+        },
+      },
     };
   }
 });
