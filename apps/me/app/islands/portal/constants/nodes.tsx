@@ -6,7 +6,7 @@ import { SiZenn } from "react-icons/si";
 import { IoMailOutline } from "react-icons/io5";
 import { LiaFlaskSolid } from "react-icons/lia";
 
-export const nodeTypes = {
+const nodeTypes = {
   aboutItem: () => (
     <PortalItem minW="300" gradColor="primaryGrad" url="/about">
       <Heading color="textBase" as="h2" size="3xl" isTruncated>
@@ -58,4 +58,67 @@ export const nodeTypes = {
       <LiaFlaskSolid color="#2D2613" size="60" title="experiments" />
     </PortalItem>
   ),
+};
+const initialNodes = [
+  {
+    id: "1",
+    type: "aboutItem",
+    position: { x: 0, y: 15 },
+    data: {
+      label: "About",
+    },
+  },
+  {
+    id: "2",
+    type: "githubItem",
+    position: { x: 330, y: 0 },
+    data: {
+      label: "GitHub",
+    },
+  },
+  {
+    id: "3",
+    type: "xItem",
+    position: { x: 330 + 180, y: 0 },
+    data: {
+      label: "Twitter",
+    },
+  },
+  {
+    id: "4",
+    type: "zennItem",
+    position: { x: 330 + 180 + 180, y: 0 },
+    data: {
+      label: "Zenn",
+    },
+  },
+  {
+    id: "5",
+    type: "blogItem",
+    position: { x: 330, y: 180 },
+    data: {
+      label: "Blog",
+    },
+  },
+  {
+    id: "6",
+    type: "contactItem",
+    position: { x: 330 + 180, y: 180 },
+    data: {
+      label: "Contact",
+    },
+  },
+  {
+    id: "7",
+    type: "experimentsItem",
+    position: { x: 330 + 180 + 180, y: 180 },
+    data: {
+      label: "Experiments",
+    },
+  },
+];
+
+export const nodeSet = {
+  nodeTypes,
+  initialNodes,
 };
