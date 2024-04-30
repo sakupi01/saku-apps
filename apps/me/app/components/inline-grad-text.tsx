@@ -17,8 +17,12 @@ export default function InlineGradText({
         bg={gradColor}
         bgClip="text"
         _hover={{
+          background: gradColor,
           cursor: "pointer",
+          color: "white",
         }}
+        transitionDuration="0.3s"
+        transitionProperty={"all"}
         {...props}
       >
         {children}

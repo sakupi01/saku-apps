@@ -1,5 +1,5 @@
 import InlineGradText from "@/components/inline-grad-text";
-import { Stack, Text } from "@yamada-ui/react";
+import { Stack, Text, useAnimation } from "@yamada-ui/react";
 
 export default function Intro() {
   return (

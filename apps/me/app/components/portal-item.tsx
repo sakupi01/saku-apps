@@ -31,7 +31,17 @@ export default function PortalItem({
       }}
       {...props}
     >
-      <a href={url} target="_blank">
+      <a
+        href={url}
+        target="_blank"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          height: "100%",
+        }}
+      >
         {children}
       </a>
     </Box>
