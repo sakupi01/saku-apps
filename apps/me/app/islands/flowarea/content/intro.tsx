@@ -3,7 +3,7 @@ import { Stack, Text } from "@yamada-ui/react";
 
 export default function Intro() {
   return (
-    <Stack color="lightTextBase">
+    <Stack color="lightTextBase" position={"relative"} zIndex={"beerus"}>
       <Text as="b" color="lightTextBase">
         Hi, I’m saku. 👋🏻
       </Text>

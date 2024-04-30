@@ -1,5 +1,5 @@
 import { Grid, Heading } from "@yamada-ui/react";
-import PortalItem from "../components/portal-item";
+import PortalGridChild from "../components/portal-grid-child";
 import { FaXTwitter } from "react-icons/fa6";
 import { SiZenn } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
@@ -16,7 +16,7 @@ export default function Portal() {
         gap="md"
         overflowX={"scroll"}
       >
-        <PortalItem
+        <PortalGridChild
           minW="300"
           colStart={1}
           colEnd={3}
@@ -28,8 +28,8 @@ export default function Portal() {
           <Heading color="textBase" as="h2" size="3xl" isTruncated>
             About
           </Heading>
-        </PortalItem>
-        <PortalItem
+        </PortalGridChild>
+        <PortalGridChild
           maxW="150"
           colSpan={1}
           rowSpan={1}
@@ -37,8 +37,8 @@ export default function Portal() {
           url={import.meta.env.VITE_GITHUB_URL}
         >
           <FaGithub color="#2D2613" size="60" title="GitHub" />
-        </PortalItem>
-        <PortalItem
+        </PortalGridChild>
+        <PortalGridChild
           maxW="150"
           colSpan={1}
           rowSpan={1}
@@ -46,8 +46,8 @@ export default function Portal() {
           url={import.meta.env.VITE_X_URL}
         >
           <FaXTwitter color="#2D2613" size="50" title="twitter" />
-        </PortalItem>
-        <PortalItem
+        </PortalGridChild>
+        <PortalGridChild
           maxW="150"
           colSpan={1}
           rowSpan={1}
@@ -55,8 +55,8 @@ export default function Portal() {
           url={import.meta.env.VITE_ZENN_URL}
         >
           <SiZenn color="#2D2613" size="50" title="zenn" />
-        </PortalItem>
-        <PortalItem
+        </PortalGridChild>
+        <PortalGridChild
           maxW="150"
           colSpan={1}
           rowSpan={1}
@@ -66,11 +66,16 @@ export default function Portal() {
           <Heading color="textBase" as="h2" size="2xl" isTruncated>
             Blog
           </Heading>
-        </PortalItem>
-        <PortalItem maxW="150" colSpan={1} rowSpan={1} gradColor="contactGrad">
+        </PortalGridChild>
+        <PortalGridChild
+          maxW="150"
+          colSpan={1}
+          rowSpan={1}
+          gradColor="contactGrad"
+        >
           <IoMailOutline color="#2D2613" size="50" title="mail" />
-        </PortalItem>
-        <PortalItem
+        </PortalGridChild>
+        <PortalGridChild
           maxW="150"
           colSpan={1}
           rowSpan={1}
@@ -78,7 +83,7 @@ export default function Portal() {
           url="/experiments"
         >
           <LiaFlaskSolid color="#2D2613" size="60" title="experiments" />
-        </PortalItem>
+        </PortalGridChild>
       </Grid>
     </>
   );

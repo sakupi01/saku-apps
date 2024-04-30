@@ -1,12 +1,9 @@
-import { createRoute } from "honox/factory";
+import Header from "@/components/header";
 import { Stack } from "@yamada-ui/react";
-import Portal from "@/islands/portal";
-import Header from "../components/header";
-import Intro from "@/islands/flowarea/content/intro";
-import FlowArea from "@/islands/flowarea/flowarea";
+import Intro from "./intro";
 
-export default createRoute((c) => {
-  return c.render(
+export default function Content() {
+  return (
     <Stack
       direction={{ base: "column" }}
       paddingY="8%"
@@ -18,8 +15,7 @@ export default createRoute((c) => {
       <Header />
       <Stack direction={{ base: "column" }} gap="70">
         <Intro />
-        <Portal />
       </Stack>
-    </Stack>,
+    </Stack>
   );
-});
+}

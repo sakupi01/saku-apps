@@ -1,18 +1,18 @@
-import { Box, BoxProps } from "@yamada-ui/react";
+import { GridItem, GridItemProps } from "@yamada-ui/react";
 import { PropsWithChildren } from "react";
 
 interface ItemProps {
   gradColor: string;
   url?: string;
 }
-export default function PortalItem({
+export default function PortalGridChild({
   gradColor,
   url,
   children,
   ...props
-}: PropsWithChildren<ItemProps & BoxProps>) {
+}: PropsWithChildren<ItemProps & GridItemProps>) {
   return (
-    <Box
+    <GridItem
       w="full"
       aspectRatio="1/1"
       p="md"
@@ -34,6 +34,6 @@ export default function PortalItem({
       <a href={url} target="_blank">
         {children}
       </a>
-    </Box>
+    </GridItem>
   );
 }
