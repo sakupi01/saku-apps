@@ -116,6 +116,8 @@ https://ja.vitejs.dev/config/ssr-options#ssr-%E3%82%AA%E3%83%95%E3%82%9A%E3%82%B
 静的ファイルを配信する
 https://zenn.dev/knaka0209/scraps/14ec0f820346f6
 `url('/static/dot-grid.png')`
+
+ssrコンポーネントをislandsに入れるとhydrationerrorが出る！<islands-honox> hogehoge...
 ## 参考
 https://github.com/honojs/honox
 https://azukiazusa.dev/blog/full-stack-web-framework-honox/

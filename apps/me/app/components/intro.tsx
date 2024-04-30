@@ -1,12 +1,10 @@
 import InlineGradText from "@/components/inline-grad-text";
-import { Stack, Text, useAnimation } from "@yamada-ui/react";
+import { Stack, Text } from "@yamada-ui/react";
 
 export default function Intro() {
   return (
     <Stack color="lightTextBase" position={"relative"} zIndex={"beerus"}>
-      <Text as="b" color="lightTextBase">
-        Hi, I’m saku. 👋🏻
-      </Text>
+      <Text as="b">Hi, I’m saku. 👋🏻</Text>
       <Text as="b">
         This is my{" "}
         <InlineGradText

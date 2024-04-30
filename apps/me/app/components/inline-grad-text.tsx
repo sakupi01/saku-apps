@@ -23,6 +23,7 @@ export default function InlineGradText({
         }}
         transitionDuration="0.3s"
         transitionProperty={"all"}
+        suppressHydrationWarning
         {...props}
       >
         {children}

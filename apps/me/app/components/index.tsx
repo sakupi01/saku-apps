@@ -13,9 +13,7 @@ export default function Content() {
       justifyContent={"center"}
     >
       <Header />
-      <Stack direction={{ base: "column" }} gap="70">
-        <Intro />
-      </Stack>
+      <Intro />
     </Stack>
   );
 }

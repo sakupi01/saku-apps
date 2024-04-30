@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { Node } from "reactflow";
 import { useBreakpoint } from "./useBreakPoints";
 
@@ -17,7 +17,7 @@ export default function usePositionNodes({
   >;
 }) {
   const breakpoint = useBreakpoint();
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleResize = () => {
       setNode((prevNodes) =>
         prevNodes.map((node) => ({
