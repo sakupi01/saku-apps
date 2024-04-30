@@ -40,6 +40,10 @@ export default function usePositionNodes({
         })),
       );
     };
+    const reactFlowLogoToBeRemoved = document.querySelector(
+      '[aria-label="React Flow attribution"]',
+    );
+    reactFlowLogoToBeRemoved?.remove();
     handleResize();
   }, []);
   return breakpoint;
