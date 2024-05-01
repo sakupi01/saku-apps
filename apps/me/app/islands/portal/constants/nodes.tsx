@@ -1,4 +1,4 @@
-import { Heading } from "@yamada-ui/react";
+import { Heading, SlideFade, Tooltip } from "@yamada-ui/react";
 import PortalItem from "@/components/portal-item";
 import { FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -8,55 +8,130 @@ import { LiaFlaskSolid } from "react-icons/lia";
 
 const nodeTypes = {
   aboutItem: () => (
-    <PortalItem minW="300" gradColor="primaryGrad" url="/about">
-      <Heading color="textBase" as="h2" size="3xl" isTruncated>
-        About
-      </Heading>
-    </PortalItem>
+    <SlideFade
+      isOpen={true}
+      duration={0.9}
+      offsetY={-70}
+      unmountOnExit
+      display="flex"
+      alignItems={"center"}
+      justifyContent={"center"}
+    >
+      <PortalItem minW="300" gradColor="primaryGrad" url="/about">
+        <Heading color="textBase" as="h2" size="3xl" isTruncated>
+          About
+        </Heading>
+      </PortalItem>
+    </SlideFade>
   ),
   githubItem: () => (
-    <PortalItem
-      minW="150"
-      gradColor="githubGrad"
-      url={import.meta.env.VITE_GITHUB_URL}
+    <SlideFade
+      isOpen={true}
+      duration={1.1}
+      offsetY={-70}
+      unmountOnExit
+      display="flex"
+      alignItems={"center"}
+      justifyContent={"center"}
     >
-      <FaGithub color="#2D2613" size="60" title="GitHub" />
-    </PortalItem>
+      <PortalItem
+        minW="150"
+        gradColor="githubGrad"
+        url={import.meta.env.VITE_GITHUB_URL}
+      >
+        <FaGithub color="#2D2613" size="60" title="GitHub" />
+      </PortalItem>
+    </SlideFade>
   ),
   xItem: () => (
-    <PortalItem minW="150" gradColor="xGrad" url={import.meta.env.VITE_X_URL}>
-      <FaXTwitter color="#2D2613" size="50" title="twitter" />
-    </PortalItem>
+    <SlideFade
+      isOpen={true}
+      duration={1.3}
+      offsetY={-70}
+      unmountOnExit
+      display="flex"
+      alignItems={"center"}
+      justifyContent={"center"}
+    >
+      <PortalItem minW="150" gradColor="xGrad" url={import.meta.env.VITE_X_URL}>
+        <FaXTwitter color="#2D2613" size="50" title="twitter" />
+      </PortalItem>
+    </SlideFade>
   ),
   zennItem: () => (
-    <PortalItem
-      minW="150"
-      gradColor="zennBlueGrad"
-      url={import.meta.env.VITE_ZENN_URL}
+    <SlideFade
+      isOpen={true}
+      duration={1.5}
+      offsetY={-70}
+      unmountOnExit
+      display="flex"
+      alignItems={"center"}
+      justifyContent={"center"}
     >
-      <SiZenn color="#2D2613" size="50" title="zenn" />
-    </PortalItem>
+      <PortalItem
+        minW="150"
+        gradColor="zennBlueGrad"
+        url={import.meta.env.VITE_ZENN_URL}
+      >
+        <SiZenn color="#2D2613" size="50" title="zenn" />
+      </PortalItem>
+    </SlideFade>
   ),
   blogItem: () => (
-    <PortalItem
-      minW="150"
-      gradColor="blogGrad"
-      url={import.meta.env.VITE_BLOG_URL}
+    <SlideFade
+      isOpen={true}
+      duration={1.5}
+      offsetY={-70}
+      unmountOnExit
+      display="flex"
+      alignItems={"center"}
+      justifyContent={"center"}
     >
-      <Heading color="textBase" as="h2" size="2xl" isTruncated>
-        Blog
-      </Heading>
-    </PortalItem>
+      <PortalItem
+        minW="150"
+        gradColor="blogGrad"
+        url={import.meta.env.VITE_BLOG_URL}
+      >
+        <Heading color="textBase" as="h2" size="2xl" isTruncated>
+          Blog
+        </Heading>
+      </PortalItem>
+    </SlideFade>
   ),
   contactItem: () => (
-    <PortalItem minW="150" gradColor="contactGrad">
-      <IoMailOutline color="#2D2613" size="50" title="mail" />
-    </PortalItem>
+    <SlideFade
+      isOpen={true}
+      duration={1.7}
+      offsetY={-70}
+      unmountOnExit
+      display="flex"
+      alignItems={"center"}
+      justifyContent={"center"}
+    >
+      <PortalItem minW="150" gradColor="contactGrad">
+        <IoMailOutline color="#2D2613" size="50" title="mail" />
+      </PortalItem>
+    </SlideFade>
   ),
   experimentsItem: () => (
-    <PortalItem minW="150" gradColor="experimentsGrad" url="/experiments">
-      <LiaFlaskSolid color="#2D2613" size="60" title="experiments" />
-    </PortalItem>
+    <SlideFade
+      isOpen={true}
+      duration={1.8}
+      offsetY={-70}
+      unmountOnExit
+      display="flex"
+      alignItems={"center"}
+      justifyContent={"center"}
+    >
+      <PortalItem
+        minW="150"
+        gradColor="experimentsGrad"
+        url="/experiments"
+        isAvailable={false}
+      >
+        <LiaFlaskSolid color="#2D2613" size="60" title="experiments" />
+      </PortalItem>
+    </SlideFade>
   ),
 };
 const initialNodes = [

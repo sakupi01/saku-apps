@@ -4,8 +4,10 @@ import { Stack, Text } from "@yamada-ui/react";
 export default function Intro() {
   return (
     <Stack color="lightTextBase" position={"relative"} zIndex={"beerus"}>
-      <Text as="b">Hi, I’m saku. 👋🏻</Text>
-      <Text as="b">
+      <Text as="b" lineHeight={2}>
+        Hi, it's saku. 👋🏻
+      </Text>
+      <Text as="b" lineHeight={2}>
         This is my{" "}
         <InlineGradText
           url={"/"}
@@ -15,8 +17,7 @@ export default function Intro() {
         </InlineGradText>
         .{" "}
       </Text>
-      <Text as="b">I work as a Web Frontend Engineer. </Text>
-      <Text as="b">
+      <Text as="b" lineHeight={2}>
         I publish technical articles on either{" "}
         <InlineGradText
           url={import.meta.env.VITE_ZENN_URL}
@@ -33,7 +34,7 @@ export default function Intro() {
         </InlineGradText>
         .{" "}
       </Text>
-      <Text as="b">
+      <Text as="b" lineHeight={2}>
         I write my personal stuff on{" "}
         <InlineGradText
           url={import.meta.env.VITE_LIFE_BLOG_URL}
@@ -43,7 +44,7 @@ export default function Intro() {
         </InlineGradText>
         .{" "}
       </Text>
-      <Text as="b">
+      <Text as="b" lineHeight={2}>
         You can find me on{" "}
         <InlineGradText
           url={import.meta.env.VITE_GITHUB_URL}

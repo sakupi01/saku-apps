@@ -11,11 +11,12 @@ export default function InlineGradText({
   ...props
 }: InlineGradTextProps & TextProps) {
   return (
-    <a href={url} target="_blank">
+    <a href={url}>
       <Text
         as="span"
         bg={gradColor}
         bgClip="text"
+        lineHeight={2}
         _hover={{
           background: gradColor,
           cursor: "pointer",
