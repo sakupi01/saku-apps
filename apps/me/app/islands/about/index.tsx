@@ -46,7 +46,7 @@ export default function About() {
             in React and TypeScript. The carrier has just started.
           </Text>
           <Text as="b" lineHeight={2}>
-            I studied Computer Science in my Japanese University, as well as a
+            I studied Computer Science at my Japanese University, as well as a
             little bit about UI/UX and Enterprise Web Application Development at
             my Australian University.
           </Text>
