@@ -43,14 +43,11 @@ export default function About() {
           </Text>
           <Text as="b" lineHeight={2}>
             I work as a Web Frontend Engineer, especially having a deep interest
-            in React and TypeScript. The carrier has been just started.
-          </Text>
-          <Text as="b" lineHeight={2}>
-            I work as a Web Frontend Engineer.{" "}
+            in React and TypeScript. The carrier has just started.
           </Text>
           <Text as="b" lineHeight={2}>
             I studied Computer Science in my Japanese University, as well as a
-            little bit about UI/UX and Enterprise Web Application Development in
+            little bit about UI/UX and Enterprise Web Application Development at
             my Australian University.
           </Text>
         </Stack>
@@ -70,8 +67,8 @@ export default function About() {
             Personal Life
           </Heading>
           <Text as="b" lineHeight={2} color="lightTextBase">
-            In order to know the world, people, the culture, and myself, I
-            travel.{" "}
+            In order to know the world, country, its people, its culture, and
+            myself, I travel.{" "}
           </Text>
 
           <Text as="b" lineHeight={2} color="lightTextBase">
