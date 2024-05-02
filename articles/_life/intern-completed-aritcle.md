@@ -105,7 +105,7 @@ https://open.spotify.com/episode/77tiyw13JGMiMhjN4BjiWt
 
 フロリア内でもチームはさらに細分化されており、中でもkintone内でアプリを作成する画面(以下参照)の刷新をするReactoneチームで働くことになりました。
 
-![アプリ作成画面](/image-1.png)
+![アプリ作成画面](/app-creation.png)
 *アプリ作成画面*
 
 https://open.spotify.com/episode/00aaRuOiyGfTLdvpbAeMnD
@@ -117,7 +117,7 @@ kintoneのような大規模プロダクトの刷新でも、このようにペ�
 私が内定者期間中に携わった具体的な刷新項目は以下でした。
 
 - 一覧画面の刷新(追加・編集・複製・削除・DnDなど)
-![一覧画面](/image-2.png)
+![一覧画面](/list-page.png)
 *一覧画面*
 - フォーム画面(アプリ作成画面の図参照)の一部フィールドの刷新
 
