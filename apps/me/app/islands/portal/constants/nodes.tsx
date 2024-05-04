@@ -108,7 +108,11 @@ const nodeTypes = {
       alignItems={"center"}
       justifyContent={"center"}
     >
-      <PortalItem minW="150" gradColor="contactGrad">
+      <PortalItem
+        minW="150"
+        gradColor="contactGrad"
+        url={import.meta.env.VITE_MAIL_URL}
+      >
         <IoMailOutline color="#2D2613" size="50" title="mail" />
       </PortalItem>
     </SlideFade>

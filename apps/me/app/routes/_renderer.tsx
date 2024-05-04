@@ -42,7 +42,7 @@ export default reactRenderer(({ children, head }) => {
           )}
           <meta
             property="og:url"
-            content="https://skr-me.com/staitc/icon.svg"
+            content="https://skr-me.com/static/icon.svg"
           />
           <meta property="og:site_name" content="saku's portfolio" />
           <meta property="og:locale" content="ja_JP" />
@@ -51,7 +51,7 @@ export default reactRenderer(({ children, head }) => {
           <meta property="og:image:height" content="512" />
           <meta
             property="og:image"
-            content="https://skr-me.com/staitc/icon.svg"
+            content="https://skr-me.com/static/icon.svg"
           />
           <meta property="og:type" content="website" />
 
@@ -73,7 +73,7 @@ export default reactRenderer(({ children, head }) => {
           <meta name="twitter:image:height" content="512" />
           <meta
             name="twitter:image"
-            content="https://skr-me.com/staitc/icon.svg"
+            content="https://skr-me.com/static/icon.svg"
           />
           <link
             rel="icon"
