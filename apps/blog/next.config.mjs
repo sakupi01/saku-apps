@@ -5,6 +5,7 @@ const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ["@repo/ui"],
   headers,
+  nftTracing: true,
 };
 
 export default nextConfig;
