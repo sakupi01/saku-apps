@@ -1,4 +1,5 @@
 import headers from "./config/headers.cjs";
+import path from "path";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
