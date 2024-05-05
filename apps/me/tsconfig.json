@@ -6,13 +6,17 @@
     "strict": true,
     "lib": [
       "ESNext",
-      "DOM"
+      "DOM",
     ],
     "types": [
       "vite/client",
       "@cloudflare/workers-types"
     ],
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
+    "jsxImportSource": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./app/*"],
+    },
   },
 }
