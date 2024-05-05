@@ -10368,10 +10368,10 @@ index 41467bb..8ae2411 100644
 +  useViewport,
 +};
 diff --git a/node_modules/@reactflow/core/dist/esm/index.mjs b/node_modules/@reactflow/core/dist/esm/index.mjs
-index 41467bb..8ae2411 100644
+index 15a9d16..b2d1133 100644
 --- a/node_modules/@reactflow/core/dist/esm/index.mjs
 +++ b/node_modules/@reactflow/core/dist/esm/index.mjs
-@@ -1,3024 +1,4453 @@
+@@ -1,3021 +1,4452 @@
 -import React, { createContext, useContext, useMemo, memo, useRef, useState, useEffect, forwardRef, useCallback } from 'react';
 -import cc from 'classcat';
 -import { useStoreWithEqualityFn, createWithEqualityFn } from 'zustand/traditional';
@@ -14923,9 +14923,8 @@ index 41467bb..8ae2411 100644
 -                    event.preventDefault();
 -                    event.stopImmediatePropagation();
 -                    const currentZoom = d3Selection.property('__zoom').k || 1;
--                    const _isMacOs = isMacOs();
--                    // macos sets ctrlKey=true for pinch gesture on a trackpad
--                    if (event.ctrlKey && zoomOnPinch && _isMacOs) {
+-                    // macos and win set ctrlKey=true for pinch gesture on a trackpad
+-                    if (event.ctrlKey && zoomOnPinch) {
 -                        const point = pointer(event);
 -                        const pinchDelta = wheelDelta(event);
 -                        const zoom = currentZoom * Math.pow(2, pinchDelta);
@@ -14939,7 +14938,7 @@ index 41467bb..8ae2411 100644
 -                    let deltaX = panOnScrollMode === PanOnScrollMode.Vertical ? 0 : event.deltaX * deltaNormalize;
 -                    let deltaY = panOnScrollMode === PanOnScrollMode.Horizontal ? 0 : event.deltaY * deltaNormalize;
 -                    // this enables vertical scrolling with shift + scroll on windows
--                    if (!_isMacOs && event.shiftKey && panOnScrollMode !== PanOnScrollMode.Vertical) {
+-                    if (!isMacOs() && event.shiftKey && panOnScrollMode !== PanOnScrollMode.Vertical) {
 -                        deltaX = event.deltaY * deltaNormalize;
 -                        deltaY = 0;
 -                    }
@@ -15062,9 +15061,8 @@ index 41467bb..8ae2411 100644
 +            event.preventDefault();
 +            event.stopImmediatePropagation();
 +            const currentZoom = d3Selection.property("__zoom").k || 1;
-+            const _isMacOs = isMacOs();
-+            // macos sets ctrlKey=true for pinch gesture on a trackpad
-+            if (event.ctrlKey && zoomOnPinch && _isMacOs) {
++            // macos and win set ctrlKey=true for pinch gesture on a trackpad
++            if (event.ctrlKey && zoomOnPinch) {
 +              const point = pointer(event);
 +              const pinchDelta = wheelDelta(event);
 +              const zoom = currentZoom * Math.pow(2, pinchDelta);
@@ -15125,7 +15123,7 @@ index 41467bb..8ae2411 100644
 +                : event.deltaY * deltaNormalize;
 +            // this enables vertical scrolling with shift + scroll on windows
 +            if (
-+              !_isMacOs &&
++              !isMacOs() &&
 +              event.shiftKey &&
 +              panOnScrollMode !== PanOnScrollMode.Vertical
 +            ) {
@@ -15297,9 +15295,7 @@ index 41467bb..8ae2411 100644
 -                    return false;
 -                }
 -                // if the pane is only movable using allowed clicks
--                if (Array.isArray(panOnDrag) &&
--                    !panOnDrag.includes(event.button) &&
--                    (event.type === 'mousedown' || event.type === 'touchstart')) {
+-                if (Array.isArray(panOnDrag) && !panOnDrag.includes(event.button) && event.type === 'mousedown') {
 -                    return false;
 -                }
 -                // We only allow right clicks if pan on drag is set to right click
@@ -15459,7 +15455,7 @@ index 41467bb..8ae2411 100644
 +        if (
 +          Array.isArray(panOnDrag) &&
 +          !panOnDrag.includes(event.button) &&
-+          (event.type === "mousedown" || event.type === "touchstart")
++          event.type === "mousedown"
 +        ) {
 +          return false;
 +        }
@@ -17426,7 +17422,7 @@ index 41467bb..8ae2411 100644
  };
  
  /**
-@@ -3026,1170 +4455,2382 @@ var wrapNode = (NodeComponent) => {
+@@ -3023,1170 +4454,2382 @@ var wrapNode = (NodeComponent) => {
   * made a selection with on or several nodes
   */
  const selector$7 = (s) => {

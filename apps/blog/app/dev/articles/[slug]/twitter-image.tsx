@@ -1,6 +1,6 @@
 import { loadGoogleFont } from "@/libs/font";
 import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
-import { ImageResponse } from "next/og";
+import { ImageResponse } from "@vercel/og";
 
 const CATEGORY = "dev" as const;
 
