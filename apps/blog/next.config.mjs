@@ -13,7 +13,7 @@ const nextConfig = {
       logDetail: true,
       // if there is `process.cwd()` expression in your code, you can set this option to tell `turbotrace` the value of `process.cwd()` while tracing.
       // for example the require(process.cwd() + '/package.json') will be traced as require('/path/to/cwd/package.json')
-      processCwd: "apps/blog",
+      processCwd: ".",
     },
   },
 };

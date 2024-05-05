@@ -1,15 +1,15 @@
 {
     "functions": {
-      "/dev/articles/[slug]/opengraph-image": {
+      "app/dev/articles/[slug]/opengraph-image.ts": {
           "includeFiles": "../../articles/**/**.md"
       },
-      "/dev/articles/[slug]/twitter-image": {
+      "app/dev/articles/[slug]/twitter-image.ts": {
           "includeFiles": "../../articles/**/**.md"
       },
-      "/life/articles/[slug]/opengraph-image": {
+      "app/life/articles/[slug]/opengraph-image.ts": {
           "includeFiles": "../../articles/**/**.md"
       },
-      "/life/articles/[slug]/twitter-image": {
+      "app/life/articles/[slug]/twitter-image.ts": {
         "includeFiles": "../../articles/**/**.md"
       }
     }
