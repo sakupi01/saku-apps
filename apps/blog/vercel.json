@@ -1,0 +1,16 @@
+{
+    "functions": {
+      "/dev/articles/[slug]/opengraph-image": {
+          "includeFiles": "../../articles/**/**.md"
+      },
+      "/dev/articles/[slug]/twitter-image": {
+          "includeFiles": "../../articles/**/**.md"
+      },
+      "/life/articles/[slug]/opengraph-image": {
+          "includeFiles": "../../articles/**/**.md"
+      },
+      "/life/articles/[slug]/twitter-image": {
+        "includeFiles": "../../articles/**/**.md"
+      }
+    }
+  }
