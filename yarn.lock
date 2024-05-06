@@ -7643,7 +7643,7 @@ humanize-ms@^1.2.1:
   dependencies:
     ms "^2.0.0"
 
-husky@^9.0.10:
+husky@9.0.11:
   version "9.0.11"
   resolved "https://registry.npmjs.org/husky/-/husky-9.0.11.tgz"
   integrity sha512-AB6lFlbwwyIqMdHYhwPe+kjOC3Oc5P3nThEoW/AaO2BX3vJDjWPFxYLxokUZOo6RNX20He3AaT8sESs9NJcmEw==
@@ -10191,7 +10191,7 @@ pa11y@^6.2.3:
     puppeteer "~9.1.1"
     semver "~7.3.5"
 
-pa11y-ci@^3.1.0:
+pa11y-ci@3.1.0:
   version "3.1.0"
   resolved "https://registry.npmjs.org/pa11y-ci/-/pa11y-ci-3.1.0.tgz"
   integrity sha512-1WBGBMq0dYtZ+N/SH/AcnFSsT6sZ2w27d8Z/5XHJWSELeX8Qhh4yX5f0drb7crwjt7ugKSo4A7eEF9RbMB0LYg==
