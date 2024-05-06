@@ -1,5 +1,5 @@
 {
-  "name": "me",
+  "name": "basic",
   "type": "module",
   "scripts": {
     "dev": "vite",
