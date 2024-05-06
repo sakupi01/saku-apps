@@ -26,7 +26,7 @@ function useHighlighted() {
     };
 
     observer.current = new IntersectionObserver(handleObserver, {
-      rootMargin: "0px 0px -20% 0px",
+      rootMargin: "0px 0px -100% 0px",
       threshold: 0,
     });
 

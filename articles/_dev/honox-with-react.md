@@ -61,8 +61,7 @@ https://github.com/honojs/honox?tab=readme-ov-file#project-structure
 
 ## レンダリングの仕組み
 レンダーは`_renderer.tsx`で設定されたレンダラーによって行なわれます。デフォルトの場合だと、`hono/jsx-renderer`のレンダラーであることがわかります。
-```tsx
-// app/routes/_renderer.tsx
+```tsx showLineNumbers {1, 3} title="./app/routes/_renderer.tsx"
 import { jsxRenderer } from 'hono/jsx-renderer'
 
 export default jsxRenderer(({ children, title }) => {
@@ -81,8 +80,7 @@ export default jsxRenderer(({ children, title }) => {
 
 レンダラーの引き数や戻り値は`global.d.ts`で定義されています。
 
-```ts
-// app/global.d.ts
+```ts showLineNumbers title="./app/global.d.ts"
 import type {} from 'hono'
 
 type Head = {
@@ -99,7 +97,7 @@ declare module 'hono' {
 このように、デフォルトの設定では`hono/jsx-renderer`のレンダラーが使用されており、アプリケーション全体を通して`hono/jsx`コンポーネントが使用されています。
 例えば、`hono/jsx`からインポートされた`useState`を使用して、以下のように`[route]/app/islands/counter.tsx`を実装できます。
 
-```tsx
+```tsx showLineNumbers {1} title="./app/islands/counter.tsx"
 import { useState } from 'hono/jsx'
 
 export default function Counter() {
@@ -115,7 +113,7 @@ export default function Counter() {
 
 ***
 
-しかし、今回はReactベースのUIライブラリを使用するため、`hono/jsx`をレンダーする`hono/jsx-renderer`は使用できません。ReactベースのUIライブラリを使用するためには、`react`のJSX(`ReactNode`)をレンダーするための`react-dom/client`が必要です。
+しかし、今回はReactベースのUIライブラリを使用するため、**`hono/jsx`をレンダーする`hono/jsx-renderer`は使用できません。ReactベースのUIライブラリを使用するためには、`react`のJSX(`ReactNode`)をレンダーするための`react-dom/client`が必要です。**
 
 そこで、次のステップでは、`ReactNode`のレンダラーを提供する`react-dom/client`にレンダラーを変更し、使用するJSXを`react`から提供されている`ReactNode`にします🏃🏻‍♀️
 
@@ -128,16 +126,15 @@ HonoXの面白い特徴として、レンダラーとしてHono純正の`hono/js
 
 まず、HonoXでReactNodeをレンダリングするために必要なモジュールをインストールします。
 ```bash
-npm i @hono/react-renderer react react-dom hono
-npm i -D @types/react @types/react-dom
+bun add @hono/react-renderer react react-dom hono --exact
+bun add -D @types/react @types/react-dom --exact
 ```
 `./app/client.ts`ではクライアントでコンポーネントをレンダリングするためのレンダラーの生成を行なっています。
 
 引数を渡さない場合のデフォルト`createClient`だと、レンダラーは`hono/jsx-renderer`、コンポーネントは`hono/jsx`として生成されます。
 
 今回は、レンダラーを`react-dom/client`、コンポーネントを`react`コンポーネントとして生成するように設定します。
-```ts
-//./app/client.ts
+```ts showLineNumbers {5, 9} title="./app/client.ts"
 import { createClient } from "honox/client";
 
 createClient({
@@ -152,15 +149,14 @@ createClient({
 });
 ```
 
-このように設定すると以下のような型エラーが出ると思いますが、こちらはKnown Issueとして確認されており、後続のリリースで修正される見込みなので、現時点では黙認しておきます。
+このように設定すると以下のような型エラーが出ると思いますが、こちらはKnown Issueとして確認されており、後続のリリースで修正されると思われますので、現時点では黙認しておきます。
 ![Known Type Error in the use of react-renderer](/type-error-createclient.png)
 *Known Type Error in the use of react-renderer*
 
 https://github.com/honojs/honox/issues/87
 
 次に、`@hono/react-renderer`のレンダラーが受け取るpropsを定義します。今回はページごとに`title`と`description`をheadに設定したかったので以下のように定義しました。
-```ts
-// global.d.ts
+```ts showLineNumbers title="./app/global.d.ts"
 import "@hono/react-renderer";
 
 type Head = {
@@ -176,8 +172,7 @@ declare module "@hono/react-renderer" {
 ```
 
 最後に、Reactレンダラーを適用して完成です。
-```tsx
-// app/routes/_renderer.tsx
+```tsx showLineNumbers {1, 3} title="./app/routes/_renderer.tsx"
 import { reactRenderer } from '@hono/react-renderer'
 
 export default reactRenderer(({ children, head }) => {
@@ -200,15 +195,14 @@ export default reactRenderer(({ children, head }) => {
 })
 ```
 
-各rootでは定義したpropsを渡して、以下のように使用できます。
-```tsx
-// ./app/routes/index.tsx
+各rootでは`global.d.ts`で定義したpropsを渡して、以下のようにレンダリングを構成できます。
+```tsx showLineNumbers title="./app/routes/index.tsx"
 import { createRoute } from "honox/factory";
 import FlowArea from "@/islands/portal/flowarea";
 
 export default createRoute((c) => {
   return c.render(<FlowArea />, {
-    head: { // 該当ページのheadを渡している
+    head: { // 該当ページのheadをpropsとして渡している
       title: "saku's Portfolio - Home", 
       description: "saku's Portfolio",
     },
@@ -295,6 +289,44 @@ https://gist.github.com/Hebilicious/88e5a444f42b8dc09fb86dfa865c6ed3
 上記の事情により、`SKIP_INSTALL_DEPENDENCY=true`としているのでビルドコマンドに`bun install`を含めます。
 
 あとは、上記を含めたビルドコマンドを構成し、ビルド出力ディレクトリなどを設定したらCloudflare Pagesにデプロイされるはずです🚀
+
+***
+
+## おまけ - モノリポにおける依存関係との仁義なき戦い
+本当は２日前くらいにデプロイ＆この記事を書いていて、「よーし、ツイートして終わり〜〜」と思っていたのですが、投稿時にog画像がいつものようにうまく表示されなくなっていました。
+
+ブログアプリはVercelにデプロイしているので、Vercelのログを確認してみたところ、og画像生成のためのファイルにうまくアクセスできていないようでした。
+![OG画像にアクセスした時のServerless Functionsでのエラー](/vercel-error.png)
+*OG画像にアクセスした時のServerless Functionsでのエラー*
+
+```
+⨯ Error: ENOENT: no such file or directory, open '/var/task/articles/_dev/blog-tech-stack.md'
+    at Object.readFileSync (node:fs:457:20)
+    at c (/var/task/apps/blog/.next/server/app/dev/articles/[slug]/twitter-image/route.js:1:4090)
+    at w (/var/task/apps/blog/.next/server/app/dev/articles/[slug]/twitter-image/route.js:1:1018)
+    at F (/var/task/apps/blog/.next/server/app/dev/articles/[slug]/twitter-image/route.js:1:2527)
+    at /var/task/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:34672
+    at /var/task/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+    at NoopContextManager.with (/var/task/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+    at ContextAPI.with (/var/task/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+    at NoopTracer.startActiveSpan (/var/task/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+    at ProxyTracer.startActiveSpan (/var/task/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/task/articles/_dev/blog-tech-stack.md'
+}
+```
+
+原因を調査したところ、`./apps/blog`と`./apps/me`間での依存関係に整合性が取れてなかったことが問題だとわかりました。
+
+具体的には、`./apps/me`を付け足しで作った際にインストールした`@hono/react-renderer`の内部依存パッケージAが、別マイクロサービスである`./apps/blog`で`^x.y.z`としてインストールしていたパッケージAとバッティングして、元々`./apps/blog`で動いていたパッケージAのバージョンが上書きされてしまったことが原因でした。
+
+解決方法としては、`npm list --depth=0 --prod`で実際に使用されているパッケージのバージョンを全て吐き出し、`^`を外して、そのバージョンをexactインストールすることで事なきを得ました......
+
+特にモノリポ開発では、範囲を持ったままパッケージをインストールすることはキケンということを再認識させられるいい機会でした🙇🏻
+
+***
 
 ## 参考
 [honojs/honox: HonoX - Hono based meta framework](https://github.com/honojs/honox)

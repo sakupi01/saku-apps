@@ -50,7 +50,7 @@
         "typescript": "^5.3.3"
     },
     "dependencies": {
-        "class-variance-authority": "^0.7.0",
-        "clsx": "^2.1.0"
+        "class-variance-authority": "0.7.0",
+        "clsx": "2.1.0"
     }
 }
