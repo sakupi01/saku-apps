@@ -226,7 +226,7 @@ div[data-rehype-pretty-code-title] {
 }
 
 .toc a {
-  @apply transition-all duration-200 ease-in-out text-subtle rounded-md hover:text-basic p-1 mb-1;
+  @apply transition-all duration-200 ease-in-out text-subtle flex text-start rounded-md hover:text-basic p-1 mb-1;
 }
 
 .is-active {

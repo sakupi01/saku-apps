@@ -293,13 +293,36 @@ https://gist.github.com/Hebilicious/88e5a444f42b8dc09fb86dfa865c6ed3
 ***
 
 ## おまけ - モノリポにおける依存関係との仁義なき戦い
-本当は２日前くらいにこの記事を書いていて、「よーし、ツイートして終わり〜〜」と思っていたのですが、投稿時にog画像がいつものようにうまく表示されなくなっていました。
+本当は２日前くらいにデプロイ＆この記事を書いていて、「よーし、ツイートして終わり〜〜」と思っていたのですが、投稿時にog画像がいつものようにうまく表示されなくなっていました。
+
+ブログアプリはVercelにデプロイしているので、Vercelのログを確認してみたところ、og画像生成のためのファイルにうまくアクセスできていないようでした。
+![OG画像にアクセスした時のServerless Functionsでのエラー](/vercel-error.png)
+*OG画像にアクセスした時のServerless Functionsでのエラー*
+
+```
+⨯ Error: ENOENT: no such file or directory, open '/var/task/articles/_dev/blog-tech-stack.md'
+    at Object.readFileSync (node:fs:457:20)
+    at c (/var/task/apps/blog/.next/server/app/dev/articles/[slug]/twitter-image/route.js:1:4090)
+    at w (/var/task/apps/blog/.next/server/app/dev/articles/[slug]/twitter-image/route.js:1:1018)
+    at F (/var/task/apps/blog/.next/server/app/dev/articles/[slug]/twitter-image/route.js:1:2527)
+    at /var/task/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:34672
+    at /var/task/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+    at NoopContextManager.with (/var/task/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+    at ContextAPI.with (/var/task/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+    at NoopTracer.startActiveSpan (/var/task/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+    at ProxyTracer.startActiveSpan (/var/task/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/task/articles/_dev/blog-tech-stack.md'
+}
+```
 
 原因を調査したところ、`./apps/blog`と`./apps/me`間での依存関係に整合性が取れてなかったことが問題だとわかりました。
 
 具体的には、`./apps/me`を付け足しで作った際にインストールした`@hono/react-renderer`の内部依存パッケージAが、別マイクロサービスである`./apps/blog`で`^x.y.z`としてインストールしていたパッケージAとバッティングして、元々`./apps/blog`で動いていたパッケージAのバージョンが上書きされてしまったことが原因でした。
 
-解決方法としては、`npm list --depth=0 --prod`で実際に使用されているパッケージのバージョンを全て吐き出し、`^`を外して、そのバージョンをexactインストールすることで事なきを得ました。。。
+解決方法としては、`npm list --depth=0 --prod`で実際に使用されているパッケージのバージョンを全て吐き出し、`^`を外して、そのバージョンをexactインストールすることで事なきを得ました......
 
 特にモノリポ開発では、範囲を持ったままパッケージをインストールすることはキケンということを再認識させられるいい機会でした🙇🏻
 
