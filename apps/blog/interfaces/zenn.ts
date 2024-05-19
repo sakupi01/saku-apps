@@ -11,7 +11,7 @@ export interface ZennArticle {
   comments_count: number;
   liked_count: number;
   body_letters_count: number;
-  article_type: string;
+  article_type: "tech" | "idea";
   emoji: string;
   is_suspending_private: boolean;
   published_at: Date;

@@ -72,8 +72,10 @@ export const getZennArticleByCategory = async (
           };
         });
     };
-
-    return articleCompatibleZennArticle(zennArticleObj.articles);
+    const convertedArticles = articleCompatibleZennArticle(
+      zennArticleObj.articles,
+    );
+    return convertedArticles;
   } catch (e) {
     console.error(e);
   }
