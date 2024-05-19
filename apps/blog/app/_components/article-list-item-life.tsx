@@ -28,11 +28,11 @@ export const ArticleListItemLife = ({
     <div
       className={clsx(
         "w-full grid grid-rows-[5_minmax(0px,_1fr)] grid-cols-[100px_minmax(0px,_1fr)] gap-x-6 rounded-md transition-colors duration-300",
-        isZenn ? "hover:bg-blue-50" : "hover:bg-neutral-50",
+        isZenn ? "hover:bg-purple-50" : "hover:bg-neutral-50",
       )}
       role="listitem"
     >
-      <div className="ml-2 row-start-3 row-end-4 col-start-1 col-end-2 aspect-square flex justify-center items-center rounded-lg shadow">
+      <div className="ml-2 row-start-3 row-end-5 col-start-1 col-end-2 aspect-square flex justify-center items-center rounded-lg shadow">
         <Image
           src={url}
           alt={alt}
