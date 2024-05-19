@@ -1,12 +1,9 @@
 name: Visual Regression Test
 
-on:
-  pull_request:
-    types: [ labeled ]
+on: [push]
 
 jobs:
   build:
-    if: ${{ github.event.label.name == 'vrt' }}
     runs-on: ubuntu-latest
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
