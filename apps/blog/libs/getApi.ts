@@ -115,8 +115,8 @@ export function getAllArticles(): Article[] {
 }
 
 export async function getAllArticlesByCategoryByTag(
-  tag = "",
   which: Category,
+  tag = "",
 ): Promise<Article[]> {
   const articles = await getAllArticlesByCategory(which);
   const filteredArticles = articles.filter((article) => {
