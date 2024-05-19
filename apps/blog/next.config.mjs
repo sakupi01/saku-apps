@@ -5,6 +5,14 @@ const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ["@repo/ui"],
   headers,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
