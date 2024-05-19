@@ -29,7 +29,7 @@ export const ArticleListItem = ({
       )}
       role="listitem"
     >
-      <div className="ml-2 row-start-3 row-end-4 col-start-1 col-end-2 aspect-square flex justify-center items-center self-center rounded-lg bg-primary-subtle shadow">
+      <div className="ml-2 row-start-3 row-end-5 col-start-1 col-end-2 aspect-square flex justify-center items-center self-center rounded-lg bg-primary-subtle shadow">
         <div
           className={clsx(
             "w-[50px] h-[50px] rounded-[50px] shadow-md bg-gradient-to-r",
