@@ -131,7 +131,7 @@ export async function fetchArticlesByQuery(
   which: Category,
   tag = "",
 ) {
-  const articles = await getAllArticlesByCategoryByTag(tag, which);
+  const articles = await getAllArticlesByCategoryByTag(which, tag);
   const filteredArticles = articles.filter((article) => {
     return (
       article.title.toLowerCase().includes(query.toLowerCase()) ||
@@ -148,7 +148,7 @@ export async function fetchArticlesByQuery(
 }
 
 export async function fetchArticlePages(which: Category, query = "", tag = "") {
-  const articles = await getAllArticlesByCategoryByTag(tag, which);
+  const articles = await getAllArticlesByCategoryByTag(which, tag);
   const filteredArticles = articles.filter((article) => {
     return (
       article.title.toLowerCase().includes(query.toLowerCase()) ||
