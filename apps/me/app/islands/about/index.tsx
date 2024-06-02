@@ -1,5 +1,5 @@
 import InlineGradText from "@/components/inline-grad-text";
-import { SlideFade, Heading, Stack, Text } from "@yamada-ui/react";
+import { Heading, SlideFade, Stack, Text } from "@yamada-ui/react";
 
 export default function About() {
   return (

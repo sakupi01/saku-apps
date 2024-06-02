@@ -1,4 +1,4 @@
-import { CustomProjectConfig } from "lost-pixel";
+import type { CustomProjectConfig } from "lost-pixel";
 
 export const config: CustomProjectConfig = {
   pageShots: {

@@ -1,7 +1,7 @@
-import type { Theme, ResponsiveObject, StyledTheme } from "@yamada-ui/core";
+import type { ResponsiveObject, StyledTheme, Theme } from "@yamada-ui/core";
 import { useTheme } from "@yamada-ui/core";
 import { createdDom } from "@yamada-ui/utils";
-import { useState, useMemo, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 /**
  * `useBreakpoint` is a custom hook that returns the current breakpoint.
@@ -119,7 +119,7 @@ export const useBreakpoint = () => {
     });
 
     return () => {
-      observer.forEach((unobserve) => unobserve());
+      for (const unobserve of observer) unobserve();
     };
   }, [queries]);
 
@@ -132,9 +132,7 @@ export const useBreakpoint = () => {
  *
  * @see Docs https://yamada-ui.com/hooks/use-breakpoint-value
  */
-export const useBreakpointValue = <T extends any>(
-  values: ResponsiveObject<T>,
-): T => {
+export const useBreakpointValue = <T>(values: ResponsiveObject<T>): T => {
   const { theme } = useTheme();
   const breakpoint = useBreakpoint();
 
@@ -142,7 +140,7 @@ export const useBreakpointValue = <T extends any>(
 };
 
 export const getBreakpointValue =
-  <T extends any>(values: ResponsiveObject<T>) =>
+  <T>(values: ResponsiveObject<T>) =>
   (theme: StyledTheme, breakpoint: Theme["breakpoints"]): T => {
     if (!theme)
       throw Error(
@@ -161,7 +159,7 @@ export const getBreakpointValue =
     for (let i = currentIndex; 0 < i; i--) {
       const nextBreakpoint = breakpoints[i];
 
-      if (values.hasOwnProperty(nextBreakpoint)) {
+      if (nextBreakpoint && Object.hasOwn(values, nextBreakpoint)) {
         return values[nextBreakpoint] as T;
       }
     }

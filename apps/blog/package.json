@@ -86,6 +86,6 @@
     "path": false
   },
   "volta": {
-    "node": "20.11.1"
+    "node": "21.7.3"
   }
 }

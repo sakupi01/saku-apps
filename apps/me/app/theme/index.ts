@@ -1,4 +1,4 @@
-import { extendTheme, UsageTheme } from "@yamada-ui/react";
+import { type UsageTheme, extendTheme } from "@yamada-ui/react";
 import { semantics } from "./semantics";
 import styles from "./styles";
 import tokens from "./tokens";

@@ -1,10 +1,10 @@
 import { Grid, Heading } from "@yamada-ui/react";
-import PortalGridChild from "../components/portal-grid-child";
-import { FaXTwitter } from "react-icons/fa6";
-import { SiZenn } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
-import { LiaFlaskSolid } from "react-icons/lia";
+import { FaXTwitter } from "react-icons/fa6";
 import { IoMailOutline } from "react-icons/io5";
+import { LiaFlaskSolid } from "react-icons/lia";
+import { SiZenn } from "react-icons/si";
+import PortalGridChild from "../components/portal-grid-child";
 
 export default function Portal() {
   return (

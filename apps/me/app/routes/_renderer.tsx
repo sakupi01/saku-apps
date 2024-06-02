@@ -1,3 +1,5 @@
+import Footer from "@/components/footer";
+import theme from "@/theme";
 import { reactRenderer } from "@hono/react-renderer";
 import {
   ColorModeScript,
@@ -5,8 +7,6 @@ import {
   defaultConfig,
 } from "@yamada-ui/react";
 import { UIProvider } from "@yamada-ui/react";
-import theme from "@/theme";
-import Footer from "@/components/footer";
 
 export default reactRenderer(({ children, head }) => {
   return (
@@ -19,9 +19,9 @@ export default reactRenderer(({ children, head }) => {
             content="width=device-width, initial-scale=1.0"
           />
           {import.meta.env.PROD ? (
-            <script type="module" src="/static/client.js"></script>
+            <script type="module" src="/static/client.js" />
           ) : (
-            <script type="module" src="/app/client.ts"></script>
+            <script type="module" src="/app/client.ts" />
           )}
           {head?.title ? <title>{head.title}</title> : ""}
           {head?.description ? (

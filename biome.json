@@ -30,8 +30,6 @@
       "**/*.md"
     ],
     "ignore": [
-      "apps/**",
-      "packages/**",
       "dist/**",
       "node_modules/**",
       "coverage/**"

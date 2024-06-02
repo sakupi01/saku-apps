@@ -1,8 +1,8 @@
+import theme from "@/theme";
 import { UIProvider } from "@yamada-ui/react";
 import ReactFlow, { useNodesState } from "reactflow";
-import theme from "@/theme";
-import Content from "../../components/content";
 import "reactflow/dist/base.css";
+import Content from "../../components/content";
 import { nodeSet } from "./constants/nodes";
 import usePositionNodes from "./hooks/usePositionNodes";
 

@@ -4,7 +4,7 @@ import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { Button, Thumbnail, Toc } from "@repo/ui";
 import { ArrowUpCircle, ChevronLeft, Github } from "lucide-react";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ShareLinks from "../../../_components/share";

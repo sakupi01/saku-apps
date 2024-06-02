@@ -1,10 +1,10 @@
-import { Heading, SlideFade, Tooltip } from "@yamada-ui/react";
 import PortalItem from "@/components/portal-item";
+import { Heading, SlideFade, Tooltip } from "@yamada-ui/react";
 import { FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { SiZenn } from "react-icons/si";
 import { IoMailOutline } from "react-icons/io5";
 import { LiaFlaskSolid } from "react-icons/lia";
+import { SiZenn } from "react-icons/si";
 
 const nodeTypes = {
   aboutItem: () => (

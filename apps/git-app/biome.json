@@ -1,6 +1,6 @@
 {
-    "extends": ["../../biome.json", "../../react-internal.json"],
-    "files": {
-        "ignore": [".dist/**"]
-    }
+  "extends": ["../../biome.json", "../../react-internal.json"],
+  "files": {
+    "ignore": ["build/**", "node_modules/**", "public/**", "vite.config.ts"]
+  }
 }

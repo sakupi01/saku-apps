@@ -19,20 +19,11 @@
     "test:e2e": "playwright test",
     "bench": "turbo bench",
     "coverage": "turbo coverage",
-    "test:update": "vitest --config vitest.config.ts --updateSnapshot",
-    "test:watch": "vitest --config vitest.config.ts --watchAll",
-    "test:debug": "vitest --config vitest.config.ts --runInBand",
-    "test": "bun run test:unit",
-    "check:format": "bunx biome format --changed --write .",
-    "check:lint": "bunx biome lint --changed --apply .",
-    "check:typecheck": "tsc --noEmit",
-    "check:lint-format": "bunx biome check --changed --apply .",
-    "check": "bun run check:typecheck & bunx biome check --apply . --no-errors-on-unmatched",
     "prepare": "husky",
     "postinstall": "patch-package"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.5.3",
+    "@biomejs/biome": "1.7.3",
     "@codspeed/vitest-plugin": "^3.1.0",
     "@repo/typescript-config": "workspace:*",
     "@types/react": "18.3.1",
@@ -46,10 +37,7 @@
     "node": ">=20"
   },
   "packageManager": "bun@1.0.25",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": ["apps/*", "packages/*"],
   "dependencies": {
     "@hono/react-renderer": "0.2.0",
     "@vercel/og": "0.6.2",
@@ -61,6 +49,6 @@
     "react-dom": "18.3.1"
   },
   "volta": {
-    "node": "20.11.1"
+    "node": "21.7.3"
   }
 }

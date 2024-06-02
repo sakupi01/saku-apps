@@ -1,5 +1,5 @@
 import { fetchArticlePages } from "@/libs/getApi";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import FilteredArticlesListContainer from "../_components/filtered-articles-list-container";
 import Pagination from "../_components/pagenation";
 

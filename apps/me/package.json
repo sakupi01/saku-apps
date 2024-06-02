@@ -1,11 +1,17 @@
 {
-  "name": "basic",
+  "name": "me",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build --mode client && vite build",
     "preview": "wrangler pages dev ./dist",
-    "deploy": "$npm_execpath run build && wrangler pages deploy ./dist"
+    "deploy": "$npm_execpath run build && wrangler pages deploy ./dist",
+    "check:format": "bunx biome format --changed --write .",
+    "check:lint": "bunx biome lint --changed --apply .",
+    "check:typecheck": "tsc --noEmit",
+    "check:lint-format": "bunx biome check --changed --apply .",
+    "check:markuplint": "markuplint \"./app/**/*.{jsx,tsx}\"",
+    "check": "bun check:typecheck & bunx biome check --apply . --no-errors-on-unmatched & bun check:markuplint"
   },
   "private": true,
   "dependencies": {

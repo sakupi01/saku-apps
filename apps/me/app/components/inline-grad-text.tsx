@@ -1,4 +1,4 @@
-import { Text, TextProps } from "@yamada-ui/react";
+import { Text, type TextProps } from "@yamada-ui/react";
 
 interface InlineGradTextProps {
   url: string;

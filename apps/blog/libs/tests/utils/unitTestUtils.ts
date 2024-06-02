@@ -1,4 +1,4 @@
-import { join } from "path";
+import { join } from "node:path";
 
 const getArticlesDirectory = (dirName: "_life" | "_dev") =>
   join(process.cwd(), `../../articles/${dirName}/`);

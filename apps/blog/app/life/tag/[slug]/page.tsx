@@ -1,13 +1,6 @@
 import FilteredArticlesListContainer from "@/app/_components/filtered-articles-list-container";
 import Pagination from "@/app/_components/pagenation";
-import {
-  fetchArticlePages,
-  fetchArticlesByQuery,
-  getAllArticleTags,
-} from "@/libs/getApi";
-import { ArticleListItem } from "@repo/ui";
-import Link from "next/link";
-import { Suspense } from "react";
+import { fetchArticlePages, getAllArticleTags } from "@/libs/getApi";
 
 const CATEGORY = "life" as const;
 
