@@ -1,6 +1,9 @@
-import { json } from "@remix-run/node";
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import {
+  QueryUserContributionYearsDocument,
+  QueryYearlyUserContributionsDocument,
+} from "~/gql/generated/graphql";
 import { error, success } from "~/types/results";
 import { fetcher } from "~/utils/fetcher";
 
@@ -14,47 +17,25 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-const queryContributedYears = `
-query QueryUserContributionYears ($username: String!) {
-  user(login: $username) {
-    contributionsCollection {
-      contributionYears
-    }
-  }
-}`;
-
-const queryYearlyUserContributions = `
-query QueryYearlyUserContributions ($username: String!, $from: DateTime!, $to: DateTime!) {
-  user(login: $username) {
-    contributionsCollection(from: $from, to: $to) {
-      contributionCalendar {
-        totalContributions
-        weeks {
-          contributionDays {
-            color
-            contributionCount
-            contributionLevel
-            date
-          }
-        }
-      }
-    }
-  }
-}`;
-
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-  const username = params.username;
+  const username = params.username || "";
+  const githubApiUrl = process.env.GITHUB_API_URL || "";
 
   try {
-    const { data: contributionYears } = await fetcher(queryContributedYears, {
-      username,
-    });
+    const contributionYears = await fetcher(
+      githubApiUrl,
+      QueryUserContributionYearsDocument,
+      {
+        username,
+      },
+    );
 
     const promises =
       contributionYears?.user?.contributionsCollection.contributionYears.map(
         async (year: number) => {
-          const { data: yearlyUserContributions } = await fetcher(
-            queryYearlyUserContributions,
+          const yearlyUserContributions = await fetcher(
+            githubApiUrl,
+            QueryYearlyUserContributionsDocument,
             {
               username,
               from: `${year}-01-01T00:00:00Z`,
@@ -67,6 +48,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
       ) || [];
 
     const contributions = await Promise.all(promises);
+
     return success(contributions);
   } catch {
     return error("There was an error fetching the data");

@@ -27,12 +27,9 @@
       "**/*.js",
       "**/*.jsx",
       "**/*.css",
-      "**/*.md"
+      "**/*.md",
+      "**/*.graphql"
     ],
-    "ignore": [
-      "dist/**",
-      "node_modules/**",
-      "coverage/**"
-    ]
+    "ignore": ["dist/**", "node_modules/**", "coverage/**"]
   }
 }

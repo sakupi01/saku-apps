@@ -40,3 +40,6 @@ Remixで取り扱うStateのほとんどは、サーバーサイドから供給�
 useRouteLoaderData関数を使うことで、簡単に任意の親RouteのStateにアクセス可能で、実質的にグローバルなState管理を代替することができる
 
 →アプリケーション全体で使うデータをあらかじめ親Routeのloaderで読み込んでおくだけで、全ての子Routeからアクセス可能
+
+client-presetでdocument node作って、以下のcustom fetcher使った
+https://the-guild.dev/graphql/codegen/docs/guides/react-vue#appendix-i-react-query-with-a-custom-fetcher-setup
