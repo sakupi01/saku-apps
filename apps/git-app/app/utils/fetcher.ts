@@ -1,4 +1,4 @@
-import { TypedDocumentNode } from "@graphql-typed-document-node/core";
+import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
 import { print } from "graphql";
 
 export async function fetcher<TResult, TVariables>(
