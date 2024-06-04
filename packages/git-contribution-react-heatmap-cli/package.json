@@ -3,7 +3,7 @@
   "module": "src/index.ts",
   "type": "module",
   "bin": {
-    "ink": "dist/index.js"
+    "git-heatmap": "dist/index.js"
   },
   "scripts": {
     "dev": "tsup --watch",
@@ -25,5 +25,8 @@
     "typescript": "^5.0.0",
     "commander": "^12.1.0",
     "rimraf": "^5.0.7"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
   }
 }
