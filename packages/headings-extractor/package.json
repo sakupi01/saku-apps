@@ -6,8 +6,8 @@
     "main": "src/index.js",
     "type": "module",
     "devDependencies": {
-        "@types/bun": "latest",
-        "@repo/typescript-config": "workspace:*"
+        "@repo/typescript-config": "workspace:*",
+        "@types/bun": "latest"
     },
     "peerDependencies": {
         "typescript": "5.3.3"

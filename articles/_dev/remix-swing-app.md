@@ -43,3 +43,40 @@ useRouteLoaderData関数を使うことで、簡単に任意の親RouteのState�
 
 client-presetでdocument node作って、以下のcustom fetcher使った
 https://the-guild.dev/graphql/codegen/docs/guides/react-vue#appendix-i-react-query-with-a-custom-fetcher-setup
+
+githubリポにstarつけるボタンつけてactionの練習したい
+
+/usernameでシェアしてメタデータとかも合わせて、snsみたいにできそう
+
+自由なデータ取得方法(=>ssrでもcsrでも)で
+githubの草を→頑張って作る。shadcnのコンポーネントダウンロード形式的な
+カスタマイズしたい→カスタマイズのための
+データに依らないView部分だけを提供したい
+
+JSXコンポーネントをcliでプロジェクトに作らせるコマンド
+ライブラリで使用しているライブラリをインストールさせる
+tailwind configを合わせさせる
+global.cssを合わせさせる
+コンポーネントインストールコマンドを叩かせる
+コンポーネントがプロジェクトに配置される（node_modulesから読み込む形ではない）
+
+bun link
+bun link git-contribution-react-heatmap-cli
+
+zod.parseを使用して返り値のかたを型安全にする
+
+```ts
+export async function fetchTree(
+  style: string,
+  tree: z.infer<typeof registryIndexSchema>
+) {
+  try {
+    const paths = tree.map((item) => `styles/${style}/${item.name}.json`)
+    const result = await fetchRegistry(paths)
+
+    return registryWithContentSchema.parse(result)
+  } catch (error) {
+    throw new Error(`Failed to fetch tree from registry.`)
+  }
+}
+```
