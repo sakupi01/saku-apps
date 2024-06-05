@@ -5,7 +5,7 @@ import {
   DEFAULT_THEME,
   THEMES,
   sizeProperties,
-} from "@/constants";
+} from "@/constants/variables";
 import { useData } from "@/hooks/useData";
 
 import { Heatmap } from "@/components/heatmap/heatmap";

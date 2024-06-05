@@ -1,4 +1,4 @@
-import { levels } from "@/constants";
+import { levels } from "@/constants/variables";
 import type { ContributionCalendar, ContributionDay } from "@/types";
 import { ContributionLevel } from "@/types/enums";
 
@@ -69,6 +69,7 @@ export function Heatmap(props: GraphProps) {
           {calendar.weeks.reduce<React.ReactElement[]>((blocks, week, i) => {
             let days = week.days;
 
+            // the code below is to fill the missing days in the first and last week
             if (days.length < 7) {
               const fills = Array.from(
                 Array(7 - days.length),
