@@ -107,8 +107,7 @@ export default async function Article({ params }: Params) {
             <div className="w-full">
               <div
                 className="markdown"
-                // https://biomejs.dev/ja/linter/rules/no-dangerously-set-inner-html/
-                // `sanitizeHtml`によりサニタイズ済みのDOMを渡すので、`dangerouslySetInnerHTML`を許容する
+                // biome-ignore lint/security/noDangerouslySetInnerHtml: `sanitizeHtml`によりサニタイズ済みのDOMを渡すので、`dangerouslySetInnerHTML`を許容する
                 dangerouslySetInnerHTML={{ __html: sanitizeHtml(content) }}
               />
             </div>
