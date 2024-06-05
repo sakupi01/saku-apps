@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "clean": "rimraf .storybook && rimraf .turbo",
+    "clean": "rimraf node_modules && rimraf .turbo",
     "check:format": "bunx biome format --changed --write .",
     "check:lint": "bunx biome lint --changed --apply .",
     "check:typecheck": "tsc --noEmit",
