@@ -1,12 +1,21 @@
 import fs from "node:fs";
 import path from "node:path";
-export function createComponent(
-  directory: string,
-  item: { name: string; content: string },
-) {
-  const fileName = `${item.name}.tsx`;
-  const filePath = path.join(directory, fileName);
+import type { RegistryWithContent } from "./registry/schema";
+export function createComponent(dir: string, item: RegistryWithContent) {
+  const directory = path.join(process.cwd(), `${dir}/${item.name}`);
+
+  const componentFileName = `${item.name}.tsx`;
+  const styleFileName = `${item.name}.module.css`;
+
+  const componentFilePath = path.join(directory, componentFileName);
+  const styleFilePath = path.join(directory, styleFileName);
+
   fs.mkdirSync(directory, { recursive: true });
-  fs.writeFileSync(filePath, item.content, { encoding: "utf-8" });
-  console.log(`Component ${item.name} is generated under ${directory}`);
+
+  fs.writeFileSync(componentFilePath, item.componentContent, {
+    encoding: "utf-8",
+  });
+  fs.writeFileSync(styleFilePath, item.styleContent, {
+    encoding: "utf-8",
+  });
 }

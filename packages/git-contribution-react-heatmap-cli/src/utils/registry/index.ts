@@ -10,13 +10,18 @@ const url =
 export const fetchComponent = async (components: string[]) => {
   const promises = components.map(async (component) => {
     try {
-      const content = await fetch(
+      const componentContentData = await fetch(
         `${url}/packages/ui/src/components/${component}/${component}.tsx`,
       );
-      const data = await content.text();
+      const styleContentData = await fetch(
+        `${url}/packages/ui/src/components/${component}/${component}.module.css`,
+      );
+      const componentContent = await componentContentData.text();
+      const styleContent = await styleContentData.text();
       return registryWithContentSchema.parse({
         name: component,
-        content: data,
+        componentContent: componentContent,
+        styleContent: styleContent,
       });
     } catch {
       throw new Error(`Component ${component} is not found`);
