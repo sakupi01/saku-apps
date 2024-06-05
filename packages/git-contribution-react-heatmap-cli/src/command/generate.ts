@@ -16,7 +16,6 @@ export const generate = (program: Command) =>
     )
     .action(async (components, options) => {
       const { directory } = options;
-      console.log(components, directory);
 
       const spinner = ora();
       try {

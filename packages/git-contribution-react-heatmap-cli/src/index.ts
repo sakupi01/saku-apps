@@ -1,9 +1,7 @@
 #! /usr/bin/env node
 import { Command } from "commander";
-import ora from "ora";
 import { generate } from "./command/generate";
-import { createComponent } from "./utils/create-components";
-import { fetchComponent } from "./utils/registry";
+import { init } from "./command/init";
 
 function main() {
   // Define the version and description of the CLI
@@ -12,6 +10,7 @@ function main() {
     .version("0.0.1")
     .description("Git Contribution Heatmap CLI");
 
+  init(program);
   generate(program);
 
   program.parse(process.argv);

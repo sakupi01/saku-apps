@@ -3,7 +3,7 @@
   "module": "src/index.ts",
   "type": "module",
   "bin": {
-    "git-heatmap": "dist/index.js"
+    "ghm": "dist/index.js"
   },
   "scripts": {
     "dev": "tsup --watch",
