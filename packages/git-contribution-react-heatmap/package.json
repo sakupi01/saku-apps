@@ -4,10 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "clean": "rimraf dist && rimraf components",
-    "preview": "vite preview",
+    "clean": "rimraf .storybook && rimraf .turbo",
     "check:format": "bunx biome format --changed --write .",
     "check:lint": "bunx biome lint --changed --apply .",
     "check:typecheck": "tsc --noEmit",

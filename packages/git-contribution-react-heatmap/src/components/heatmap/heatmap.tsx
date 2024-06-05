@@ -1,9 +1,7 @@
 import { levels } from "@/constants/variables";
 import type { ContributionCalendar, ContributionDay } from "@/types";
 import { ContributionLevel } from "@/types/enums";
-
 import styles from "./heatmap.module.css";
-
 interface GraphProps extends React.ComponentProps<"div"> {
   data: ContributionCalendar;
   daysLabel?: boolean;
