@@ -6,32 +6,27 @@
   "scripts": {
     "build": "remix vite:build",
     "dev": "remix vite:dev",
-    "start": "remix-serve ./build/server/index.js",
+    "start": "remix-serve $(pwd)/build/server/index.js",
     "check:format": "bunx biome format --changed --write .",
     "check:lint": "bunx biome lint --changed --apply .",
     "check:typecheck": "tsc --noEmit",
     "check:lint-format": "bunx biome check --changed --apply .",
     "check:markuplint": "markuplint \"./app/**/*.{jsx,tsx}\"",
     "check": "bun check:typecheck & bunx biome check --apply . --no-errors-on-unmatched & bun check:markuplint",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "codegen": "graphql-codegen --config codegen.ts",
+    "echo": "echo $(pwd)/build/server/index.js"
   },
   "dependencies": {
-    "@remix-run/node": "^2.9.2",
-    "@remix-run/react": "^2.9.2",
-    "@remix-run/serve": "^2.9.2",
-    "graphql": "^16.8.1",
-    "isbot": "^4.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@remix-run/node": "2.9.2",
+    "@remix-run/react": "2.9.2",
+    "@remix-run/serve": "2.9.2",
+    "graphql": "16.8.1",
+    "isbot": "4.1.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",
     "@graphql-codegen/client-preset": "4.2.6",
-    "@remix-run/dev": "^2.9.2",
-    "@types/react": "^18.2.20",
-    "@types/react-dom": "^18.2.7",
-    "typescript": "^5.4.5",
-    "vite": "^5.1.0",
+    "@remix-run/dev": "2.9.2",
     "vite-tsconfig-paths": "^4.2.1"
   },
   "engines": {

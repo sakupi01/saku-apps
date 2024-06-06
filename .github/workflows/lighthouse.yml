@@ -51,7 +51,12 @@ jobs:
       - name: Build
         run: bun run build
       
+      - name: 🫶🏻Echo
+        run: bun echo
+        working-directory: ${{ github.workspace }}/apps/git-app
+
       - name: 🌟Run Lighthouse CI
+        working-directory: ${{ github.workspace }}
         run: bun add -g @lhci/cli@0.13.x && lhci autorun
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
