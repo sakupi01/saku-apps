@@ -50,10 +50,6 @@ jobs:
 
       - name: Build
         run: bun run build
-      
-      - name: 🫶🏻Echo
-        run: pwd
-        working-directory: ${{ github.workspace }}
 
       - name: 🌟Run Lighthouse CI
         working-directory: ${{ github.workspace }}

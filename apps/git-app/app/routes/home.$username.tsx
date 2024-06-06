@@ -1,11 +1,11 @@
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
 import {
   QueryUserContributionYearsDocument,
   QueryYearlyUserContributionsDocument,
-} from "~/gql/generated/graphql";
-import { error, success } from "~/types/results";
-import { fetcher } from "~/utils/fetcher";
+} from "@/gql/generated/graphql";
+import { error, success } from "@/types/results";
+import { fetcher } from "@/utils/fetcher";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [

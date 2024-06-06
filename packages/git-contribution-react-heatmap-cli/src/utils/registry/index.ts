@@ -37,13 +37,13 @@ export const fetchComponent = async (components: string[]) => {
 export const fetchUtils = async () => {
   try {
     const variablesContentData = await fetch(
-      `${url}/packages/git-contribution-react-heatmap/src/constants/variables.ts`,
+      `${url}/packages/git-contribution-react-heatmap/src/components/constants/variables.ts`,
     );
     const enumsContentData = await fetch(
-      `${url}/packages/git-contribution-react-heatmap/src/types/enums.ts`,
+      `${url}/packages/git-contribution-react-heatmap/src/components/types/enums.ts`,
     );
     const typesContentData = await fetch(
-      `${url}/packages/git-contribution-react-heatmap/src/types/index.ts`,
+      `${url}/packages/git-contribution-react-heatmap/src/components/types/index.ts`,
     );
     const variablesContent = await variablesContentData.text();
     const enumsContent = await enumsContentData.text();

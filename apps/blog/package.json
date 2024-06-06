@@ -70,13 +70,10 @@
     "@types/react-dom": "^18.2.18",
     "@types/rss": "^0.0.32",
     "@vitest/coverage-v8": "^1.5.0",
-    "autoprefixer": "^10.4.17",
     "lost-pixel": "^3.16.0",
     "markuplint": "^4.1.0",
     "msw": "^2.2.13",
-    "postcss": "^8.4.35",
     "react-icons": "^5.0.1",
-    "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   },
   "browser": {

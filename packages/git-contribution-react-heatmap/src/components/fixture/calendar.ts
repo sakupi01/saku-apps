@@ -1,4 +1,4 @@
-import type { ContributionCalendar } from "@/types";
+import type { ContributionCalendar } from "@/components/types";
 
 export const CALENDAR: ContributionCalendar = {
   total: 1061,

@@ -1,3 +1,5 @@
+import path from "node:path";
+import { input } from "@inquirer/prompts";
 import type { Command } from "commander";
 import ora from "ora";
 import { createComponent } from "../utils/create-components";
@@ -10,13 +12,11 @@ export const generate = (program: Command) =>
     .command("generate")
     .description("Generate the heatmap under the given directory")
     .arguments("<components...>")
-    .option(
-      "-d, --directory <directory>",
-      "The directory to generate the heatmap",
-    )
-    .action(async (components, options) => {
-      const { directory } = options;
-
+    .action(async (components) => {
+      const globalCSSDir = await input({
+        message: " Where is your global CSS file?",
+      });
+      const directory = path.join(globalCSSDir, "git-heatmap");
       const spinner = ora();
       try {
         // fetch component from GitHub
