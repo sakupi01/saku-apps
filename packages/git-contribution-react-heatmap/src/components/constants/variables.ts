@@ -1,6 +1,10 @@
-import { type ContributionLevel, DisplayName, GraphSize } from "@/types/enums";
+import {
+  type ContributionLevel,
+  DisplayName,
+  GraphSize,
+} from "@/components/types/enums";
 
-import type { Theme, Themes } from "@/types";
+import type { Theme, Themes } from "@/components/types";
 
 export const levels = {
   Null: -1,

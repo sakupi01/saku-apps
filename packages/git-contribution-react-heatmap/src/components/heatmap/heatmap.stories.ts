@@ -1,4 +1,4 @@
-import { CALENDAR } from "@/fixture/calendar";
+import { CALENDAR } from "@/components/fixture/calendar";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Heatmap } from "./heatmap";
 

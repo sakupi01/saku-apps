@@ -1,6 +1,6 @@
-import { levels } from "@/constants/variables";
-import type { ContributionCalendar, ContributionDay } from "@/types";
-import { ContributionLevel } from "@/types/enums";
+import { levels } from "@/components/constants/variables";
+import type { ContributionCalendar, ContributionDay } from "@/components/types";
+import { ContributionLevel } from "@/components/types/enums";
 import styles from "./heatmap.module.css";
 interface GraphProps extends React.ComponentProps<"div"> {
   data: ContributionCalendar;
