@@ -1,5 +1,5 @@
-import { Box, BoxProps, Tooltip } from "@yamada-ui/react";
-import { PropsWithChildren } from "react";
+import { Box, type BoxProps, Tooltip } from "@yamada-ui/react";
+import type { PropsWithChildren } from "react";
 
 interface ItemProps {
   gradColor: string;
@@ -39,7 +39,7 @@ export default function PortalItem({
           }}
           {...props}
         >
-          <a
+          <div
             style={{
               display: "flex",
               justifyContent: "center",
@@ -50,7 +50,7 @@ export default function PortalItem({
             tabIndex={-1}
           >
             {children}
-          </a>
+          </div>
         </Box>
       </Tooltip>
     );

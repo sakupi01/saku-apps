@@ -1,7 +1,7 @@
-import fs from "fs";
-import { join } from "path";
-import { Article } from "@/interfaces/article";
-import { ZennArticle, ZennArticleObj } from "@/interfaces/zenn";
+import fs from "node:fs";
+import { join } from "node:path";
+import type { Article } from "@/interfaces/article";
+import type { ZennArticle, ZennArticleObj } from "@/interfaces/zenn";
 import matter from "gray-matter";
 import { assertNonNullable } from "./assertNonNullable";
 import { convertDateToYYYYMMDD } from "./convertDate";
@@ -115,8 +115,8 @@ export function getAllArticles(): Article[] {
 }
 
 export async function getAllArticlesByCategoryByTag(
-  tag = "",
   which: Category,
+  tag = "",
 ): Promise<Article[]> {
   const articles = await getAllArticlesByCategory(which);
   const filteredArticles = articles.filter((article) => {
@@ -131,7 +131,7 @@ export async function fetchArticlesByQuery(
   which: Category,
   tag = "",
 ) {
-  const articles = await getAllArticlesByCategoryByTag(tag, which);
+  const articles = await getAllArticlesByCategoryByTag(which, tag);
   const filteredArticles = articles.filter((article) => {
     return (
       article.title.toLowerCase().includes(query.toLowerCase()) ||
@@ -148,7 +148,7 @@ export async function fetchArticlesByQuery(
 }
 
 export async function fetchArticlePages(which: Category, query = "", tag = "") {
-  const articles = await getAllArticlesByCategoryByTag(tag, which);
+  const articles = await getAllArticlesByCategoryByTag(which, tag);
   const filteredArticles = articles.filter((article) => {
     return (
       article.title.toLowerCase().includes(query.toLowerCase()) ||

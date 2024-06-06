@@ -67,7 +67,7 @@ export default async function Image({ params: { slug } }: Props) {
           justifyContent: "center",
         }}
       >
-        <div tw={`flex w-full h-full p-4 rounded-lg`}>
+        <div tw={"flex w-full h-full p-4 rounded-lg"}>
           <div tw="flex flex-col justify-around items-start w-full h-ful text-basic rounded-lg px-10 py-6 bg-white shadow-sm">
             <p tw="flex gap-3 mb-5">{renderTags}</p>
             <h1 tw="text-6xl font-bold text-left text-basic my-5">
@@ -99,7 +99,6 @@ export default async function Image({ params: { slug } }: Props) {
         ],
       },
     );
-  } else {
-    return new Response("Not Found", { status: 404 });
   }
+  return new Response("Not Found", { status: 404 });
 }

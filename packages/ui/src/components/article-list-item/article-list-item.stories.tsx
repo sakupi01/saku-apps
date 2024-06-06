@@ -31,20 +31,13 @@ const tagWithId = TAGS?.map((tag) => {
   };
 });
 
-const renderTags = tagWithId.map((tag) => (
-  <span key={tag.id} className="tag mr-3">
-    {tag.name}
-  </span>
-));
-
 export const Default: Story = {
   args: {
     title: "title",
     excerpt: "excerptexcerptexcerptexcerptexcerptexcerptexcerptexcerptexcerpt",
     date: new Date().toISOString().split("T")[0] ?? "",
-    beginColor: "from-[#FEAC5E]",
-    middleColor: "via-[#C779D0]",
-    endColor: "to-[#4BC0C8]",
-    tags: renderTags,
+    colors: "from-[#FEAC5E] via-[#C779D0] to-[#4BC0C8]",
+    tags: tagWithId,
+    slug: "slug",
   },
 };

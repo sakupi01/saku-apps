@@ -1,5 +1,5 @@
-import { GridItem, GridItemProps } from "@yamada-ui/react";
-import { PropsWithChildren } from "react";
+import { GridItem, type GridItemProps } from "@yamada-ui/react";
+import type { PropsWithChildren } from "react";
 
 interface ItemProps {
   gradColor: string;
@@ -31,7 +31,7 @@ export default function PortalGridChild({
       }}
       {...props}
     >
-      <a href={url} target="_blank">
+      <a href={url} target="_blank" rel="noreferrer">
         {children}
       </a>
     </GridItem>

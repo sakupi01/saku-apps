@@ -1,0 +1,25 @@
+query QueryUserContributionYears ($username: String!) {
+  user(login: $username) {
+    contributionsCollection {
+      contributionYears
+    }
+  }
+}
+
+query QueryYearlyUserContributions ($username: String!, $from: DateTime!, $to: DateTime!) {
+  user(login: $username) {
+    contributionsCollection(from: $from, to: $to) {
+      contributionCalendar {
+        totalContributions
+        weeks {
+          contributionDays {
+            color
+            contributionCount
+            contributionLevel
+            date
+          }
+        }
+      }
+    }
+  }
+}

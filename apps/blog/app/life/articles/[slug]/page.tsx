@@ -6,7 +6,7 @@ import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { Button, Toc } from "@repo/ui";
 import { ArrowUpCircle, ChevronLeft } from "lucide-react";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -107,8 +107,6 @@ export default async function Article({ params }: Params) {
             <div className="w-full">
               <div
                 className="markdown"
-                // https://biomejs.dev/ja/linter/rules/no-dangerously-set-inner-html/
-                // `sanitizeHtml`によりサニタイズ済みのDOMを渡すので、`dangerouslySetInnerHTML`を許容する
                 dangerouslySetInnerHTML={{ __html: sanitizeHtml(content) }}
               />
             </div>

@@ -1,5 +1,5 @@
-import { readFileSync, readdirSync } from "fs";
-import { Mock, bench, describe, expect, test, vitest } from "vitest";
+import { readFileSync, readdirSync } from "node:fs";
+import { type Mock, bench, describe, test, vitest } from "vitest";
 import {
   getAllArticles,
   getArticleBySlug,

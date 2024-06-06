@@ -1,4 +1,4 @@
-import { Article } from "@/interfaces/article";
+import type { Article } from "@/interfaces/article";
 import { ArticleListItem, Divider } from "@repo/ui";
 import { ArticleListItemLife } from "./article-list-item-life";
 
@@ -19,7 +19,7 @@ export default async function FilteredArticlesList({
         });
 
         return (
-          <>
+          <div key={article.slug}>
             {article.category === "life" ? (
               <ArticleListItemLife
                 title={article.title}
@@ -41,7 +41,7 @@ export default async function FilteredArticlesList({
               />
             )}
             <Divider />
-          </>
+          </div>
         );
       })}
     </div>
