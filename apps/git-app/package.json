@@ -6,15 +6,14 @@
   "scripts": {
     "build": "remix vite:build",
     "dev": "remix vite:dev",
-    "start": "remix-serve $(pwd)/build/server/index.js",
+    "start": "PORT=4000 remix-serve $(pwd)/build/server/index.js",
     "check:format": "bunx biome format --changed --write .",
     "check:lint": "bunx biome lint --changed --apply .",
     "check:typecheck": "tsc --noEmit",
     "check:lint-format": "bunx biome check --changed --apply .",
     "check:markuplint": "markuplint \"./app/**/*.{jsx,tsx}\"",
     "check": "bun check:typecheck & bunx biome check --apply . --no-errors-on-unmatched & bun check:markuplint",
-    "codegen": "graphql-codegen --config codegen.ts",
-    "echo": "echo $(pwd)/build/server/index.js"
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@remix-run/node": "2.9.2",

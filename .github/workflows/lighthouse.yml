@@ -52,8 +52,8 @@ jobs:
         run: bun run build
       
       - name: 🫶🏻Echo
-        run: bun echo
-        working-directory: ${{ github.workspace }}/apps/git-app
+        run: pwd
+        working-directory: ${{ github.workspace }}
 
       - name: 🌟Run Lighthouse CI
         working-directory: ${{ github.workspace }}
