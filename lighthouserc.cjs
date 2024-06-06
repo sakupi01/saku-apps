@@ -2,7 +2,7 @@ module.exports = {
   ci: {
     collect: {
       startServerCommand: "bun start",
-      url: ["http://localhost:3000/", "http://localhost:4000/"],
+      url: ["http://localhost:3000/", "http://localhost:4000/home/saku-1101"],
       numberOfRuns: 1,
       settings: { chromeFlags: "--no-sandbox", preset: "desktop" },
     },
