@@ -12,8 +12,8 @@ export const registryWithContentArraySchema = z.array(
 
 export const utilsFilesSchema = z.object({
   variablesContent: z.string(),
-  enumsContent: z.string(),
-  typesContent: z.string(),
+  enumsContent: z.string().optional(),
+  typesContent: z.string().optional(),
 });
 
 export type RegistryWithContent = z.infer<typeof registryWithContentSchema>;
