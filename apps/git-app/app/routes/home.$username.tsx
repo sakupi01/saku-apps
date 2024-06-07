@@ -1,3 +1,5 @@
+import { Heatmap } from "@/components/heatmap/heatmap";
+import type { ContributionCalendar, ContributionDay } from "@/components/types";
 import {
   QueryUserContributionYearsDocument,
   QueryYearlyUserContributionsDocument,
@@ -32,7 +34,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
     const promises =
       contributionYears?.user?.contributionsCollection.contributionYears.map(
-        async (year: number) => {
+        async (year: number): Promise<ContributionCalendar> => {
           const yearlyUserContributions = await fetcher(
             githubApiUrl,
             QueryYearlyUserContributionsDocument,
@@ -42,8 +44,25 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
               to: `${year}-12-31T23:59:59Z`,
             },
           );
-          return yearlyUserContributions?.user?.contributionsCollection
-            .contributionCalendar;
+          const weeks =
+            (yearlyUserContributions?.user?.contributionsCollection.contributionCalendar?.weeks.map(
+              (week) => {
+                return {
+                  days: week.contributionDays.map((day) => {
+                    return {
+                      level: day.contributionLevel,
+                    };
+                  }),
+                };
+              },
+            ) ?? []) satisfies ContributionCalendar["weeks"];
+          return {
+            year,
+            total:
+              yearlyUserContributions?.user?.contributionsCollection
+                .contributionCalendar.totalContributions || 0,
+            weeks,
+          };
         },
       ) || [];
 
@@ -69,7 +88,9 @@ export default function GitApp() {
       <h2>Contributions</h2>
       <div>
         {data.ok ? (
-          <pre>{JSON.stringify(data.data, null, 2)}</pre>
+          data.data?.map((annualData) => (
+            <Heatmap key={annualData.year} data={annualData} />
+          ))
         ) : (
           <p>There was an error fetching the data</p>
         )}
