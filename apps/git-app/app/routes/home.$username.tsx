@@ -1,13 +1,17 @@
 import { Heatmap } from "@/components/heatmap/heatmap";
-import type { ContributionCalendar, ContributionDay } from "@/components/types";
+import type { ContributionCalendar } from "@/components/types";
 import {
   QueryUserContributionYearsDocument,
   QueryYearlyUserContributionsDocument,
 } from "@/gql/generated/graphql";
 import { error, success } from "@/types/results";
 import { fetcher } from "@/utils/fetcher";
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import type {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
+import { redirect, useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -18,6 +22,12 @@ export const meta: MetaFunction = () => {
     },
   ];
 };
+
+export async function action({ request }: ActionFunctionArgs) {
+  const body = await request.formData();
+  const username = body.get("username") || "";
+  return redirect(`/home/${username}`);
+}
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const username = params.username || "";
