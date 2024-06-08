@@ -5,6 +5,6 @@ tag-prefix: git-contribution-react-heatmap-cli@
 include-paths:
   - "packages/git-contribution-react-heatmap-cli/"
 template: |
-  ## [git-contribution-react-heatmap-cliv$RESOLVED_VERSION](https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION)
+  ## [git-contribution-react-heatmap-cli@$RESOLVED_VERSION](https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION)
   ## Changes
   $CHANGES

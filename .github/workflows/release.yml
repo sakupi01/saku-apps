@@ -33,6 +33,44 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     needs: draft_release
     steps:
+      - name: Create semver outputs
+        uses: actions/github-script@v6
+        id: semver
+        with:
+          script: |
+            const TAG_NAME = "${{ steps.release-drafter.outputs.tag_name }}"
+            const matched = TAG_NAME.match(/(((git-contribution-react-heatmap-cli@\d+)\.\d+).\d+)/)
+            core.setOutput('major', matched[3])
+            core.setOutput('minor', matched[2])
+            core.setOutput('patch', matched[1])
+            
+      - uses: actions/checkout@v4
+        with:
+          ref: "${{ steps.release-drafter.outputs.tag_name }}"
+
+      # Build packages with bun
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+          registry-url: 'https://registry.npmjs.org'
+      - run: bun build-packages
+
+      # Publish packages to npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '21.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: |
+            npm version ${{ steps.semver.outputs.major }}.${{ steps.semver.outputs.minor }}.${{ steps.semver.outputs.patch }}
+            npm publish --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Update major and minor git tags
+        run: |
+           git push -f origin "refs/tags/${{ steps.release-drafter.outputs.tag_name }}:refs/tags/${{ steps.semver.outputs.major }}"
+           git push -f origin "refs/tags/${{ steps.release-drafter.outputs.tag_name }}:refs/tags/${{ steps.semver.outputs.minor }}"
+
       - uses: release-drafter/release-drafter@v5
         id: release-drafter
         with:
@@ -40,20 +78,3 @@ jobs:
           publish: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create semver outputs
-        uses: actions/github-script@v6
-        id: semver
-        with:
-          script: |
-            const VERSION = "${{ steps.release-drafter.outputs.tag_name }}"
-            const matched = VERSION.match(/(((v\d+)\.\d+).\d+)/)
-            core.setOutput('major', matched[3])
-            core.setOutput('minor', matched[2])
-            core.setOutput('patch', matched[1])
-      - uses: actions/checkout@v4
-        with:
-          ref: "${{ steps.release-drafter.outputs.tag_name }}"
-      - name: Update major and minor git tags
-        run: |
-           git push -f origin "refs/tags/${{ steps.release-drafter.outputs.tag_name }}:refs/tags/${{ steps.semver.outputs.major }}"
-           git push -f origin "refs/tags/${{ steps.release-drafter.outputs.tag_name }}:refs/tags/${{ steps.semver.outputs.minor }}"
