@@ -63,9 +63,6 @@ jobs:
             const TAG_NAME = 'git-contribution-react-heatmap-cli@0.1.1'
             const matched = TAG_NAME.match(/@(\d+)\.(\d+)\.(\d+)/)
             if (matched) {
-              console.log(`Major: ${matched[1]}`)
-              console.log(`Minor: ${matched[2]}`)
-              console.log(`Patch: ${matched[3]}`)
               core.setOutput('major', matched[1])
               core.setOutput('minor', matched[2])
               core.setOutput('patch', matched[3])
@@ -108,6 +105,7 @@ jobs:
           node-version: '21.x'
           registry-url: 'https://registry.npmjs.org'
       - run: |
+            cd ./packages/git-contribution-react-heatmap-cli
             npm version ${{ steps.semver.outputs.major }}.${{ steps.semver.outputs.minor }}.${{ steps.semver.outputs.patch }}
             npm publish --provenance
         env:
