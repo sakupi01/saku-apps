@@ -80,6 +80,8 @@ jobs:
             cd ./packages/git-contribution-react-heatmap-cli
             npm version ${{ steps.semver.outputs.major }}.${{ steps.semver.outputs.minor }}.${{ steps.semver.outputs.patch }}
             npm publish --provenance
+            git add ./**/package*.json 
+            git commit -m"Update version"
             git push origin main
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
