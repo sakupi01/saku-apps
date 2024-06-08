@@ -19,6 +19,7 @@
     "test:e2e": "playwright test",
     "bench": "turbo bench",
     "coverage": "turbo coverage",
+    "build-packages": "turbo build:publish",
     "prepare": "husky",
     "postinstall": "patch-package"
   },
