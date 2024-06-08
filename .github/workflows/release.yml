@@ -71,7 +71,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-      # Publish packages to npm
+      # Publish packages to npm and push uodated package.json
       - uses: actions/setup-node@v4
         with:
           node-version: '21.x'
@@ -80,13 +80,9 @@ jobs:
             cd ./packages/git-contribution-react-heatmap-cli
             npm version ${{ steps.semver.outputs.major }}.${{ steps.semver.outputs.minor }}.${{ steps.semver.outputs.patch }}
             npm publish --provenance
+            git push origin main
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Update major and minor git tags
-        run: |
-           git push -f origin "refs/tags/${{ needs.draft_release.outputs.tag_name }}:refs/tags/${{ steps.semver.outputs.major }}"
-           git push -f origin "refs/tags/${{ needs.draft_release.outputs.tag_name }}:refs/tags/${{ steps.semver.outputs.minor }}"
 
       - uses: release-drafter/release-drafter@v5
         id: release-drafter
