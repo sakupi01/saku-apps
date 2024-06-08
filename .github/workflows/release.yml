@@ -96,6 +96,11 @@ jobs:
 
       - name: Build
         run: bun build-packages
+    
+      - name: Setup git config
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
 
       # Publish packages to npm
       - uses: actions/setup-node@v4
