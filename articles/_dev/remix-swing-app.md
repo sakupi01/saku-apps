@@ -80,3 +80,5 @@ export async function fetchTree(
   }
 }
 ```
+
+actionsを使用するとserver actionsみたいにprogressive enhancementが有効になる

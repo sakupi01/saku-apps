@@ -1,5 +1,5 @@
 import path from "node:path";
-import { input } from "@inquirer/prompts";
+import { confirm, input } from "@inquirer/prompts";
 import type { Command } from "commander";
 import ora from "ora";
 import { checkTailwindCSS } from "../utils/check-deps";
@@ -29,19 +29,25 @@ export const init = (program: Command) =>
 
       const globalCSSDir = await input({
         message: " Where is your global CSS file?",
+        default: "app/global.css",
       });
       const directory = path.join(globalCSSDir, "git-heatmap");
+
+      const needTypeFile = await confirm({
+        message: "Do you need types and constants?",
+        default: true,
+      });
 
       try {
         // fetch files from GitHub
         spinner.start("Fetching files...");
-        const files = await fetchUtils();
+        const files = await fetchUtils(needTypeFile);
         spinner.succeed("Files are fetched from GitHub!");
         spinner.stop();
 
         // set files under the given directory
         spinner.start(`Setting files under ${directory}`);
-        createUtils(directory, files);
+        createUtils(directory, files, needTypeFile);
         spinner.succeed(
           `Files are set under ${directory}/constants and ${directory}/types`,
         );

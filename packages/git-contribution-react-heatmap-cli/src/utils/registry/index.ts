@@ -34,24 +34,30 @@ export const fetchComponent = async (components: string[]) => {
   return registryWithContentArraySchema.parse(items);
 };
 
-export const fetchUtils = async () => {
+export const fetchUtils = async (needTypeFile: boolean) => {
   try {
     const variablesContentData = await fetch(
       `${url}/packages/git-contribution-react-heatmap/src/components/constants/variables.ts`,
     );
-    const enumsContentData = await fetch(
-      `${url}/packages/git-contribution-react-heatmap/src/components/types/enums.ts`,
-    );
-    const typesContentData = await fetch(
-      `${url}/packages/git-contribution-react-heatmap/src/components/types/index.ts`,
-    );
     const variablesContent = await variablesContentData.text();
-    const enumsContent = await enumsContentData.text();
-    const typesContent = await typesContentData.text();
+
+    if (needTypeFile) {
+      const enumsContentData = await fetch(
+        `${url}/packages/git-contribution-react-heatmap/src/components/types/enums.ts`,
+      );
+      const typesContentData = await fetch(
+        `${url}/packages/git-contribution-react-heatmap/src/components/types/index.ts`,
+      );
+      const enumsContent = await enumsContentData.text();
+      const typesContent = await typesContentData.text();
+      return utilsFilesSchema.parse({
+        variablesContent,
+        enumsContent,
+        typesContent,
+      });
+    }
     return utilsFilesSchema.parse({
       variablesContent,
-      enumsContent,
-      typesContent,
     });
   } catch {
     throw new Error("Failed to fetch some utils files");
