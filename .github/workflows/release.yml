@@ -39,7 +39,7 @@ jobs:
         id: semver
         with:
           script: |
-            cosnt TAG_NAME=${{ needs.draft_release.outputs.tag_name }}
+            const TAG_NAME=${{ needs.draft_release.outputs.tag_name }}
             const matched = TAG_NAME.match(/(((git-contribution-react-heatmap-cli@\d+)\.\d+).\d+)/)
             core.setOutput('major', matched[3])
             core.setOutput('minor', matched[2])
