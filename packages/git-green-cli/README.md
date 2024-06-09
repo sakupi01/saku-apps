@@ -12,17 +12,17 @@ You can install the library by running the following command:
 npm install git-green-cli
 ```
 
-Once installed, you can use the CLI tool by running the "ghm" command in your terminal.
+Once installed, you can use the CLI tool by running the "git-green" command in your terminal.
 The following command can check for you if tailwindcss is installed and initialize to use Github heatmap UI in your project.
 
 ```bash
-npm ghm init
+npm git-green init
 ```
 
 Once you've initialized, you can add Components like so:
 
 ```bash
-npm ghm generate <component_name>
+npm git-green gen <component_name>
 ```
 
 #### Available components
