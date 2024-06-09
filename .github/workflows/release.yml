@@ -44,17 +44,19 @@ jobs:
               core.setOutput('major', matched[1])
               core.setOutput('minor', matched[2])
               core.setOutput('patch', matched[3])
-            }
+            } 
 
-      - name: Echo SemVer outputs
-        run: |
-          echo "Major: ${{ steps.semver.outputs.major }}"
-          echo "Minor: ${{ steps.semver.outputs.minor }}"
-          echo "Patch: ${{ steps.semver.outputs.patch }}"    
+      # Use GitHub App for bypassing ruleset guard
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.PUSH_BYPASS_APP_ID }}
+          private-key: ${{ secrets.PUSH_BYPASS_APP_PRIVATE_KEY }}
 
       - uses: actions/checkout@v4
         with:
-          ref: "${{ steps.release-drafter.outputs.tag_name }}"
+          ref: main
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -71,23 +73,25 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-      # Publish packages to npm and push uodated package.json
+      # Publish packages to npm
       - uses: actions/setup-node@v4
         with:
           node-version: '21.x'
           registry-url: 'https://registry.npmjs.org'
       - run: |
-            cd ./packages/git-contribution-react-heatmap-cli
+            cd ./packages/git-green-cli
             npm version ${{ steps.semver.outputs.major }}.${{ steps.semver.outputs.minor }}.${{ steps.semver.outputs.patch }}
             npm publish --provenance
-            git add ./**/package*.json 
-            git commit -m"Update version"
-            git push origin main
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      - name: Commit and push updated package.json
+        run: |
+          git add ./**/package*.json
+          git commit -m "🎉release: release ${{ steps.semver.outputs.major }}.${{ steps.semver.outputs.minor }}.${{ steps.semver.outputs.patch }}"
+          git push origin main
 
       - uses: release-drafter/release-drafter@v5
-        id: release-drafter
         with:
           config-name: release-drafter-git-green-cli.yml
           publish: true
