@@ -6,11 +6,11 @@
     "main": "src/index.js",
     "type": "module",
     "devDependencies": {
-        "@repo/typescript-config": "workspace:*",
+        "@repo/typescript-config": "*",
         "@types/bun": "latest"
     },
     "peerDependencies": {
-        "typescript": "5.3.3"
+        "typescript": "5.4.5"
     },
     "dependencies": {
         "gray-matter": "4.0.3",
