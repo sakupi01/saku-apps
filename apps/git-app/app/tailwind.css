@@ -7,4 +7,63 @@
     html {
         @apply font-pacifico;
     }
+* {
+    --color-base: #ecfff6;
+    --color-base-text: #3f4c46;
+}
+/* GitHub (Default) */
+:root {
+  --color-primary: #30a14e;
+  --color-primary-text: #ffffff;
+  --color-primary-hover: #216e39;
+  --color-primary-hover-text: #ffffff;
+  --color-primary-active: #40c463;
+  --color-primary-active-text: #ffffff;
+  --color-primary-disabled: #ebedf0;
+  --color-primary-disabled-text: #9be9a8;
+  --color-primary-background: #ffffff;
+  --color-primary-background-text: #24292f;
+}
+  
+  /* GitHub Dark */
+  .custom-github-dark {
+    --color-primary: #26a641;
+    --color-primary-text: #2d333b;
+    --color-primary-hover: #30a14e;
+    --color-primary-hover-text: #ffffff;
+    --color-primary-active: #40c463;
+    --color-primary-active-text: #ffffff;
+    --color-primary-disabled: #2d333b;
+    --color-primary-disabled-text: #9be9a8;
+    --color-primary-background: #22272e;
+    --color-primary-background-text: #adbac7;
   }
+
+  /* Winter */
+  .custom-winter {
+    --color-primary: #54aeff;
+    --color-primary-text: #2d333b;
+    --color-primary-hover: #0969da;
+    --color-primary-hover-text: #ffffff;
+    --color-primary-active: #0a3069;
+    --color-primary-active-text: #ffffff;
+    --color-primary-disabled: #2d333b;
+    --color-primary-disabled-text: #9f9be9;
+    --color-primary-background: #ebedf0;
+    --color-primary-background-text: #adbac7;
+  }
+
+  /* Halloween */
+  .custom-halloween {
+    --color-primary: #fe9600;
+    --color-primary-text: #ffffff;
+  }
+
+  /* GitLab */
+  .custom-gitlab {
+    --color-primary: #527ba0;
+    --color-primary-text: #2e2e2e;
+  }
+
+  }
+
