@@ -73,7 +73,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-      # Publish packages to npm
+      # Publish packages to npm registry and push updated package.json and package-lock.json
       - uses: actions/setup-node@v4
         with:
           node-version: '21.x'
@@ -81,16 +81,13 @@ jobs:
       - run: |
             cd ./packages/git-green-cli
             npm version ${{ steps.semver.outputs.major }}.${{ steps.semver.outputs.minor }}.${{ steps.semver.outputs.patch }}
+            git add ./**/package.json ./**/package-lock.json
+            git commit -m "🎉release: release ${{ steps.semver.outputs.major }}.${{ steps.semver.outputs.minor }}.${{ steps.semver.outputs.patch }}"
+            git push origin main
             npm publish --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      
-      - name: Commit and push updated package.json
-        run: |
-          git add ./**/package*.json
-          git commit -m "🎉release: release ${{ steps.semver.outputs.major }}.${{ steps.semver.outputs.minor }}.${{ steps.semver.outputs.patch }}"
-          git push origin main
-
+    
       - uses: release-drafter/release-drafter@v5
         with:
           config-name: release-drafter-git-green-cli.yml
