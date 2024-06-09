@@ -36,6 +36,7 @@ version-resolver:
   patch:
     labels:
       - 'bug'
+      - 'fix'
       - 'security'
   default: patch
 

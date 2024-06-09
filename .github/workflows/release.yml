@@ -38,7 +38,7 @@ jobs:
         id: semver
         with:
           script: |
-            const TAG_NAME = 'git-green-cli@0.1.1'
+            const TAG_NAME = "${{ needs.draft_release.outputs.tag_name }}"
             const matched = TAG_NAME.match(/@(\d+)\.(\d+)\.(\d+)/)
             if (matched) {
               core.setOutput('major', matched[1])
