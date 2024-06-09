@@ -28,7 +28,7 @@ export function Heatmap(props: GraphProps) {
 
   return (
     <div {...rest}>
-      <div className="mb-2 text-sm">
+      <div className="mb-2 text-sm text-base-text">
         <span className="mr-2 italic">{calendar.year}:</span>
         {isNewYear && calendar.total === 0
           ? newYearText

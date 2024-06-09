@@ -1,3 +1,5 @@
+import { Form } from "@/components/form/form";
+import { Input } from "@/components/form/input";
 import { Heatmap } from "@/components/heatmap/heatmap";
 import type { ContributionCalendar } from "@/components/types";
 import {
@@ -11,7 +13,8 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import { redirect } from "@remix-run/react";
+import { Outlet, redirect } from "@remix-run/react";
+import { Layout } from "./_layout";
 
 export const meta: MetaFunction = () => {
   return [
@@ -33,13 +36,30 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function GitApp() {
   return (
-    <>
-      <h1>Git Browse App</h1>
-      <p>Enter a GitHub username to see their contributions</p>
-      <form action="?index" method="post">
-        <input name="username" />
-        <button type="submit">Search</button>
-      </form>
-    </>
+    <Layout>
+      <div className="w-full">
+        <h1 className="my-5 text-3xl text-center font-bold text-base-text">
+          Git Browse App
+        </h1>
+        <p className="text-md text-center text-base-text">
+          Enter a GitHub username to see their contributions.
+        </p>
+        <Form action="?index" method="post" className="my-10">
+          <>
+            <Input
+              id="username"
+              name="username"
+              placeholder="Search by username..."
+            />
+            <button
+              type="submit"
+              className="text-primary-text absolute end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-4 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2 animate-bounce hover:animate-none"
+            >
+              Search
+            </button>
+          </>
+        </Form>
+      </div>
+    </Layout>
   );
 }

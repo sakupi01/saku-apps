@@ -52,23 +52,23 @@
   }
   
   .grids li[data-level='0'] {
-    background-color: var(--level-0, #ebedf0);
+    @apply bg-level-0;
   }
   
   .grids li[data-level='1'] {
-    background-color: var(--level-1, #9be9a8);
+    @apply bg-level-1;
   }
   
   .grids li[data-level='2'] {
-    background-color: var(--level-2, #40c463);
+    @apply bg-level-2;
   }
   
   .grids li[data-level='3'] {
-    background-color: var(--level-3, #30a14e);
+    @apply bg-level-3;
   }
   
   .grids li[data-level='4'] {
-    background-color: var(--level-4, #216e39);
+    @apply bg-level-4;
   }
   
   .days li:nth-child(odd) {

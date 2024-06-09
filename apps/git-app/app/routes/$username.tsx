@@ -1,4 +1,7 @@
+import { Form } from "@/components/form/form";
+import { Input } from "@/components/form/input";
 import { Heatmap } from "@/components/heatmap/heatmap";
+import { ThemeSelector } from "@/components/theme-selector/theme-selector";
 import type { ContributionCalendar } from "@/components/types";
 import {
   QueryUserContributionYearsDocument,
@@ -12,9 +15,7 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 import { redirect, useLoaderData } from "@remix-run/react";
-import { Form } from "../components/form/form";
-import { Input } from "../components/form/input";
-import { Label } from "../components/form/label";
+import { Layout } from "./_layout";
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -45,6 +46,8 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
       },
     );
 
+    let totalInLifetime = 0;
+
     const promises =
       contributionYears?.user?.contributionsCollection.contributionYears.map(
         async (year: number): Promise<ContributionCalendar> => {
@@ -69,11 +72,13 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
                 };
               },
             ) ?? []) satisfies ContributionCalendar["weeks"];
+          const total =
+            yearlyUserContributions?.user?.contributionsCollection
+              .contributionCalendar.totalContributions || 0;
+          totalInLifetime += total;
           return {
             year,
-            total:
-              yearlyUserContributions?.user?.contributionsCollection
-                .contributionCalendar.totalContributions || 0,
+            total,
             weeks,
           };
         },
@@ -81,7 +86,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
     const contributions = await Promise.all(promises);
 
-    return success({ username, contributions });
+    return success({ username, totalInLifetime, contributions });
   } catch {
     return error("There was an error fetching the data");
   }
@@ -90,26 +95,46 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 export default function GitApp() {
   const data = useLoaderData<typeof loader>();
   return (
-    <>
-      <h1 className="text-3xl font-bold text-base-text">Git Browse App</h1>
-      <p className="text-md text-base-text">
-        Enter a GitHub username to see their contributions
-      </p>
-      <Form method="post">
-        <>
-          <Label htmlFor="username" />
-          <Input id="username" name="username" />
-          <button
-            type="submit"
-            className="text-primary-text absolute end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-4 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2 animate-bounce hover:animate-none"
-          >
-            Search
-          </button>
-        </>
-      </Form>
-      <br />
-      <h2>{data.ok ? data.data?.username : "unknown"}'s Contributions</h2>
-      <div>
+    <Layout>
+      <div className="w-full">
+        <ThemeSelector />
+        <Form method="post">
+          <>
+            <Input
+              id="username"
+              name="username"
+              placeholder="Search by username..."
+            />
+            <button
+              type="submit"
+              className="text-primary-text absolute end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-4 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2 animate-bounce hover:animate-none"
+            >
+              Search
+            </button>
+          </>
+        </Form>
+      </div>
+      <div className="w-full py-10">
+        <h2 className="text-xl font-bold text-base-text ">
+          {data.ok ? data.data?.username : "unknown"}'s Contributions 🪴
+        </h2>
+        <hr className="my-6 border-gray-300 sm:mx-auto lg:my-8" />
+        <div className="flex items-center gap-3">
+          <img
+            className="w-10 h-10 rounded-full"
+            src="/docs/images/people/profile-picture-5.jpg"
+            alt="Rounded avatar"
+          />
+          <h2 className="text-lg font-bold text-base-text">
+            {data.ok ? data.data?.username : "unknown"} has made{" "}
+            <span className="text-primary-active font-bold text-lg">
+              {data.ok ? data.data?.totalInLifetime : "Nan"}
+            </span>{" "}
+            contributions in life!
+          </h2>
+        </div>
+      </div>
+      <div className="flex flex-col gap-8">
         {data.ok ? (
           data.data?.contributions.map((annualData) => (
             <Heatmap key={annualData.year} data={annualData} />
@@ -118,6 +143,6 @@ export default function GitApp() {
           <p>There was an error fetching the data</p>
         )}
       </div>
-    </>
+    </Layout>
   );
 }
