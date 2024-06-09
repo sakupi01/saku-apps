@@ -4,7 +4,7 @@ import { Heatmap } from "@/components/heatmap/heatmap";
 import { ThemeSelector } from "@/components/theme-selector/theme-selector";
 import type { ContributionCalendar } from "@/components/types";
 import {
-  QueryUserContributionYearsDocument,
+  QueryUserInfoAndContributionYearsDocument,
   QueryYearlyUserContributionsDocument,
 } from "@/gql/generated/graphql";
 import { error, success } from "@/types/results";
@@ -38,18 +38,20 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   const githubApiUrl = process.env.GITHUB_API_URL || "";
 
   try {
-    const contributionYears = await fetcher(
+    const { user } = await fetcher(
       githubApiUrl,
-      QueryUserContributionYearsDocument,
+      QueryUserInfoAndContributionYearsDocument,
       {
         username,
       },
     );
 
+    const { contributionsCollection, ...rest } = user ?? {};
+
     let totalInLifetime = 0;
 
     const promises =
-      contributionYears?.user?.contributionsCollection.contributionYears.map(
+      contributionsCollection?.contributionYears.map(
         async (year: number): Promise<ContributionCalendar> => {
           const yearlyUserContributions = await fetcher(
             githubApiUrl,
@@ -86,7 +88,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
     const contributions = await Promise.all(promises);
 
-    return success({ username, totalInLifetime, contributions });
+    return success({ ...rest, username, totalInLifetime, contributions });
   } catch {
     return error("There was an error fetching the data");
   }
@@ -94,6 +96,8 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
 export default function GitApp() {
   const data = useLoaderData<typeof loader>();
+  const username = data.ok ? data.data?.username : "";
+
   return (
     <Layout>
       <div className="w-full">
@@ -116,23 +120,66 @@ export default function GitApp() {
       </div>
       <div className="w-full py-10">
         <h2 className="text-xl font-bold text-base-text ">
-          {data.ok ? data.data?.username : "unknown"}'s Contributions 🪴
+          {data.ok && data.data?.name ? data.data.name : username}'s
+          Contributions 🪴
         </h2>
+
         <hr className="my-6 border-gray-300 sm:mx-auto lg:my-8" />
-        <div className="flex items-center gap-3">
+
+        <div className="flex items-center gap-3 py-3">
           <img
-            className="w-10 h-10 rounded-full"
-            src="/docs/images/people/profile-picture-5.jpg"
+            className="w-10 h-10 p-1 rounded-full ring-1 ring-gray-300 "
+            src={data.ok ? data.data?.avatarUrl : "/avatar.png"}
             alt="Rounded avatar"
           />
           <h2 className="text-lg font-bold text-base-text">
-            {data.ok ? data.data?.username : "unknown"} has made{" "}
+            {data.ok && data.data?.name ? data.data.name : username} has made{" "}
             <span className="text-primary-active font-bold text-lg">
               {data.ok ? data.data?.totalInLifetime : "Nan"}
             </span>{" "}
             contributions in life!
           </h2>
         </div>
+        {data.ok ? (
+          <div className="text-base-text">
+            {data.data?.bio ? <p className="pb-3">{data.data.bio} </p> : ""}
+            {data.data?.username ? (
+              <p className="text-sm pb-2">id: {data.data.username} </p>
+            ) : (
+              ""
+            )}
+            {data.data?.email ? (
+              <span className="bg-primary-disabled text-primary-background-text text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">
+                📧 {data.data.email || "saku@mailcom"}
+              </span>
+            ) : (
+              ""
+            )}
+            {data.data?.company ? (
+              <span className="bg-primary-disabled text-primary-background-text text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">
+                💼 {data.data.company}
+              </span>
+            ) : (
+              ""
+            )}
+            {data.data?.twitterUsername ? (
+              <span className="bg-primary-disabled text-primary-background-text text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">
+                @{data.data.twitterUsername}
+              </span>
+            ) : (
+              ""
+            )}
+            {data.data?.followers ? (
+              <span className="bg-primary-disabled text-primary-background-text text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">
+                {data.data.followers?.totalCount} Followers
+              </span>
+            ) : (
+              ""
+            )}
+          </div>
+        ) : (
+          <p>There was an error fetching the data</p>
+        )}
       </div>
       <div className="flex flex-col gap-8">
         {data.ok ? (
