@@ -83,7 +83,7 @@ jobs:
             npm version ${{ steps.semver.outputs.major }}.${{ steps.semver.outputs.minor }}.${{ steps.semver.outputs.patch }}
             git add --all
             git commit -m "🎉release: release ${{ steps.semver.outputs.major }}.${{ steps.semver.outputs.minor }}.${{ steps.semver.outputs.patch }}"
-            # npm publish --provenance
+            npm publish --provenance
             git push origin main
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
