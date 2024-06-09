@@ -13,12 +13,12 @@ import type {
 } from "@remix-run/node";
 import { redirect, useLoaderData } from "@remix-run/react";
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
-    { title: "Git Browse App" },
+    { title: `${data?.data?.username}'s GitHub Contributions` },
     {
       name: "description",
-      content: "Your can browse anyone's GitHub contributions!",
+      content: `View ${data?.data?.username}'s GitHub contributions`,
     },
   ];
 };
@@ -26,7 +26,7 @@ export const meta: MetaFunction = () => {
 export async function action({ request }: ActionFunctionArgs) {
   const body = await request.formData();
   const username = body.get("username") || "";
-  return redirect(`/home/${username}`);
+  return redirect(`/${username}`);
 }
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -78,7 +78,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
     const contributions = await Promise.all(promises);
 
-    return success(contributions);
+    return success({ username, contributions });
   } catch {
     return error("There was an error fetching the data");
   }
@@ -95,10 +95,10 @@ export default function GitApp() {
         <button type="submit">Search</button>
       </form>
       <br />
-      <h2>Contributions</h2>
+      <h2>{data.ok ? data.data?.username : "unknown"}'s Contributions</h2>
       <div>
         {data.ok ? (
-          data.data?.map((annualData) => (
+          data.data?.contributions.map((annualData) => (
             <Heatmap key={annualData.year} data={annualData} />
           ))
         ) : (
