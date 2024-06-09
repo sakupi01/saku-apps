@@ -81,10 +81,10 @@ jobs:
       - run: |
             cd ./packages/git-green-cli
             npm version ${{ steps.semver.outputs.major }}.${{ steps.semver.outputs.minor }}.${{ steps.semver.outputs.patch }}
-            git add ./**/package.json ./**/package-lock.json
+            git add --all
             git commit -m "🎉release: release ${{ steps.semver.outputs.major }}.${{ steps.semver.outputs.minor }}.${{ steps.semver.outputs.patch }}"
-            git push origin main
             npm publish --provenance
+            git push origin main
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     
