@@ -1,4 +1,4 @@
-# git-contribution-react-heatmap-cli
+# git-green-cli
 
 To install dependencies:
 

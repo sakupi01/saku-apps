@@ -21,7 +21,7 @@ jobs:
       - uses: release-drafter/release-drafter@v5
         id: release-drafter
         with:
-          config-name: release-drafter-git-contribution-react-heatmap-cli.yml
+          config-name: release-drafter-git-green-cli.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   install-dependencies:
@@ -54,13 +54,13 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     needs: draft_release
     steps:
-      # Extract SemVers from tag (git-contribution-react-heatmap-cli@1.0.0 -> 1 0 0)
+      # Extract SemVers from tag (git-green-cli@1.0.0 -> 1 0 0)
       - name: Create SemVer outputs
         uses: actions/github-script@v6
         id: semver
         with:
           script: |
-            const TAG_NAME = 'git-contribution-react-heatmap-cli@0.1.1'
+            const TAG_NAME = 'git-green-cli@0.1.1'
             const matched = TAG_NAME.match(/@(\d+)\.(\d+)\.(\d+)/)
             if (matched) {
               console.log(`Major: ${matched[1]}`)
@@ -121,7 +121,7 @@ jobs:
       - uses: release-drafter/release-drafter@v5
         id: release-drafter
         with:
-          config-name: release-drafter-git-contribution-react-heatmap-cli.yml
+          config-name: release-drafter-git-green-cli.yml
           publish: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

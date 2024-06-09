@@ -12,10 +12,10 @@ export const fetchComponent = async (components: string[]) => {
   const promises = components.map(async (component) => {
     try {
       const componentContentData = await fetch(
-        `${url}/packages/git-contribution-react-heatmap/src/components/${component}/${component}.tsx`,
+        `${url}/packages/git-green/src/components/${component}/${component}.tsx`,
       );
       const styleContentData = await fetch(
-        `${url}/packages/git-contribution-react-heatmap/src/components/${component}/${component}.module.css`,
+        `${url}/packages/git-green/src/components/${component}/${component}.module.css`,
       );
       const componentContent = await componentContentData.text();
       const styleContent = await styleContentData.text();
@@ -37,16 +37,16 @@ export const fetchComponent = async (components: string[]) => {
 export const fetchUtils = async (needTypeFile: boolean) => {
   try {
     const variablesContentData = await fetch(
-      `${url}/packages/git-contribution-react-heatmap/src/components/constants/variables.ts`,
+      `${url}/packages/git-green/src/components/constants/variables.ts`,
     );
     const variablesContent = await variablesContentData.text();
 
     if (needTypeFile) {
       const enumsContentData = await fetch(
-        `${url}/packages/git-contribution-react-heatmap/src/components/types/enums.ts`,
+        `${url}/packages/git-green/src/components/types/enums.ts`,
       );
       const typesContentData = await fetch(
-        `${url}/packages/git-contribution-react-heatmap/src/components/types/index.ts`,
+        `${url}/packages/git-green/src/components/types/index.ts`,
       );
       const enumsContent = await enumsContentData.text();
       const typesContent = await typesContentData.text();

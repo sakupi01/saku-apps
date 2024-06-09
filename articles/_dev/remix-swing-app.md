@@ -61,7 +61,7 @@ global.cssを合わせさせる
 コンポーネントがプロジェクトに配置される（node_modulesから読み込む形ではない）
 
 bun link
-bun link git-contribution-react-heatmap-cli
+bun link git-green-cli
 
 zod.parseを使用して返り値のかたを型安全にする
 

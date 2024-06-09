@@ -1,10 +1,10 @@
 _extends: saku-apps:.github/release-drafter-base.yml
-name-template: git-contribution-react-heatmap-cli@$RESOLVED_VERSION
-tag-template: git-contribution-react-heatmap-cli@$RESOLVED_VERSION
-tag-prefix: git-contribution-react-heatmap-cli@
+name-template: git-green-cli@$RESOLVED_VERSION
+tag-template: git-green-cli@$RESOLVED_VERSION
+tag-prefix: git-green-cli@
 include-paths:
-  - "packages/git-contribution-react-heatmap-cli/"
+  - "packages/git-green-cli/"
 template: |
-  ## [git-contribution-react-heatmap-cli@$RESOLVED_VERSION](https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION)
+  ## [git-green-cli@$RESOLVED_VERSION](https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION)
   ## Changes
   $CHANGES
