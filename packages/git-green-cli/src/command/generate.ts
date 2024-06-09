@@ -9,7 +9,7 @@ import { fetchComponent } from "../utils/registry";
 // > bun git-heatmap generate <components...> -d <directory>
 export const generate = (program: Command) =>
   program
-    .command("generate")
+    .command("gen")
     .description("Generate the heatmap under the given directory")
     .arguments("<components...>")
     .action(async (components) => {

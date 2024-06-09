@@ -13,7 +13,7 @@
     "access": "public"
   },
   "bin": {
-    "ghm": "dist/index.js"
+    "git-green": "dist/index.js"
   },
   "scripts": {
     "dev": "tsup --watch",
