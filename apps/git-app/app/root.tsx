@@ -29,6 +29,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <link
           href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik+Mono+One&family=Tiny5&display=swap"
           rel="stylesheet"
+          crossOrigin="anonymous"
         />
       </head>
       <body>

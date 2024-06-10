@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+ /* @font-face {
+  font-family: "Rubik Mono One", monospace;
+  font-weight: 400;
+  font-style: normal;
+  src: url(../public//fonts//Rubik_Mono_One//RubikMonoOne-Regular.ttf) format('ttf');
+ } */
+ /* @font-face {
+  font-family: 'notosansjp';
+  font-weight: 600;
+  src: url(/font/notosansjp/NotoSansJP-Bold.otf) format('opentype');
+ }
+ @font-face {
+  font-family: 'notosansjp';
+  font-weight: 900;
+  src: url(/font/notosansjp/NotoSansJP-Black.otf) format('opentype');
+ } */
+
+ /* @font-face {
+   font-family: "Pacifico";
+   src: url(../public/fonts/Pacifico/Pacifico-Regular.ttf) format('ttf');
+  } */
+
+  /* *, :after, :before {
+    border-style: none;
+    border-color: #e5e7eb;
+    box-sizing: border-box
+} */
+
 @layer base {
     html {
         @apply font-pacifico;
