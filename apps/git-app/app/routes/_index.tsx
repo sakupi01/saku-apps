@@ -26,9 +26,13 @@ export default function GitApp() {
   return (
     <Layout>
       <div className="w-full">
-        <h1 className="my-5 text-3xl text-center font-bold text-base-text">
-          Git Browse App
+        <h1 className="my-16 text-3xl text-center font-bold text-base-text">
+          Git Kusa App
         </h1>
+        <h2 className="my-16 text-xl text-center text-base-text">
+          Visualize Your Coding Trail - Commit Heatmaps to Witness Your Growth.
+        </h2>
+        <hr className="my-6 border-gray-300 sm:mx-auto lg:my-8" />
         <p className="text-md text-center text-base-text">
           Enter a GitHub username to see their contributions.
         </p>

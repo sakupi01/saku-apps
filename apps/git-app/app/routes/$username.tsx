@@ -17,6 +17,7 @@ import type {
 import { redirect, useLoaderData } from "@remix-run/react";
 import clsx from "clsx";
 import domtoimage from "dom-to-image";
+import { Check, CircleMinus, Copy, Download } from "lucide-react";
 import { useRef, useState } from "react";
 import { Layout } from "./_layout";
 
@@ -216,7 +217,7 @@ export default function GitApp() {
 
   return (
     <Layout>
-      <div className="w-full">
+      <div className="w-full px-3">
         <ThemeSelector />
         <Form method="post">
           <>
@@ -234,22 +235,23 @@ export default function GitApp() {
           </>
         </Form>
       </div>
+
       <p>
         Reach out to{" "}
         <a
           href={data.data?.url}
-          className="text-primary-active font-bold underline hover:text-primary-hover transition-colors"
+          className="text-primary-active underline hover:text-primary-hover transition-colors"
         >
           {username} on GitHub!
         </a>
       </p>
 
       <div className="w-full py-10">
-        <div className="flex justify-between">
-          <h2 className="text-xl font-bold text-base-text ">
+        <div className="flex flex-col gap-2 md:flex-row md:justify-between">
+          <h2 className="text-2xl text-base-text ">
             {data.data?.name ? data.data.name : username}'s Contributions 🪴
           </h2>
-          <div className="flex gap-3">
+          <div className="flex gap-3 justify-end">
             <button
               type="button"
               className={clsx(
@@ -260,13 +262,33 @@ export default function GitApp() {
               )}
               onClick={handleDownload}
             >
-              {downloading ? "Downloading..." : "Download"}
+              {/* MEMO: replace hogehoge.com */}
+              <a
+                href={`https://twitter.com/intent/tweet?text=${username}'s%20Kusa%20Over%20the%20years%20|&url=https://hogehoge.com/${username}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Share!
+              </a>
             </button>
 
             <button
               type="button"
               className={clsx(
-                "text-primary-text end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2 transition-colors",
+                "text-primary-text end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-2 py-2 transition-colors",
+                {
+                  "animate-pulse ": downloading,
+                },
+              )}
+              onClick={handleDownload}
+            >
+              {downloading ? <CircleMinus size={15} /> : <Download size={15} />}
+            </button>
+
+            <button
+              type="button"
+              className={clsx(
+                "text-primary-text end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-2 py-2 transition-colors",
                 {
                   "animate-pulse ": doingCopy,
                   "bg-green-300": copySuccess,
@@ -274,21 +296,27 @@ export default function GitApp() {
               )}
               onClick={handleCopyImage}
             >
-              {copySuccess ? "Copied!" : doingCopy ? "Copying..." : "Copy"}
+              {copySuccess ? (
+                <Check size={15} />
+              ) : doingCopy ? (
+                <CircleMinus size={15} />
+              ) : (
+                <Copy size={15} />
+              )}
             </button>
           </div>
         </div>
 
-        <hr className="my-6 border-gray-300 sm:mx-auto lg:my-8" />
+        <hr className="my-4 border-gray-300 sm:mx-autolg:my-8" />
 
-        <div ref={contributionImageAreaRef}>
-          <div className="flex items-center gap-3 py-3">
+        <div ref={contributionImageAreaRef} className="overflow-x-scroll">
+          <div className="flex items-center gap-3 py-3 px-1">
             <img
               className="w-10 h-10 p-1 rounded-full ring-1 ring-gray-300 "
               src={data.data?.avatarUrl}
               alt="Rounded avatar"
             />
-            <h2 className="text-lg font-bold text-base-text">
+            <h2 className="text-lg text-base-text">
               {data.data?.name ? data.data.name : username} has made{" "}
               <span className="text-primary-active font-bold text-lg">
                 {data.data?.totalInLifetime}
