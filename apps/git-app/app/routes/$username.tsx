@@ -248,9 +248,16 @@ export default function GitApp() {
 
       <div className="w-full py-10">
         <div className="flex flex-col gap-2 md:flex-row md:justify-between">
-          <h2 className="text-2xl text-base-text ">
-            {data.data?.name ? data.data.name : username}'s Contributions 🪴
-          </h2>
+          <div className="flex items-center">
+            <h2 className="text-2xl text-base-text ">
+              {data.data?.name ? data.data.name : username}'s Contributions{" "}
+            </h2>
+            <img
+              className="w-10 h-10"
+              src={"/public/favicon.ico"}
+              alt="Kusabocado"
+            />
+          </div>
           <div className="flex gap-3 justify-end">
             <button
               type="button"
