@@ -1,19 +1,7 @@
 import { Form } from "@/components/form/form";
 import { Input } from "@/components/form/input";
-import { Heatmap } from "@/components/heatmap/heatmap";
-import type { ContributionCalendar } from "@/components/types";
-import {
-  QueryUserContributionYearsDocument,
-  QueryYearlyUserContributionsDocument,
-} from "@/gql/generated/graphql";
-import { error, success } from "@/types/results";
-import { fetcher } from "@/utils/fetcher";
-import type {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-  MetaFunction,
-} from "@remix-run/node";
-import { Outlet, redirect } from "@remix-run/react";
+import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
+import { redirect } from "@remix-run/react";
 import { Layout } from "./_layout";
 
 export const meta: MetaFunction = () => {
@@ -53,7 +41,7 @@ export default function GitApp() {
             />
             <button
               type="submit"
-              className="text-primary-text absolute end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2 animate-bounce hover:animate-none"
+              className="text-primary-text absolute end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2 animate-bounce hover:animate-none transition-colors"
             >
               Search
             </button>

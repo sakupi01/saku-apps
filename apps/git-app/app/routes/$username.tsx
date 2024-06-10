@@ -18,7 +18,6 @@ import { redirect, useLoaderData } from "@remix-run/react";
 import clsx from "clsx";
 import domtoimage from "dom-to-image";
 import { useRef, useState } from "react";
-import { useTransition } from "react";
 import { Layout } from "./_layout";
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
@@ -228,13 +227,22 @@ export default function GitApp() {
             />
             <button
               type="submit"
-              className="text-primary-text absolute end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2 animate-bounce hover:animate-none"
+              className="text-primary-text absolute end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2 animate-bounce hover:animate-none transition-colors"
             >
               Search
             </button>
           </>
         </Form>
       </div>
+      <p>
+        Reach out to{" "}
+        <a
+          href={data.data?.url}
+          className="text-primary-active font-bold underline hover:text-primary-hover transition-colors"
+        >
+          {username} on GitHub!
+        </a>
+      </p>
 
       <div className="w-full py-10">
         <div className="flex justify-between">
@@ -245,7 +253,7 @@ export default function GitApp() {
             <button
               type="button"
               className={clsx(
-                "text-primary-text end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2",
+                "text-primary-text end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2 transition-colors",
                 {
                   "animate-pulse ": downloading,
                 },
@@ -258,7 +266,7 @@ export default function GitApp() {
             <button
               type="button"
               className={clsx(
-                "text-primary-text end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2",
+                "text-primary-text end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2 transition-colors",
                 {
                   "animate-pulse ": doingCopy,
                   "bg-green-300": copySuccess,
