@@ -315,46 +315,48 @@ export default function GitApp() {
         <hr className="my-4 border-gray-300 sm:mx-auto lg:my-8" />
 
         <div id="calendar-graph">
-          <div
-            ref={contributionImageAreaRef}
-            className="w-full bg-primary-background overflow-x-scroll md:overflow-hidden md:w-main-width"
-          >
-            <div className="flex items-center gap-3 py-3 px-1">
-              <img
-                className="w-10 h-10 p-1 rounded-full ring-1 ring-gray-300 "
-                src={data.data?.avatarUrl}
-                alt="Rounded avatar"
-              />
-              <h2 className="text-lg text-primary-background-text">
-                {data.data?.name ? data.data.name : username} has made{" "}
-                <span className="text-primary-active font-bold text-lg">
-                  {data.data?.totalInLifetime}
-                </span>{" "}
-                contributions in life!
-              </h2>
-            </div>
-            <div className="text-primary-background-text">
-              {data.data?.bio ? <p className="pb-3">{data.data.bio} </p> : ""}
-              {data.data?.username ? (
-                <p className="text-sm pb-2">id: {data.data.username} </p>
-              ) : (
-                ""
-              )}
-              {renderTruthyData({ data: data.data?.email, prefix: "📧" })}
-              {renderTruthyData({ data: data.data?.company, prefix: "💼" })}
-              {renderTruthyData({
-                data: data.data?.twitterUsername,
-                prefix: "@",
-              })}
-              {renderTruthyData({
-                data: data.data?.followers?.totalCount.toString(),
-                suffix: "followers",
-              })}
-            </div>
-            <div className="flex flex-col gap-8 mt-7">
-              {data.data?.contributions.map((annualData) => (
-                <Heatmap key={annualData.year} data={annualData} />
-              ))}
+          <div className="overflow-auto md:overflow-visible">
+            <div
+              ref={contributionImageAreaRef}
+              className="w-main-width bg-primary-background"
+            >
+              <div className="flex items-center gap-3 py-3 px-1">
+                <img
+                  className="w-10 h-10 p-1 rounded-full ring-1 ring-gray-300 "
+                  src={data.data?.avatarUrl}
+                  alt="Rounded avatar"
+                />
+                <h2 className="text-lg text-primary-background-text">
+                  {data.data?.name ? data.data.name : username} has made{" "}
+                  <span className="text-primary-active font-bold text-lg">
+                    {data.data?.totalInLifetime}
+                  </span>{" "}
+                  contributions in life!
+                </h2>
+              </div>
+              <div className="text-primary-background-text">
+                {data.data?.bio ? <p className="pb-3">{data.data.bio} </p> : ""}
+                {data.data?.username ? (
+                  <p className="text-sm pb-2">id: {data.data.username} </p>
+                ) : (
+                  ""
+                )}
+                {renderTruthyData({ data: data.data?.email, prefix: "📧" })}
+                {renderTruthyData({ data: data.data?.company, prefix: "💼" })}
+                {renderTruthyData({
+                  data: data.data?.twitterUsername,
+                  prefix: "@",
+                })}
+                {renderTruthyData({
+                  data: data.data?.followers?.totalCount.toString(),
+                  suffix: "followers",
+                })}
+              </div>
+              <div className="flex flex-col gap-8 mt-7">
+                {data.data?.contributions.map((annualData) => (
+                  <Heatmap key={annualData.year} data={annualData} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
