@@ -2,34 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
- /* @font-face {
-  font-family: "Rubik Mono One", monospace;
-  font-weight: 400;
-  font-style: normal;
-  src: url(../public//fonts//Rubik_Mono_One//RubikMonoOne-Regular.ttf) format('ttf');
- } */
- /* @font-face {
-  font-family: 'notosansjp';
-  font-weight: 600;
-  src: url(/font/notosansjp/NotoSansJP-Bold.otf) format('opentype');
- }
- @font-face {
-  font-family: 'notosansjp';
-  font-weight: 900;
-  src: url(/font/notosansjp/NotoSansJP-Black.otf) format('opentype');
- } */
-
- /* @font-face {
-   font-family: "Pacifico";
-   src: url(../public/fonts/Pacifico/Pacifico-Regular.ttf) format('ttf');
-  } */
-
-  /* *, :after, :before {
-    border-style: none;
-    border-color: #e5e7eb;
-    box-sizing: border-box
-} */
-
 @layer base {
     html {
         @apply font-pacifico;
@@ -49,7 +21,7 @@
   --color-primary-disabled: #ebedf0;
   --color-primary-disabled-text: #9be9a8;
   --color-primary-background: #ffffff;
-  --color-primary-background-text: #24292f;
+  --color-primary-background-text: #3f4c46;
   --color-level-0: #ebedf0;
   --color-level-1: #9be9a8;
   --color-level-2: #40c463;
@@ -87,7 +59,7 @@
     --color-primary-disabled: #ebedf0; /* 淡いグレー */
     --color-primary-disabled-text: #9cd6f7; /* 薄い水色 */
     --color-primary-background: #ffffff; /* 白 */
-    --color-primary-background-text: #24292f; /* 濃いグレー */
+    --color-primary-background-text: #3f4c46; /* 濃いグレー */
     --color-level-0: #e7effc; /* 淡いグレー */
     --color-level-1: #c2e1ec; /* 非常に薄い水色 */
     --color-level-2: #9cd6f7; /* 薄い水色 */
@@ -107,7 +79,7 @@
     --color-primary-disabled: #ebedf0; /* 淡いグレー */
     --color-primary-disabled-text: #f7b25c; /* 濃いオレンジ */
     --color-primary-background: #ffffff; /* 白 */
-    --color-primary-background-text: #24292f; /* 濃いグレー */
+    --color-primary-background-text: #3f4c46; /* 濃いグレー */
     --color-level-0: #faf5ec; /* 淡いグレー */
     --color-level-1: #ffdead; /* 非常に薄いオレンジ */
     --color-level-2: #f7b25c; /* 濃いオレンジ */
@@ -118,15 +90,15 @@
   /* Summer */
   .custom-summer {
     --color-primary: #ffdc35; /* 明るい黄色 */
-    --color-primary-text: #24292f; /* 濃いグレー */
+    --color-primary-text: #3f4c46; /* 濃いグレー */
     --color-primary-hover: #ffd500; /* 中間の黄色 */
-    --color-primary-hover-text: #24292f; /* 濃いグレー */
+    --color-primary-hover-text: #3f4c46; /* 濃いグレー */
     --color-primary-active: #ffc800; /* 濃い黄色 */
-    --color-primary-active-text: #24292f; /* 濃いグレー */
+    --color-primary-active-text: #3f4c46; /* 濃いグレー */
     --color-primary-disabled: #ebedf0; /* 淡いグレー */
     --color-primary-disabled-text: #ffdc35; /* 明るい黄色 */
     --color-primary-background: #ffffff; /* 白 */
-    --color-primary-background-text: #24292f; /* 濃いグレー */
+    --color-primary-background-text: #3f4c46; /* 濃いグレー */
     --color-level-0: #fbf6ea; /* 淡いグレー */
     --color-level-1: #d6f7ff; /* 非常に薄い水色 */
     --color-level-2: #ffdc35; /* 明るい黄色 */
@@ -145,7 +117,7 @@
     --color-primary-disabled: #ebedf0; /* 淡いグレー */
     --color-primary-disabled-text: #ffb2dc; /* ピンク */
     --color-primary-background: #ffffff; /* 白 */
-    --color-primary-background-text: #24292f; /* 濃いグレー */
+    --color-primary-background-text: #3f4c46; /* 濃いグレー */
     --color-level-0: #fbeffc; /* 淡いグレー */
     --color-level-1: #d1ffb2; /* 非常に薄い緑色 */
     --color-level-2: #ffb2dc; /* ピンク */

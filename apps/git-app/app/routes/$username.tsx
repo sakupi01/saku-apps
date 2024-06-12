@@ -44,7 +44,7 @@ const renderTruthyData = ({
     return <></>;
   }
   return (
-    <span className="bg-primary-disabled text-primary-background-text text-[0.65rem] font-medium me-2 px-2.5 py-0.5 rounded-full">
+    <span className="bg-primary-disabled text-primary-base-text text-[0.65rem] font-medium me-2 px-2.5 py-0.5 rounded-full">
       {prefix} {data} {suffix}
     </span>
   );
@@ -316,14 +316,17 @@ export default function GitApp() {
 
         <hr className="my-4 border-gray-300 sm:mx-autolg:my-8" />
 
-        <div ref={contributionImageAreaRef} className="overflow-x-scroll">
+        <div
+          ref={contributionImageAreaRef}
+          className="overflow-x-scroll bg-primary-background"
+        >
           <div className="flex items-center gap-3 py-3 px-1">
             <img
               className="w-10 h-10 p-1 rounded-full ring-1 ring-gray-300 "
               src={data.data?.avatarUrl}
               alt="Rounded avatar"
             />
-            <h2 className="text-lg text-base-text">
+            <h2 className="text-lg text-primary-base-text">
               {data.data?.name ? data.data.name : username} has made{" "}
               <span className="text-primary-active font-bold text-lg">
                 {data.data?.totalInLifetime}
@@ -331,7 +334,7 @@ export default function GitApp() {
               contributions in life!
             </h2>
           </div>
-          <div className="text-base-text">
+          <div className="text-primary-base-text">
             {data.data?.bio ? <p className="pb-3">{data.data.bio} </p> : ""}
             {data.data?.username ? (
               <p className="text-sm pb-2">id: {data.data.username} </p>

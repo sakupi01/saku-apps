@@ -1,6 +1,7 @@
 import { levels } from "@/components/constants/variables";
 import type { ContributionCalendar, ContributionDay } from "@/components/types";
 import { ContributionLevel } from "@/components/types/enums";
+import clsx from "clsx";
 import styles from "./heatmap.module.css";
 interface GraphProps extends React.ComponentProps<"div"> {
   data: ContributionCalendar;
@@ -28,7 +29,7 @@ export function Heatmap(props: GraphProps) {
 
   return (
     <div {...rest}>
-      <div className="mb-2 text-sm text-base-text">
+      <div className="mb-2 text-sm text-primary-base-text">
         <span className="mr-2 italic">{calendar.year}:</span>
         {isNewYear && calendar.total === 0
           ? newYearText
@@ -36,7 +37,7 @@ export function Heatmap(props: GraphProps) {
       </div>
 
       <div className={styles.graph}>
-        <ul className={styles.months}>
+        <ul className={clsx(styles.months, "text-primary-base-text")}>
           <li>Jan</li>
           <li>Feb</li>
           <li>Mar</li>
@@ -52,7 +53,7 @@ export function Heatmap(props: GraphProps) {
         </ul>
 
         {daysLabel && (
-          <ul className={styles.days}>
+          <ul className={clsx(styles.days, "text-primary-base-text")}>
             <li>Sun</li>
             <li>Mon</li>
             <li>Tue</li>
