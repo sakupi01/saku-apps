@@ -15,7 +15,7 @@ function numberWithCommas(num: number): string {
 }
 
 export function Heatmap(props: GraphProps) {
-  const { data: calendar, daysLabel, ...rest } = props;
+  const { data: calendar, daysLabel } = props;
 
   const currentYear = new Date().getFullYear();
   const isNewYear =
@@ -28,7 +28,7 @@ export function Heatmap(props: GraphProps) {
       0;
 
   return (
-    <div {...rest}>
+    <>
       <div className="mb-2 text-sm text-primary-base-text">
         <span className="mr-2 italic">{calendar.year}:</span>
         {isNewYear && calendar.total === 0
@@ -93,6 +93,6 @@ export function Heatmap(props: GraphProps) {
           }, [])}
         </ul>
       </div>
-    </div>
+    </>
   );
 }

@@ -193,6 +193,7 @@ export default function GitApp() {
       <Layout>
         <div className="w-full">
           <ThemeSelector />
+          <SizeSelector />
           <Form method="post">
             <>
               <Input
@@ -218,6 +219,7 @@ export default function GitApp() {
     <Layout>
       <div className="w-full px-3">
         <ThemeSelector />
+        <hr className="my-4 border-gray-300 border-dashed sm:mx-auto" />
         <SizeSelector />
         <Form method="post">
           <>
@@ -261,13 +263,9 @@ export default function GitApp() {
           <div className="flex gap-3 justify-end">
             <button
               type="button"
-              className={clsx(
-                "text-primary-text end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2 transition-colors",
-                {
-                  "animate-pulse ": downloading,
-                },
-              )}
-              onClick={handleDownload}
+              className={
+                "text-primary-text end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2"
+              }
             >
               {/* MEMO: replace hogehoge.com */}
               <a
@@ -317,45 +315,50 @@ export default function GitApp() {
         <hr className="my-4 border-gray-300 sm:mx-auto lg:my-8" />
 
         <div
-          ref={contributionImageAreaRef}
-          className="overflow-x-scroll bg-primary-background"
+          id="calendar-graph"
+          className="overflow-x-scroll md:overflow-hidden"
         >
-          <div className="flex items-center gap-3 py-3 px-1">
-            <img
-              className="w-10 h-10 p-1 rounded-full ring-1 ring-gray-300 "
-              src={data.data?.avatarUrl}
-              alt="Rounded avatar"
-            />
-            <h2 className="text-lg text-primary-base-text">
-              {data.data?.name ? data.data.name : username} has made{" "}
-              <span className="text-primary-active font-bold text-lg">
-                {data.data?.totalInLifetime}
-              </span>{" "}
-              contributions in life!
-            </h2>
-          </div>
-          <div className="text-primary-base-text">
-            {data.data?.bio ? <p className="pb-3">{data.data.bio} </p> : ""}
-            {data.data?.username ? (
-              <p className="text-sm pb-2">id: {data.data.username} </p>
-            ) : (
-              ""
-            )}
-            {renderTruthyData({ data: data.data?.email, prefix: "📧" })}
-            {renderTruthyData({ data: data.data?.company, prefix: "💼" })}
-            {renderTruthyData({
-              data: data.data?.twitterUsername,
-              prefix: "@",
-            })}
-            {renderTruthyData({
-              data: data.data?.followers?.totalCount.toString(),
-              suffix: "followers",
-            })}
-          </div>
-          <div className="flex flex-col gap-8 mt-7" id="calendar-graph">
-            {data.data?.contributions.map((annualData) => (
-              <Heatmap key={annualData.year} data={annualData} />
-            ))}
+          <div
+            ref={contributionImageAreaRef}
+            className="w-full bg-primary-background md:w-main-width"
+          >
+            <div className="flex items-center gap-3 py-3 px-1">
+              <img
+                className="w-10 h-10 p-1 rounded-full ring-1 ring-gray-300 "
+                src={data.data?.avatarUrl}
+                alt="Rounded avatar"
+              />
+              <h2 className="text-lg text-primary-base-text">
+                {data.data?.name ? data.data.name : username} has made{" "}
+                <span className="text-primary-active font-bold text-lg">
+                  {data.data?.totalInLifetime}
+                </span>{" "}
+                contributions in life!
+              </h2>
+            </div>
+            <div className="text-primary-base-text">
+              {data.data?.bio ? <p className="pb-3">{data.data.bio} </p> : ""}
+              {data.data?.username ? (
+                <p className="text-sm pb-2">id: {data.data.username} </p>
+              ) : (
+                ""
+              )}
+              {renderTruthyData({ data: data.data?.email, prefix: "📧" })}
+              {renderTruthyData({ data: data.data?.company, prefix: "💼" })}
+              {renderTruthyData({
+                data: data.data?.twitterUsername,
+                prefix: "@",
+              })}
+              {renderTruthyData({
+                data: data.data?.followers?.totalCount.toString(),
+                suffix: "followers",
+              })}
+            </div>
+            <div className="flex flex-col gap-8 mt-7">
+              {data.data?.contributions.map((annualData) => (
+                <Heatmap key={annualData.year} data={annualData} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

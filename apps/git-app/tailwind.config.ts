@@ -33,7 +33,7 @@ export default {
       },
       width: {
         "block-size": "var(--block-size, 11px)",
-        "week-width": "calc(var(--block-size, 10px) + var(--block-gap, 3px))",
+        "main-width": "var(--main-width, 800px)",
       },
       borderRadius: {
         "block-round": "var(--block-round, 3px)",
@@ -43,10 +43,6 @@ export default {
       },
       gridTemplateRows: {
         "contribution-calendar": "repeat(7, var(--block-size, 10px))",
-      },
-      gridTemplateColumns: {
-        "contribution-calendar":
-          "calc(var(--week-width) * 5) calc(var(--week-width) * 4) calc(var(--week-width) * 4) calc(var(--week-width) * 5) calc(var(--week-width) * 4) calc(var(--week-width) * 4) calc(var(--week-width) * 5) calc(var(--week-width) * 4) calc(var(--week-width) * 4) calc(var(--week-width) * 5) calc(var(--week-width) * 4) calc(var(--week-width) * 5)",
       },
       gridAutoColumns: {
         "contribution-calendar": "var(--block-size,10px)",
