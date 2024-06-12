@@ -28,8 +28,8 @@ export function Heatmap(props: GraphProps) {
       0;
 
   return (
-    <>
-      <div className="mb-2 text-sm text-primary-base-text">
+    <div>
+      <div className="mb-2 text-sm text-primary-background-text">
         <span className="mr-2 italic">{calendar.year}:</span>
         {isNewYear && calendar.total === 0
           ? newYearText
@@ -37,7 +37,7 @@ export function Heatmap(props: GraphProps) {
       </div>
 
       <div className={clsx(styles.graph)}>
-        <ul className={clsx(styles.months, "text-primary-base-text")}>
+        <ul className={clsx(styles.months, "text-primary-background-text")}>
           <li>Jan</li>
           <li>Feb</li>
           <li>Mar</li>
@@ -53,7 +53,7 @@ export function Heatmap(props: GraphProps) {
         </ul>
 
         {daysLabel && (
-          <ul className={clsx(styles.days, "text-primary-base-text")}>
+          <ul className={clsx(styles.days, "text-primary-background-text")}>
             <li>Sun</li>
             <li>Mon</li>
             <li>Tue</li>
@@ -93,6 +93,6 @@ export function Heatmap(props: GraphProps) {
           }, [])}
         </ul>
       </div>
-    </>
+    </div>
   );
 }

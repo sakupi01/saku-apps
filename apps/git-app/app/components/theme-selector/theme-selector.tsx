@@ -22,7 +22,7 @@ export const ThemeSelector = () => {
   };
 
   return (
-    <>
+    <fieldset>
       <ul
         className="w-full space-y-1 grid md:grid-cols-3 md:grid-rows-2 gap-2 p-2 grid-cols-2"
         aria-labelledby="dropdownHelperRadioButton"
@@ -32,8 +32,8 @@ export const ThemeSelector = () => {
             <div className="flex p-2 rounded hover:bg-gray-100 transition">
               <div className="flex items-center h-5">
                 <input
-                  id={`helper-radio-${index}`}
-                  name="helper-radio"
+                  id={`theme-radio-${index}`}
+                  name="theme-radio"
                   type="radio"
                   onClick={handleClick}
                   value={theme.themeClass}
@@ -42,7 +42,7 @@ export const ThemeSelector = () => {
               </div>
               <div className="ms-2 text-sm">
                 <label
-                  htmlFor={`helper-radio-${index}`}
+                  htmlFor={`theme-radio-${index}`}
                   className="font-medium text-base-text"
                 >
                   <div>{theme.name}</div>
@@ -52,6 +52,6 @@ export const ThemeSelector = () => {
           </li>
         ))}
       </ul>
-    </>
+    </fieldset>
   );
 };

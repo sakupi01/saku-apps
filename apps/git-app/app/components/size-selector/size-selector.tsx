@@ -20,7 +20,7 @@ export const SizeSelector = () => {
   };
 
   return (
-    <>
+    <fieldset>
       <ul
         className="w-full space-y-1 grid md:grid-cols-3 md:grid-rows-2 gap-2 p-2 grid-cols-2"
         aria-labelledby="dropdownHelperRadioButton2"
@@ -30,8 +30,8 @@ export const SizeSelector = () => {
             <div className="flex p-2 rounded hover:bg-gray-100 transition">
               <div className="flex items-center h-5">
                 <input
-                  id={`helper-radio-${key}`}
-                  name="helper-radio"
+                  id={`size-radio-${key}`}
+                  name="size-radio"
                   type="radio"
                   onClick={handleClick}
                   value={value}
@@ -40,7 +40,7 @@ export const SizeSelector = () => {
               </div>
               <div className="ms-2 text-sm">
                 <label
-                  htmlFor={`helper-radio-${key}`}
+                  htmlFor={`size-radio-${key}`}
                   className="font-medium text-base-text"
                 >
                   <div>{key}</div>
@@ -50,6 +50,6 @@ export const SizeSelector = () => {
           </li>
         ))}
       </ul>
-    </>
+    </fieldset>
   );
 };

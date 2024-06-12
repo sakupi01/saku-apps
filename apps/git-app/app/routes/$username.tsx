@@ -45,7 +45,7 @@ const renderTruthyData = ({
     return <></>;
   }
   return (
-    <span className="bg-primary-disabled text-primary-base-text text-[0.65rem] font-medium me-2 px-2.5 py-0.5 rounded-full">
+    <span className="bg-primary-disabled text-primary-background-text text-[0.65rem] font-medium me-2 px-2.5 py-0.5 rounded-full">
       {prefix} {data} {suffix}
     </span>
   );
@@ -314,13 +314,10 @@ export default function GitApp() {
 
         <hr className="my-4 border-gray-300 sm:mx-auto lg:my-8" />
 
-        <div
-          id="calendar-graph"
-          className="overflow-x-scroll md:overflow-hidden"
-        >
+        <div id="calendar-graph">
           <div
             ref={contributionImageAreaRef}
-            className="w-full bg-primary-background md:w-main-width"
+            className="w-full bg-primary-background overflow-x-scroll md:overflow-hidden md:w-main-width"
           >
             <div className="flex items-center gap-3 py-3 px-1">
               <img
@@ -328,7 +325,7 @@ export default function GitApp() {
                 src={data.data?.avatarUrl}
                 alt="Rounded avatar"
               />
-              <h2 className="text-lg text-primary-base-text">
+              <h2 className="text-lg text-primary-background-text">
                 {data.data?.name ? data.data.name : username} has made{" "}
                 <span className="text-primary-active font-bold text-lg">
                   {data.data?.totalInLifetime}
@@ -336,7 +333,7 @@ export default function GitApp() {
                 contributions in life!
               </h2>
             </div>
-            <div className="text-primary-base-text">
+            <div className="text-primary-background-text">
               {data.data?.bio ? <p className="pb-3">{data.data.bio} </p> : ""}
               {data.data?.username ? (
                 <p className="text-sm pb-2">id: {data.data.username} </p>

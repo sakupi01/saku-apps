@@ -127,6 +127,8 @@
 
 }
 
+  /* Graph Size */
+
 .calendar-size-small {
   --block-size: 10px;
   --block-round: 2px;
