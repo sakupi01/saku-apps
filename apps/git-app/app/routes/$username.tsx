@@ -175,8 +175,6 @@ export default function GitApp() {
 
         setCopySuccess(true);
         setTimeout(() => {
-          console.log("now");
-
           setCopySuccess(false);
         }, 2000);
       } catch (err) {

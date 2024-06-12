@@ -23,7 +23,6 @@ export const ThemeSelector = () => {
 
   return (
     <>
-      {/* create grid which is a flex container and has a column layout */}
       <ul
         className="w-full space-y-1 grid md:grid-cols-3 md:grid-rows-2 gap-2 p-2 grid-cols-2"
         aria-labelledby="dropdownHelperRadioButton"

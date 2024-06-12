@@ -18,7 +18,6 @@ export const meta: MetaFunction = () => {
 export async function action({ request }: ActionFunctionArgs) {
   const body = await request.formData();
   const username = body.get("username") || "";
-  console.log("username", username);
 
   return redirect(`/${username}`);
 }
