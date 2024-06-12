@@ -1,8 +1,4 @@
-import {
-  type ContributionLevel,
-  DisplayName,
-  GraphSize,
-} from "@/components/types/enums";
+import { type ContributionLevel, GraphSize } from "@/components/types/enums";
 
 import type { Theme, Themes } from "@/components/types";
 
@@ -15,34 +11,11 @@ export const levels = {
   FOURTH_QUARTILE: 4,
 } satisfies Record<ContributionLevel, -1 | 0 | 1 | 2 | 3 | 4>;
 
-export const sizeProperties = {
-  [GraphSize.Small]: {
-    "--block-size": "10px",
-    "--block-round": "2px",
-    "--block-gap": "3px",
-  },
-  [GraphSize.Medium]: {
-    "--block-size": "11px",
-    "--block-round": "3px",
-    "--block-gap": "3px",
-  },
-  [GraphSize.Large]: {
-    "--block-size": "12px",
-    "--block-round": "3px",
-    "--block-gap": "4px",
-  },
-} as const satisfies Record<
-  GraphSize,
-  {
-    "--block-size": string;
-    "--block-round": string;
-    "--block-gap": string;
-  }
->;
-
-export const DEFAULT_SIZE: GraphSize = GraphSize.Small;
-export const DEFAULT_THEME: Themes = "Default";
-export const DEFAULT_DISPLAY_NAME: DisplayName = DisplayName.Username;
+export const SIZE = {
+  [GraphSize.Small]: "small",
+  [GraphSize.Medium]: "medium",
+  [GraphSize.Large]: "large",
+} as const satisfies Record<GraphSize, string>;
 
 export const THEMES = [
   {

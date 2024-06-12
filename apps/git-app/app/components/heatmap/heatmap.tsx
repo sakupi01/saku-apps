@@ -36,7 +36,7 @@ export function Heatmap(props: GraphProps) {
           : `${numberWithCommas(calendar.total)} Contributions`}
       </div>
 
-      <div className={styles.graph}>
+      <div className={clsx(styles.graph)}>
         <ul className={clsx(styles.months, "text-primary-base-text")}>
           <li>Jan</li>
           <li>Feb</li>

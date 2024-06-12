@@ -1,6 +1,7 @@
 import { Form } from "@/components/form/form";
 import { Input } from "@/components/form/input";
 import { Heatmap } from "@/components/heatmap/heatmap";
+import { SizeSelector } from "@/components/size-selector/size-selector";
 import { ThemeSelector } from "@/components/theme-selector/theme-selector";
 import type { ContributionCalendar } from "@/components/types";
 import {
@@ -217,6 +218,7 @@ export default function GitApp() {
     <Layout>
       <div className="w-full px-3">
         <ThemeSelector />
+        <SizeSelector />
         <Form method="post">
           <>
             <Input
@@ -312,7 +314,7 @@ export default function GitApp() {
           </div>
         </div>
 
-        <hr className="my-4 border-gray-300 sm:mx-autolg:my-8" />
+        <hr className="my-4 border-gray-300 sm:mx-auto lg:my-8" />
 
         <div
           ref={contributionImageAreaRef}
@@ -350,7 +352,7 @@ export default function GitApp() {
               suffix: "followers",
             })}
           </div>
-          <div className="flex flex-col gap-8 mt-7">
+          <div className="flex flex-col gap-8 mt-7" id="calendar-graph">
             {data.data?.contributions.map((annualData) => (
               <Heatmap key={annualData.year} data={annualData} />
             ))}

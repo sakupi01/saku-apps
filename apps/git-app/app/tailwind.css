@@ -126,3 +126,24 @@
   }
 
 }
+
+.calendar-size-small {
+  --block-size: 10px;
+  --block-round: 2px;
+  --block-gap: 3px;
+  --week-width: calc(var(--block-size, 10px) + var(--block-gap, 3px))
+}
+
+.calendar-size-medium {
+  --block-size: 11px;
+  --block-round: 3px;
+  --block-gap: 3px;
+  --week-width: calc(var(--block-size, 10px) + var(--block-gap, 3px))
+}
+
+.calendar-size-large {
+  --block-size: 12px;
+  --block-round: 3px;
+  --block-gap: 4px;
+  --week-width: calc(var(--block-size, 10px) + var(--block-gap, 3px)),
+}

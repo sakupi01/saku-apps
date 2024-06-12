@@ -1,19 +1,17 @@
 import type { MouseEventHandler } from "react";
-import { THEMES } from "../constants/variables";
+import { SIZE } from "../constants/variables";
 
-export const ThemeSelector = () => {
+export const SizeSelector = () => {
   function toggleCustomMode(buttonValue: string) {
-    const themingAreaClassList =
-      document.getElementById("theming-area")?.classList;
+    const calendarGraphClassList =
+      document.getElementById("calendar-graph")?.classList;
 
     // delete all custom-theme classNamees
-    for (const theme of themingAreaClassList ?? []) {
-      themingAreaClassList?.remove(theme);
+    for (const size of calendarGraphClassList ?? []) {
+      calendarGraphClassList?.remove(size);
     }
     // add the selected custom-theme className
-    buttonValue === "default"
-      ? undefined // do nothing
-      : themingAreaClassList?.add(buttonValue);
+    calendarGraphClassList?.add(`calendar-size-${buttonValue}`);
   }
 
   const handleClick: MouseEventHandler<HTMLInputElement> = (e) => {
@@ -25,27 +23,27 @@ export const ThemeSelector = () => {
     <>
       <ul
         className="w-full space-y-1 grid md:grid-cols-3 md:grid-rows-2 gap-2 p-2 grid-cols-2"
-        aria-labelledby="dropdownHelperRadioButton"
+        aria-labelledby="dropdownHelperRadioButton2"
       >
-        {THEMES.map((theme, index) => (
-          <li key={theme.name}>
+        {Object.entries(SIZE).map(([key, value]) => (
+          <li key={key}>
             <div className="flex p-2 rounded hover:bg-gray-100 transition">
               <div className="flex items-center h-5">
                 <input
-                  id={`helper-radio-${index}`}
+                  id={`helper-radio-${key}`}
                   name="helper-radio"
                   type="radio"
                   onClick={handleClick}
-                  value={theme.themeClass}
-                  className={`w-4 h-4 ${theme.radioButtonColor} `}
+                  value={value}
+                  className={"w-4 h-4"}
                 />
               </div>
               <div className="ms-2 text-sm">
                 <label
-                  htmlFor={`helper-radio-${index}`}
+                  htmlFor={`helper-radio-${key}`}
                   className="font-medium text-base-text"
                 >
-                  <div>{theme.name}</div>
+                  <div>{key}</div>
                 </label>
               </div>
             </div>

@@ -1,6 +1,5 @@
 .graph {
     --week-width: calc(var(--block-size, 10px) + var(--block-gap, 3px));
-  
     @apply text-xs gap-1;
   
     display: inline-grid;
@@ -28,6 +27,8 @@
       calc(var(--week-width) * 5) /* Dec */;
   }
   
+
+
   .days {
     grid-area: days;
   }
@@ -36,15 +37,14 @@
   .days {
     opacity: 0.4;
   }
-  
+
   .blocks {
+    @apply auto-cols-contribution-calendar grid-flow-col;
     grid-area: blocks;
-    grid-auto-columns: var(--block-size, 10px);
-    grid-auto-flow: column;
   }
   
   .grids li {
-    border-radius: var(--block-round, 2px);
+    @apply rounded-block-round;
   }
   
   .grids li[data-level='-1'] {
@@ -74,10 +74,8 @@
   .days li:nth-child(odd) {
     visibility: hidden;
   }
-  
   .days,
   .blocks {
-    display: grid;
-    grid-gap: var(--block-gap, 3px);
-    grid-template-rows: repeat(7, var(--block-size, 10px));
+    @apply grid grid-rows-contribution-calendar gap-block-gap;
   }
+  

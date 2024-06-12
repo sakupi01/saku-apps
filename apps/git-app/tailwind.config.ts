@@ -31,6 +31,26 @@ export default {
         "level-3": "var(--color-level-3)",
         "level-4": "var(--color-level-4)",
       },
+      width: {
+        "block-size": "var(--block-size, 11px)",
+        "week-width": "calc(var(--block-size, 10px) + var(--block-gap, 3px))",
+      },
+      borderRadius: {
+        "block-round": "var(--block-round, 3px)",
+      },
+      gap: {
+        "block-gap": "var(--block-gap, 3px)",
+      },
+      gridTemplateRows: {
+        "contribution-calendar": "repeat(7, var(--block-size, 10px))",
+      },
+      gridTemplateColumns: {
+        "contribution-calendar":
+          "calc(var(--week-width) * 5) calc(var(--week-width) * 4) calc(var(--week-width) * 4) calc(var(--week-width) * 5) calc(var(--week-width) * 4) calc(var(--week-width) * 4) calc(var(--week-width) * 5) calc(var(--week-width) * 4) calc(var(--week-width) * 4) calc(var(--week-width) * 5) calc(var(--week-width) * 4) calc(var(--week-width) * 5)",
+      },
+      gridAutoColumns: {
+        "contribution-calendar": "var(--block-size,10px)",
+      },
     },
   },
   plugins: [],
