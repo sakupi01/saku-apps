@@ -47,7 +47,12 @@ export default function GitApp() {
       <p className="text-md text-center text-base-text">
         Enter a GitHub username to see their contributions.
       </p>
-      <Form action="?index" method="post" className="w-full my-10">
+      <Form
+        action="?index"
+        method="post"
+        className="w-full my-10"
+        id="search-form-home"
+      >
         <>
           <Input
             id="username"

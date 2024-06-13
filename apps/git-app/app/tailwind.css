@@ -2,9 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
-    html {
-        @apply font-pacifico;
+  @view-transition {
+    navigation: auto;
+  }
+
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+
+@keyframes shrink-x {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+::view-transition-old(root) {
+  animation: 0.3s ease-in-out both shrink-x;
+}
+
+::view-transition-new(root) {
+  animation: 0.3s 0.3s linear both grow-x;
+}
+
+html {
+      @apply font-pacifico;
     }
 * {
     --color-base: #ecfff6;

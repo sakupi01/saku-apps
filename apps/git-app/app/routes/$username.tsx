@@ -1,3 +1,4 @@
+import { Card } from "@/components/card/card";
 import { Form } from "@/components/form/form";
 import { Input } from "@/components/form/input";
 import { Heatmap } from "@/components/heatmap/heatmap";
@@ -10,6 +11,7 @@ import {
 } from "@/gql/generated/graphql";
 import { error, success } from "@/types/results";
 import { fetcher } from "@/utils/fetcher";
+import { getStreakStats } from "@/utils/parser";
 import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
@@ -57,6 +59,7 @@ export async function action({ request }: ActionFunctionArgs) {
   return redirect(`/${username}`);
 }
 
+// MEMO: TODO: current streakなどを得るhttps://github.com/franznkemaka/github-streak-api/blob/main/src/github/graphql.ts
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const username = params.username || "";
   const githubApiUrl = process.env.GITHUB_API_URL || "";
@@ -92,6 +95,8 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
                 days: week.contributionDays.map((day) => {
                   return {
                     level: day.contributionLevel,
+                    date: day.date,
+                    contributionCount: day.contributionCount,
                   };
                 }),
               };
@@ -112,19 +117,29 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
       return error(`Sorry, we couldn't find ${username} on GitHub.`);
 
     const contributions = await Promise.all(promises);
-
-    return success({ ...rest, username, totalInLifetime, contributions });
+    const stats = await getStreakStats(
+      contributionsCollection?.contributionYears ?? [],
+      contributions.reverse(),
+    );
+    contributions.reverse();
+    return success({
+      ...rest,
+      username,
+      totalInLifetime,
+      contributions,
+      stats,
+    });
   } catch {
     return error("There was an error fetching the data");
   }
 };
 
 export default function GitApp() {
-  const data = useLoaderData<typeof loader>();
+  const { ok, data, message } = useLoaderData<typeof loader>();
   const [copySuccess, setCopySuccess] = useState(false);
   const [doingCopy, setDoingCopy] = useState(false);
   const [downloading, setDownloading] = useState(false);
-  const username = data.ok ? data.data?.username : "";
+  const username = ok ? data?.username : "";
   const contributionImageAreaRef = useRef<HTMLDivElement>(null);
 
   // MEMO: use `useTransition` to control suspense after upgrading to React 19
@@ -187,14 +202,13 @@ export default function GitApp() {
       }
     }
   };
-
-  if (!data.ok) {
+  if (!ok) {
     return (
       <Layout>
         <div className="w-full">
           <ThemeSelector />
           <SizeSelector />
-          <Form method="post">
+          <Form method="post" id="search-form-result">
             <>
               <Input
                 id="username"
@@ -210,7 +224,7 @@ export default function GitApp() {
             </>
           </Form>
         </div>
-        <p>{data.message}</p>
+        <p>{message}</p>
       </Layout>
     );
   }
@@ -241,18 +255,44 @@ export default function GitApp() {
       <p>
         Reach out to{" "}
         <a
-          href={data.data?.url}
+          href={data?.url}
           className="text-primary-active underline hover:text-primary-hover transition-colors"
         >
           {username} on GitHub!
         </a>
       </p>
 
+      <div className="grid md:grid-cols-2 md:grid-rows-2 gap-2 pt-10">
+        <Card
+          title={`${data?.name ? data.name : username} has made a total of \n`}
+          statNumber={
+            `${data?.totalInLifetime} contributions in life!` ?? "N/A"
+          }
+          details="You've grow a lot! Keep it up!"
+        />
+        <Card
+          // biome-ignore lint/style/noUnusedTemplateLiteral: As I need to use template literals
+          title={`First contribution was made on \n`}
+          statNumber={data?.stats?.firstContribution ?? "N/A"}
+          details="Your GitHub journey has started here!"
+        />
+        <Card
+          title="Longest Streak is "
+          statNumber={`${data?.stats?.longestStreak.days} day` ?? "N/A"}
+          details={`started on ${data?.stats?.longestStreak.start}\nended on ${data?.stats?.longestStreak.end}`}
+        />
+        <Card
+          title="Current Streak is "
+          statNumber={`${data?.stats?.currentStreak.days} day` ?? "N/A"}
+          details={`started on ${data?.stats?.currentStreak.start}\nended on ${data?.stats?.currentStreak.end}`}
+        />
+      </div>
+
       <div className="w-full py-10">
         <div className="flex flex-col gap-2 md:flex-row md:justify-between">
           <div className="flex items-center">
             <h2 className="text-2xl text-base-text ">
-              {data.data?.name ? data.data.name : username}'s Contributions{" "}
+              {data?.name ? data.name : username}'s Contributions{" "}
             </h2>
             <img
               className="w-10 h-10"
@@ -315,7 +355,7 @@ export default function GitApp() {
         <hr className="my-4 border-gray-300 sm:mx-auto lg:my-8" />
 
         <div id="calendar-graph">
-          <div className="overflow-auto md:overflow-visible">
+          <div className="overflow-auto md:overflow-visible transition-all duration-200">
             <div
               ref={contributionImageAreaRef}
               className="w-main-width bg-primary-background"
@@ -323,37 +363,39 @@ export default function GitApp() {
               <div className="flex items-center gap-3 py-3 px-1">
                 <img
                   className="w-10 h-10 p-1 rounded-full ring-1 ring-gray-300 "
-                  src={data.data?.avatarUrl}
+                  src={data?.avatarUrl}
                   alt="Rounded avatar"
                 />
                 <h2 className="text-lg text-primary-background-text">
-                  {data.data?.name ? data.data.name : username} has made{" "}
-                  <span className="text-primary-active font-bold text-lg">
-                    {data.data?.totalInLifetime}
-                  </span>{" "}
-                  contributions in life!
+                  Hello, It's {data?.name ? data.name : username}!
                 </h2>
               </div>
               <div className="text-primary-background-text">
-                {data.data?.bio ? <p className="pb-3">{data.data.bio} </p> : ""}
-                {data.data?.username ? (
-                  <p className="text-sm pb-2">id: {data.data.username} </p>
+                {data?.bio ? <p className="pb-3">{data.bio} </p> : ""}
+                {data?.username ? (
+                  <p className="text-sm pb-2">id: {data.username} </p>
                 ) : (
                   ""
                 )}
-                {renderTruthyData({ data: data.data?.email, prefix: "📧" })}
-                {renderTruthyData({ data: data.data?.company, prefix: "💼" })}
                 {renderTruthyData({
-                  data: data.data?.twitterUsername,
+                  data: data?.email,
+                  prefix: "📧",
+                })}
+                {renderTruthyData({
+                  data: data?.company,
+                  prefix: "💼",
+                })}
+                {renderTruthyData({
+                  data: data?.twitterUsername,
                   prefix: "@",
                 })}
                 {renderTruthyData({
-                  data: data.data?.followers?.totalCount.toString(),
+                  data: data?.followers?.totalCount.toString(),
                   suffix: "followers",
                 })}
               </div>
               <div className="flex flex-col gap-8 mt-7">
-                {data.data?.contributions.map((annualData) => (
+                {data?.contributions.map((annualData) => (
                   <Heatmap key={annualData.year} data={annualData} />
                 ))}
               </div>

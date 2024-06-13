@@ -74,6 +74,8 @@ export function Heatmap(props: GraphProps) {
                 Array(7 - days.length),
               ).map<ContributionDay>(() => ({
                 level: ContributionLevel.Null,
+                date: "",
+                contributionCount: 0,
               }));
               if (i === 0) {
                 days = [...fills, ...week.days];

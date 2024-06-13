@@ -24,6 +24,8 @@ export interface Theme {
 
 export interface ContributionDay {
   level: `${ContributionLevel}`;
+  date: string;
+  contributionCount: number;
   weekday?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 }
 
