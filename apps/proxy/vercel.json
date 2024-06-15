@@ -21,7 +21,7 @@
       "destination": "https://saku-apps-git-app.vercel.app/"
     },
     {
-      "source": "git-app/:match*",
+      "source": "/git-app/:match*",
       "destination": "https://saku-apps-git-app.vercel.app/:match*"
     }
   ]
