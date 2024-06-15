@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon server server.ts",
     "start": "nodemon server dist/server.js",
-    "build": "rimraf ./dist && tsc --project ./ --outDir dist",
+    "build": "rimraf ./dist && tsup",
     "deploy": "bun run build && vercel --prod"
   },
   "dependencies": {

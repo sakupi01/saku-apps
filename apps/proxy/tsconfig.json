@@ -2,13 +2,15 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist",
-    "target": "es5",
+    "target": "esnext",
+    "module": "NodeNext",
     "sourceMap": false,
     "strict": true,
     "removeComments": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"
+    "moduleResolution": "NodeNext"
   },
+  "include": ["server.ts"],
   "exclude": [
     "**/node_modules/**/*",
     "dist/**/*",
