@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "target": "es5",
+    "sourceMap": false,
+    "strict": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
+  },
+  "exclude": [
+    "**/node_modules/**/*",
+    "dist/**/*",
+    "build/**/*",
+    "public/**/*",
+    "src/**/*"
+  ]
+}
