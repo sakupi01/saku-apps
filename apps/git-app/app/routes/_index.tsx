@@ -26,19 +26,11 @@ export default function GitApp() {
   return (
     <Layout>
       <div className="flex items-center">
-        <img
-          className="w-10 h-10"
-          src={"/public/favicon.ico"}
-          alt="Kusabocado"
-        />
+        <img className="w-10 h-10" src={"/favicon.ico"} alt="Kusabocado" />
         <h1 className="my-16 text-3xl text-center font-bold text-base-text">
           Git Kusa Graph
         </h1>
-        <img
-          className="w-10 h-10"
-          src={"/public/favicon.ico"}
-          alt="Kusabocado"
-        />
+        <img className="w-10 h-10" src={"/favicon.ico"} alt="Kusabocado" />
       </div>
       <h2 className="my-16 text-xl text-center text-base-text">
         Visualize Your Coding Trail - Commit Heatmaps to Witness Your Growth.

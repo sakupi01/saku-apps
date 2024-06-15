@@ -294,11 +294,7 @@ export default function GitApp() {
             <h2 className="text-2xl text-base-text ">
               {data?.name ? data.name : username}'s Contributions{" "}
             </h2>
-            <img
-              className="w-10 h-10"
-              src={"/public/favicon.ico"}
-              alt="Kusabocado"
-            />
+            <img className="w-10 h-10" src={"/favicon.ico"} alt="Kusabocado" />
           </div>
           <div className="flex gap-3 justify-end">
             <button
