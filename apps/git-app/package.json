@@ -38,9 +38,7 @@
     "tailwindcss": "^3.4.4",
     "vite-tsconfig-paths": "^4.2.1"
   },
-  "engines": {
-    "node": ">=21.7.3"
-  },
+  "engines": { "node": "20.x" },
   "volta": {
     "node": "21.7.3"
   }

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "target": "esnext",
+    "module": "NodeNext",
+    "sourceMap": false,
+    "strict": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "moduleResolution": "NodeNext"
+  },
+  "include": ["server.ts"],
+  "exclude": [
+    "**/node_modules/**/*",
+    "dist/**/*",
+    "build/**/*",
+    "public/**/*",
+    "src/**/*"
+  ]
+}
