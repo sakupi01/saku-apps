@@ -1,0 +1,14 @@
+{
+  "name": "proxy",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon server server.ts"
+  },
+  "dependencies": {
+    "@types/http-proxy": "^1.17.14",
+    "express": "^4.18.2",
+    "http-proxy": "^1.18.1",
+    "nodemon": "^2.0.22"
+  }
+}
