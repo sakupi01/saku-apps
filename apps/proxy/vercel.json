@@ -1,0 +1,28 @@
+{
+  "rewrites": [
+    {
+      "source": "/me",
+      "destination": "https://skr-me.com/"
+    },
+    {
+      "source": "/me/:match*",
+      "destination": "https://skr-me.com/:match*"
+    },
+    {
+      "source": "/blog",
+      "destination": "https://skr-blog.com/"
+    },
+    {
+      "source": "/blog/:match*",
+      "destination": "https://skr-blog.com/:match*"
+    },
+    {
+      "source": "/git-app",
+      "destination": "https://saku-apps-git-app.vercel.app/"
+    },
+    {
+      "source": "git-app/:match*",
+      "destination": "https://saku-apps-git-app.vercel.app/:match*"
+    }
+  ]
+}
