@@ -310,9 +310,8 @@ export default function GitApp() {
                 "text-primary-text end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2"
               }
             >
-              {/* MEMO: replace url in production */}
               <a
-                href={`https://twitter.com/intent/tweet?text=${username}'s%20Kusa%20Over%20the%20years%20|&url=https://saku-apps-git-app.vercel.app/${username}`}
+                href={`https://x.com/intent/post?text=${username}has%20${data?.totalInLifetime}%20Kusas%20in%20life%20time!%20%7C%20&url=https%3A%2F%2Fgit-kusa.vercel.app/${username}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
