@@ -59,7 +59,6 @@ export async function action({ request }: ActionFunctionArgs) {
   return redirect(`/${username}`);
 }
 
-// MEMO: TODO: current streakなどを得るhttps://github.com/franznkemaka/github-streak-api/blob/main/src/github/graphql.ts
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const username = params.username || "";
   const githubApiUrl = process.env.GITHUB_API_URL || "";
@@ -311,9 +310,9 @@ export default function GitApp() {
                 "text-primary-text end-2.5 bottom-2.5 bg-primary hover:bg-primary-hover focus:ring-2 focus:outline-none focus:ring-primary-active font-medium rounded-lg text-sm px-4 py-2"
               }
             >
-              {/* MEMO: replace hogehoge.com */}
+              {/* MEMO: replace url in production */}
               <a
-                href={`https://twitter.com/intent/tweet?text=${username}'s%20Kusa%20Over%20the%20years%20|&url=https://hogehoge.com/${username}`}
+                href={`https://twitter.com/intent/tweet?text=${username}'s%20Kusa%20Over%20the%20years%20|&url=https://saku-apps-git-app.vercel.app/${username}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
