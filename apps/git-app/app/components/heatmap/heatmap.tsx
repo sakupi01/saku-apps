@@ -1,6 +1,7 @@
 import { levels } from "@/components/constants/variables";
 import type { ContributionCalendar, ContributionDay } from "@/components/types";
 import { ContributionLevel } from "@/components/types/enums";
+import clsx from "clsx";
 import styles from "./heatmap.module.css";
 interface GraphProps extends React.ComponentProps<"div"> {
   data: ContributionCalendar;
@@ -14,7 +15,7 @@ function numberWithCommas(num: number): string {
 }
 
 export function Heatmap(props: GraphProps) {
-  const { data: calendar, daysLabel, ...rest } = props;
+  const { data: calendar, daysLabel } = props;
 
   const currentYear = new Date().getFullYear();
   const isNewYear =
@@ -27,16 +28,16 @@ export function Heatmap(props: GraphProps) {
       0;
 
   return (
-    <div {...rest}>
-      <div className="mb-2 text-sm">
+    <div>
+      <div className="mb-2 text-sm text-primary-background-text">
         <span className="mr-2 italic">{calendar.year}:</span>
         {isNewYear && calendar.total === 0
           ? newYearText
           : `${numberWithCommas(calendar.total)} Contributions`}
       </div>
 
-      <div className={styles.graph}>
-        <ul className={styles.months}>
+      <div className={clsx(styles.graph)}>
+        <ul className={clsx(styles.months, "text-primary-background-text")}>
           <li>Jan</li>
           <li>Feb</li>
           <li>Mar</li>
@@ -52,7 +53,7 @@ export function Heatmap(props: GraphProps) {
         </ul>
 
         {daysLabel && (
-          <ul className={styles.days}>
+          <ul className={clsx(styles.days, "text-primary-background-text")}>
             <li>Sun</li>
             <li>Mon</li>
             <li>Tue</li>
@@ -73,6 +74,8 @@ export function Heatmap(props: GraphProps) {
                 Array(7 - days.length),
               ).map<ContributionDay>(() => ({
                 level: ContributionLevel.Null,
+                date: "",
+                contributionCount: 0,
               }));
               if (i === 0) {
                 days = [...fills, ...week.days];

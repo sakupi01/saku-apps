@@ -2,20 +2,13 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist",
-    "target": "esnext",
-    "module": "NodeNext",
+    "module": "CommonJS",
+    "skipLibCheck": true,
     "sourceMap": false,
     "strict": true,
     "removeComments": true,
-    "esModuleInterop": true,
-    "moduleResolution": "NodeNext"
+    "esModuleInterop": true
   },
   "include": ["server.ts"],
-  "exclude": [
-    "**/node_modules/**/*",
-    "dist/**/*",
-    "build/**/*",
-    "public/**/*",
-    "src/**/*"
-  ]
+  "exclude": ["**/node_modules/**/*", "dist/**/*"]
 }
