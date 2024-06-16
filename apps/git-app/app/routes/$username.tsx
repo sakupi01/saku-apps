@@ -20,7 +20,7 @@ import type {
 import { redirect, useLoaderData } from "@remix-run/react";
 import clsx from "clsx";
 import domtoimage from "dom-to-image";
-import { Check, CircleMinus, Copy, Download } from "lucide-react";
+import { Check, Copy, Download, Hand } from "lucide-react";
 import { useRef, useState } from "react";
 import { Layout } from "./_layout";
 
@@ -278,12 +278,20 @@ export default function GitApp() {
         />
         <Card
           title="Longest Streak is "
-          statNumber={`${data?.stats?.longestStreak.days} day` ?? "N/A"}
+          statNumber={
+            `${data?.stats?.longestStreak.days} ${
+              data?.stats?.longestStreak.days === 1 ? "day" : "days"
+            }` ?? "N/A"
+          }
           details={`started on ${data?.stats?.longestStreak.start}\nended on ${data?.stats?.longestStreak.end}`}
         />
         <Card
           title="Current Streak is "
-          statNumber={`${data?.stats?.currentStreak.days} day` ?? "N/A"}
+          statNumber={
+            `${data?.stats?.currentStreak.days} ${
+              data?.stats?.currentStreak.days === 1 ? "day" : "days"
+            }` ?? "N/A"
+          }
           details={`started on ${data?.stats?.currentStreak.start}\nended on ${data?.stats?.currentStreak.end}`}
         />
       </div>
@@ -291,7 +299,7 @@ export default function GitApp() {
       <div className="w-full py-10">
         <div className="flex flex-col gap-2 md:flex-row md:justify-between">
           <div className="flex items-center">
-            <h2 className="text-2xl text-base-text ">
+            <h2 className="text-2xl text-base-text">
               {data?.name ? data.name : username}'s Contributions{" "}
             </h2>
             <img className="w-10 h-10" src={"/favicon.ico"} alt="Kusabocado" />
@@ -322,8 +330,9 @@ export default function GitApp() {
                 },
               )}
               onClick={handleDownload}
+              disabled={downloading}
             >
-              {downloading ? <CircleMinus size={15} /> : <Download size={15} />}
+              {downloading ? <Hand size={15} /> : <Download size={15} />}
             </button>
 
             <button
@@ -336,11 +345,12 @@ export default function GitApp() {
                 },
               )}
               onClick={handleCopyImage}
+              disabled={doingCopy}
             >
               {copySuccess ? (
                 <Check size={15} />
               ) : doingCopy ? (
-                <CircleMinus size={15} />
+                <Hand size={15} />
               ) : (
                 <Copy size={15} />
               )}
