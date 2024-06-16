@@ -8,18 +8,8 @@ export enum ContributionLevel {
   FOURTH_QUARTILE = "FOURTH_QUARTILE",
 }
 
-export enum ErrorType {
-  BadCredentials = 0,
-  BadRequest = 1,
-}
-
 export enum GraphSize {
-  Small = "s",
-  Medium = "m",
-  Large = "l",
-}
-
-export enum DisplayName {
-  Username = "0",
-  ProfileName = "1",
+  Small = "Small",
+  Medium = "Medium",
+  Large = "Large",
 }

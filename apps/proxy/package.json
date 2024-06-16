@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon server server.ts",
-    "start": "nodemon server dist/server.js",
-    "build": "rimraf ./dist && tsup",
+    "start": "ts-node server.ts",
+    "build": "rimraf ./dist && tsc -p ./tsconfig.json --outDir ./dist",
     "deploy": "bun run build && vercel --prod"
   },
   "dependencies": {

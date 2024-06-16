@@ -82,3 +82,5 @@ export async function fetchTree(
 ```
 
 actionsを使用するとserver actionsみたいにprogressive enhancementが有効になる
+
+https://github.com/remix-run/remix/discussions/7296
