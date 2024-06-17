@@ -5,13 +5,44 @@ import { redirect } from "@remix-run/react";
 import { Layout } from "./_layout";
 
 export const meta: MetaFunction = () => {
+  const twitter = [
+    {
+      name: "twitter:image",
+      content: "https://git-kusa.vercel.app/favicon.ico",
+    },
+    { name: "twitter:card", content: "summary" },
+  ];
+  const og = [
+    {
+      property: "og:image",
+      content: "https://git-kusa.vercel.app/favicon.ico",
+    },
+    { property: "og:card", content: "summary" },
+    {
+      property: "og:title",
+      content: "Git Kusa Graph",
+    },
+    {
+      property: "og:description",
+      content:
+        "Visualize Your Coding Trail - Commit Heatmaps to Witness Your Growth.",
+    },
+    {
+      property: "og:url",
+      content: "https://git-kusa.vercel.app/",
+    },
+  ];
+
   return [
-    { title: "Git Kusa Graph" },
+    { name: "title", content: "Git Kusa Graph" },
+    { name: "description", content: "Visualize Your Coding Trail" },
     {
       name: "description",
       content:
         "Visualize Your Coding Trail - Commit Heatmaps to Witness Your Growth.",
     },
+    ...twitter,
+    ...og,
   ];
 };
 

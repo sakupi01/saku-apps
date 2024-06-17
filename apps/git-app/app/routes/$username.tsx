@@ -25,12 +25,48 @@ import { useRef, useState } from "react";
 import { Layout } from "./_layout";
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  const twitter = [
+    {
+      name: "twitter:image",
+      content: "https://git-kusa.vercel.app/favicon.ico",
+    },
+    { name: "twitter:card", content: "summary" },
+  ];
+  const og = [
+    {
+      property: "og:image",
+      content: "https://git-kusa.vercel.app/favicon.ico",
+    },
+
+    {
+      property: "og:title",
+      content: `${data?.data?.username}'s Git Kusa`,
+    },
+    {
+      property: "og:description",
+      content: `View ${data?.data?.username}'s Git Kusa`,
+    },
+    {
+      property: "og:card",
+      content: "summary",
+    },
+    {
+      property: "og:url",
+      content: `https://git-kusa.vercel.app/${data?.data?.username}`,
+    },
+  ];
   return [
     { title: `${data?.data?.username}'s GitHub Contributions` },
+    {
+      name: "title",
+      content: `${data?.data?.username}'s GitHub Contributions`,
+    },
     {
       name: "description",
       content: `View ${data?.data?.username}'s GitHub contributions`,
     },
+    ...twitter,
+    ...og,
   ];
 };
 
