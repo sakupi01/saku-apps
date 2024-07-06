@@ -20,6 +20,12 @@ export default async function Page() {
           <br />
           旅と自然とコーヒーが好きです。
         </p>
+        <a
+          href="https://sakupi01.com/"
+          className="text-blossom text-center leading-9 tracking-wide hover:underline mt-10"
+        >
+          Portfolio
+        </a>
       </div>
     </main>
   );
