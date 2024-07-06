@@ -8,14 +8,14 @@ export const meta: MetaFunction = () => {
   const twitter = [
     {
       name: "twitter:image",
-      content: "https://git-kusa.vercel.app/favicon.ico",
+      content: "https://git-kusa.sakupi01.com/favicon.ico",
     },
     { name: "twitter:card", content: "summary" },
   ];
   const og = [
     {
       property: "og:image",
-      content: "https://git-kusa.vercel.app/favicon.ico",
+      content: "https://git-kusa.sakupi01.com/favicon.ico",
     },
     { property: "og:card", content: "summary" },
     {
@@ -29,7 +29,7 @@ export const meta: MetaFunction = () => {
     },
     {
       property: "og:url",
-      content: "https://git-kusa.vercel.app/",
+      content: "https://git-kusa.sakupi01.com/",
     },
   ];
 

@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --mode client && vite build",
-    "start": "vite preview",
+    "start": "vite preview --port 5173",
     "preview": "wrangler pages dev ./dist",
     "deploy": "$npm_execpath run build && wrangler pages deploy ./dist",
     "check:format": "bunx biome format --changed --write .",

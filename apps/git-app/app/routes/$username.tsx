@@ -28,14 +28,14 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const twitter = [
     {
       name: "twitter:image",
-      content: "https://git-kusa.vercel.app/favicon.ico",
+      content: "https://git-kusa.sakupi01.com/favicon.ico",
     },
     { name: "twitter:card", content: "summary" },
   ];
   const og = [
     {
       property: "og:image",
-      content: "https://git-kusa.vercel.app/favicon.ico",
+      content: "https://git-kusa.sakupi01.com/favicon.ico",
     },
 
     {
@@ -52,7 +52,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     },
     {
       property: "og:url",
-      content: `https://git-kusa.vercel.app/${data?.data?.username}`,
+      content: `https://git-kusa.sakupi01.com/${data?.data?.username}`,
     },
   ];
   return [
