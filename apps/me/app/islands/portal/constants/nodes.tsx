@@ -127,12 +127,7 @@ const nodeTypes = {
       alignItems={"center"}
       justifyContent={"center"}
     >
-      <PortalItem
-        minW="150"
-        gradColor="experimentsGrad"
-        url="/experiments"
-        isAvailable={false}
-      >
+      <PortalItem minW="150" gradColor="experimentsGrad" url="/experiments">
         <LiaFlaskSolid color="#2D2613" size="60" title="experiments" />
       </PortalItem>
     </SlideFade>

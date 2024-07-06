@@ -13,7 +13,7 @@ export const colors: ThemeTokens = {
   primaryGrad: "linear-gradient(135deg, #FBC7C7, #9796F0)",
   blogGrad: "linear-gradient(135deg, #FBC7C7, #BAFFDE)",
   contactGrad: "linear-gradient(135deg, #FBC7C7, #F9FFBA)",
-  experimentsGrad: "linear-gradient(135deg, #FBC7C7, #C8CEFF)",
+  experimentsGrad: "linear-gradient(135deg, #ffbe64, #ff6262, #bf5fff)",
   zennBlueGrad: "linear-gradient(135deg, #D5F1FF, #9796F0)",
   xGrad: "linear-gradient(135deg, #5C8EA6, #0B1C45)",
   githubGrad: "linear-gradient(135deg, #9796F0, #0B1C45)",
