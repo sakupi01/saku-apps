@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: "https://skr-blog.com/",
+    sitemap: "https://blog.sakupi01.com/",
   };
 }

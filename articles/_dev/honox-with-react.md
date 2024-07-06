@@ -16,7 +16,7 @@ status: 'published'
 
 本記事では、作成したポートフォリオサイトをCloudflare Pagesにデプロイするまでの方法をまとめています。
 
-https://skr-me.com/
+https://sakupi01.com/
 
 ([リポジトリ](https://github.com/saku-1101/saku-apps/tree/main/apps/me))
 

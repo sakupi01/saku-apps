@@ -10,7 +10,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://blog.sakupi01.com/"),
+  metadataBase: new URL("https://blog.sakupi01.com"),
   title: {
     default: "saku's blog",
     /** `next-seo`の`titleTemplate`に相当する機能 */
