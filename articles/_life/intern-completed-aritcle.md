@@ -24,7 +24,7 @@ status: 'published'
 
 早く働きたい！と思った動機として一応書きますが、本質ではないことも話しています。
 
-[ジョインする](https://www.skr-blog.com/life/articles/intern-completed-aritcle#ジョインする)からがアルバイト体験記です😌
+[ジョインする](https://blog.sakupi01.com/life/articles/intern-completed-aritcle#ジョインする)からがアルバイト体験記です😌
 
 ### 就活
 <!-- textlint-disable -->
