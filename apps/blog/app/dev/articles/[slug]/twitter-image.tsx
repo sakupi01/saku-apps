@@ -5,7 +5,7 @@ import { ImageResponse } from "@vercel/og";
 const CATEGORY = "dev" as const;
 
 // Route segment config
-export const runtime = "nodejs";
+export const runtime = "edge";
 
 // Image metadata
 export const alt = "記事のアイキャッチ画像";
@@ -86,8 +86,6 @@ export default async function Image({ params: { slug } }: Props) {
       </div>,
       // ImageResponse options
       {
-        // For convenience, we can re-use the exported opengraph-image
-        // size config to also set the ImageResponse's width and height.
         ...size,
         fonts: [
           {
