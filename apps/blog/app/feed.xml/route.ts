@@ -1,13 +1,13 @@
 import { getAllArticles } from "@/libs/getApi";
 import RSS from "rss";
 
-const HOST = "https://www.skr-blog.com" as const;
+const HOST = "https://blog.sakupi01.com" as const;
 export async function GET() {
   const feed = new RSS({
     title: "saku's blog",
     description: "sakuの備忘録",
-    site_url: "https://www.skr-blog.com",
-    feed_url: "https://www.skr-blog.com/feed.xml",
+    site_url: "https://blog.sakupi01.com",
+    feed_url: "https://blog.sakupi01.com/feed.xml",
     copyright: "saku",
     language: "ja",
     pubDate: new Date().toISOString(),

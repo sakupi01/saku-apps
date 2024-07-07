@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const article = getArticleBySlug(slug, CATEGORY);
 
   return {
-    metadataBase: new URL("https://www.skr-blog.com"),
+    metadataBase: new URL("https://blog.sakupi01.com"),
     title: {
       default: article?.title ?? "saku's blog",
       template: `%s - saku's Lifeblog`,
