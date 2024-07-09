@@ -9,9 +9,8 @@
         ".[jt]sx$": "@markuplint/react-spec"
     },
     "excludeFiles": [
-        "./**/twitter-image.tsx",
-        "./**/opengraph-image.tsx",
-        "./app/_components/share.tsx"
+        "./app/_components/share.tsx",
+        "./libs/generateOgImage.tsx"
     ],
     "rules": {
         "attr-duplication": true,

@@ -1,38 +1,12 @@
-import { loadGoogleFont } from "@/libs/font";
-import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
-import { ImageResponse } from "@vercel/og";
+import type { Article } from "@/interfaces/article";
+import type { Size } from "@/interfaces/common";
+import { ImageResponse } from "next/og";
+import { loadGoogleFont } from "./font";
 
-const CATEGORY = "dev" as const;
-
-// Route segment config
-export const runtime = "edge";
-
-// Image metadata
-export const alt = "記事のアイキャッチ画像";
-export const size = {
-  width: 1200,
-  height: 630,
-};
-
-export const contentType = "image/png";
-
-type Props = {
-  params: { slug: string };
-};
-
-// Return a list of `params` to populate the [slug] dynamic segment
-export async function generateStaticParams() {
-  const slugs = getArticleSlugs(CATEGORY);
-
-  return slugs.map((slug) => ({
-    slug: slug,
-  }));
-}
-
-// Image generation
-export default async function Image({ params: { slug } }: Props) {
-  const article = getArticleBySlug(slug, CATEGORY);
-  // Font
+export const generateOgImage = async (
+  article: Article | undefined,
+  size: Size,
+) => {
   const interArrayBuffer = await loadGoogleFont({
     family: "Inter",
     weight: 600,
@@ -78,7 +52,7 @@ export default async function Image({ params: { slug } }: Props) {
                 {article.date}
               </p>
               <p tw="text-3xl font-medium text-left text-basic">
-                - 🌸 saku's Techblog
+                - 🌸 saku's Lifeblog
               </p>
             </div>
           </div>
@@ -99,4 +73,4 @@ export default async function Image({ params: { slug } }: Props) {
     );
   }
   return new Response("Not Found", { status: 404 });
-}
+};

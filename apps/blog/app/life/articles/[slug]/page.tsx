@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       siteName: "saku's blog",
       locale: "ja_JP",
       type: "website",
+      images: `/life/articles/${params.slug}/og.png`,
     },
     twitter: {
       card: "summary_large_image",
@@ -44,6 +45,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       description: "saku's Lifeblog",
       site: "@SakuOnTheWeb",
       creator: "@SakuOnTheWeb",
+      images: `/life/articles/${params.slug}/og.png`,
     },
     alternates: {
       canonical: "/",
@@ -107,6 +109,8 @@ export default async function Article({ params }: Params) {
             <div className="w-full">
               <div
                 className="markdown"
+                // https://biomejs.dev/ja/linter/rules/no-dangerously-set-inner-html/
+                // biome-ignore lint/security/noDangerouslySetInnerHtml: `sanitizeHtml`によりサニタイズ済みのDOMを渡すので、`dangerouslySetInnerHTML`を許容する
                 dangerouslySetInnerHTML={{ __html: sanitizeHtml(content) }}
               />
             </div>

@@ -36,6 +36,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       siteName: "saku's blog",
       locale: "ja_JP",
       type: "website",
+      images: `/dev/articles/${params.slug}/og.png`,
     },
     twitter: {
       card: "summary_large_image",
@@ -43,6 +44,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       description: "saku's Techblog",
       site: "@SakuOnTheWeb",
       creator: "@SakuOnTheWeb",
+      images: `/dev/articles/${params.slug}/og.png`,
     },
     alternates: {
       canonical: "/",
