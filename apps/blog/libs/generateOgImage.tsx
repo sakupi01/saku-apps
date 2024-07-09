@@ -1,12 +1,12 @@
 import type { Article } from "@/interfaces/article";
-import type { Size } from "@/interfaces/common";
 import { ImageResponse } from "next/og";
 import { loadGoogleFont } from "./font";
 
-export const generateOgImage = async (
-  article: Article | undefined,
-  size: Size,
-) => {
+export const generateOgImage = async (article: Article | undefined) => {
+  const size = {
+    width: 1200,
+    height: 630,
+  };
   const interArrayBuffer = await loadGoogleFont({
     family: "Inter",
     weight: 600,
