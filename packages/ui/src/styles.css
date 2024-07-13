@@ -157,7 +157,7 @@ div[data-rehype-pretty-code-title] {
 }
 
 .rlc-container {
-  @apply  w-full h-32 my-8 text-basic !no-underline after:!content-[''] flex items-start border-neutral-200 box-border rounded-md border-[1px] border-solid transition-all duration-200 ease-in-out;
+  @apply  w-full h-28 my-8 text-basic !no-underline after:!content-[''] flex items-start border-neutral-200 box-border rounded-md border-[1px] border-solid transition-all duration-200 ease-in-out;
 }
 
 .rlc-container:hover{
@@ -165,11 +165,11 @@ div[data-rehype-pretty-code-title] {
 }
 
 .rlc-info {
-  @apply h-full w-4/6 px-3 py-4 flex flex-col shrink justify-between overflow-hidden text-left;
+  @apply h-full w-4/6 pl-5 pr-3 py-4 flex flex-col shrink justify-between overflow-hidden text-left;
 }
 
 .rlc-title {
-  @apply text-xl text-basic whitespace-nowrap overflow-hidden text-ellipsis no-underline ;
+  @apply text-lg font-semibold text-basic whitespace-nowrap overflow-hidden text-ellipsis no-underline ;
 }
 
 .rlc-description {
@@ -185,7 +185,7 @@ div[data-rehype-pretty-code-title] {
 }
 
 .rlc-url {
-  @apply text-basic text-sm whitespace-nowrap overflow-hidden text-ellipsis;
+  @apply text-basic text-xs whitespace-nowrap overflow-hidden text-ellipsis;
 }
 
 .rlc-image-container {
@@ -193,7 +193,7 @@ div[data-rehype-pretty-code-title] {
 }
 
 .rlc-image {
-  @apply object-cover w-full h-full rounded-br rounded-tr;
+  @apply object-scale-down w-full h-full rounded-br rounded-tr;
 }
 
 .warning {
