@@ -52,7 +52,7 @@ export const generateOgImage = async (article: Article | undefined) => {
                 {article.date}
               </p>
               <p tw="text-3xl font-medium text-left text-basic">
-                - 🌸 saku's Lifeblog
+                - 🌸 saku's Techblog
               </p>
             </div>
           </div>
