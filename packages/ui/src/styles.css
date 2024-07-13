@@ -157,7 +157,7 @@ div[data-rehype-pretty-code-title] {
 }
 
 .rlc-container {
-  @apply  w-full h-32 my-8 text-basic !no-underline rounded flex items-start shadow-md after:!content-[''] transition-all duration-200 ease-in-out;
+  @apply  w-full h-32 my-8 text-basic !no-underline after:!content-[''] flex items-start border-neutral-200 box-border rounded-md border-[1px] border-solid transition-all duration-200 ease-in-out;
 }
 
 .rlc-container:hover{

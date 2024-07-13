@@ -9,20 +9,17 @@ import { h } from "hastscript";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
+import { remark } from "remark";
 import collapse from "remark-collapse";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
 import rlc from "remark-link-card";
-import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import remarkToc from "remark-toc";
-import { unified } from "unified";
 import { visit } from "unist-util-visit";
 
 export default async function markdownToHtml(markdown: string) {
-  const result = await unified()
-    // @ts-expect-error
-    .use(remarkParse)
+  const result = await remark()
     // @ts-expect-error
     .use(remarkEmbedder, {
       transformers: [CodeSandboxTransformer, oembedTransformer],
@@ -48,7 +45,6 @@ export default async function markdownToHtml(markdown: string) {
       keepBackground: true,
       defaultLang: "plaintext",
     })
-    // @ts-expect-error
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(markdown);
   return result.toString();
