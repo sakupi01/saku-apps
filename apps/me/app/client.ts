@@ -1,5 +1,4 @@
 import { createClient } from "honox/client";
-import { ReactNode } from "react";
 
 createClient({
   hydrate: async (elem, root) => {
