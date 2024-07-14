@@ -19,5 +19,5 @@ export async function generateStaticParams() {
 // Image generation
 export async function GET(req: Request, { params: { slug } }: Props) {
   const article = getArticleBySlug(slug, CATEGORY);
-  return generateOgImage(article);
+  return generateOgImage(article, CATEGORY);
 }

@@ -2,7 +2,10 @@ import type { Article } from "@/interfaces/article";
 import { ImageResponse } from "next/og";
 import { loadGoogleFont } from "./font";
 
-export const generateOgImage = async (article: Article | undefined) => {
+export const generateOgImage = async (
+  article: Article | undefined,
+  category: "dev" | "life",
+) => {
   const size = {
     width: 1200,
     height: 630,
@@ -52,7 +55,7 @@ export const generateOgImage = async (article: Article | undefined) => {
                 {article.date}
               </p>
               <p tw="text-3xl font-medium text-left text-basic">
-                - 🌸 saku's Techblog
+                - 🌸 saku's {category === "dev" ? "Techblog" : "Lifeblog"}
               </p>
             </div>
           </div>
