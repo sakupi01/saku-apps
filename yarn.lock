@@ -13369,9 +13369,7 @@ netmask@^2.0.2:
     "@next/swc-win32-x64-msvc" "14.1.1"
 
 next@^14.2.5:
-  version "14.2.5"
-  resolved "https://registry.npmjs.org/next/-/next-14.2.5.tgz"
-  integrity sha512-0f8aRfBVL+mpzfBjYfQuLWh2WyAwtJXCRfkPF4UJ5qd2YwrHczsrSzXU4tRMV0OAxR8ZJZWPFn6uhSC56UTsLA==
+  version "14.2.10"
   dependencies:
     busboy "1.6.0"
     postcss "8.4.31"
