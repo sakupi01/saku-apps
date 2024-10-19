@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 import ShareLinks from "@/app/_components/share";
 import ThumbnailLife from "@/app/_components/thumbnail-life";
 import generateToc from "@/libs/generateToc";
@@ -34,7 +36,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       title: article?.title ?? "saku's blog",
       description: "saku's Lifeblog",
       url: "/",
-      siteName: "saku's blog",
+      siteName: "Blog - saku",
       locale: "ja_JP",
       type: "website",
       images: `/life/articles/${params.slug}/og.png`,
@@ -43,8 +45,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       card: "summary_large_image",
       title: article?.title ?? "saku's blog",
       description: "saku's Lifeblog",
-      site: "@SakuOnTheWeb",
-      creator: "@SakuOnTheWeb",
+      site: "@sakupi01",
+      creator: "@sakupi01",
       images: `/life/articles/${params.slug}/og.png`,
     },
     alternates: {

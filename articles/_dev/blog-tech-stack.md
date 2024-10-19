@@ -12,25 +12,31 @@ status: 'published'
 ## 目次
 
 ## はじめに
+
 このブログを開発するにあたって選定した技術やアプリの構成について簡単にまとめておこうと思います。
 技術的な詳細やチャレンジは後日また書こうと考えています。
 
 ## 使用技術
+
 今回このブログに使用されているおおまかな技術は以下のようになります。
 
 https://github.com/saku-1101/saku-apps
 
 #### 全体
+
 - Vercel
 - Turborepo
 
 #### ブログアプリ：`/apps/blog`
+
 - Next.js (v14)
 
 #### 記事管理：`/articles`
+
 - マークダウンを管理
 
 #### アプリで必要なパッケージ：`/packages`
+
 - サイドバー目次作成のためのHeadings切り出しパッケージ：`headings-extractor`
   - JavaScript
 - TailwindCSSのグローバルconfigパッケージ：`tailwind-confing`
@@ -47,7 +53,9 @@ TypeScript, biome, markuplint(`/apps/blog`), markdownlint(`/articles`), cspell(`
 <!-- textlint-enable -->
 
 ## 選定基準
+
 ### Turborepo
+
 モノリポを個人開発でも導入してみたかったという興味がきっかけです。
 <br/>
 <br/>
@@ -83,12 +91,14 @@ https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks
     ...
 }
 ```
+
 さらに、リモートキャッシュを使用することでCIの高速化を図ることができます。
 今回はVercelをPaaSとして使用したので、Vercelのキャッシュサーバーをそのまま利用でき、CIでリモートキャッシュを比較的簡単に使用できました。
 
 https://vercel.com/docs/monorepos/turborepo
 
 ### Next.js
+
 まず、ブログアプリということで、初回レンダリングのパフォーマンス改善とSEOに対する強みが欲しかったので、ページのPre-RenderingができるReactフレームワークを使用したいと考えました。
 加えて、ブログアプリのため、リクエスト時ではなく、ビルド時に生成されたファイルを提供する、SSGができるということも条件に入れたかったです。
 <br/>
@@ -107,6 +117,7 @@ Next.jsのSSGアプリをVercelでホスティングすると、構築済みのH
 しかし、App Routerを使用することでReact Server ComponentsやSuspenseがデフォルトで使用できたり、それによるさらなるパフォーマンス改善が期待できたりしました。そこで、一旦App Routerでやってみて、不具合などで見切りがつきそうならPagesにしようという気持ちでApp Routerに舵を切りました。
 
 ### 記事管理と提供
+
 記事の管理は`[root]/articles/**/*.md`でマークダウンとして管理しています。
 `*.md`ファイルの頭にfront matterというYAML形式でメタデータを記述できる手法を用いて、[gray-matter](https://www.npmjs.com/package/gray-matter)でYAMLを解析し、jsonデータとして取り出しています。
 <br/>
@@ -120,6 +131,7 @@ stringに変換されたHTMLは、最終的にはサニタイズしたのちに`
 <!-- textlint-enable -->
 
 ## 感想
+
 今回は、ブログを開発するにあたって選定した技術について狭く浅く触れました。
 <br/>
 <br/>

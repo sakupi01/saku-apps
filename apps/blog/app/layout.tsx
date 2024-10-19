@@ -12,13 +12,13 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL("https://blog.sakupi01.com"),
   title: {
-    default: "saku's blog",
+    default: "Blog - saku",
     /** `next-seo`の`titleTemplate`に相当する機能 */
-    template: `%s - saku's blog`,
+    template: "%s - saku",
   },
   description: "sakuの備忘録",
   openGraph: {
-    title: "saku's blog",
+    title: "Blog - saku",
     description: "sakuの備忘録",
     url: "/",
     siteName: "saku's blog",
@@ -33,10 +33,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "saku's blog",
+    title: "Blog - saku",
     description: "sakuの備忘録",
-    site: "@SakuOnTheWeb",
-    creator: "@SakuOnTheWeb",
+    site: "@sakupi01",
+    creator: "@sakupi01",
     images: [
       {
         url: "/twitter-image.png",

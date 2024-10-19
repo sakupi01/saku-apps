@@ -6,6 +6,7 @@
 import remarkEmbedder from "@remark-embedder/core";
 import oembedTransformer from "@remark-embedder/transformer-oembed";
 import { h } from "hastscript";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
@@ -46,6 +47,7 @@ export default async function markdownToHtml(markdown: string) {
       defaultLang: "plaintext",
     })
     .use(rehypeStringify, { allowDangerousHtml: true })
+    .use(rehypeAutolinkHeadings, { behavior: "wrap" })
     .process(markdown);
   return result.toString();
 }

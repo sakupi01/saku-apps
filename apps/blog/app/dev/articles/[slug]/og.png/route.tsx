@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 import { generateOgImage } from "@/libs/generateOgImage";
 import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 

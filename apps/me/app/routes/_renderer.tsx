@@ -44,7 +44,7 @@ export default reactRenderer(({ children, head }) => {
             property="og:url"
             content="https://sakupi01.com/static/icon.svg"
           />
-          <meta property="og:site_name" content="saku's portfolio" />
+          <meta property="og:site_name" content="Portfolio - saku" />
           <meta property="og:locale" content="ja_JP" />
           <meta property="og:image:type" content="image/png" />
           <meta property="og:image:width" content="512" />
@@ -56,8 +56,8 @@ export default reactRenderer(({ children, head }) => {
           <meta property="og:type" content="website" />
 
           <meta name="twitter:card" content="summary" />
-          <meta name="twitter:site" content="@SakuOnTheWeb" />
-          <meta name="twitter:creator" content="@SakuOnTheWeb" />
+          <meta name="twitter:site" content="@sakupi01" />
+          <meta name="twitter:creator" content="@sakupi01" />
           {head?.title ? (
             <meta name="twitter:title" content={`${head.title}`} />
           ) : (

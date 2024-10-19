@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 import generateToc from "@/libs/generateToc";
 import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
@@ -42,8 +44,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       card: "summary_large_image",
       title: article?.title ?? "saku's blog",
       description: "saku's Techblog",
-      site: "@SakuOnTheWeb",
-      creator: "@SakuOnTheWeb",
+      site: "@sakupi01",
+      creator: "@sakupi01",
       images: `/dev/articles/${params.slug}/og.png`,
     },
     alternates: {
@@ -53,7 +55,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 // Return a list of `params` to populate the [slug] dynamic segment
-export async function generateStaticParams() {
+export function generateStaticParams() {
   const slugs = getArticleSlugs(CATEGORY);
 
   return slugs.map((slug) => ({

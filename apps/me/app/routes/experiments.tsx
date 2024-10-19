@@ -4,8 +4,8 @@ import { createRoute } from "honox/factory";
 export default createRoute((c) => {
   return c.render(<Experiments />, {
     head: {
-      title: "saku's Portfolio - Experiments",
-      description: "saku's Portfolio",
+      title: "Experiments - saku",
+      description: "Experiments in saku's Portfolio",
     },
   });
 });

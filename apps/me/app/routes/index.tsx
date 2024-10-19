@@ -4,7 +4,7 @@ import { createRoute } from "honox/factory";
 export default createRoute((c) => {
   return c.render(<FlowArea />, {
     head: {
-      title: "saku's Portfolio - Home",
+      title: "Portfolio - saku",
       description: "saku's Portfolio",
     },
   });

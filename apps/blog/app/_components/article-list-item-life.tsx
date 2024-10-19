@@ -50,7 +50,7 @@ export const ArticleListItemLife = ({
         />
       </div>
 
-      <div className="pt-10 pr-2 row-start-1 row-end-2 col-start-2 col-end-3 flex flex-wrap pointer-events-none">
+      <div className="pt-5 pr-2 row-start-1 row-end-2 col-start-2 col-end-3 flex flex-wrap pointer-events-none">
         {tags.map((tag) => (
           <Link
             href={`/life/tag/${tag.name}`}
@@ -65,9 +65,9 @@ export const ArticleListItemLife = ({
         href={
           isZenn ? `${zennBaseUrl}/articles/${slug}` : `/life/articles/${slug}`
         }
-        className="pb-10 pr-2 grid grid-rows-subgrid grid-cols-subgrid row-start-1 row-end-6 col-start-1 col-end-3"
+        className="ignoreClass [&>h2]:visited:text-purple-800 pb-5 pr-2 grid grid-rows-subgrid grid-cols-subgrid row-start-1 row-end-6 col-start-1 col-end-3"
       >
-        <h2 className="grid grid-rows-subgrid row-start-3 col-end-[-1] md:text-3xl text-2xl font-semibold text-left text-basic">
+        <h2 className="grid grid-rows-subgrid row-start-3 col-end-[-1] md:text-xl text-lg font-semibold text-left text-basic">
           {title}
         </h2>
         <p className="grid grid-rows-subgrid grid-cols-subgrid row-start-4 row-end-5 col-end-[-1] subtle line-clamp-4 w-full">
