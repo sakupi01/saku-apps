@@ -10,10 +10,7 @@ export default async function Page() {
           width="200"
           height="200"
         />
-        <h1 className="text-4xl md:text-5xl font-bold text-left text-basic my-10">
-          sakuです
-        </h1>
-        <p className="text-base text-left text-basic leading-9 tracking-wide ">
+        <p className="text-base text-left text-basic leading-9 tracking-wide mb-10">
           sakuです。
           <br />
           Webの世界にいることが多いです。
@@ -22,9 +19,33 @@ export default async function Page() {
         </p>
         <a
           href="https://sakupi01.com/"
-          className="text-blossom text-center leading-9 tracking-wide hover:underline mt-10"
+          className="text-blossom text-center leading-9 tracking-wide hover:underline"
         >
           Portfolio
+        </a>
+        <a
+          href="https://sakupi01.github.io/slides/"
+          className="text-blossom text-center leading-9 tracking-wide hover:underline"
+        >
+          slides
+        </a>
+        <a
+          href="https://zenn.dev/s_a_k_u"
+          className="text-blossom text-center leading-9 tracking-wide hover:underline"
+        >
+          Zenn
+        </a>
+        <a
+          href="https://github.com/sakupi01/"
+          className="text-blossom text-center leading-9 tracking-wide hover:underline"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://x.com/sakupi01/"
+          className="text-blossom text-center leading-9 tracking-wide hover:underline"
+        >
+          X
         </a>
       </div>
     </main>
