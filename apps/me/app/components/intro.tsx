@@ -34,7 +34,7 @@ export default function Intro() {
         </InlineGradText>
         , and here's{" "}
         <InlineGradText
-          url={import.meta.env.VITE_TECH_BLOG_URL}
+          url={import.meta.env.VITE_SLIDES_URL}
           gradColor="linear-gradient(90deg, #86ff6e, #e159ff)"
         >
           my slides
