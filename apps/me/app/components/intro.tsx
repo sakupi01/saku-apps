@@ -32,7 +32,14 @@ export default function Intro() {
         >
           my tech blog
         </InlineGradText>
-        .{" "}
+        , and here's{" "}
+        <InlineGradText
+          url={import.meta.env.VITE_TECH_BLOG_URL}
+          gradColor="linear-gradient(90deg, #86ff6e, #e159ff)"
+        >
+          my slides
+        </InlineGradText>{" "}
+        to use when I give talks at conferences and meetups.
       </Text>
       <Text as="b" lineHeight={2}>
         I write my personal stuff on{" "}
