@@ -16,7 +16,7 @@ export default async function Page() {
         <p className="text-base text-left text-basic leading-9 tracking-wide ">
           sakuです。
           <br />
-          Webフロントエンドの世界にいることが多いです。
+          Webの世界にいることが多いです。
           <br />
           旅と自然とコーヒーが好きです。
         </p>

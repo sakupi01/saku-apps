@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 import generateToc from "@/libs/generateToc";
 import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
@@ -53,7 +55,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 // Return a list of `params` to populate the [slug] dynamic segment
-export async function generateStaticParams() {
+export function generateStaticParams() {
   const slugs = getArticleSlugs(CATEGORY);
 
   return slugs.map((slug) => ({

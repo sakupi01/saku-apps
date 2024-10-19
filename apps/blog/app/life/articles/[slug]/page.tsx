@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 import ShareLinks from "@/app/_components/share";
 import ThumbnailLife from "@/app/_components/thumbnail-life";
 import generateToc from "@/libs/generateToc";
