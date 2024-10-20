@@ -44,7 +44,7 @@ export default reactRenderer(({ children, head }) => {
             property="og:url"
             content="https://sakupi01.com/static/icon.svg"
           />
-          <meta property="og:site_name" content="saku's portfolio" />
+          <meta property="og:site_name" content="Portfolio - saku" />
           <meta property="og:locale" content="ja_JP" />
           <meta property="og:image:type" content="image/png" />
           <meta property="og:image:width" content="512" />

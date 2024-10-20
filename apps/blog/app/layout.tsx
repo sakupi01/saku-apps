@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL("https://blog.sakupi01.com"),
   title: {
-    default: "Blog",
+    default: "Blog - saku",
     /** `next-seo`の`titleTemplate`に相当する機能 */
     template: "%s - saku",
   },

@@ -7,7 +7,7 @@ const CATEGORY = "dev" as const;
 
 export const metadata: Metadata = {
   title: "Techblog",
-  description: "saku's Techblog",
+  description: "Techblog in saku's Blog",
 };
 
 export default async function Page({
