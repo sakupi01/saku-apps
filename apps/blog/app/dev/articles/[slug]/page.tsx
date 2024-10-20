@@ -44,8 +44,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       card: "summary_large_image",
       title: article?.title ?? "saku's blog",
       description: "saku's Techblog",
-      site: "@SakuOnTheWeb",
-      creator: "@SakuOnTheWeb",
+      site: "@sakupi01",
+      creator: "@sakupi01",
       images: `/dev/articles/${params.slug}/og.png`,
     },
     alternates: {

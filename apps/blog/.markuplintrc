@@ -48,5 +48,13 @@
         "required-h1": true,
         "use-list": false,
         "wai-aria": true
+    },
+    "nodeRules": [
+    {
+      "selector": ".ignoreClass",
+      "rules": {
+        "character-reference": false
+      }
     }
+  ]
 }

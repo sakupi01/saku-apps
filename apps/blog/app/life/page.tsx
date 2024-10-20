@@ -6,8 +6,8 @@ import Pagination from "../_components/pagenation";
 const CATEGORY = "life" as const;
 
 export const metadata: Metadata = {
-  title: "saku's Lifeblog",
-  description: "sakuのLifeblog",
+  title: "Lifeblog",
+  description: "saku's Lifeblog",
 };
 
 export default async function Page({

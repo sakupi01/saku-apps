@@ -9,7 +9,7 @@ import { convertDateToYYYYMMDD } from "./convertDate";
 const techArticlesDirectory = join(process.cwd(), "../../articles/_dev/");
 const lifeArticlesDirectory = join(process.cwd(), "../../articles/_life/");
 type Category = "life" | "dev";
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 10;
 
 export function getArticleSlugs(which: Category) {
   const articlesDirectory =
