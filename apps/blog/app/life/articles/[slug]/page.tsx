@@ -7,7 +7,7 @@ import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { Button, Toc } from "@repo/ui";
-import { ArrowUpCircle, ChevronLeft, Github } from "lucide-react";
+import { AlignLeft, ArrowUpCircle, ChevronLeft, Github } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -114,6 +114,9 @@ export default async function Article({ params }: Params) {
             ページの先頭に戻る
             <ArrowUpCircle />
           </Link>
+        }
+        tocIcon={
+          <AlignLeft className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1} />
         }
       />
       <div className="flex flex-col items-center max-w-3xl mx-auto md:pt-20 md:pb-0 p-2">

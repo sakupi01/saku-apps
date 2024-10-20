@@ -1,7 +1,6 @@
 "use client";
 
-import { Logs } from "lucide-react";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Divider } from "../divider/divider";
 import useHighlighted from "./hooks/useHighlighted";
 
@@ -9,8 +8,14 @@ export const Toc = ({
   nodes,
   githubLink,
   backToTopLink,
+  tocIcon,
+}: {
   //  biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents>
-}: { nodes: any[]; githubLink?: ReactNode; backToTopLink: ReactNode }) => {
+  nodes: any[];
+  githubLink?: ReactNode;
+  backToTopLink: ReactNode;
+  tocIcon: ReactNode;
+}) => {
   if (!nodes?.length) {
     return null;
   }
@@ -30,7 +35,7 @@ export const Toc = ({
         className="menu-icon p-2 md:p-3 rounded-full transition-all duration-[0.3s] ease-in-out 
       flex items-center justify-center"
       >
-        <Logs className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1} />
+        {tocIcon}
       </div>
       <div className="menu p-4 max-w-[250px] md:flex flex-col gap-2 sticky top-2 hidden opacity-0">
         <div className={"toc"}>{renderNodes(nodes)}</div>
