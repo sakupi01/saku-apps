@@ -56,8 +56,8 @@ export default reactRenderer(({ children, head }) => {
           <meta property="og:type" content="website" />
 
           <meta name="twitter:card" content="summary" />
-          <meta name="twitter:site" content="@SakuOnTheWeb" />
-          <meta name="twitter:creator" content="@SakuOnTheWeb" />
+          <meta name="twitter:site" content="@sakupi01" />
+          <meta name="twitter:creator" content="@sakupi01" />
           {head?.title ? (
             <meta name="twitter:title" content={`${head.title}`} />
           ) : (

@@ -12,6 +12,7 @@ status: 'published'
 ## 目次
 
 ## はじめに
+
 [Hono](https://hono.dev/)のフルスタックメタフレームワークである[HonoX](https://github.com/honojs/honox)に[react-renderer](https://github.com/honojs/middleware/tree/main/packages/react-renderer)ミドルウェアを適用して、ReactベースのUIフレームワークである[YamadaUI](https://yamada-ui.com/)と[React Flow](https://reactflow.dev/)を使用してポートフォリオサイトを作成しました。
 
 本記事では、作成したポートフォリオサイトをCloudflare Pagesにデプロイするまでの方法をまとめています。
@@ -21,6 +22,7 @@ https://sakupi01.com/
 ([リポジトリ](https://github.com/saku-1101/saku-apps/tree/main/apps/me))
 
 ## HonoXとは
+
 HonoXは、HonoとViteを組み合わせてできたHonoのメタフレームワークです。ファイルベースルーティングやIslandアーキテクチャによるClient ComponentとServer Componentの棲み分け、SSRを実現し、Next.jsのようなフルスタックWebフレームワークの書き心地を実現したHonoアプリを作成できます。
 
 詳細は、以下のyusukebeさんの記事を参照ください。
@@ -28,13 +30,17 @@ HonoXは、HonoとViteを組み合わせてできたHonoのメタフレームワ
 https://zenn.dev/yusukebe/articles/724940fa3f2450
 
 ### セットアップ
+
 [Starter template](https://github.com/honojs/honox?tab=readme-ov-file#starter-template)に倣って、以下のコマンドを実行し、`x-basic`を選択します。(※今回はパッケージマネジャにbunを使用しています)
+
 ```bash
 bun create hono@latest
 ```
 
 ## ディレクトリの構造と役割
+
 実行完了すると、以下のようなディレクトリ構成でHonoXアプリが作成されます。
+
 ```
 .
 ├── app
@@ -51,6 +57,7 @@ bun create hono@latest
 ├── tsconfig.json
 └── vite.config.ts
 ```
+
 https://github.com/honojs/honox?tab=readme-ov-file#project-structure
 
 上記の構成とコメントからわかるように、ファイルベースのルーティングやError Boundaryの設置ができることがわかります。
@@ -60,7 +67,9 @@ https://github.com/honojs/honox?tab=readme-ov-file#project-structure
 *HonoXアプリの初期画面*
 
 ## レンダリングの仕組み
+
 レンダーは`_renderer.tsx`で設定されたレンダラーによって行なわれます。デフォルトの場合だと、`hono/jsx-renderer`のレンダラーであることがわかります。
+
 ```tsx showLineNumbers {1, 3} title="./app/routes/_renderer.tsx"
 import { jsxRenderer } from 'hono/jsx-renderer'
 
@@ -118,6 +127,7 @@ export default function Counter() {
 そこで、次のステップでは、`ReactNode`のレンダラーを提供する`react-dom/client`にレンダラーを変更し、使用するJSXを`react`から提供されている`ReactNode`にします🏃🏻‍♀️
 
 ## React化する
+
 ### レンダラーを変更する
 
 HonoXの面白い特徴として、レンダラーとしてHono純正の`hono/jsx-renderer`以外の任意のレンダラーを使用できます。
@@ -125,15 +135,18 @@ HonoXの面白い特徴として、レンダラーとしてHono純正の`hono/js
 今回は、HonoXでReactのレンダラーを用いることでReactベースのUIライブラリであるYamadaUIやReact Flowを使用可能にしていきます。
 
 まず、HonoXでReactNodeをレンダリングするために必要なモジュールをインストールします。
+
 ```bash
 bun add @hono/react-renderer react react-dom hono --exact
 bun add -D @types/react @types/react-dom --exact
 ```
+
 `./app/client.ts`ではクライアントでコンポーネントをレンダリングするためのレンダラーの生成を行なっています。
 
 引数を渡さない場合のデフォルト`createClient`だと、レンダラーは`hono/jsx-renderer`、コンポーネントは`hono/jsx`として生成されます。
 
 今回は、レンダラーを`react-dom/client`、コンポーネントを`react`コンポーネントとして生成するように設定します。
+
 ```ts showLineNumbers {5, 9} title="./app/client.ts"
 import { createClient } from "honox/client";
 
@@ -156,6 +169,7 @@ createClient({
 https://github.com/honojs/honox/issues/87
 
 次に、`@hono/react-renderer`のレンダラーが受け取るpropsを定義します。今回はページごとに`title`と`description`をheadに設定したかったので以下のように定義しました。
+
 ```ts showLineNumbers title="./app/global.d.ts"
 import "@hono/react-renderer";
 
@@ -172,6 +186,7 @@ declare module "@hono/react-renderer" {
 ```
 
 最後に、Reactレンダラーを適用して完成です。
+
 ```tsx showLineNumbers {1, 3} title="./app/routes/_renderer.tsx"
 import { reactRenderer } from '@hono/react-renderer'
 
@@ -196,6 +211,7 @@ export default reactRenderer(({ children, head }) => {
 ```
 
 各rootでは`global.d.ts`で定義したpropsを渡して、以下のようにレンダリングを構成できます。
+
 ```tsx showLineNumbers title="./app/routes/index.tsx"
 import { createRoute } from "honox/factory";
 import FlowArea from "@/islands/portal/flowarea";
@@ -211,6 +227,7 @@ export default createRoute((c) => {
 ```
 
 ### ライブラリを使用する
+
 viteはデフォルトではすべての依存関係を外部化、つまり、開発中にバンドルは行なわずプログラムの配布前にのみ行なうということをします。これにより、ビルドの高速化しています。
 
 しかし、Viteの**SSR**ではリンクされた依存関係はHMRをするために外部化しない、つまりSSRではリンクされたパッケージをバンドルに含めてビルドします。([Vite - 外部 SSR](https://ja.vitejs.dev/guide/ssr.html#ssr-externals))
@@ -223,6 +240,7 @@ viteはデフォルトではすべての依存関係を外部化、つまり、�
 
 クライアントサイドレンダリング用のライブラリは、サーバー側レンダリング時には不要だからです。
 例えば、YamadaUIの場合は以下のようなエラーが出ます。
+
 ```bash
 ...
 11:17:53 AM [vite] Error when evaluating SSR module /@fs/Users/s002996/Develop/saku-apps/node_modules/@yamada-ui/core/dist/index.mjs: failed to import "/@fs/Users/s002996/Develop/saku-apps/node_modules/react-fast-compare/index.js"
@@ -247,6 +265,7 @@ https://ja.vitejs.dev/config/ssr-options#ssr-%E3%82%AA%E3%83%95%E3%82%9A%E3%82%B
 ***
 
 従って、`vite.config.ts`の`ssr.external`を以下のように追加して、YamadaUIとReact Flowをクライアントサイドで使用できるようにします。
+
 ```ts
 export default defineConfig(({ mode }) => {
     ...
@@ -268,16 +287,19 @@ export default defineConfig(({ mode }) => {
 これで、HonoXでReactやReactに依存しているUIコンポーネントを使用できるようになりました🎉
 
 YamadaUIやReact Flowは、各ライブラリの公式ドキュメントに従うことで使用できます。
+
 - [YamadaUI - Getting Started with Hono](https://yamada-ui.com/getting-started/frameworks/hono)
 - [React Flow](https://reactflow.dev/)
 
 ## bunでCloudflare Pagesにデプロイする
+
 Cloudflare Pagesのプロジェクトを作成し、GitHubと統合します。これにより、`main`ブランチに変更があった際、Cloudflare Pagesへ自動デプロイされるようになります。
 
 しかし、初期設定のまま、パッケージマネジャとしてbunを使用してCloudflare Pagesで依存関係をインストールすると以下の状態から進行しませんでした。
+
 ```bash
-10:44:26.853	Installing project dependencies: bun install --frozen-lockfile
-10:44:27.101	bun install v1.0.1 (32abb4eb)
+10:44:26.853 Installing project dependencies: bun install --frozen-lockfile
+10:44:27.101 bun install v1.0.1 (32abb4eb)
 ```
 
 パッケージマネジャにbunを用いる場合は、現状以下の環境変数の設定が必要なようです。
@@ -293,6 +315,7 @@ https://gist.github.com/Hebilicious/88e5a444f42b8dc09fb86dfa865c6ed3
 ***
 
 ## おまけ - モノリポにおける依存関係との仁義なき戦い
+
 本当は２日前くらいにデプロイ＆この記事を書いていて、「よーし、ツイートして終わり〜〜」と思っていたのですが、投稿時にog画像がいつものようにうまく表示されなくなっていました。
 
 ブログアプリはVercelにデプロイしているので、Vercelのログを確認してみたところ、og画像生成のためのファイルにうまくアクセスできていないようでした。
@@ -329,6 +352,7 @@ https://gist.github.com/Hebilicious/88e5a444f42b8dc09fb86dfa865c6ed3
 ***
 
 ## 参考
+
 [honojs/honox: HonoX - Hono based meta framework](https://github.com/honojs/honox)
 
 [フルスタック Web フレームワーク HonoX を使ってみる](https://azukiazusa.dev/blog/full-stack-web-framework-honox/)

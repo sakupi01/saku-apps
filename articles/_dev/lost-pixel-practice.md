@@ -12,6 +12,7 @@ status: 'published'
 ## 目次
 
 ## はじめに
+
 2月に開催された[#vrt4選](https://twitter.com/hashtag/VRT4%E9%81%B8)という勉強会に参加した際、その中で紹介されていたLost Pixelというツールに興味を持ちました。
 
 👇該当のスライド
@@ -23,14 +24,15 @@ https://speakerdeck.com/aiji42/vrtturunodakuhosu-lost-pixelwoshao-jie-sitai
 [#vrt4選](https://twitter.com/hashtag/VRT4%E9%81%B8)では詳細な実装やVRTの一連の流れまで述べられていなかったかつ、Lost Pixelはまだあまり普及しておらず、発表者の方のスライド以外で使用例があまり見つからなかったため、今回はLost Pixelを用いた具体的なVRTの運用方法をまとめてみました。
 
 ## 前提
+
 前提として、Next.js製のブログアプリを含むモノリポ構成でできている、このブログアプリの`/apps/blog`マイクロサービスにVRTを施していきます。
 
 ブログアプリの全体像は以下の通りです。
 
 https://blog.sakupi01.com/dev/articles/blog-tech-stack
 
-
 ### Lost Pixelとは
+
 Lost Pixelとは、VRT(Visual Regression Test, ビジュアル回帰テスト)を行うためのツールです。
 
 https://www.lost-pixel.com/
@@ -46,6 +48,7 @@ https://www.lost-pixel.com/blog/visual-regression-testing-101
 VRTを実現するためのツールは、Chromatic, storycapでのスナップショット+reg-suitでの差分比較**など**が挙げられますが、Lost PixelのOSSモードを使用すると、私がこれまで使用した範囲では以下のような利点がありました。
 
 ⭐️メリット
+
 - OSSモードだと、Githubをフル活用することで、無料でVRTできる基盤が作れる
 - StorybookやLadle, Histoire, ページ単位のスクリーンショット、CypressやPlaywrightを用いたスクリーンショットなど様々な撮影方法が可能
 - VRTでの差分チェックをGIthubでのPRレビューに組み込める
@@ -122,12 +125,13 @@ export const config: CustomProjectConfig = {
   failOnDifference: true,
 };
 ```
-</details>
 
+</details>
 
 ## プロジェクトに適用
 
 ### 運用シナリオ
+
 早速、プロジェクトにLost Pixelを適用していく手順を見ていきます👀
 
 まず、今回の運用シナリオは以下とすることにします。
@@ -142,7 +146,9 @@ export const config: CustomProjectConfig = {
 おおまかな流れを掴んだところで、実際に手順を確認していきましょう🏋🏻
 
 ### ローカルで確認
+
 #### 0. ローカルで差分確認する
+
 `package.json`に以下のコマンドを追加します。
 [セットアップ](https://blog.sakupi01.com/dev/articles/lost-pixel-practice#セットアップ)で設定した`lostpixel.config.ts`の内容をよく見ると、環境変数の値によって設定値を変えている部分があるので、そこを加味したスクリプトにします。
 
@@ -158,18 +164,20 @@ export const config: CustomProjectConfig = {
     ...
 }
 ```
-上記のように`LOCAL=true`としているのは、npm scriptsを使用して実行するのはローカルだけで、CIでは[lost-pixelのアクション](https://github.com/lost-pixel/lost-pixel)を使用するので、このscriptsのLOCAL環境変数は`true`に設定しておいて問題ないです。
 
+上記のように`LOCAL=true`としているのは、npm scriptsを使用して実行するのはローカルだけで、CIでは[lost-pixelのアクション](https://github.com/lost-pixel/lost-pixel)を使用するので、このscriptsのLOCAL環境変数は`true`に設定しておいて問題ないです。
 
 以下のコマンドで、手元の環境で差分を確認してみると、わたしのプロジェクトでは以下のようにスナップショットが出力されます。
 
 ```bash
-$ bun lost-pixel
+bun lost-pixel
 ```
+
 ![lost-pixel初回実行](/first-execution.png)
 *lost-pixel初回実行の出力*
 
 #### 1. baselineをupdateする
+
 ところが、初めて実行すると、以下のように、「baselineのスクショがないから比較できないよ〜」の例外がスローされます。
 
 ```bash {6, 8, 10, 13, 14}
@@ -193,13 +201,15 @@ error: script "lost-pixel" exited with code 1
 なので、ベースラインとなる画像をアップデートして、比較基準を生成してあげます。
 
 ```bash
-$ bun lost-pixel:update
+bun lost-pixel:update
 ```
+
 すると、以下のようにbaseline-imagesにベースライン画像が格納されていることが確認できます。
 ![ベースライン画像が生成される](/baseline-gen.png)
 *ベースライン画像が生成される*
 
 しかし、baseline-imagesとcurrent-imagesの比較がベースライン画像のアップデートよりも先に行われている可能性があるからか、またもや例外がスローされます。
+
 ```bash {12, 13}
 Screenshots done!
 Creating shots took 13.659 seconds
@@ -218,11 +228,15 @@ error: script "lost-pixel:update" exited with code 1
 ```
 
 #### 2. もう一度差分確認をする
+
 とはいえ、base-imagesの更新はできているようなので、もう一度差分の確認をします。
+
 ```bash
-$ bun lost-pixel
+bun lost-pixel
 ```
+
 すると、今回は例外はスローされずにプロセスが完了しました🎉
+
 ```bash {9, 10, 11}
 Screenshots done!
 Creating shots took 12.356 seconds
@@ -241,13 +255,17 @@ Comparison done!
 ⏱  Lost Pixel run took 12.371 seconds
 Sending anonymized telemetry data.
 ```
+
 この流れをCI上でもおこない、PRマージの際に自動チェックしていきましょう🏌🏻‍♀️
 
 ### 運用の準備
+
 #### 3. Workflowを作成する
+
 Github Actionsを用いてCIとして動かすためのWorkflowファイルを作成していきます。
 
 [運用シナリオ](https://blog.sakupi01.com/dev/articles/lost-pixel-practice#運用シナリオ)で述べた以下の流れを実現するために、次からの項目で`vis-reg-test.yml`と`update-lostpixel.yml`を作成します。
+>
 > - featureブランチ`feat/lost-pixel`のPRチェック時にGithub ActionsでLost Pixel OSSモードを用いたVRTを行う
 > - 差分が検出された場合は`/update-vrt`とPRにコメントを入れることで、ベースライン画像の更新PR`lost-pixel-update/> [base-pr-name]`を元ブランチ`feat/lost-pixel`から新たに作成する
 > - `lost-pixel-update/[base-pr-name]`のベースライン画像の差分をImage Diffを用いて確認・レビューし、マージする
@@ -256,6 +274,7 @@ Github Actionsを用いてCIとして動かすためのWorkflowファイルを�
 （P.S. このCI workflowを作成するのに多くの時間を消費しました。私はCIにとても弱いです。（CIスパスパ作れる人々かっこいい。。。））
 
 ##### 3.1 差分確認のためのWorkflow(vis-reg-test.yml)
+
 `vis-reg-test.yml`の役割は[lost-pixel/lost-pixelというアクション](https://github.com/lost-pixel/lost-pixel)を利用した単純な差分チェックです。
 
 ワークフローの各ステップの内容は`# 🟢...`で示しています。
@@ -360,9 +379,11 @@ jobs:
             LOST_PIXEL_DISABLE_TELEMETRY: 1
             LOST_PIXEL_CONFIG_DIR: ${{ matrix.config.package }}
 ```
+
 </details>
 
 ##### 3.2 baseline更新のためのWorkflow(update-vrt.yml)
+
 <details>
 
 ```yaml showLineNumbers {7} title="update-vrt.yml"
@@ -520,9 +541,11 @@ jobs:
                        --label update-lost-pixel \
                        --title 'Lost Pixel Update
 ```
+
 </details>
 
 #### 4. update-vrt.ymlをmainブランチに取り込む
+
 実際にfeat/lost-pixelブランチのPRを作成して`vis-reg-test.yml`のワークフローを回す前に、運用の下準備として`update-vrt.yml`をmainブランチに取り込んでおきましょう。
 
 feat/lost-pixelブランチにそのまま`update-vrt.yml`をコミットしたい気持ちですが、このままではPRに`/update-vrt`をコメントしてもワークフローはトリガーされません。
@@ -542,11 +565,13 @@ https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows
 ### 運用する
 
 #### 6. vis-reg-test.ymlを回す
+
 `feat/lost-pixel`のPRを作成して`vis-reg-test.yml`で定義されているワークフローを回します。
 
 以下の6.**のステップで、ワークフローの実行結果によってとる行動を示します。
 
-##### 6.1 Failのとき 
+##### 6.1 Failのとき
+
 **`/update-vrt`とPRにコメント**します。すると、先ほど定義した`update-vrt.yml`のワークフローがトリガーされます。
 
 これにより、baselineのupdateをするためのブランチlost-pixel-update/[base-pr-name]がコメントを入れたPRから生える形で作成されます。
@@ -565,7 +590,6 @@ PRのChanges部分を確認することで、Github上で視覚的に見た目�
 
 →[ステップ6.1.1へ](https://blog.sakupi01.com/dev/articles/lost-pixel-practice#611-許容可能な見た目の変化のとき)
 
-
 👇見た目の大きな変化。この場合、コードベースに何らかの問題があると思われる。
 ![許容できない見た目の変化](/large-diff.png)
 *zennの記事を表示する変更を加えた際、定義した環境変数が正しく読み込まれていなかったことによる不整合*
@@ -574,6 +598,7 @@ PRのChanges部分を確認することで、Github上で視覚的に見た目�
 <br />
 
 ###### 6.1.1 許容可能な見た目の変化のとき
+
 PRの差分を確認した結果、許容可能な見た目の変化の時は、コメント元のブランチ(feat/lost-pixel)に6.1で生成されたPRをマージしたいです。
 
 そうすることで、コメント元のブランチのbaseline画像がアップデートされ、`vis-reg-test.yml`のワークフローのテストをpassすることができるはずです。
@@ -587,11 +612,13 @@ PRの差分を確認した結果、許容可能な見た目の変化の時は、
 <br />
 
 ###### 6.1.2 許容不可能な見た目の変化のとき
+
 コメント元のブランチ(feat/lost-pixel)に戻って、見た目を揃えるための修正コミットを加え、再度pushします。
 
 →[ステップ6へ](https://blog.sakupi01.com/dev/articles/lost-pixel-practice#6-vis-reg-testymlを回す)
 
 ##### 6.2 Successのとき
+
 おめでとうございます！これで見た目が確認された変更をマージできます💯
 
 ***

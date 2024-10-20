@@ -10,7 +10,9 @@ export default function Content() {
       paddingX={{ base: "34%", sm: "10%", xl: "30%" }}
       gap="50"
       alignItems={"center"}
-      justifyContent={"center"}
+      justifyContent={"start"}
+      height={"100%"}
+      overflowY={"scroll"}
     >
       <SlideFade
         isOpen={true}
