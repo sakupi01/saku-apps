@@ -7,7 +7,7 @@ import { getArticleBySlug, getArticleSlugs } from "@/libs/getApi";
 import markdownToHtml from "@/libs/markdownToHtml";
 import { sanitizeHtml } from "@/libs/sanitize";
 import { Button, Toc } from "@repo/ui";
-import { ArrowUpCircle, ChevronLeft } from "lucide-react";
+import { ArrowUpCircle, ChevronLeft, Github } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -92,12 +92,38 @@ export default async function Article({ params }: Params) {
 
   return (
     <main>
-      <div className="max-w-3xl mx-auto md:pt-20 md:px-20 md:pb-0 p-5">
-        <Link href={"/life"}>
-          <Button aria-label="back" intent="square-icon" size="square">
-            <ChevronLeft />
-          </Button>
-        </Link>
+      <Toc
+        // biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents>
+        nodes={toc as any[]}
+        githubLink={
+          <a
+            href={`https://github.com/saku-1101/saku-apps/blob/main/articles/_life/${params.slug}.md`}
+            className="w-full flex items-center justify-start gap-2 text-subtle hover:underline hover:text-basic"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Githubで修正を提案する
+            <Github />
+          </a>
+        }
+        backToTopLink={
+          <Link
+            href="#top"
+            className="w-full flex items-center justify-start gap-2 text-subtle hover:underline hover:text-basic"
+          >
+            ページの先頭に戻る
+            <ArrowUpCircle />
+          </Link>
+        }
+      />
+      <div className="flex flex-col items-center max-w-3xl mx-auto md:pt-20 md:pb-0 p-2">
+        <div className="w-full">
+          <Link href={"/life"}>
+            <Button aria-label="back" intent="square-icon" size="square">
+              <ChevronLeft />
+            </Button>
+          </Link>
+        </div>
         <ThumbnailLife
           url={article.coverImage.url}
           alt={article.coverImage.alt}
@@ -117,19 +143,6 @@ export default async function Article({ params }: Params) {
               />
             </div>
           </article>
-          <Toc
-            // biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents>
-            nodes={toc as any[]}
-            backToTopLink={
-              <Link
-                href="#top"
-                className="w-full flex items-center justify-start gap-2 text-subtle hover:underline hover:text-basic"
-              >
-                ページの先頭に戻る
-                <ArrowUpCircle />
-              </Link>
-            }
-          />
         </div>
         <ShareLinks
           title={article.title}

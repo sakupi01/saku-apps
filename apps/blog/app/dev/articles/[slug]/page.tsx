@@ -91,12 +91,38 @@ export default async function Article({ params }: Params) {
 
   return (
     <main>
-      <div className="max-w-3xl mx-auto md:pt-20 md:px-20 md:pb-0 p-5">
-        <Link href={"/dev"}>
-          <Button aria-label="back" intent="square-icon" size="square">
-            <ChevronLeft />
-          </Button>
-        </Link>
+      <Toc
+        // biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents>
+        nodes={toc as any[]}
+        githubLink={
+          <a
+            href={`https://github.com/saku-1101/saku-apps/blob/main/articles/_dev/${params.slug}.md`}
+            className="w-full flex items-center justify-start gap-2 text-subtle hover:underline hover:text-basic"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Githubで修正を提案する
+            <Github />
+          </a>
+        }
+        backToTopLink={
+          <Link
+            href="#top"
+            className="w-full flex items-center justify-start gap-2 text-subtle hover:underline hover:text-basic"
+          >
+            ページの先頭に戻る
+            <ArrowUpCircle />
+          </Link>
+        }
+      />
+      <div className="flex flex-col items-center max-w-3xl mx-auto md:pt-20 md:pb-0 p-2">
+        <div className="w-full">
+          <Link href={"/dev"}>
+            <Button aria-label="back" intent="square-icon" size="square">
+              <ChevronLeft />
+            </Button>
+          </Link>
+        </div>
         <Thumbnail
           title={article.title}
           date={article.date}
@@ -116,30 +142,6 @@ export default async function Article({ params }: Params) {
               />
             </div>
           </article>
-          <Toc
-            // biome-ignore lint/suspicious/noExplicitAny: <As described https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents>
-            nodes={toc as any[]}
-            githubLink={
-              <a
-                href={`https://github.com/saku-1101/saku-apps/blob/main/articles/_dev/${params.slug}.md`}
-                className="w-full flex items-center justify-start gap-2 text-subtle hover:underline hover:text-basic"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Githubで修正を提案する
-                <Github />
-              </a>
-            }
-            backToTopLink={
-              <Link
-                href="#top"
-                className="w-full flex items-center justify-start gap-2 text-subtle hover:underline hover:text-basic"
-              >
-                ページの先頭に戻る
-                <ArrowUpCircle />
-              </Link>
-            }
-          />
         </div>
         <ShareLinks
           title={article.title}
