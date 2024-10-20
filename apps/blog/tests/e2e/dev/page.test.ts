@@ -1,5 +1,6 @@
 import { describe } from "node:test";
-import { expect, test } from "next/experimental/testmode/playwright";
+import { expect } from "@playwright/test";
+import { test } from "next/experimental/testmode/playwright.js";
 import { oembed } from "../fixture/oembed";
 import { articles } from "../fixture/zenn";
 

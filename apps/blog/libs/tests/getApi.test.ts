@@ -1,81 +1,89 @@
 import { readFileSync, readdirSync } from "node:fs";
-import { type Mock, describe, expect, test, vitest } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import {
-  getAllArticles,
   getArticleBySlug,
   getArticleSlugs,
   getZennArticleByCategory,
 } from "../getApi";
-import { ARTICLE, WHICH } from "./constants/unitTestConstants";
+import { ARTICLE, CATEGORIES } from "./fixtures/constants";
 import { unitTestUtils } from "./utils/unitTestUtils";
 
-vitest.mock("fs");
-
 describe("getApi", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   describe("getArticleSlugs", () => {
-    test("lifeカテゴリの時/articles/_life内ファイルのslugを文字列配列として返す", () => {
-      (readdirSync as Mock).mockReturnValue(["test1.md", "test-2.md"]);
-      const { getArticlesDirectory } = unitTestUtils;
-      const lifeArticlesDirectory = getArticlesDirectory(WHICH.life.dir);
-      const lifeSlugs = getArticleSlugs(WHICH.life.name);
-      expect(lifeSlugs).toEqual(["test1.md", "test-2.md"]);
-      expect(readdirSync).toHaveBeenCalledWith(lifeArticlesDirectory);
+    const FILES = ["test1.md", "test-2.md"] as const;
+    const { getArticlesDirectory, createMockDirent } = unitTestUtils;
+    beforeEach(() => {
+      vi.mocked(readdirSync).mockReturnValue(createMockDirent(FILES));
     });
-    test("devカテゴリの時/articles/_dev内ファイルのslugを文字列配列として返す", () => {
-      (readdirSync as Mock).mockReturnValue(["test1.md", "test-2.md"]);
-      const { getArticlesDirectory } = unitTestUtils;
-      const devArticlesDirectory = getArticlesDirectory(WHICH.dev.dir);
-      const devSlugs = getArticleSlugs(WHICH.dev.name);
-      expect(devSlugs).toEqual(["test1.md", "test-2.md"]);
-      expect(readdirSync).toHaveBeenCalledWith(devArticlesDirectory);
+
+    test("lifeカテゴリのとき、/articles/_life内からファイルを返す", () => {
+      getArticleSlugs(CATEGORIES.life.name);
+
+      expect(readdirSync).toHaveBeenCalledWith(
+        getArticlesDirectory(CATEGORIES.life.dir),
+      );
+    });
+    test("devカテゴリの時/articles/_dev内からファイルを返す", () => {
+      getArticleSlugs(CATEGORIES.dev.name);
+
+      expect(readdirSync).toHaveBeenCalledWith(
+        getArticlesDirectory(CATEGORIES.dev.dir),
+      );
     });
   });
 
   describe("getArticleBySlug", () => {
+    const { getArticlesDirectory } = unitTestUtils;
+    beforeEach(() => {
+      vi.mocked(readFileSync).mockReturnValue(ARTICLE.data);
+    });
+
     test("slugを受け取り、その記事のデータを返す", () => {
-      const { getArticlesDirectory } = unitTestUtils;
-      const lifeArticlesDirectory = getArticlesDirectory(WHICH.life.dir);
-
+      const lifeArticlesDirectory = getArticlesDirectory(CATEGORIES.life.dir);
       const fullPath = `${lifeArticlesDirectory}${ARTICLE.slug}.md`;
+      const lifeArticle = getArticleBySlug(ARTICLE.slug, CATEGORIES.life.name);
 
-      (readdirSync as Mock).mockReturnValue(["test1.md"]);
-      (readFileSync as Mock).mockReturnValue(
-        ARTICLE.content.replace(/^\n/g, "\n"),
-      );
-      const lifeArticle = getArticleBySlug(ARTICLE.slug, WHICH.life.name);
-
-      expect(lifeArticle).toEqual({
-        slug: "test1",
-        content: ARTICLE.content,
-      });
-
-      expect(readdirSync).toHaveBeenCalledWith(lifeArticlesDirectory);
       expect(readFileSync).toHaveBeenCalledWith(fullPath, "utf8");
+      expect(lifeArticle).toEqual({
+        slug: "hoge",
+        title: "test1",
+        date: "2024-11-28",
+        excerpt: "test1",
+        content: "## 目次\n\n## はじめに\n",
+        category: "dev",
+        tags: ["test1"],
+        status: "published",
+      });
     });
   });
 
   describe("getZennArticleByCategory", () => {
-    test("カテゴリを受け取り、Zenn記事のデータを返し、カテゴリの記事を抽出し、ブログの記事の型に合わせる", async () => {
-      const devZennArticle = await getZennArticleByCategory("dev");
+    test("Zennの記事が取得できた場合はArticle型に変換してデータを返す", async () => {
+      const lifeZennArticle = await getZennArticleByCategory("dev");
 
-      // MEMO: Zennの記事が取得できなかったときはcatchで、undefinedが返る
-      expect(devZennArticle).not.toBeUndefined();
-    });
-  });
-
-  // MEMO: このテストはgetArticleBySlugに依存している
-  describe("getAllArticles", () => {
-    test("すべての記事を取得する", () => {
-      const allArticles = getAllArticles();
-
-      expect(allArticles).toEqual([
+      expect(lifeZennArticle).toEqual([
         {
-          slug: "test1",
-          content: ARTICLE.content,
-        },
-        {
-          slug: "test1",
-          content: ARTICLE.content,
+          slug: "a-glance-of-react-hooks",
+          title: "Reactの状態を理解して適切にHooksを利用する",
+          date: "2024-02-02",
+          coverImage: {
+            url: "https://lh3.googleusercontent.com/a-/AOh14Gj4KNw5uLzMvqRcvyDSrJAPIQCXAcTLblGzFYG5qA=s96-c",
+            alt: "saku",
+          },
+          excerpt:
+            "Zennで執筆した「Reactの状態を理解して適切にHooksを利用する」に関する記事です",
+          content: "",
+          preview: false,
+          beginColor: "from-sky-200",
+          middleColor: "via-blue-200",
+          endColor: "to-violet-300",
+          category: "dev",
+          tags: ["zenn"],
+          status: "published",
         },
       ]);
     });

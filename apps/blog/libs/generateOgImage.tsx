@@ -1,9 +1,9 @@
-import type { Article } from "@/interfaces/article";
+import type { ArticleSchemaType } from "@/interfaces/type";
 import { ImageResponse } from "next/og";
 import { loadGoogleFont } from "./font";
 
 export const generateOgImage = async (
-  article: Article | undefined,
+  article: ArticleSchemaType | undefined,
   category: "dev" | "life",
 ) => {
   const size = {

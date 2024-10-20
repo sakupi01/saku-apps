@@ -1,11 +1,11 @@
-import type { Article } from "@/interfaces/article";
+import type { ArticleSchemaType } from "@/interfaces/type";
 import { ArticleListItem, Divider } from "@repo/ui";
 import { ArticleListItemLife } from "./article-list-item-life";
 
 export default async function FilteredArticlesList({
   filteredArticles,
 }: {
-  filteredArticles: Article[];
+  filteredArticles: ArticleSchemaType[];
 }) {
   return (
     <div role="list">
@@ -25,8 +25,11 @@ export default async function FilteredArticlesList({
                 title={article.title}
                 excerpt={article.excerpt}
                 date={article.date}
-                url={article.coverImage.url}
-                alt={article.coverImage.alt}
+                url={
+                  article.coverImage?.url ||
+                  "https://blog.sakupi01.com/icon.svg"
+                }
+                alt={article.coverImage?.alt || "saku's Icon"}
                 tags={tagWithId}
                 slug={article.slug}
               />

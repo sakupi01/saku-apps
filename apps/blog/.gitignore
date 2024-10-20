@@ -1,3 +1,4 @@
 test-info.md
 .env.*
 globalTestSetup.ts
+test-results

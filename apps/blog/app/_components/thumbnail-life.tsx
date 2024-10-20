@@ -32,7 +32,7 @@ export default function TunbnailLife({
       />
       <div className="w-full  text-basic rounded-lg p-10">
         <div className="flex flex-wrap">{tags && tags}</div>
-        <h1 className="md:text-5xl text-3xl font-bold text-left text-basic my-10">
+        <h1 className="md:text-4xl text-3xl font-bold text-left text-basic my-10">
           {title}
         </h1>
         <p className="date">{date}</p>

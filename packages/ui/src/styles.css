@@ -28,22 +28,22 @@ body iframe {
   @apply my-8 w-full;
 }
 
-.markdown h1 > a{
+.markdown :is(h1 > a, h1){
     @apply md:text-4xl text-3xl font-bold text-left text-basic no-underline my-10;
   }
-.markdown h2 > a{
+.markdown :is(h2 > a, h2){
     @apply md:text-2xl  text-2xl font-semibold text-left text-basic no-underline my-8;
   }
-.markdown h3 > a{
+.markdown :is(h3 > a, h3){
     @apply md:text-xl text-xl font-semibold text-left text-basic no-underline my-6;
   }
-.markdown h4 > a{
+.markdown :is(h4 > a, h4){
     @apply md:text-lg text-lg font-semibold text-left text-basic no-underline my-4;
   }
-.markdown h5 > a{
+.markdown :is(h5 > a, h5){
     @apply text-lg font-semibold  text-left text-basic no-underline my-2;
   }
-.markdown h6 > a{
+.markdown :is(h6 > a, h6){
     @apply text-base font-semibold text-left text-basic no-underline my-2;
   }
 .markdown p{
@@ -142,7 +142,7 @@ div[data-rehype-pretty-code-title] {
     @apply text-sm p-1 font-medium rounded text-left text-tag hover:underline hover:bg-neutral-100;
   }
 .date{
-    @apply text-base font-medium text-left text-tag ;
+    @apply text-sm font-medium text-left text-tag ;
   }
 .markdown table {
   @apply w-full my-6 border border-neutral-200;
@@ -233,11 +233,15 @@ div[data-rehype-pretty-code-title] {
 }
 
 .toc {
-  @apply p-4 mt-10 min-w-[250px] text-basic rounded-md border border-neutral-200 shadow-sm;
+  @apply mt-5 text-basic
 }
 
 .toc a {
-  @apply transition-all duration-200 ease-in-out text-subtle flex text-start rounded-md hover:text-basic p-1 mb-1;
+  @apply block w-full transition-all duration-200 ease-in-out text-sm text-subtle flex text-start rounded-md hover:text-sm p-1;
+}
+
+.toc :is(ul, li, button, a) {
+  @apply block w-full;
 }
 
 .is-active {

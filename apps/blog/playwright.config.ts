@@ -1,10 +1,9 @@
-import { defineConfig } from "next/experimental/testmode/playwright";
+import { defineConfig } from "next/experimental/testmode/playwright.js";
 
 export default defineConfig({
-  testDir: "test/e2e",
+  testDir: "./tests/e2e",
   webServer: {
-    command:
-      "NODE_ENV='test' PORT=3001 bun run dev -- --experimental-test-proxy",
+    command: "NODE_ENV='test' PORT=3001 bun run dev",
     url: "http://localhost:3001",
   },
 });

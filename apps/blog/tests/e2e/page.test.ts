@@ -1,5 +1,6 @@
 import { describe } from "node:test";
-import { expect, test } from "next/experimental/testmode/playwright";
+import { expect } from "@playwright/test";
+import { test } from "next/experimental/testmode/playwright.js";
 import { articles } from "./fixture/zenn";
 
 // 検索バーにキーワードを入力し、検索ボタンをクリックすると、検索結果が表示されることを確認する

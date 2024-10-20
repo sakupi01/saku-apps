@@ -1,58 +1,51 @@
 import { readFileSync, readdirSync } from "node:fs";
-import { type Mock, bench, describe, test, vitest } from "vitest";
 import {
-  getAllArticles,
+  type Mock,
+  beforeEach,
+  bench,
+  describe,
+  test,
+  vi,
+  vitest,
+} from "vitest";
+import {
   getArticleBySlug,
   getArticleSlugs,
   getZennArticleByCategory,
 } from "../getApi";
-import { ARTICLE, WHICH } from "./constants/unitTestConstants";
+import { ARTICLE, CATEGORIES } from "./fixtures/constants";
+import { unitTestUtils } from "./utils/unitTestUtils";
 
 vitest.mock("fs");
 
 describe("getApi", () => {
   describe("getArticleSlugs", () => {
-    // create a huge array
-    const hugeArray = Array.from({ length: 1000000 }, (_, i) => i);
-    bench(
-      "lifeカテゴリの時/articles/_life内ファイルのslugを文字列配列として返す",
-      () => {
-        (readdirSync as Mock).mockReturnValue(hugeArray);
-        getArticleSlugs("life");
-      },
-    );
-    bench(
-      "devカテゴリの時/articles/_dev内ファイルのslugを文字列配列として返す",
-      () => {
-        (readdirSync as Mock).mockReturnValue(hugeArray);
-        getArticleSlugs("dev");
-      },
-    );
+    const { createMockDirent } = unitTestUtils;
+    const hugeArray = Array.from({ length: 1000000 }, (_, i) => i.toString());
+    beforeEach(() => {
+      vi.mocked(readdirSync).mockReturnValue(createMockDirent(hugeArray));
+    });
+    bench("lifeカテゴリのとき、/articles/_life内からファイルを返す", () => {
+      getArticleSlugs("life");
+    });
+    bench("devカテゴリの時/articles/_dev内からファイルを返す", () => {
+      getArticleSlugs("dev");
+    });
   });
 
   describe("getArticleBySlug", () => {
+    beforeEach(() => {
+      vi.mocked(readFileSync).mockReturnValue(ARTICLE.data);
+    });
+
     bench("slugを受け取り、その記事のデータを返す", () => {
-      (readdirSync as Mock).mockReturnValue(["test1.md"]);
-      (readFileSync as Mock).mockReturnValue(
-        ARTICLE.content.replace(/^\n/g, "\n"),
-      );
-      getArticleBySlug(ARTICLE.slug, WHICH.life.name);
+      getArticleBySlug(ARTICLE.slug, CATEGORIES.life.name);
     });
   });
 
   describe("getZennArticleByCategory", () => {
-    test("カテゴリを受け取り、Zenn記事のデータを返し、カテゴリの記事を抽出し、ブログの記事の型に合わせる", async () => {
+    test("Zennの記事が取得できた場合はArticle型に変換してデータを返す", async () => {
       await getZennArticleByCategory("dev");
-    });
-  });
-
-  describe("getAllArticles", () => {
-    bench("すべての記事を取得する", () => {
-      (readdirSync as Mock).mockReturnValue(["test1.md"]);
-      (readFileSync as Mock).mockReturnValue(
-        ARTICLE.content.replace(/^\n/g, "\n"),
-      );
-      getAllArticles();
     });
   });
 });
