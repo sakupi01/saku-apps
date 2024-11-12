@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import "react-loading-skeleton/dist/skeleton.css";
 import NavigationBar from "./_components/navigation";
 import "./globals.css";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -57,6 +58,10 @@ export default function RootLayout({
   const date = new Date();
   return (
     <html lang="en">
+      <Script
+        src="https://cdn.jsdelivr.net/npm/baseline-status@1.0.8/baseline-status.min.js"
+        type="module"
+      />
       <body className={inter.className} id="scrollArea">
         <NavigationBar />
         {children}
