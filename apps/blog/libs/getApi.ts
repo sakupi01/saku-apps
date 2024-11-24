@@ -130,7 +130,7 @@ export async function getAllArticlesByCategoryByTag(
 ) {
   const articles = await getAllArticlesByCategory(category);
   const filteredArticles = articles.filter((article) => {
-    return article.tags.some((t) => t.toLowerCase().includes(tag));
+    return article.tags.some((t) => t.toLowerCase().includes(decodeURI(tag)));
   });
   return filteredArticles;
 }

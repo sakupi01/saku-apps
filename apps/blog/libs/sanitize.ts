@@ -4,8 +4,14 @@ import * as DOMPurify from "isomorphic-dompurify";
 
 export function sanitizeHtml(dirtyHtml: string) {
   const clean = DOMPurify.sanitize(dirtyHtml, {
-    ADD_TAGS: ["iframe"],
-    ADD_ATTR: ["allow", "allowfullscreen", "frameborder", "scrolling"],
+    ADD_TAGS: ["iframe", "baseline-status"],
+    ADD_ATTR: [
+      "allow",
+      "allowfullscreen",
+      "frameborder",
+      "scrolling",
+      "featureId",
+    ],
   });
   return clean;
 }
