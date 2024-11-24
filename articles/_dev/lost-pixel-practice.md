@@ -112,13 +112,13 @@ export const config: CustomProjectConfig = {
   // 🟢モノリポの場合、Github Actionで実行するときのパスはプロジェクトのrootからのパスを設定する
   imagePathBaseline: process.env.LOCAL // 🟢baselineイメージの格納先。ここに格納されているスクリーンショットが比較基準
     ? "./tests/vrt/baseline-images"
-    : "./apps/blog/tests/vrt/baseline-images",
+    : "./apps/blog.sakupi01.com/tests/vrt/baseline-images",
   imagePathCurrent: process.env.LOCAL // 🟢currentイメージの格納先。現状のスクリーンのキャプチャで、baselineと比較される
     ? "./tests/vrt/current-images"
-    : "./apps/blog/tests/vrt/current-images",
+    : "./apps/blog.sakupi01.com/tests/vrt/current-images",
   imagePathDifference: process.env.LOCAL // 🟢differenceイメージの格納先。currentImageとbaselineImageの差分画像
     ? "./tests/vrt/difference-images"
-    : "./apps/blog/tests/vrt/difference-images",
+    : "./apps/blog.sakupi01.com/tests/vrt/difference-images",
   generateOnly: true,
 
   // 🟢baselineとcurrentに差分がある時は実行結果をfailとしてマーク
@@ -152,7 +152,7 @@ export const config: CustomProjectConfig = {
 `package.json`に以下のコマンドを追加します。
 [セットアップ](https://blog.sakupi01.com/dev/articles/lost-pixel-practice#セットアップ)で設定した`lostpixel.config.ts`の内容をよく見ると、環境変数の値によって設定値を変えている部分があるので、そこを加味したスクリプトにします。
 
-```json showLineNumbers {5, 6} title="./apps/blog/package.json"
+```json showLineNumbers {5, 6} title="./apps/blog.sakupi01.com/package.json"
 {
     ...
     "scripts": {
@@ -321,7 +321,7 @@ jobs:
           config:
             # 🟢 将来的にVRTしたいマイクロサービスが増えたらここに追加する
             - {
-                package: "apps/blog",
+                package: "apps/blog.sakupi01.com",
                 name: "Lost Pixel for blog page",
                 command: "bun run start",
               }
@@ -413,7 +413,7 @@ jobs:
     strategy:
       matrix:
         config: 
-          - { package: "apps/blog", name: "Lost Pixel for blog page", command: "bun run start" }
+          - { package: "apps/blog.sakupi01.com", name: "Lost Pixel for blog page", command: "bun run start" }
     
     # 🟢 stepが利用するデフォルトのディレクトリを上記${{ matrix.config.package }}の値にする
     defaults:

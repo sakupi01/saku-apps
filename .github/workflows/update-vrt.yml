@@ -22,7 +22,7 @@ jobs:
     strategy:
       matrix:
         config:
-          - { package: "apps/blog", name: "Lost Pixel for blog page", command: "bun run start" }
+          - { package: "apps/blog.sakupi01.com", name: "Lost Pixel for blog page", command: "bun run start" }
 
     defaults:
       run:

@@ -39,13 +39,13 @@ export const config: CustomProjectConfig = {
   // OSS mode
   imagePathBaseline: process.env.LOCAL
     ? "./tests/vrt/baseline-images"
-    : "./apps/blog/tests/vrt/baseline-images",
+    : "./apps/blog.sakupi01.com/tests/vrt/baseline-images",
   imagePathCurrent: process.env.LOCAL
     ? "./tests/vrt/current-images"
-    : "./apps/blog/tests/vrt/current-images",
+    : "./apps/blog.sakupi01.com/tests/vrt/current-images",
   imagePathDifference: process.env.LOCAL
     ? "./tests/vrt/difference-images"
-    : "./apps/blog/tests/vrt/difference-images",
+    : "./apps/blog.sakupi01.com/tests/vrt/difference-images",
   generateOnly: true,
   failOnDifference: true,
 };

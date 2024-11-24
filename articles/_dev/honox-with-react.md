@@ -19,7 +19,7 @@ status: 'published'
 
 https://sakupi01.com/
 
-([リポジトリ](https://github.com/saku-1101/saku-apps/tree/main/apps/me))
+([リポジトリ](https://github.com/saku-1101/saku-apps/tree/main/apps/sakupi01.com))
 
 ## HonoXとは
 
@@ -325,9 +325,9 @@ https://gist.github.com/Hebilicious/88e5a444f42b8dc09fb86dfa865c6ed3
 ```
 ⨯ Error: ENOENT: no such file or directory, open '/var/task/articles/_dev/blog-tech-stack.md'
     at Object.readFileSync (node:fs:457:20)
-    at c (/var/task/apps/blog/.next/server/app/dev/articles/[slug]/twitter-image/route.js:1:4090)
-    at w (/var/task/apps/blog/.next/server/app/dev/articles/[slug]/twitter-image/route.js:1:1018)
-    at F (/var/task/apps/blog/.next/server/app/dev/articles/[slug]/twitter-image/route.js:1:2527)
+    at c (/var/task/apps/blog.sakupi01.com/.next/server/app/dev/articles/[slug]/twitter-image/route.js:1:4090)
+    at w (/var/task/apps/blog.sakupi01.com/.next/server/app/dev/articles/[slug]/twitter-image/route.js:1:1018)
+    at F (/var/task/apps/blog.sakupi01.com/.next/server/app/dev/articles/[slug]/twitter-image/route.js:1:2527)
     at /var/task/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:34672
     at /var/task/node_modules/next/dist/server/lib/trace/tracer.js:140:36
     at NoopContextManager.with (/var/task/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
@@ -341,9 +341,9 @@ https://gist.github.com/Hebilicious/88e5a444f42b8dc09fb86dfa865c6ed3
 }
 ```
 
-原因を調査したところ、`./apps/blog`と`./apps/me`間での依存関係に整合性が取れてなかったことが問題だとわかりました。
+原因を調査したところ、`./apps/blog.sakupi01.com`と`./apps/sakupi01.com`間での依存関係に整合性が取れてなかったことが問題だとわかりました。
 
-具体的には、`./apps/me`を付け足しで作った際にインストールした`@hono/react-renderer`の内部依存パッケージAが、別マイクロサービスである`./apps/blog`で`^x.y.z`としてインストールしていたパッケージAとバッティングして、元々`./apps/blog`で動いていたパッケージAのバージョンが上書きされてしまったことが原因でした。
+具体的には、`./apps/sakupi01.com`を付け足しで作った際にインストールした`@hono/react-renderer`の内部依存パッケージAが、別マイクロサービスである`./apps/blog.sakupi01.com`で`^x.y.z`としてインストールしていたパッケージAとバッティングして、元々`./apps/blog.sakupi01.com`で動いていたパッケージAのバージョンが上書きされてしまったことが原因でした。
 
 解決方法としては、`npm list --depth=0 --prod`で実際に使用されているパッケージのバージョンを全て吐き出し、`^`を外して、そのバージョンをexactインストールすることで事なきを得ました......
 

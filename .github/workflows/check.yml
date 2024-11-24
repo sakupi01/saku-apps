@@ -93,7 +93,7 @@ jobs:
         run: bun run build 
 
       - name: 🐣 Pa11y Test
-        working-directory: ${{ github.workspace }}/apps/blog
+        working-directory: ${{ github.workspace }}/apps/blog.sakupi01.com
         run: bun run start & sleep 3; bun pa11y
 
 # This job is for executing tests.
