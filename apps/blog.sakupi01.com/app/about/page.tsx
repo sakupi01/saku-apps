@@ -5,7 +5,7 @@ export default async function Page() {
     <main className="flex min-w-screen  min-h-[70vh] md:min-h-[80vh] flex-col items-center justify-center px-24">
       <div className="max-w-2xl mx-auto flex flex-col items-center">
         <Image
-          src={"/icon.png"}
+          src={"/app/icon.png"}
           alt="sakuのアイコン"
           width="200"
           height="200"
