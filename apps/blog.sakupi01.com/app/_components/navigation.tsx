@@ -12,7 +12,7 @@ export default function NavigationBar() {
       <div className="flex flex-col md:!flex-row items-center justify-center md:gap-3 gap-5 ">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src={"/icon.png"}
+            src={"/app/icon.png"}
             alt="sakuのアイコン"
             width="80"
             height="80"
