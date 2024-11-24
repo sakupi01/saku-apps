@@ -37,7 +37,7 @@ jobs:
         matrix:
           config:
             - {
-                package: "apps/blog",
+                package: "apps/blog.sakupi01.com",
                 name: "Lost Pixel for blog page",
                 command: "bun run start",
               }

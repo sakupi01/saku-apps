@@ -27,7 +27,7 @@ https://github.com/saku-1101/saku-apps
 - Vercel
 - Turborepo
 
-#### ブログアプリ：`/apps/blog`
+#### ブログアプリ：`/apps/blog.sakupi01.com`
 
 - Next.js (v14)
 
@@ -49,7 +49,7 @@ https://github.com/saku-1101/saku-apps
 
 #### 解析ツール・CI/CD
 <!-- textlint-disable -->
-TypeScript, biome, markuplint(`/apps/blog`), markdownlint(`/articles`), cspell(`/articles`), textlint(`/articles`), Pa11y, Lighthouse
+TypeScript, biome, markuplint(`/apps/blog.sakupi01.com`), markdownlint(`/articles`), cspell(`/articles`), textlint(`/articles`), Pa11y, Lighthouse
 <!-- textlint-enable -->
 
 ## 選定基準

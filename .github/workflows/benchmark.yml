@@ -11,46 +11,21 @@ on:
 
 
 jobs:
-  install-dependencies:
+  benchmarks:
     runs-on: ubuntu-latest
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
       - name: Checkout Commit
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
+
       - name: Install dependencies
         run: bun install
-      - name: Cache bun dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
-        id: bun-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: ${{ runner.os }}-bun
-
-  benchmarks:
-    needs: install-dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Commit
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      
-      - name: Add vitest
-        run: bun add @codspeed/vitest-plugin vitest
 
       - name: Run benchmarks
         uses: CodSpeedHQ/action@v2
