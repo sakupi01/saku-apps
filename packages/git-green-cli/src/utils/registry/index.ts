@@ -6,7 +6,7 @@ import {
 
 const url =
   process.env.REGISTRY_URL ??
-  "https://raw.githubusercontent.com/saku-1101/saku-apps/main";
+  "https://raw.githubusercontent.com/sakupi01/sakupi01.com/main";
 
 export const fetchComponent = async (components: string[]) => {
   const promises = components.map(async (component) => {

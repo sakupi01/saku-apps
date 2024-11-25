@@ -1,4 +1,4 @@
-_extends: saku-apps:.github/release-drafter-base.yml
+_extends: sakupi01.com:.github/release-drafter-base.yml
 name-template: git-green-cli@$RESOLVED_VERSION
 tag-template: git-green-cli@$RESOLVED_VERSION
 tag-prefix: git-green-cli@
