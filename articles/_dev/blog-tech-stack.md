@@ -20,7 +20,7 @@ status: 'published'
 
 今回このブログに使用されているおおまかな技術は以下のようになります。
 
-https://github.com/saku-1101/saku-apps
+https://github.com/sakupi01/sakupi01.com
 
 #### 全体
 

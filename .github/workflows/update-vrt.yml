@@ -59,7 +59,7 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: cd ../../ && bun install
+        run: cd ../../ && bun install --frozen-lockfile
 
       - name: Build UI
         working-directory: ./packages/ui

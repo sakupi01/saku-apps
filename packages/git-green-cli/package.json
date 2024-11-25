@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/saku-1101/saku-apps/tree/main/packages/git-green-cli"
+    "url": "git+https://github.com/saku-1101/sakupi01.com/tree/main/packages/git-green-cli"
   },
   "module": "src/index.ts",
   "type": "module",

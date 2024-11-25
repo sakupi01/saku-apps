@@ -19,7 +19,7 @@ status: 'published'
 
 https://sakupi01.com/
 
-([リポジトリ](https://github.com/saku-1101/saku-apps/tree/main/apps/sakupi01.com))
+([リポジトリ](https://github.com/sakupi01/sakupi01.com/tree/main/apps/sakupi01.com))
 
 ## HonoXとは
 
@@ -243,10 +243,10 @@ viteはデフォルトではすべての依存関係を外部化、つまり、�
 
 ```bash
 ...
-11:17:53 AM [vite] Error when evaluating SSR module /@fs/Users/s002996/Develop/saku-apps/node_modules/@yamada-ui/core/dist/index.mjs: failed to import "/@fs/Users/s002996/Develop/saku-apps/node_modules/react-fast-compare/index.js"
+11:17:53 AM [vite] Error when evaluating SSR module /@fs/Users/s002996/Develop/sakupi01.com/node_modules/@yamada-ui/core/dist/index.mjs: failed to import "/@fs/Users/s002996/Develop/sakupi01.com/node_modules/react-fast-compare/index.js"
 |- ReferenceError: module is not defined
-    at eval (/Users/s002996/Develop/saku-apps/node_modules/react-fast-compare/index.js:125:1)
-    at instantiateModule (file:///Users/s002996/Develop/saku-apps/node_modules/vite/dist/node/chunks/dep-DkOS1hkm.js:55036:15)
+    at eval (/Users/s002996/Develop/sakupi01.com/node_modules/react-fast-compare/index.js:125:1)
+    at instantiateModule (file:///Users/s002996/Develop/sakupi01.com/node_modules/vite/dist/node/chunks/dep-DkOS1hkm.js:55036:15)
 
 ...
 ```

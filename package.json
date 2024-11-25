@@ -1,5 +1,15 @@
 {
-  "name": "saku-apps",
+  "name": "sakupi01.com",
+  "homepage": "https://sakupi01.com",
+  "description": "everything about sakupi01.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sakupi01/sakupi01.com.git"
+  },
+  "author": "sakupi01",
+  "bugs": {
+    "url": "https://github.com/sakupi01/sakupi01.com/issues"
+  },
   "private": true,
   "type": "module",
   "scripts": {
@@ -44,7 +54,6 @@
   "engines": {
     "node": ">=21"
   },
-  "packageManager": "bun@1.0.25",
   "workspaces": ["apps/*", "packages/*"],
   "dependencies": {
     "husky": "9.0.11",
@@ -53,7 +62,5 @@
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },
-  "volta": {
-    "node": "21.7.3"
-  }
+  "packageManager": "bun@1.1.3"
 }
