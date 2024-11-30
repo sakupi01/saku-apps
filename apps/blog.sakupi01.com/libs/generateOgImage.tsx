@@ -15,6 +15,11 @@ export const generateOgImage = async (
     weight: 600,
   });
 
+  const notoSansArrayBuffer = await loadGoogleFont({
+    family: "Noto Sans JP",
+    weight: 600,
+  });
+
   const tagWithId = article?.tags.map((tag) => {
     const id = Math.random().toString(32).substring(2);
     return {
@@ -79,6 +84,12 @@ export const generateOgImage = async (
           {
             name: "interArrayBuffer",
             data: interArrayBuffer,
+            style: "normal",
+            weight: 600,
+          },
+          {
+            name: "Noto Sans JP",
+            data: notoSansArrayBuffer,
             style: "normal",
             weight: 600,
           },
