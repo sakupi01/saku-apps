@@ -15,6 +15,11 @@ export const generateOgImage = async (
     weight: 600,
   });
 
+  const notoSansArrayBuffer = await loadGoogleFont({
+    family: "Noto Sans JP",
+    weight: 600,
+  });
+
   const tagWithId = article?.tags.map((tag) => {
     const id = Math.random().toString(32).substring(2);
     return {
@@ -35,39 +40,56 @@ export const generateOgImage = async (
   if (article) {
     return new ImageResponse(
       <div
+        tw="w-full h-full p-7 flex"
         style={{
-          background: "white",
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          backgroundImage: "linear-gradient(to right, #ffdede, #BAA0B5)",
+          fontFamily: '"Inter", sans-serif',
         }}
       >
-        <div tw={"flex w-full h-full p-4 rounded-lg"}>
-          <div tw="flex flex-col justify-around items-start w-full h-ful text-basic rounded-lg px-10 py-6 bg-white shadow-sm">
-            <p tw="flex gap-3 mb-5">{renderTags}</p>
-            <h1 tw="text-6xl font-bold text-left text-basic my-5">
+        <div tw="rounded-xl border-2 border-zinc-500 w-full h-full p-4 flex bg-zinc-100 shadow-lg">
+          <div tw="w-full flex flex-col p-8 h-full justify-between">
+            <div tw="flex flex-wrap gap-3 w-full">{renderTags}</div>
+            <h1 tw="w-full text-7xl font-bold text-left text-zinc-700 my-6 text-pretty">
               {article.title}
             </h1>
-            <div tw="flex w-full justify-between">
-              <p tw="text-lg font-medium text-left text-[#B8A47C]">
-                {article.date}
-              </p>
-              <p tw="text-3xl font-medium text-left text-basic">
-                - 🌸 saku's {category === "dev" ? "Techblog" : "Lifeblog"}
-              </p>
+            <div tw="flex justify-between items-end w-full text-zinc-400 text-xl">
+              <div tw="flex items-center">
+                <div tw="flex items-center">
+                  <img
+                    tw="rounded-full border-2 border-zinc-400"
+                    width="90"
+                    height="90"
+                    src="https://blog.sakupi01.com/icon.svg"
+                    alt="icon"
+                  />
+                  <div tw="flex items-center align-center text-4xl font-bold ml-2">
+                    <span tw="text-zinc-400">🌸saku's&nbsp;</span>
+                    <span tw="text-[#BAA0B5]">
+                      {category === "dev" ? "Techblog" : "Lifeblog"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <span>{article.date}</span>
             </div>
           </div>
         </div>
       </div>,
-      // ImageResponse options
       {
         ...size,
+        width: 1200,
+        height: 630,
+        debug: false,
         fonts: [
           {
-            name: "Inter",
+            name: "interArrayBuffer",
             data: interArrayBuffer,
+            style: "normal",
+            weight: 600,
+          },
+          {
+            name: "Noto Sans JP",
+            data: notoSansArrayBuffer,
             style: "normal",
             weight: 600,
           },

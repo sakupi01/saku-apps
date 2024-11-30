@@ -1,7 +1,10 @@
 import sharedConfig from "@repo/tailwind-config";
 import type { Config } from "tailwindcss";
 
-const config: Pick<Config, "content" | "presets" | "mode" | "safelist"> = {
+const config: Pick<
+  Config,
+  "content" | "presets" | "mode" | "safelist" | "theme"
+> = {
   mode: "jit",
   content: {
     relative: true,
@@ -12,6 +15,13 @@ const config: Pick<Config, "content" | "presets" | "mode" | "safelist"> = {
       "../../packages/ui/src/**/*.{js,ts,jsx,tsx}",
       "!./node_modules",
     ],
+  },
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-inter)"],
+      },
+    },
   },
   presets: [sharedConfig],
   safelist: [
