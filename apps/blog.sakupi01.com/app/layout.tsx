@@ -8,7 +8,11 @@ import NavigationBar from "./_components/navigation";
 import "./globals.css";
 import Script from "next/script";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://blog.sakupi01.com"),
@@ -62,7 +66,7 @@ export default function RootLayout({
         src="https://cdn.jsdelivr.net/npm/baseline-status@1.0.8/baseline-status.min.js"
         type="module"
       />
-      <body className={inter.className} id="scrollArea">
+      <body className={`${inter.variable}`} id="scrollArea">
         <NavigationBar />
         {children}
         <SpeedInsights />
