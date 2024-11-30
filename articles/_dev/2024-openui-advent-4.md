@@ -51,7 +51,7 @@ Form Controlに欠けていたものは、一貫したスタイルの実現だ�
 <audio controls src="/hoge.mp3"></audio>
 ```
 
-初期の仕様策定の段階で、具体的な実装方法が詰められることがなく、各ブラウザで実装が進められてきた結果、スタイルと拡張性が著しくかけたままのForm Controlが多く存在しています。
+初期の仕様策定の段階で、具体的な実装方法が詰められることがなく、各ブラウザで実装が進められてきた結果、スタイルと拡張性が著しく欠けたままのForm Controlが多く存在しています。
 
 かといって、ネイティブForm Controlを使用せずにイチから実装しようとすると、アクセシビリティやパフォーマンス、セキュリティなど、非常に多くの考慮事項が発生します。
 もし仮に、完璧なARIAロールを持ち合わせ、パフォーマンスもセキュリティも問題ないようなカスタムForm Controlを実装できたとしても、長期的にその独自Form Controlが動作するかというと、それは保証されていません。
@@ -60,7 +60,7 @@ Form Controlに欠けていたものは、一貫したスタイルの実現だ�
 
 ## Form Controlの抱える問題を解決する動き
 
-Open UIのChairであるGreg Whitworthが、何がForm Controlの中でも扱いにくいのか、それはどうしてなのかを1,400人の回答者を対象に行いました。
+Open UIのChairであるGreg Whitworthが、何がForm Controlの中でも扱いにくいのか、それはどうしてなのかを測る調査を1,400人の回答者を対象に行いました。
 
 https://www.gwhitworth.com/posts/2019/form-controls-components/
 
@@ -85,9 +85,9 @@ https://www.gwhitworth.com/posts/2019/form-controls-components/
 
 ![hardest-form-controls](/hardest-form-controls.png)
 
-このサーベイの結果から、`<select>`に関する扱いにくさは特に顕著だとわかります。独自実装している理由としては、スタイリングや機能拡張、クロスブラウザでの一貫性が挙げられています。
+このサーベイの結果から、`<select>`の扱いにくさは特に顕著だとわかります。独自実装している理由としては、スタイリングや機能拡張、クロスブラウザでの一貫性の無さが挙げられています。
 
-この問題に立ち向かうべく、Customizable Select Elementが提案されました。
+この問題に立ち向かうべく、Open UIに提案された新しい仕様が、Customizable Select Elementだったのです。
 
 ***
 
