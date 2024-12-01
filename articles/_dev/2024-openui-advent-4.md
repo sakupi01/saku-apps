@@ -17,77 +17,91 @@ status: 'published'
 🎄 この記事は[Open UI Advent Calendar](https://adventar.org/calendars/10293)の4日目の記事です。
 :::
 
-## レンダリング技術の発展とForm Controlの拡張性
+[Customizable Select Element Ep.1](https://blog.sakupi01.com/dev/articles/2024-openui-advent-3)では、Form Controlの歴史について触れ、Form ControlのスタイルはCSSから制御することができず、ブラウザやOSに依存していたことを振り返りました。
 
-### ほとんどのForm Controlのスタイリングが可能に
+## ブラウザエンジンの発展と、Web標準の台頭、より柔軟なスタイリングの可能性
 
-OSへの技術的な依存が解消されて、ブラウザレンダリングエンジンによる描画がおこなわれるようになったことに加え、CSS3の登場により、ほとんどのForm Controlに対してスタイリングが可能になりました。
+### OSに依存したレンダリング
 
-例えば、以下の要素ではスタイリングが可能です。
+1990年代後半から2000年代初頭にかけてのWebブラウザは、OSに強く依存していました。
+各OSは独自のUIガイドラインと、それに対応するネイティブコントロールを持っており、ブラウザは、これらのネイティブコントロールをそのまま使用することで、OSと一貫性を保ったUIを提供していました。つまり、ブラウザはOSネイティブなレンダリングエンジンを利用していたわけで、同じWebページでも異なるOS上で表示すると、Form Controlの見た目が大きく異なっていたのです。（参考: [Ep3. ###Form Controlにおけるスタイリングの制限](https://blog.sakupi01.com/dev/articles/2024-openui-advent-3#form-controlにおけるスタイリングの制限) ）
 
-- `<form>`
-- `<fieldset>`、`<legend>`
-- `<input>` （type = text, url, email） `<input type="search">` 以外
-- `<textarea>`
-- ボタン（`<input>` と `<button>` の両方とも）
-- `<label>`
-- `<output>`
+Webの普及につれて、この状況は徐々に課題となっていきました。
+同じコンテンツが異なるOSで異なる見た目になる問題を解決するべく、多くのWebブラウザが登場し、OSに依存しない形で独自のレンダリングエンジンを持つようになりました。
 
-しかし、レンダリングのOSへの依存が解消されてからも、`<select>`などの「入力時になんらかの特殊要素を必要とするもの」に関しては、スタイリングが困難なままでした。
+しかし、この動きは、Web標準化という観点からは必ずしも良い方向に進んでいたわけではありません。
 
-### CustomizableでないForm Controlたち
+### The Browser Wars
 
-CustomizableでないForm Controlが存在する根幹の原因は、1995年にHTML2.0に定義されたForm Controlの仕様まで遡ります。
+MosaicのライセンスがMSに供与され、それをベースとしてMSがIEをリリース。その前年に、Netscape社のNetscape Navigatorはv1.0をリリースしていました。
 
-- [RFC 1866 - Hypertext Markup Language - 2.0  - Forms](https://datatracker.ietf.org/doc/html/rfc1866#section-8)
+このMSとNetscape間で、サポートする機能の優位性に関する競争が激化。両ブラウザがWeb標準に対する独自の解釈を持ったまま、独自機能を次々と開発した結果、今度はブラウザ間で一貫性の問題が生じる状況が生まれました。
 
-[Ep.1](https://blog.sakupi01.com/dev/articles/2024-openui-advent-3)でも見たように、当初の仕様では、HTMLドキュメントにデータを入力する方法、そのデータを使用してアクションを実行する方法のみが定義され、Form Controlの具体的な構築方法は各ブラウザに委ねられていました。
+この時期は俗に「ブラウザ戦争」と呼ばれています。（正確には「第一次ブラウザ戦争」）
 
-標準化されていなければ、クロスブラウザの互換性を保つことができないため、Form Controlをスタイラブルにする改善を加えることも現実的ではなくなります。
+「Netscapeでは動作するが、IEでは動作しない」（その逆も然り）という状況が起こり、「このサイトは...で表示するのが最適」というバッジを貼って開発する状況になっていました。
 
-Form Controlに欠けていたものは、一貫したスタイルの実現だけではありません。例えば、`<video>`や`<audio>`などの要素はcontrols属性を持ち、再生/停止のコントロールを表示/非表示することはできますが、これをスタイリングしたり内部のDOMを制御することはできません。
+### Web標準の台頭: Web Standards ProjectによるWeb標準化の推進
 
-```html
-<audio controls src="/hoge.mp3"></audio>
+この状況を打開するために、Web標準化の動きが活発化しました。
+
+有志によって、[WaSP（Web Standards Project）](https://www.webstandards.org/)が立ち上げられ、W3Cの仕様を推奨事項ではなく「標準」とすることで、W3Cの仕様に準拠したブラウザの開発が各社に働きかけられました。
+
+（恒常的に標準をサポートしようとし続けてきた）Operaを踏まえると、2000年にリリースされたIE 5は、W3Cの勧告をある程度なレベルでサポートしており、これはIEにとってもWeb標準化にとっても非常に大きなマイルストーンでした。
+
+加えて、WaSPがNetscapeに働きかけ、Netscape Navigatorのv5.0を標準に準拠したものにするよう促し、これは後のFirefoxの基礎となりました。
+
+<details>
+<summary>Doctype Switchingに見る、段階的標準化の具体例</summary>
+
+IEは5.xになっても、Box Modelを独自で実装していたため、CSS標準に則って実装していたNetscapeとは異なる見た目になっていました。
+
+- CSS標準: width = コンテンツ幅
+- IE5.x: width = コンテンツ幅 - (padding + border)
+
+この差分を解消するために「Box Model Hack」と呼ばれる、異なるブラウザ間のBox Modelの解釈の違いを吸収する方法が編み出されました。
+
+- [Box Model Hack](https://tantek.com/CSS/Examples/boxmodelhack.html)
+  - IEが`voice-family`プロパティを正しくパースできないことを利用して、意図した幅を実現する
+
+```css title="css"
+/* 
+標準ブラウザ: 最終的なwidth: 300pxが適用
+IE5.x: 最初のwidth: 400pxが維持される 
+*/
+div.content { 
+  width: 400px;  /* 最初に幅を設定 */
+  voice-family: "\"}\"";  /* IE5.xが正しく解釈できないプロパティを挿入 */
+  voice-family: inherit;  /* 継承してパーサの状態をリセット */
+  width: 300px;  /* 標準ブラウザで利用される最終的な幅を定義 */
+}
 ```
 
-初期の仕様策定の段階で、具体的な実装方法が詰められることがなく、各ブラウザで実装が進められてきた結果、スタイルと拡張性が著しく欠けたままのForm Controlが多く存在しています。
+かといって、IE5.xが突然「CSS標準に準拠した実装にします！」とすると、それまでIE5.xで正常に動作していた何十万、何百万というサイトが崩れてしまうことになります。
 
-かといって、ネイティブForm Controlを使用せずにイチから実装しようとすると、アクセシビリティやパフォーマンス、セキュリティなど、非常に多くの考慮事項が発生します。
-もし仮に、完璧なARIAロールを持ち合わせ、パフォーマンスもセキュリティも問題ないようなカスタムForm Controlを実装できたとしても、長期的にその独自Form Controlが動作するかというと、それは保証されていません。
+そこで、後方互換性を保つために[Doctype Switching](https://www.w3.org/html/wg/wiki/DoctypeSwitching)が生まれ、ブラウザに「どのモードで解釈するか」を指示できるようになりました。
+これにより、仕様に準拠した記法への段階的な移行が可能になりました。
 
-独自Form Controlを構築する上で必要だった実装の一部が、いつの日かWebプラットフォームから廃止されてしまうリスクも考えられます。アクセシビリティの要件もアップデートされ続けます。独自で実装したものを中長期的に運用していくコストは、非常に高いと言えるでしょう。
+- Standardsモード（標準準拠モード）: W3Cの標準に準拠したモード
+- Quirksモード（後方互換モード）: 旧来ブラウザと互換性のあるモード
 
-## Form Controlの抱える問題を解決する動き
+</details>
 
-Open UIのChairであるGreg Whitworthが、何がForm Controlの中でも扱いにくいのか、それはどうしてなのかを測る調査を1,400人の回答者を対象に行いました。
+WaSPにより、Web技術の標準化が推進され、ブラウザベンダーは標準に準拠したブラウザを段階的に開発するようになり、その中で自ずとOSネイティブなレンダリングエンジンから独立していくようになります。
 
-https://www.gwhitworth.com/posts/2019/form-controls-components/
+### CSSの発展とモダンブラウザの登場
 
-- どのForm Controlを独自で実装したか
-  1. `<select>`
-  2. `<input type="checkbox">`
-  3. `<input type="date">`
+Web標準化が推進されたことにより、ブラウザはCSSを用いて、より柔軟に要素のスタイルを制御できるようになりました。
 
-![re-created-form-controls](/re-created-form-controls.png)
+[Ep3.でも触れた](https://blog.sakupi01.com/dev/articles/2024-openui-advent-3##form-controlにおけるスタイリングの制限)ように、[CSS2.2](https://www.w3.org/TR/CSS22/conform.html#conformance)の時点では、Form Controlに対するスタイリングは実験的な機能として定義されていました。
 
-- どうして独自で実装したか
-  1. スタイリングできなかったから
-  2. 機能拡張したかったから
-  3. クロスブラウザでの一貫性がなかったから
+しかし、CSS3では、例えば`padding`の定義されている、[CSS Box Model ModuleのConformanceの項](https://drafts.csswg.org/css-box/#w3c-conformance)には、そのような記述はされていません。（※ CSS3では、異なる機能を扱いやすいチャンクに分割するModules構造の仕様となりました。）
 
-![reasons-re-creation](/reasons-re-creation.png)
+MDNにも[CSS property compatibility table for form controls](https://developer.mozilla.org/en-US/docs/Learn/Forms/Property_compatibility_table_for_form_controls)といったページがあることから、完全ではないながらも、Form Controlに対するスタイリングはCSS3で実現可能とされたと言えるでしょう。
 
-- どのForm Controlが最も扱いにくいか
-  1. `<select>`
-  2. `<input type="date">`
-  3. `<input type="file">`
+そして、2000年代中期に入ってからは、Firefox、Safari、Chromeなどのモダンブラウザが登場し、これらはCSS3の機能を積極的にサポートするようになりました。
 
-![hardest-form-controls](/hardest-form-controls.png)
-
-このサーベイの結果から、`<select>`の扱いにくさは特に顕著だとわかります。独自実装している理由としては、スタイリングや機能拡張、クロスブラウザでの一貫性の無さが挙げられています。
-
-この問題に立ち向かうべく、Open UIに提案された新しい仕様が、Customizable Select Elementだったのです。
+こうした一連の活動により、ブラウザはOSに依存するレンダリングから、レンダリングエンジンを搭載したブラウザでの、CSS3によるより柔軟なスタイリングが可能となりました。
 
 ***
 
@@ -97,10 +111,10 @@ See you tomorrow!
 
 ### Appendix
 
-- [Tim Berners-Lee: WorldWideWeb, the first Web client](https://www.w3.org/People/Berners-Lee/WorldWideWeb.html)
-- [https://web.sfc.keio.ac.jp/~hagino/dis23/01.pdf](https://web.sfc.keio.ac.jp/~hagino/dis23/01.pdf)
-- [https://www.w3.org/MarkUp/html-spec/html-spec_toc.html](https://www.w3.org/MarkUp/html-spec/html-spec_toc.html)
-- [https://developer.mozilla.org/ja/docs/Learn/Forms/Styling_web_forms](https://developer.mozilla.org/ja/docs/Learn/Forms/Styling_web_forms)
-- [Styling form controls with CSS, revisited | 456 Berea Street](https://www.456bereastreet.com/archive/200701/styling_form_controls_with_css_revisited/)
-- [20 Years of CSS](https://www.w3.org/Style/CSS20/)
 - [CSS Properties Index · Jens Oliver Meiert](https://meiert.com/en/indices/css-properties/)
+- [The history of the Web - W3C Wiki](https://www.w3.org/wiki/The_history_of_the_Web)
+- [History of the Web Standards Project - The Web Standards Project](https://www.webstandards.org/about/history/)
+- [Call for action on Vendor Prefixes - The Web Standards Project](https://www.webstandards.org/2012/02/09/call-for-action-on-vendor-prefixes/index.html)
+- [Prefix or Posthack – A List Apart](https://alistapart.com/article/prefix-or-posthack/)
+- [Box Model Hack](https://tantek.com/CSS/Examples/boxmodelhack.html)
+- [IE7とFirefox2のDOCTYPEスイッチ | コリス](https://coliss.com/articles/build-websites/operation/css/84.html)
