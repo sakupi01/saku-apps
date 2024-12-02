@@ -1,5 +1,5 @@
 ---
-title: "🎄Open UI Advent Calendar: Day 2 / Open UIについて"
+title: "🎄Open UI Advent Calendar: Day 2 / Web UIの抱える課題とOpen UIの発足背景"
 excerpt: "Web UIの抱える課題とOpen UIの発足背景について"
 date: "2024-12-2"
 beginColor: 'from-red-500'
