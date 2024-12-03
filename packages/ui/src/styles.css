@@ -28,6 +28,10 @@ body iframe {
   @apply my-8 w-full;
 }
 
+.markdown :is(p, span, a) {
+  @apply w-full text-wrap;
+}
+
 .markdown :is(h1 > a, h1){
     @apply md:text-4xl text-3xl font-bold text-left text-basic no-underline my-10;
   }
