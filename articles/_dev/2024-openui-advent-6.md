@@ -57,7 +57,7 @@ status: 'published'
 
 iOS Safariでは、`<select>`のフォントサイズが16px未満だとページがズームインされてしまうという、デバイス固有の特殊な制約がある
 
-4. 十分な言語対応がされていない問題
+4. 十分な多言語対応がされていない問題
 
 ネイティブの`<select>`は、右から左に書く言語（アラビア語、ヘブライ語など）をサポートしているが、独自のスタイリングをする場合は追加で考慮が必要
 
@@ -73,13 +73,13 @@ iOS Safariでは、`<select>`のフォントサイズが16px未満だとペー�
 ![プラットフォーム間でのCSS適用の差分](/dropdown-difference.png)
 *出典: Stylability of Form Controls*
 
-これに関しては、Mason Freedが詳細をまとめてくれているので、参考にしてみてください。
+これに関しては、[Mason Freed](https://x.com/mfreed777)が詳細をまとめてくれているので、参考にしてみてください。
 
 - [Stylability of Form Controls - Google ドキュメント](https://docs.google.com/document/d/1Xa_k_MKfw4QnqHjjOKUW0HWGvgHmZeo7YWWCxTjKWBI/edit?tab=t.0#heading=h.97wudakpmohg)
 
-### DomenicによるCSEの初期提案
+### Domenic DenicolaによるCSEの初期提案
 
-これらの詳細な調査結果を受けて、Domenicは、`<select>`のスタイリングに関する問題を解決するためのインクリメンタルなアプローチを切り出しました。
+これらの詳細な調査結果を受けて、Googleの[Domenic](https://x.com/domenic)は、`<select>`のスタイリングに関する問題を解決するためのインクリメンタルなアプローチを切り出しました。
 
 - [Thoughts on an incremental approach to `<select>`/`<input>` + `<datalist>` · Issue #3 · openui/open-ui](https://github.com/openui/open-ui/issues/3)
 
@@ -98,7 +98,7 @@ iOS Safariでは、`<select>`のフォントサイズが16px未満だとペー�
 
 #### 3. 小さく絞って拡張していく
 
-1. `::dropdown-button`や`::marker`のようなドロップダウンの矢印を指定できる疑似要素の追加
+1. `::dropdown-button`や`::marker`のような、ドロップダウンの矢印を指定できる疑似要素の追加
 2. `<select>`のプレースホルダーを`placeholder=""`などとして、スタイル可能なより柔軟なサポートを追加
 3. ドロップダウンが「openな状態」を示す疑似クラスの追加
 4. モバイルとデスクトップで、ポップアップ表示かドロップダウン表示か区別する擬似クラス的な仕組みを追加
@@ -126,7 +126,7 @@ iOS Safariでは、`<select>`のフォントサイズが16px未満だとペー�
 
 ***
 
-個人による一連の調査が、Open UIで`<select>`の問題提起を導き、これを契機に本格的に`<select>`のリサーチがなされていくことになります。
+GregやMasonによる一連の調査が、Domenicによる`<select>`の問題提起を導き、これを契機にOpen UIで本格的に`<select>`のリサーチがなされていくことになります。
 
 - [Can we please style the `<select>` control?!](https://www.gwhitworth.com/posts/2019/can-we-please-style-select/)
 - [Add initial curated page and research for <select> by wdencker · Pull Request #19 · openui/open-ui](https://github.com/openui/open-ui/pull/19)
