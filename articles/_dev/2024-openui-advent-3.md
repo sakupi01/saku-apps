@@ -128,8 +128,8 @@ See you tomorrow!
 ### Appendix
 
 - [Tim Berners-Lee: WorldWideWeb, the first Web client](https://www.w3.org/People/Berners-Lee/WorldWideWeb.html)
-- [https://web.sfc.keio.ac.jp/~hagino/dis23/01.pdf](https://web.sfc.keio.ac.jp/~hagino/dis23/01.pdf)
-- [https://www.w3.org/MarkUp/html-spec/html-spec_toc.html](https://www.w3.org/MarkUp/html-spec/html-spec_toc.html)
+- [第1回 Webの歴史 - Tatsuya Hagino](https://web.sfc.keio.ac.jp/~hagino/dis23/01.pdf)
+- [Hypertext Markup Language - 2.0 - Table of Contents](https://www.w3.org/MarkUp/html-spec/html-spec_toc.html)
 - [ウェブフォームへのスタイル設定 - ウェブ開発を学ぶ | MDN](https://developer.mozilla.org/ja/docs/Learn/Forms/Styling_web_forms)
 - [Styling form controls with CSS, revisited | 456 Berea Street](https://www.456bereastreet.com/archive/200701/styling_form_controls_with_css_revisited/)
 - [20 Years of CSS](https://www.w3.org/Style/CSS20/)
