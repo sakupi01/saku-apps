@@ -45,13 +45,18 @@ CustomizableでないForm Controlが存在する根幹の原因は、1995年にH
 
 標準化されていなければ、クロスブラウザの互換性を保つことができないため、Form Controlをスタイリング可能にする改善を加えることも現実的ではなくなります。
 
-Form Controlに欠けていたものは、一貫したスタイルの実現だけではありません。例えば、`<video>`や`<audio>`などの要素はcontrols属性を持ち、再生/停止のコントロールを表示/非表示することはできますが、これをスタイリングしたり内部のDOMを制御することはできません。
+例えば、`<input>`のtype属性に”range”を指定するとスライダーを表示させることができますが、ブラウザ・OS間で見た目が一貫しておらず、かといってスタイリングしたり内部のDOMを制御したりすることはできません。
 
 ```html
-<audio controls src="/hoge.mp3"></audio>
+<input type="range" id="volume" name="volume" min="0" max="11"></input>
 ```
 
-初期の仕様策定の段階で、具体的な実装方法が詰められることがなく、各ブラウザで実装が進められてきた結果、スタイルと拡張性が著しく欠けたままのForm Controlが多く存在しています。
+![スライダーはShadow DOMとしてレンダリングされるため、外部から変更できない](/slider-shadowdom.png)
+*スライダー内部はShadow DOMとしてレンダリングされるため、外部から変更できない*
+
+- [CSS property compatibility table for form controls - Learn web development | MDN](https://developer.mozilla.org/en-US/docs/Learn/Forms/Property_compatibility_table_for_form_controls#range)
+
+初期の仕様策定の段階で、具体的な実装方法が詰められることがなく、各ブラウザで実装が進められてきた結果、ネイティブの見た目の一貫性・スタイル可能性と拡張性が著しく欠けたままのForm Controlは多く存在しています。
 
 かといって、ネイティブForm Controlを使用せずにイチから実装しようとすると、アクセシビリティやパフォーマンス、セキュリティなど、非常に多くの考慮事項が発生します。
 もし仮に、完璧なARIAロールを持ち合わせ、パフォーマンスもセキュリティも問題ないようなカスタムForm Controlを実装できたとしても、長期的にその独自Form Controlが動作するかというと、それは保証されていません。
@@ -69,7 +74,7 @@ Form Controlに欠けていたものは、一貫したスタイルの実現だ�
 
 ## Form Controlの抱える問題を解決する動き
 
-Open UIのChairであるGreg Whitworthが、何がForm Controlの中でも扱いにくいのか、それはどうしてなのかを測る調査を1,400人の回答者を対象に行いました。
+Open UIのChairであるGreg WhitworthはForm Controlについて、「何が扱いにくいのか」、「それはどうしてなのか」を調べるため、1,400人の回答者を対象にサーベイを行いました。
 
 https://www.gwhitworth.com/posts/2019/form-controls-components/
 
@@ -110,4 +115,3 @@ See you tomorrow!
 - [Styling form controls with CSS, revisited | 456 Berea Street](https://www.456bereastreet.com/archive/200701/styling_form_controls_with_css_revisited/)
 - [20 Years of CSS](https://www.w3.org/Style/CSS20/)
 - [CSS Properties Index · Jens Oliver Meiert](https://meiert.com/en/indices/css-properties/)
-
