@@ -51,13 +51,16 @@ status: 'published'
 > A menu is a widget that offers a list of choices to the user, **such as a set of actions or functions**. Menu widgets behave like native operating system menus, such as the menus that pull down from the menubars commonly found at the top of many desktop application windows.
 > [Menu and Menubar Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/)
 
+![Menu](/menu.png)
+*画面遷移のアクションを伴うMenuの例 - 出典: APG | WAI | W3C [Navigation Menubar Example](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/examples/menubar-navigation/)*
+
 :::note{.memo}
 📝 [APG (ARIA Authoring Practices Guide)](https://www.w3.org/WAI/ARIA/apg/):
 アクセシブルなウェブ体験を作成するための、 Accessible Rich Internet Application (ARIA) 仕様書で定義されたセマンティクスのガイド。一般的なデザインパターンとウィジェットにアクセシビリティセマンティクスを適用する方法を記述し、デザインパターンと機能例を提供しています。
 （出典：[ウェブ制作者のためのアクセシビリティ情報 - アクセシビリティ | MDN](https://developer.mozilla.org/ja/docs/Web/Accessibility/Information_for_Web_authors#%E3%82%AC%E3%82%A4%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%81%A8%E8%A6%8F%E5%AE%9A)）
 :::
 
-一方のComboboxパターンは、入力フィールドとリストを組み合わせたUIで、値の選択肢がリストなってポップアップで表現さると定義されています。
+一方のComboboxパターンは、値の選択肢がリストなってポップアップで表現さると定義されています。また、入力フィールドとリストを組み合わせたUIであったり、選択のみのUIであったりしてもComboboxと見なされます。
 
 > A combobox is an input widget that has an associated popup. **The popup enables users to choose a value for the input from a collection**. The popup may be a listbox, grid, tree, or dialog.
 >
@@ -66,9 +69,16 @@ status: 'published'
 > The combobox pattern supports several optional behaviors. The one that most shapes interaction is text input. **Some comboboxes allow users to type and edit text in the combobox and others do not. If a combobox does not support text input, it is referred to as select-only, meaning the only way users can set its value is by selecting a value in the popup.**
 > [Combobox Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)
 
-APGを踏まえると、初期主張には一定納得でき、Open UIのメンバーの多くもこの提案に興味を示すことになります。
+| 入力フィールドのあるCombobox | 選択のみ可能なCombobox |
+| ---- | ---- |
+| ![入力フィールドのあるCombobox](/input-combobox.png) | ![選択のみ可能なCombobox](/select-combobox.png) |
 
-しかし、ComboboxのAPGによると、Comboboxは「Listboxとinputを組み合わせたUIパターン」、または「selectそのもの」を指すと言えます。
+*Comboboxの例 - 出典: APG | WAI | W3C [Editable Combobox With List Autocomplete Example](Chttps://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/), [Select-Only Combobox Example](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/)*
+
+APGを踏まえると、「`<selectmenu>`はMenuパターンではない」という初期主張には一定納得でき、Open UIのメンバーの多くもこの提案に興味を示すことになります。
+
+しかし、「`<selectmenu>`はComboboxパターンに近いので`<selectbox>`にすべき」という主張に関してはどうでしょうか。
+ComboboxのAPGによると、Comboboxは「Listboxとinputを組み合わせたUIパターン」、または「selectそのもの」を指すと言えます。
 
 この定義に基づくと、Comboboxは「Listboxをinputの入力値によって変更した結果得られるUIである」ということができ、`<selectbox>`という命名をしてしまうと、ListboxやComboboxなど、他の「box」との混同を招く可能性があると指摘されています。
 しかしながら、Comboboxは「selectそのもの」を指すこともできるため、`<selectbox>`には一定の正当性があるという意見もありました。
