@@ -22,14 +22,14 @@ status: 'published'
 
 ## `<selectmenu>`のその後: `<selectlist>`へ
 
-`<selectmenu>`は2023年5月のGoogle I/Oで発表され、Chrome CanaryのExperimental Web Platform Featuresフラグを有効にすることで試すことができました。
+`<selectmenu>`は2023年5月のGoogle I/Oで発表され、Chrome CanaryのExperimental Web Platform Featuresフラグを有効にすることで、試すことができました。
 
 - [What's new in CSS and UI: I/O 2023 Edition  |  Blog  |  Chrome for Developers](https://developer.chrome.com/blog/whats-new-css-ui-2023#selectmenu)
 - [selectmenu prototype | Open UI](https://open-ui.org/prototypes/selectmenu/)
 
-この時点で、[Intent to Prototype](https://groups.google.com/a/chromium.org/g/blink-dev/c/9TcfjaOs5zg/m/WAiv6WpUAAAJ)が出されてから実に3年の月日が経っており、ようやく試験的に試せるようになりました。
+この時点で、[Intent to Prototype](https://groups.google.com/a/chromium.org/g/blink-dev/c/9TcfjaOs5zg/m/WAiv6WpUAAAJ)が出されてから実に3年の月日が経っていました。
 
-`<selectmenu>`には、Popover APIとCSS Anchor Positioningという新しいWebの機能が使用されるなど、技術的な挑戦が実装に組み込まれており、当時は注目を集めました。
+`<selectmenu>`には、Popover APIとCSS Anchor Positioningという新しいWebの機能が使用されるなど、技術的な挑戦が仕様に組み込まれており、当時は注目を集めました。
 （※ 一旦命名の変遷にのみ着目しているため、その間に起こった技術的な出来事は後回しにします）
 
 ***
@@ -99,11 +99,11 @@ https://github.com/openui/open-ui/issues/773#issuecomment-1649976535
 
 そして、多くの票を集めた`<selectlist>`と`<selectbox>`に関する[Telecon](https://github.com/openui/open-ui/issues/773#issuecomment-1664421419)がもう一度行われ、以下の内容が話されました。
 
-- `<selectlist>`の方が「リスト」という意味でより明示的であり、「box」は形状を示すだけで適切に機能を説明的ではない
+- `<selectlist>`の方が「リスト」という意味でより明示的であり、「box」は形状を示すだけで適切に機能を説明的できない
 - `<listbox>`という要素が将来的に登場する可能性が否めないため、`<selectbox>`と`<listbox>`が共存すると混乱を招く可能性がある
 - 非英語ネイティブスピーカーにとっても「list」の方が理解しやすい
 
-この結果を以って、最終的に`<selectlist>`が採用されることになりました。`<selectlist>`に決まったのは2023年8月始めのことでした。
+この結果を以って、最終的に`<selectlist>`が採用されることになりました。
 
 ---
 
