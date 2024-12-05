@@ -19,7 +19,7 @@ status: 'published'
 
 [Customizable Select Element Ep.4](https://blog.sakupi01.com/dev/articles/2024-openui-advent-6)では、GregとMasonによる調査結果を受けた、DomenicによるOpen UI内での初期提案について見ていきました。
 
-今回から、これまでにどのような提案が議論され、実装されてきたのか、または議論中なのかをみていきます。
+今回から、これまでにどのような提案が議論され、実装されてきたのか、または議論中なのかを見ていきます。
 
 CSEは、現状の形になる前に命名の変遷を辿ってきました。
 初めは`<selectmenu>`だったものが、`<selectlist>`になり、今となっては`<select>`です。
