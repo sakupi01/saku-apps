@@ -90,7 +90,8 @@ APGを踏まえると、初期主張には一定納得でき、Open UIのメン�
 
 埒が開かないので、絵文字投票が行われ、その時点で多くの票が`<selectlist>`と`<selectbox>`に集まりました。
 
-https://github.com/openui/open-ui/issues/773#issuecomment-1649976535
+![絵文字投票](/emoji-election.png)
+*絵文字投票 - 参考: https://github.com/openui/open-ui/issues/773#issuecomment-1649976535*
 
 その上でもう一度[Telecon](https://github.com/openui/open-ui/issues/773#issuecomment-1654169425)で話し合われ、その時点でGoogle DevRelの[Una Kravets](https://x.com/una)は以下のように主張しました。
 
