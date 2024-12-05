@@ -46,10 +46,16 @@ status: 'published'
 - 「Menu」と「Combobox」の認識差異による誤解が、アクセシブルかつ一貫性のあるUIを設計する際に問題となりかねない
 - `<selectmenu>`を`<selectbox>`に改名することで、よりComboboxパターンに近しい選択ツールであることを明確にできる
 
-確かに、APGにもMenuパターンは以下のように定義されており、何らかのアクションを伴う要素のリストを提供するものであることが一般的であるとわかります。
+確かに、[APG](https://www.w3.org/WAI/ARIA/apg/)にもMenuパターンは以下のように定義されており、何らかのアクションを伴う要素のリストを提供するものであることが一般的であるとわかります。
 
 > A menu is a widget that offers a list of choices to the user, **such as a set of actions or functions**. Menu widgets behave like native operating system menus, such as the menus that pull down from the menubars commonly found at the top of many desktop application windows.
 > [Menu and Menubar Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/)
+
+:::note{.memo}
+📝 [APG (ARIA Authoring Practices Guide)](https://www.w3.org/WAI/ARIA/apg/):
+アクセシブルなウェブ体験を作成するための、 Accessible Rich Internet Application (ARIA) 仕様書で定義されたセマンティクスのガイド。一般的なデザインパターンとウィジェットにアクセシビリティセマンティクスを適用する方法を記述し、デザインパターンと機能例を提供しています。
+（出典：[ウェブ制作者のためのアクセシビリティ情報 - アクセシビリティ | MDN](https://developer.mozilla.org/ja/docs/Web/Accessibility/Information_for_Web_authors#%E3%82%AC%E3%82%A4%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%81%A8%E8%A6%8F%E5%AE%9A)）
+:::
 
 一方のComboboxパターンは、入力フィールドとリストを組み合わせたUIで、値の選択肢がリストなってポップアップで表現さると定義されています。
 
