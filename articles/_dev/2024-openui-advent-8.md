@@ -116,7 +116,7 @@ ComboboxのAPGによると、Comboboxは「Listboxとinputを組み合わせたU
 
 そして、多くの票を集めた`<selectlist>`と`<selectbox>`に関する[Telecon](https://github.com/openui/open-ui/issues/773#issuecomment-1664421419)がもう一度行われ、以下の内容が話されました。
 
-- `<selectlist>`の方が「リスト」という意味でより明示的であり、「box」は形状を示すだけで適切に機能を説明的できない
+- `<selectlist>`の方が「リスト」という意味でより明示的であり、「box」は形状を示すだけで適切に機能を説明できない
 - `<listbox>`という要素が将来的に登場する可能性が否めないため、`<selectbox>`と`<listbox>`が共存すると混乱を招く可能性がある
 - 非英語ネイティブスピーカーにとっても「list」の方が理解しやすい
 
