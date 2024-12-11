@@ -39,15 +39,28 @@ CSEのデフォルトのスタイルでは、ポップオーバー部分をト�
 
 - [[css-ui] Pseudo-elements for checkmark and dropdown icon for appearance:base `<select>` · Issue #10908 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/issues/10908)
 
-しかし、デフォルト擬似要素に加えて`::before``::after`を当てたいとなると、以下のようなユースケースも考えられます。
+しかし、デフォルトの擬似要素に加えて、`::before``::after`を要素に当てたいというユースケースも考えられます。
+例えば、`<li>`のデフォルトの行頭文字はBulletで`::marker`としてレンダーされますが、`<li>`に`::marker`だけでなく`::before`でも「何か別の要素（🎄）」を配置したい場合、以下のように記述できます。
 
 ```css
 
-li::marker::before {
-  content: "🎄";
+li::marker {
+  font-size: 1.5rem;
+  color: orange;
+}
+li::before {
+  content: '\1F384';
+  margin-right: 10px;
 }
 
 ```
+
+![`::marker`を上書きする](/marker-null-list.png)
+*`::marker`を上書きする*
+
+しかし、もし`::marker`が存在せず、UAスタイルシートに`li::before`でBulletが実装されていた場合はどうでしょうか。`<li>`の`::before`はもうUAによって使われているため、Bulletと「何か別の要素（🎄）」の二つを配置することは困難です。
+
+***
 
 これに関して、デフォルトでは`::select-arrow`などの新しい擬似要素を提案するべきとの[指摘](https://github.com/w3c/csswg-drafts/issues/10857#issuecomment-2347867882)があり、TPAC 2024のOpen UIとCSSWGのJoint Sessionで話し合われる運びになりました。
 
