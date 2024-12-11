@@ -1,0 +1,125 @@
+---
+title: "🎄Open UI Advent Calendar: Day 11 / Customizable Select Element Ep.9"
+excerpt: "Customizable Select Element"
+date: "2024-12-11"
+beginColor: 'from-red-500'
+middleColor: 'via-lime-500'
+endColor: 'to-green-700'
+category: 'dev'
+tags: ['openui', 'advent calendar']
+status: 'published'
+---
+## 目次
+
+## はじめに
+
+:::note{.message}
+🎄 この記事は[Open UI Advent Calendar](https://adventar.org/calendars/10293)の11日目の記事です。
+:::
+
+[Customizable Select Element Ep.9](https://blog.sakupi01.com/dev/articles/2024-openui-advent-8)から、 `appearance: base-select;`で提供される、CSEのデフォルトの見た目が決定された背景の議論をお話ししています。
+
+Ep.9では、`<option>::checkmark`が現状の見た目となった背景について深掘りました。
+今回は、`::picker-icon`部分について取り上げます。
+
+![2024/12/9時点でのselectの各パーツの定義](/select-anatomy.png)
+*2024/12/9時点でのselectの各パーツの定義*
+
+## Customizable Select Elementの関連仕様
+
+### ボタン要素右の矢印アイコン
+
+CSEのデフォルトのスタイルでは、ポップオーバー部分をトリガーする`<button>`の右に「▼」矢印アイコンが表示されます。
+
+初期段階では、この矢印アイコンは`select::after`として実装されていましたが、後に`::select-arrow`となり、現在では`::picker-icon`となっています。
+
+デフォルトスタイルを決める[Issue](https://github.com/w3c/csswg-drafts/issues/10857)の初期段階では、`select::after`という既存の擬似要素をそのまま使用して提案されていました。（現在はこのIssueの親コメントの内容は最新のものに変わっている）
+
+もともと`::before`や`::after`で実装されていたのは、Author スタイルシートから簡単にレンダリングをDisableする挙動の再現が最も容易だったたためです。
+
+- [[css-ui] Pseudo-elements for checkmark and dropdown icon for appearance:base `<select>` · Issue #10908 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/issues/10908)
+
+しかし、デフォルト擬似要素に加えて`::before``::after`を当てたいとなると、以下のようなユースケースも考えられます。
+
+```css
+
+li::marker::before {
+  content: "🎄";
+}
+
+```
+
+これに関しては、デフォルトでは`::select-arrow`などの新しい擬似要素を提案するべきとの[指摘](https://github.com/w3c/csswg-drafts/issues/10857#issuecomment-2347867882)もあり、TPAC 2024のOpen UIとCSSWGのJoint Sessionで話し合われる運びになりました。
+
+- [Cascading Style Sheets (CSS) Working Group Teleconference – 24 September 2024](https://www.w3.org/2024/09/24-css-minutes.html#t07)
+
+もし、ボタン要素右の矢印アイコンを`::after`で実装すると、Authorスタイルシートの`::after`でスタイルをカスタマイズする際に、以下の3つのプロパティを上書きする必要があります。
+
+```css title={UAスタイルシート}
+select::after {
+  margin-inline-start: auto;
+  display: block;
+  content: counter(fake-counter-name, disclosure-open);
+}
+```
+
+一方、独自の擬似要素を定義すると、UAスタイルシートの擬似要素を`display: none;`するだけで、デフォルトの矢印アイコンを削除でき、Authorスタイルシートでの上書きが容易になります。
+
+加えて、目的に沿った命名の擬似要素を定義することで、要素の目的を明確にできるという利点もあります。
+
+TPACでは、こうした議論の結果、既存の`::after`ではなく、新しく擬似要素を定義するという結論に至りました。
+
+> RESOLUTION: create new pseudo elements for checkmark and dropdown icon for base appearance select instead of using ::before and ::after in the UA stylesheet
+> ACTION: Tab and fantasai to make better words for this in the css-pseudo spec
+
+#### 擬似要素のカテゴリ
+
+新しい擬似要素を実際にspecに定義する際、擬似要素を`tree-abiding`とするか`element-backed`にするかという話がありました。
+擬似要素は2種類に大別でき、`tree-abiding`と`element-backed`はそれぞれ以下のような特徴があります。
+
+- `tree-abiding`な擬似要素: TreeにAbide（従う・倣らう）要素。それ自体は要素としてBox Treeの中には存在しない。レンダーするコンテンツは、`content`プロパティ内に指定する e.g. `::before`, `::after`, `::select-arrow`（`::picker-icon`）
+  - [CSS Pseudo-Elements Module Level 4](https://www.w3.org/TR/css-pseudo-4/#treelike)
+- `element-backed`な擬似要素: Tree Abidingの中でも、Box Tree内のイチ要素となるもの e.g. `::part()`, `::picker`
+
+![仕様上の擬似要素カテゴリ](/presudo-element-categories.png)
+*仕様上の擬似要素カテゴリ*
+
+`::selected-arrow`は、元々`select::after`として定義＆実装されていたように、それ自体はBox Treeの中には存在しない`tree-abiding`な擬似要素なので、specにも`tree-abiding`な擬似要素とカテゴライズされることになりました。
+
+> gregwhitworth RESOLVED: add pseudo-elements for the select button and option checkmarks which are **fully stylable pseudo-elements** **with content specified by the content property**
+> https://logs.csswg.org/irc.w3.org/css/2024-10-24/
+
+- [[css-forms-1] Add new pseudo-elements for customizable select by josepharhar · Pull Request #10986 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/pull/10986)
+
+#### `::selected-arrow`、`::picker-icon`に決定押される
+
+`::selected-arrow`は暫定的な名前だったため、要素に対する投票＆議論が行われ、最終的に`::picker-icon`に決定され、Chromiumの実装に反映されました。
+
+- https://github.com/w3c/csswg-drafts/issues/10908#issuecomment-2489173316
+
+> RESOLVED: go with ::picker-icon
+> https://github.com/w3c/csswg-drafts/issues/10908#issuecomment-2489173316
+
+- [6065538: Rename ::select-arrow to ::picker-icon](https://chromium-review.googlesource.com/c/chromium/src/+/6065538)
+
+***
+
+今回はポップオーバーを開閉するボタン要素右の矢印アイコン、`::picker-icon`を取り上げました。
+
+- [ ] `appearance: base-select;`の見た目は、どのようにして決まったのか
+  - [x] 選択された`<option>`のデフォルトチェックマーク
+  - [x] ポップオーバーを開閉するボタン要素右の矢印アイコン
+  - [ ] ボタン要素や選択肢ポップオーバーの色
+  - [ ] その他のスタイル
+
+上記Issueに記されているデフォルトスタイルになった背景について、次回からも引き続き見ていこうと思います。
+
+それでは、また明日⛄
+
+See you tomorrow!
+
+### Appendix
+
+- [6024158: Update customizable select UA styles](https://chromium-review.googlesource.com/c/chromium/src/+/6024158)
+- [6065538: Rename ::select-arrow to ::picker-icon](https://chromium-review.googlesource.com/c/chromium/src/+/6065538)
+- [Bug 1934981 [wpt PR 49499] - Rename ::select-arrow to ::picker-icon, … · mozilla/gecko-dev@8426dc5](https://github.com/mozilla/gecko-dev/commit/8426dc5cc270a53e4a5483d8084047b3f65bd990#diff-d05e7899d421ed4baeab371c3fb033fc4844bf46780313a6ae6b4c1d265dc883)
