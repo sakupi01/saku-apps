@@ -109,6 +109,10 @@ select::after {
 
 - [6065538: Rename ::select-arrow to ::picker-icon](https://chromium-review.googlesource.com/c/chromium/src/+/6065538)
 
+以下は、デフォルトの`::picker-icon`をカスタマイズしたデモです。
+
+https://codepen.io/sakupi01/pen/YPKyOyP
+
 ***
 
 今回はポップオーバーを開閉するボタン要素右の矢印アイコン、`::picker-icon`を取り上げました。
