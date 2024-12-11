@@ -35,7 +35,7 @@ CSEのデフォルトのスタイルでは、ポップオーバー部分をト�
 
 デフォルトスタイルを決める[Issue](https://github.com/w3c/csswg-drafts/issues/10857)の初期段階では、`select::after`という既存の擬似要素をそのまま使用して提案されていました。（現在はこのIssueの親コメントの内容は最新のものに変わっている）
 
-もともと`::before`や`::after`で実装されていたのは、Author スタイルシートから簡単にレンダリングをDisableする挙動の再現が最も容易だったたためです。
+もともと`::before`や`::after`で実装されていたのは、`::before`や`::after`が「`diplay: none;`などで簡単に上書きできる」という要件を満たしつつ、UAスタイルシートでの実装も容易だったためです。
 
 - [[css-ui] Pseudo-elements for checkmark and dropdown icon for appearance:base `<select>` · Issue #10908 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/issues/10908)
 
@@ -49,11 +49,18 @@ li::marker::before {
 
 ```
 
-これに関しては、デフォルトでは`::select-arrow`などの新しい擬似要素を提案するべきとの[指摘](https://github.com/w3c/csswg-drafts/issues/10857#issuecomment-2347867882)もあり、TPAC 2024のOpen UIとCSSWGのJoint Sessionで話し合われる運びになりました。
+これに関して、デフォルトでは`::select-arrow`などの新しい擬似要素を提案するべきとの[指摘](https://github.com/w3c/csswg-drafts/issues/10857#issuecomment-2347867882)があり、TPAC 2024のOpen UIとCSSWGのJoint Sessionで話し合われる運びになりました。
 
 - [Cascading Style Sheets (CSS) Working Group Teleconference – 24 September 2024](https://www.w3.org/2024/09/24-css-minutes.html#t07)
 
-もし、ボタン要素右の矢印アイコンを`::after`で実装すると、Authorスタイルシートの`::after`でスタイルをカスタマイズする際に、以下の3つのプロパティを上書きする必要があります。
+先ほどの`::marker`のようなケースのみならず、既存の`::before``::after`をUAで使用するとさまざまな考慮事項が発生します。
+
+例えば、Authorスタイルシートの`::after`を使ってボタン要素右の矢印アイコンを全く独自のものに置き換えるケース考えてみましょう。
+以下のように、UAスタイルシートがボタン要素右の矢印アイコンを`::after`で実装すると、以下をやらねばならなくなります。
+
+1. UAスタイルシートの`select::after`に何が当たっているかDevToolsを開いて確認する
+2. Authorスタイルシートで以下の3つのプロパティを上書きする
+3. 独自のアイコンにするためのスタイルを当てる
 
 ```css title={UAスタイルシート}
 select::after {
@@ -63,18 +70,18 @@ select::after {
 }
 ```
 
-一方、独自の擬似要素を定義すると、UAスタイルシートの擬似要素を`display: none;`するだけで、デフォルトの矢印アイコンを削除でき、Authorスタイルシートでの上書きが容易になります。
+一方、UAが、`::before``::after`ではなく新しい擬似要素で実装すると、新しい擬似要素を`display: none;`するだけで、デフォルトの矢印アイコンを削除でき、Authorスタイルシートでの上書きが容易になります。
 
 加えて、目的に沿った命名の擬似要素を定義することで、要素の目的を明確にできるという利点もあります。
 
-TPACでは、こうした議論の結果、既存の`::after`ではなく、新しく擬似要素を定義するという結論に至りました。
+こうした議論の結果、既存の`::after`ではなく、新しく擬似要素を定義するという結論に至りました。
 
 > RESOLUTION: create new pseudo elements for checkmark and dropdown icon for base appearance select instead of using ::before and ::after in the UA stylesheet
 > ACTION: Tab and fantasai to make better words for this in the css-pseudo spec
 
 #### 擬似要素のカテゴリ
 
-新しい擬似要素を実際にspecに定義する際、擬似要素を`tree-abiding`とするか`element-backed`にするかという話がありました。
+新しい擬似要素を実際に仕様書に記載する際、擬似要素を`tree-abiding`とするか`element-backed`にするかという話がありました。
 擬似要素は2種類に大別でき、`tree-abiding`と`element-backed`はそれぞれ以下のような特徴があります。
 
 - `tree-abiding`な擬似要素: TreeにAbide（従う・倣らう）要素。それ自体は要素としてBox Treeの中には存在しない。レンダーするコンテンツは、`content`プロパティ内に指定する e.g. `::before`, `::after`, `::select-arrow`（`::picker-icon`）
@@ -84,16 +91,16 @@ TPACでは、こうした議論の結果、既存の`::after`ではなく、新�
 ![仕様上の擬似要素カテゴリ](/presudo-element-categories.png)
 *仕様上の擬似要素カテゴリ*
 
-`::selected-arrow`は、元々`select::after`として定義＆実装されていたように、それ自体はBox Treeの中には存在しない`tree-abiding`な擬似要素なので、specにも`tree-abiding`な擬似要素とカテゴライズされることになりました。
+`::selected-arrow`は、元々`select::after`として定義＆実装されていたように、それ自体はBox Treeの中には存在しない`tree-abiding`な擬似要素なので、仕様書にも`tree-abiding`な擬似要素とカテゴライズされることになりました。
 
 > gregwhitworth RESOLVED: add pseudo-elements for the select button and option checkmarks which are **fully stylable pseudo-elements** **with content specified by the content property**
 > https://logs.csswg.org/irc.w3.org/css/2024-10-24/
 
 - [[css-forms-1] Add new pseudo-elements for customizable select by josepharhar · Pull Request #10986 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/pull/10986)
 
-#### `::selected-arrow`、`::picker-icon`に決定押される
+#### `::selected-arrow`、`::picker-icon`に決定される
 
-`::selected-arrow`は暫定的な名前だったため、要素に対する投票＆議論が行われ、最終的に`::picker-icon`に決定され、Chromiumの実装に反映されました。
+`::selected-arrow`は暫定的な名前だったため、要素に対する議論＆投票が行われ、最終的に`::picker-icon`に決定され、Chromiumの実装に反映されました。
 
 - https://github.com/w3c/csswg-drafts/issues/10908#issuecomment-2489173316
 
