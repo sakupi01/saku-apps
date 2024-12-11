@@ -37,7 +37,7 @@ CSEのデフォルトのスタイルでは、ポップオーバー部分をト�
 
 もともと`::before`や`::after`で実装されていたのは、`::before`や`::after`が「`diplay: none;`などで簡単に上書きできる」という要件を満たしつつ、UAスタイルシートでの実装も容易だったためです。
 
-- [[css-ui] Pseudo-elements for checkmark and dropdown icon for appearance:base `<select>` · Issue #10908 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/issues/10908)
+- [[css-ui] Pseudo-elements for checkmark and dropdown icon for appearance base `<select>` · Issue #10908 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/issues/10908)
 
 しかし、デフォルトの擬似要素に加えて、`::before``::after`を要素に当てたいというユースケースも考えられます。
 例えば、`<li>`のデフォルトの行頭文字はBulletで`::marker`としてレンダーされますが、`<li>`に`::marker`だけでなく`::before`でも「何か別の要素（🎄）」を配置したい場合、以下のように記述できます。
@@ -83,7 +83,7 @@ select::after {
 }
 ```
 
-一方、UAが、`::before``::after`ではなく新しい擬似要素で実装すると、新しい擬似要素を`display: none;`するだけで、デフォルトの矢印アイコンを削除でき、Authorスタイルシートでの上書きが容易になります。
+一方、UAが、`::before` `::after`ではなく新しい擬似要素で実装すると、新しい擬似要素を`display: none;`するだけで、デフォルトの矢印アイコンを削除でき、Authorスタイルシートでの上書きが容易になります。
 
 加えて、目的に沿った命名の擬似要素を定義することで、要素の目的を明確にできるという利点もあります。
 
@@ -94,8 +94,9 @@ select::after {
 
 #### 擬似要素のカテゴリ
 
-新しい擬似要素を実際に仕様書に記載する際、擬似要素を`tree-abiding`とするか`element-backed`にするかという話がありました。
-擬似要素は2種類に大別でき、`tree-abiding`と`element-backed`はそれぞれ以下のような特徴があります。
+新しい擬似要素を実際に仕様書に記載する際、擬似要素をTree-AbidingとするかElement-Backedにするかという話がありました。
+
+擬似要素は2種類に大別でき、Tree-AbidingとElement-Backedはそれぞれ以下のような特徴があります。
 
 - `tree-abiding`な擬似要素: TreeにAbide（従う・倣らう）要素。それ自体は要素としてBox Treeの中には存在しない。レンダーするコンテンツは、`content`プロパティ内に指定する e.g. `::before`, `::after`, `::select-arrow`（`::picker-icon`）
   - [CSS Pseudo-Elements Module Level 4](https://www.w3.org/TR/css-pseudo-4/#treelike)
