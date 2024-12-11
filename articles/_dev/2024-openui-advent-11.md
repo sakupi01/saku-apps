@@ -127,7 +127,32 @@ select::after {
 
 - [6065538: Rename ::select-arrow to ::picker-icon](https://chromium-review.googlesource.com/c/chromium/src/+/6065538)
 
-以下は、デフォルトの`::picker-icon`をカスタマイズしたデモです。
+以下は、デフォルトの`::picker-icon`をカスタマイズした例です。
+
+```css
+.customized-picker-select {
+  appearance: base-select;
+  &::picker(select) {
+    appearance: base-select;
+  }
+  /* デフォルトの::picker-iconは簡単に消せる */
+  &::picker-icon {
+    display: none;
+  }
+  /* ::afterを使って独自のドロップダウンボタンを実装できる */
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url(https://blog.sakupi01.com/icon.svg);
+    background-size: contain;
+    vertical-align: middle;
+  }
+}
+```
+
+デモ：
 
 https://codepen.io/sakupi01/pen/YPKyOyP
 
