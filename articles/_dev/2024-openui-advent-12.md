@@ -17,16 +17,17 @@ status: 'published'
 🎄 この記事は[Open UI Advent Calendar](https://adventar.org/calendars/10293)の12日目の記事です。
 :::
 
-Customizable Select Element Ep.9から、 appearance: base-select;で提供される、CSEのデフォルトの見た目が決定された背景の議論をお話ししています。
+Customizable Select Element Ep.9から、 `appearance: base-select;`で提供される、CSEのデフォルトの見た目が決定された背景の議論をお話ししてきました。
 
-Ep.9では、<option>::checkmarkが現状の見た目となった背景について深掘りました。 今回は、::picker-icon部分について取り上げます。
+Ep.9では、`<option>::checkmark`が現状の見た目となった背景について、Ep.10では、ポップオーバーを開閉するボタン要素右の矢印アイコン`::picker-icon`について深掘りました。 今回は、「色」について取り上げます。
 
 ![2024/12/9時点でのselectの各パーツの定義](/select-anatomy.png)
 *2024/12/9時点でのselectの各パーツの定義*
 
 ## Customizable Select Elementの関連仕様
 
-### 
+### ボタン要素や選択肢ポップオーバーの色
+
 
 
 ***
