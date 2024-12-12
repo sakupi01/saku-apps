@@ -119,7 +119,7 @@ export default async function Article({ params }: Params) {
           <AlignLeft className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1} />
         }
       />
-      <div className="flex flex-col items-center max-w-3xl mx-auto md:pt-20 md:pb-0 p-2">
+      <div className="flex flex-col items-center max-w-4xl mx-auto md:pt-20 md:pb-0 p-2">
         <div className="w-full">
           <Link href={"/life"}>
             <Button aria-label="back" intent="square-icon" size="square">

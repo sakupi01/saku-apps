@@ -43,7 +43,6 @@ CSEのデフォルトのスタイルでは、ポップオーバー部分をト�
 例えば、`<li>`のデフォルトの行頭文字はBulletで`::marker`としてレンダーされますが、`<li>`に`::marker`だけでなく`::before`でも「何か別の要素（🎄）」を配置したい場合、以下のように記述できます。
 
 ```css
-
 li::marker {
   font-size: 1.5rem;
   color: orange;
@@ -52,7 +51,6 @@ li::before {
   content: '\1F384';
   margin-right: 10px;
 }
-
 ```
 
 ![`::marker`を上書きする](/marker-null-list.png)
@@ -120,8 +118,6 @@ select::after {
 #### `::selected-arrow`、`::picker-icon`に決定される
 
 `::selected-arrow`は暫定的な名前だったため、要素に対する議論＆投票が行われ、最終的に`::picker-icon`に決定され、Chromiumの実装に反映されました。
-
-- https://github.com/w3c/csswg-drafts/issues/10908#issuecomment-2489173316
 
 > RESOLVED: go with ::picker-icon
 > https://github.com/w3c/csswg-drafts/issues/10908#issuecomment-2489173316
