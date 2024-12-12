@@ -35,12 +35,28 @@ UAスタイルシートに定義される一般的な色として、`<system-col
 
 ### `@media(prefers-color-scheme: <light | dark>)`
 
-`@media(prefers-color-scheme: <light | dark>)`を使用すると、**ユーザが**設定したカラーテーマである`prefers-color-scheme`をページに反映することができます。
+`@media(prefers-color-scheme: <light | dark>)`を使用すると、**ユーザが**設定したカラーテーマを、`prefers-color-scheme`を用いてページに反映することができます。
 
 > The prefers-color-scheme media feature reflects the user’s desire that the page use a light or dark color theme.
 > https://drafts.csswg.org/mediaqueries-5/#prefers-color-scheme
 
-例えば、ユーザのOSのカラー設定がダークテーマだった場合、`prefers-color-scheme`が使用されていれば、一般的には`@media(prefers-color-scheme: dark)`中に記述した、ダークテーマのCSSが適用されます。
+例えば、ユーザのOSのカラー設定がダークテーマだった場合、`@media(prefers-color-scheme: dark)`中に記述した、ダークテーマのCSSが適用されます。
+
+```css
+@media (prefers-color-scheme: light) {
+  :root {
+    color: var(--light);
+    background-color: var(--light-bg);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: var(--dark);
+    background-color: var(--dar-bg);
+  }
+}
+```
 
 ### `light-dark()`関数
 
@@ -63,7 +79,7 @@ UAスタイルシートに定義される一般的な色として、`<system-col
 
 ### `color-scheme`プロパティ
 
-`prefers-color-scheme`がユーザが設定したカラーテーマを表すのに対し、`color-scheme`プロパティは、**ブラウザが**設定したカラーテーマを、要素に反映することができます。
+`prefers-color-scheme`がユーザが設定したカラーテーマをクエリするのに対し、`color-scheme`プロパティは、**ブラウザが**設定したカラーテーマを、要素に反映することができます。
 
 `<select>`のみならず、多くのForm Controlやスクロールバーなどは、歴史的背景からスタイルが困難なものばかりです。
 そうしたAuthor スタイルシートからスタイルが困難な要素がカラーテーマに対応できるように、`color-scheme`プロパティが存在しています。
@@ -90,8 +106,7 @@ color-scheme: normal;
 
 ***
 
-このように、`prefers-color-scheme`はユーザが適用するカラーテーマであるのに対し、`color-scheme`はブラウザが適用するカラーテーマです。
-そして、`prefers-color-scheme`に依存する`@media(prefers-color-scheme: <light | dark>)`は、「ユーザのカラーテーマ」を反映するのに対し、`color-scheme`に依存する`light-dark()`は、「ブラウザのカラーテーマ」を反映します。
+このように、`prefers-color-scheme` Media Queryは、ユーザが設定したカラーテーマを反映するのに対し、`color-scheme`を用いた`light-dark()`は、Authorが設定したカラーテーマを要素に反映します。
 
 ### カラースキーマの計算方法
 
