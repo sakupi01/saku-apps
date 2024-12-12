@@ -1,6 +1,6 @@
 ---
 title: "🎄Open UI Advent Calendar: Day 11 / Customizable Select Element Ep.9"
-excerpt: "Customizable Select Element"
+excerpt: "Customizable Select Elementの関連仕様: `::picker-icon`のデフォルトスタイルはどうやって決まったのか"
 date: "2024-12-11"
 beginColor: 'from-red-500'
 middleColor: 'via-lime-500'
