@@ -161,7 +161,7 @@ https://codepen.io/sakupi01/pen/MYgjvwy
 /* https://github.com/w3c/csswg-drafts/issues/10857 */
 ```
 
-加えて、ボタン部分を表す、`<select>`の色に関しては、以下の議論の結果、`<select>`には透明な背景色を使用し、色は親要素から継承するという決定がなされました。
+加えて、ボタン部分を表す、`<select>`の色に関しては、以下の議論の結果、`<select>`には透明な`background-color`を使用し、`color`, `border-color`は親要素から継承するという決定がなされました。
 
 > RESOLVED: Use currentColor for borders, inherit the color, transparent background color (for in-page controls). Use system colors for pickers.
 > https://github.com/w3c/csswg-drafts/issues/10909#issuecomment-2491769385
