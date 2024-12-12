@@ -93,6 +93,10 @@ color-scheme: normal;
 }
 ```
 
+このように、`prefers-color-scheme` Media Queryを用いると、ユーザがブラウザやOSに適用したカラーテーマを、コンテンツに反映することができます。反映させるのはあくまでAuthorで、 Author が`prefers-color-scheme`を CSS でクエリして、そこにスタイルをあてて始めてコンテンツに反映されます。ユーザがカラーテーマ変えたからといって、Media Queryにスタイルが当たっていなければ、ページのスタイルが変わるとは限りません。
+
+`color-scheme` は、Author が要素やページ自体に対して、対応しているカラーテーマを宣言するプロパティです。例えば、ユーザがOSにはダークテーマを設定してる場合に、AuthorがページにDark/Light切り替え機能を用意して、`color-scheme: light` を設定すれば全体を light に、`color-scheme: dark` を設定すれば全体を dark にすることができます。
+
 ### カラースキーマの計算方法
 
 `color-scheme`はAuthorが適用する色を決めるCSSプロパティですが、ユーザがカラーテーマを設定している場合なども鑑みると、実際に適用される色はどのようにして決まるのでしょうか？
