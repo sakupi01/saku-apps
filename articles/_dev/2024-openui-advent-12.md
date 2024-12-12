@@ -75,7 +75,7 @@ color-scheme: normal;
 > The prefers-color-scheme media feature reflects the user’s desire that the page use a light or dark color theme.
 > https://drafts.csswg.org/mediaqueries-5/#prefers-color-scheme
 
-例えば、ユーザのOSやブラウザのカラー設定がダークテーマだった場合、`@media(prefers-color-scheme: dark)`中に記述した、ダークテーマのCSSが適用されます。
+例えば、OSやブラウザにユーザが設定したカラーテーマがダークテーマだった場合、`@media(prefers-color-scheme: dark)`中に記述した、ダークテーマのCSSが適用されます。
 
 ```css
 @media (prefers-color-scheme: light) {
