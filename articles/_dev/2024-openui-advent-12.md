@@ -43,9 +43,9 @@ CSEの主に`::picker()`部分のデフォルトカラーには`<system-color>`�
 
 ### `color-scheme`プロパティ
 
-`color-scheme`プロパティは、**ブラウザが**設定したカラーテーマを、要素に反映することができます。
+`color-scheme`プロパティは、**ページ実装者（以下、Author）が設定したカラーテーマ**を反映できるCSSプロパティです。
 
-`<select>`のみならず、多くのForm Controlやスクロールバーなどは、歴史的背景からページ実装者によるスタイルが困難なものばかりです。
+`<select>`のみならず、多くのForm Controlやスクロールバーなどは、歴史的背景からAuthorによるスタイルが困難なものばかりです。
 そうしたAuthor スタイルシートからスタイルが困難な要素が、カラーテーマに対応できるよう、`color-scheme`プロパティが存在しています。
 
 > While the prefers-color-scheme media feature allows an author to adapt the page’s colors to the user’s preferred color scheme, many parts of the page are not under the author’s control (such as form controls, scrollbars, etc). The color-scheme property allows an element to indicate which color schemes it is designed to be rendered with. These values are negotiated with the user’s preferences, resulting in a used color scheme that affects things such as the default colors of form controls and scrollbars. (See § 2.2 Effects of the Used Color Scheme.)
@@ -70,12 +70,12 @@ color-scheme: normal;
 
 ### `@media(prefers-color-scheme: <light | dark>)`
 
-`color-scheme`でページ実装者が設定したカラーテーマを反映できるのに対し、`@media(prefers-color-scheme: <light | dark>)`を使用すると、**ユーザが**設定したカラーテーマを、`prefers-color-scheme`を用いてページに反映することができます。
+`color-scheme`でAuthorが設定したカラーテーマを反映できるのに対し、`@media(prefers-color-scheme: <light | dark>)`を使用すると、**ユーザが設定したカラーテーマ**を、`prefers-color-scheme`を用いてページに反映することができます。
 
 > The prefers-color-scheme media feature reflects the user’s desire that the page use a light or dark color theme.
 > https://drafts.csswg.org/mediaqueries-5/#prefers-color-scheme
 
-例えば、OSやブラウザにユーザが設定したカラーテーマがダークテーマだった場合、`@media(prefers-color-scheme: dark)`中に記述した、ダークテーマのCSSが適用されます。
+例えば、Macのシステム設定などで、OSにユーザが設定したカラーテーマがダークテーマだった場合、`@media(prefers-color-scheme: dark)`中に記述した、ダークテーマのCSSが適用されます。
 
 ```css
 @media (prefers-color-scheme: light) {
@@ -95,7 +95,7 @@ color-scheme: normal;
 
 ### カラースキーマの計算方法
 
-`color-scheme`はページ実装者が適用する色を決めるCSSプロパティですが、ユーザがカラーテーマを設定している場合なども鑑みると、実際に適用される色はどのようにして決まるのでしょうか？
+`color-scheme`はAuthorが適用する色を決めるCSSプロパティですが、ユーザがカラーテーマを設定している場合なども鑑みると、実際に適用される色はどのようにして決まるのでしょうか？
 
 > To **determine the used color scheme** of an element:
 >
@@ -128,7 +128,7 @@ color-scheme: normal;
 
 ```
 
-[CSS Color Module Level 5の仕様](https://drafts.csswg.org/css-color-5/#light-dark)によると、`light-dark()`関数は`color-scheme`プロパティによってテーマを決めることができます。従来からこの機能を持っていたのは`<system-color>`でしたが、`light-dark()`関数の登場により、`color-scheme`プロパティのテーマに依存した色の変更が可能になりました。
+`color-scheme`のテーマに依存した色の変更は、ブラウザがUAスタイルシートに定義している`<system-color>`の利用でのみ可能でしたが、`light-dark()`関数の登場により、Authorの定義した色が`color-scheme`プロパティのテーマに依存して変更可能になりました。
 
 > System colors have the ability to react to the current used color-scheme value. The light-dark() function exposes the same capability to authors.
 
