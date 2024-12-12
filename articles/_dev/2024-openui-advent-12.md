@@ -63,7 +63,15 @@ UAスタイルシートに定義される一般的な色として、`<system-col
 
 ### `color-scheme`プロパティ
 
-`color-scheme`プロパティを使用すると、**ブラウザが**設定したカラーテーマを、要素に反映することができるCSS関数です。
+`prefers-color-scheme`がユーザが設定したカラーテーマを表すのに対し、`color-scheme`プロパティは、**ブラウザが**設定したカラーテーマを、要素に反映することができます。
+
+`<select>`のみならず、多くのForm Controlやスクロールバーなどは、歴史的背景からスタイルが困難なものばかりです。
+そうしたAuthor スタイルシートからスタイルが困難な要素がカラーテーマに対応できるように、`color-scheme`プロパティが存在しています。
+
+> While the prefers-color-scheme media feature allows an author to adapt the page’s colors to the user’s preferred color scheme, many parts of the page are not under the author’s control (such as form controls, scrollbars, etc). The color-scheme property allows an element to indicate which color schemes it is designed to be rendered with. These values are negotiated with the user’s preferences, resulting in a used color scheme that affects things such as the default colors of form controls and scrollbars. (See § 2.2 Effects of the Used Color Scheme.)
+> https://drafts.csswg.org/css-color-adjust/#color-scheme-prop
+
+`color-scheme`プロパティは以下のような値を取ります。
 
 ```css
 /* OSのライトテーマのみをサポートする */
