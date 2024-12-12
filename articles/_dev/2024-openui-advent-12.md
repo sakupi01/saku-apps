@@ -1,7 +1,7 @@
 ---
 title: "🎄Open UI Advent Calendar: Day 12 / Customizable Select Element Ep.10"
 excerpt: "Customizable Select Elementの関連仕様"
-date: "2024-12-10"
+date: "2024-12-12"
 beginColor: 'from-red-500'
 middleColor: 'via-lime-500'
 endColor: 'to-green-700'
@@ -26,63 +26,27 @@ Ep.9では、`<option>::checkmark`が現状の見た目となった背景につ�
 
 ## Customizable Select Elementの関連仕様
 
-### `<system-color>`、`prefers-color-scheme`、そして`color-scheme`
+CSEの主に`::picker()`部分のデフォルトカラーには`<system-color>`が使用されています。
 
-UAスタイルシートに定義される一般的な色として、`<system-color>`キーワードがあげられます。
-`<system-color>`キーワードを使用すると、ユーザやブラウザ、OSが設定したデフォルトの色選択を反映した色でレンダリングされるのため、`<system-color>`はUAスタイルシートで一般的に使用されています。
+### `<system-color>`キーワードとは
 
-この`<system-color>`にどのような色が適用されるかは、**`prefers-color-scheme`や`color-scheme`によって変化**します。
+`<system-color>`は、**ユーザのカラーテーマ設定や`color-scheme`によって適用される色が決まるキーワード**です。
 
-### `@media(prefers-color-scheme: <light | dark>)`
+身近な例として、`<textarea>`要素の背景色である「Field」やその文字色である「FieldText」などがあり、多くのシステムカラーが定義されています。
 
-`@media(prefers-color-scheme: <light | dark>)`を使用すると、**ユーザが**設定したカラーテーマを、`prefers-color-scheme`を用いてページに反映することができます。
+![system-colorの例](/system-colors.png)
+*system-colorの例*
 
-> The prefers-color-scheme media feature reflects the user’s desire that the page use a light or dark color theme.
-> https://drafts.csswg.org/mediaqueries-5/#prefers-color-scheme
+- [CSS Color Module Level 4](https://drafts.csswg.org/css-color/#css-system-colors)
 
-例えば、ユーザのOSのカラー設定がダークテーマだった場合、`@media(prefers-color-scheme: dark)`中に記述した、ダークテーマのCSSが適用されます。
-
-```css
-@media (prefers-color-scheme: light) {
-  :root {
-    color: var(--light);
-    background-color: var(--light-bg);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: var(--dark);
-    background-color: var(--dar-bg);
-  }
-}
-```
-
-### `light-dark()`関数
-
-2024年のCSS新機能として登場した、`light-dark()`関数は、`@media(prefers-color-scheme: <light | dark>)`を使用せずとも、**ブラウザが**設定したカラーテーマを、スタイル可能な要素に反映することができるCSS関数です。
-
-```css
-
-:root {
-  color: light-dark(var(--light), var(--dark));
-  background-color: light-dark(var(--light-bg), var(--dark-bg));
-}
-
-```
-
-[CSS Color Module Level 5の仕様](https://drafts.csswg.org/css-color-5/#light-dark)によると、`light-dark()`関数は`color-scheme`プロパティによってテーマを決めることができます。従来からこの機能を持っていたのは`<system-color>`でしたが、`light-dark()`関数の登場により、`color-scheme`プロパティのテーマに依存した色の変更が可能になりました。
-
-> System colors have the ability to react to the current used color-scheme value. The light-dark() function exposes the same capability to authors.
-
-`light-dark()`関数は、`color-scheme`がライトテーマか不明な場合は1番目の`<color>`値を、ダークテーマの場合は2番目の`<color>`値を適用します。
+この`<system-color>`にどのような色が適用されるかは、**ユーザのカラーテーマ設定や`color-scheme`によって変化**します。
 
 ### `color-scheme`プロパティ
 
-`prefers-color-scheme`がユーザが設定したカラーテーマをクエリするのに対し、`color-scheme`プロパティは、**ブラウザが**設定したカラーテーマを、要素に反映することができます。
+`color-scheme`プロパティは、**ブラウザが**設定したカラーテーマを、要素に反映することができます。
 
-`<select>`のみならず、多くのForm Controlやスクロールバーなどは、歴史的背景からスタイルが困難なものばかりです。
-そうしたAuthor スタイルシートからスタイルが困難な要素がカラーテーマに対応できるように、`color-scheme`プロパティが存在しています。
+`<select>`のみならず、多くのForm Controlやスクロールバーなどは、歴史的背景からページ実装者によるスタイルが困難なものばかりです。
+そうしたAuthor スタイルシートからスタイルが困難な要素が、カラーテーマに対応できるよう、`color-scheme`プロパティが存在しています。
 
 > While the prefers-color-scheme media feature allows an author to adapt the page’s colors to the user’s preferred color scheme, many parts of the page are not under the author’s control (such as form controls, scrollbars, etc). The color-scheme property allows an element to indicate which color schemes it is designed to be rendered with. These values are negotiated with the user’s preferences, resulting in a used color scheme that affects things such as the default colors of form controls and scrollbars. (See § 2.2 Effects of the Used Color Scheme.)
 > https://drafts.csswg.org/css-color-adjust/#color-scheme-prop
@@ -104,13 +68,34 @@ color-scheme: only dark;
 color-scheme: normal;
 ```
 
-***
+### `@media(prefers-color-scheme: <light | dark>)`
 
-このように、`prefers-color-scheme` Media Queryは、ユーザが設定したカラーテーマを反映するのに対し、`color-scheme`を用いた`light-dark()`は、Authorが設定したカラーテーマを要素に反映します。
+`color-scheme`でページ実装者が設定したカラーテーマを反映できるのに対し、`@media(prefers-color-scheme: <light | dark>)`を使用すると、**ユーザが**設定したカラーテーマを、`prefers-color-scheme`を用いてページに反映することができます。
+
+> The prefers-color-scheme media feature reflects the user’s desire that the page use a light or dark color theme.
+> https://drafts.csswg.org/mediaqueries-5/#prefers-color-scheme
+
+例えば、ユーザのOSやブラウザのカラー設定がダークテーマだった場合、`@media(prefers-color-scheme: dark)`中に記述した、ダークテーマのCSSが適用されます。
+
+```css
+@media (prefers-color-scheme: light) {
+  :root {
+    color: var(--light);
+    background-color: var(--light-bg);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: var(--dark);
+    background-color: var(--dar-bg);
+  }
+}
+```
 
 ### カラースキーマの計算方法
 
-`color-scheme`は**ブラウザが**適用する色を決めるCSSプロパティですが、どのようにして実際に適用される色は決まるのでしょうか？
+`color-scheme`はページ実装者が適用する色を決めるCSSプロパティですが、ユーザがカラーテーマを設定している場合なども鑑みると、実際に適用される色はどのようにして決まるのでしょうか？
 
 > To **determine the used color scheme** of an element:
 >
@@ -125,12 +110,33 @@ color-scheme: normal;
 
 つまり、以下の順番でどのような色が適用されるか決まります。
 
-1. `prefers-color-scheme`の色が`color-scheme`によってサポートされる場合：`prefers-color-scheme`の色が適用される
-2. そうでない場合で、`color-scheme`で「only」を使用せずに「light/dark」が適用されている場合：`prefers-color-scheme`の色が適用される
+1. ユーザの設定した色が`color-scheme`によってサポートされる場合：ユーザの設定した色が適用される
+2. そうでない場合、つまり`color-scheme`で「only」を使用せずに「light/dark」が適用されている場合：ユーザの設定した色が上書き適用される
 3. そうでない場合、つまり`color-scheme`に「only」を使用して「light/dark」が適用されている場合：`color-scheme`の色が適用される
-4. 上記いずれでもない場合：[`color-scheme: normal;`](https://drafts.csswg.org/css-color-adjust-1/#valdef-color-scheme-normal)の色が適用される。ページデフォルトの色が[`<meta name="color-scheme" content="dark">`](https://html.spec.whatwg.org/multipage/semantics.html#meta-color-scheme)で指定されている場合はその色が適用され、指定されていない場合はページデフォルトの色（通常はライトテーマ）が適用される
+4. 上記いずれでもない場合：[`color-scheme: normal;`](https://drafts.csswg.org/css-color-adjust-1/#valdef-color-scheme-normal)の色が適用される。ページデフォルトの色が[`<meta name="color-scheme" content=<"dark" | "light">`](https://html.spec.whatwg.org/multipage/semantics.html#meta-color-scheme)で指定されている場合はその色が適用され、指定されていない場合はページデフォルトの色（通常はライトテーマ）が適用される
 
-上記の適用順序を確認できるデモを作成しました。長いのでCopepenリンクのみ記載します。
+### `light-dark()`関数
+
+2024年のCSS新機能として登場した、`light-dark()`関数は、`@media(prefers-color-scheme: <light | dark>)`を使用せずとも、`color-scheme`を要素に反映することができるCSS関数です。
+
+```css
+
+:root {
+  color: light-dark(var(--light), var(--dark));
+  background-color: light-dark(var(--light-bg), var(--dark-bg));
+}
+
+```
+
+[CSS Color Module Level 5の仕様](https://drafts.csswg.org/css-color-5/#light-dark)によると、`light-dark()`関数は`color-scheme`プロパティによってテーマを決めることができます。従来からこの機能を持っていたのは`<system-color>`でしたが、`light-dark()`関数の登場により、`color-scheme`プロパティのテーマに依存した色の変更が可能になりました。
+
+> System colors have the ability to react to the current used color-scheme value. The light-dark() function exposes the same capability to authors.
+
+`light-dark()`関数は、`color-scheme`がライトテーマか不明な場合は第一引数の`<color>`値を、ダークテーマの場合は第二引数の`<color>`値を適用します。
+
+***
+
+上記で理解した、カラースキーマの適用順序を`light-dark()`関数で確認できるデモを作成しました。長いのでCopepenリンクのみ記載します。
 
 デモ：
 
@@ -138,18 +144,7 @@ https://codepen.io/sakupi01/pen/MYgjvwy
 
 ***
 
-### `<system-color>`キーワード
-
-`<system-color>`は、`light-dark()`関数と同様、**`color-scheme`によって適用される色が決まるキーワード**です。
-
-身近な例として、`<textarea>`要素の背景色である「Field」やその文字色である「FieldText」など、多くのシステムカラーが定義されています。
-
-![system-colorの例](/system-colors.png)
-*system-colorの例*
-
-- [CSS Color Module Level 4](https://drafts.csswg.org/css-color/#css-system-colors)
-
-`<system-color>`キーワードを使用すると、`color-scheme`の値を反映して、UAスタイルシート外部の設定と調和できるため、`<system-color>`はUAスタイルシートで一般的に使用されているのです。
+このように、`<system-color>`キーワードを使用すると、ユーザのカラーテーマ設定や`color-scheme`の値を反映した色でレンダリングされ、UAスタイルシート外部の設定と調和を保てます。これの目的から、`<system-color>`はUAスタイルシートで一般的に使用されているのです。
 
 ### ボタン要素や`::picker()`の色
 
