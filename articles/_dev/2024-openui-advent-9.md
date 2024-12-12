@@ -131,7 +131,7 @@ CSEは`<select>`を”完全に”カスタマイズ可能にすることを目�
 > I updated the explainer to be `<select>` instead of `<selectlist>`: https://open-ui.org/components/selectlist/
 > https://github.com/whatwg/html/issues/9799#issuecomment-1885356884
 
-`<selectlist>`から`<select>`への変更理由は、最近web dot devから発表されたRFCでも触れられています。
+`<selectlist>`から`<select>`への変更理由は、最近developer.chrome.comから発表されたRFCでも触れられています。
 
 - [Enhance the existing <select> element | Request for developer feedback: customizable select  |  Blog  |  Chrome for Developers](https://developer.chrome.com/blog/rfc-customizable-select#enhance_the_existing_select_element)
 
