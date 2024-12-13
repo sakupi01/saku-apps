@@ -1,6 +1,6 @@
 ---
 title: "🎄Open UI Advent Calendar: Day 12 / Customizable Select Element Ep.10"
-excerpt: "Customizable Select Elementの関連仕様"
+excerpt: "Customizable Select Elementの関連仕様: `::picker`のデフォルト色から深掘る、system-color/ color-scheme/ prefers-color-schemeの関係"
 date: "2024-12-12"
 beginColor: 'from-red-500'
 middleColor: 'via-lime-500'
@@ -99,7 +99,20 @@ color-scheme: normal;
 
 ### カラースキーマの計算方法
 
-`color-scheme`はAuthorが適用する色を決めるCSSプロパティですが、ユーザがカラーテーマを設定している場合なども鑑みると、実際に適用される色はどのようにして決まるのでしょうか？
+ユーザは、ChromeのAutomatic Dark Modeを用いて、Color Schemeを変更することができます。
+
+:::note{.memo}
+📝 カラーテーマを設定する方法は、例えば以下のような方法があります。
+
+1. ユーザがPreferred Color Scheme を変更する設定：Mac OSのシステム設定
+2. ユーザがPreferred Color Scheme を変更する設定：ChromeのPreferrs Color Scheme
+3. ユーザがColor Schemeを変更する設定：ChromeのAutomatic Dark Mode
+4. AuthorがPreferred Color Schemeを要素に反映する設定: prefers-color-scheme Media Query
+5. AuthorがColor Schemeを要素・ページに反映する設定: color-scheme
+
+:::
+
+`color-scheme`はAuthorが適用する色を決めるCSSプロパティですが、ユーザがColor Schemeを変更する設定していた場合、実際に適用される色はどのようにして決まるのでしょうか？
 
 > To **determine the used color scheme** of an element:
 >
@@ -114,9 +127,9 @@ color-scheme: normal;
 
 つまり、以下の順番でどのような色が適用されるか決まります。
 
-1. ユーザの設定した色が`color-scheme`によってサポートされる場合：ユーザの設定した色が適用される
-2. そうでない場合、つまり`color-scheme`で「only」を使用せずに「light/dark」が適用されている場合：ユーザの設定した色が上書き適用される
-3. そうでない場合、つまり`color-scheme`に「only」を使用して「light/dark」が適用されている場合：`color-scheme`の色が適用される
+1. ユーザの設定した色が`color-scheme`によってサポートされる場合：ユーザの設定したColor Schemeが適用される
+2. そうでない場合、つまり`color-scheme`で「only」を使用せずに「light/dark」が適用されている場合：ユーザの設定したColor Schemeで上書き適用される
+3. そうでない場合、つまり`color-scheme`に「only」を使用して「light/dark」が適用されている場合：`color-scheme`の色が適用され、ユーザの設定したColor Schemeでは上書きできない
 4. 上記いずれでもない場合：[`color-scheme: normal;`](https://drafts.csswg.org/css-color-adjust-1/#valdef-color-scheme-normal)の色が適用される。ページデフォルトの色が[`<meta name="color-scheme" content=<"dark" | "light">`](https://html.spec.whatwg.org/multipage/semantics.html#meta-color-scheme)で指定されている場合はその色が適用され、指定されていない場合はページデフォルトの色（通常はライトテーマ）が適用される
 
 ### `light-dark()`関数
