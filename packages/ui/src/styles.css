@@ -213,28 +213,28 @@ code[data-line-numbers] > span[data-line]::before {
 }
 
 .warning {
-  @apply flex p-4 my-5 text-red-800 rounded-lg bg-red-50;
+  @apply flex flex-col p-4 my-5 text-red-800 rounded-lg bg-red-50;
 }
 .warning p{
   @apply  text-red-800;
 }
 
 .message {
-  @apply flex p-4 my-5 text-green-800 rounded-lg bg-green-50;
+  @apply flex flex-col p-4 my-5 text-green-800 rounded-lg bg-green-50;
 }
 .message p{
   @apply  text-green-800;
 }
 
 .info {
-  @apply flex p-4 my-5 text-blue-800 rounded-md bg-blue-50;
+  @apply flex flex-col p-4 my-5 text-blue-800 rounded-md bg-blue-50;
 }
 .info p{
   @apply  text-blue-800;
 }
 
 .memo {
-  @apply flex p-4 my-5 text-gray-700 rounded-md bg-gray-200;
+  @apply flex flex-col p-4 my-5 text-gray-700 rounded-md bg-gray-200;
 }
 .memo p{
   @apply  text-gray-700;
