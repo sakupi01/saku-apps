@@ -60,12 +60,12 @@ select {
 }
 ```
 
-![selectedcontent内部に、選択肢たoptionの要素がクローンされている。selectecontent内部のオプションは画像だけを表示する](/selectedcontent.png)
-*selectedcontent内部に、選択肢たoptionの要素がクローンされている。selectecontent内部のオプションは画像だけを表示する*
+![selectedcontent内部に、選択したoptionの要素がクローンされている。selectecontent内部のオプションは画像だけを表示する](/selectedcontent.png)
+*selectedcontent内部に、選択したoptionの要素がクローンされている。selectecontent内部のオプションは画像だけを表示する*
 
 こうした、「DOMをクローンして、別のDOMの内部要素として挿入し、レンダリングする」という仕組みを提供するHTML要素は、筆者の調査範囲では、`<selectedcontent>`が初めての仕様となります。
 
-そもそも現在の`<select>`には「選択されたオプションを`<button>`に表示する」という仕様すらないのですが、どうしてCSEを実現する上で`<selectedcontent>`が必要となり、仕様策定されることになったのでしょうか？
+そもそも現在の`<select>`には「選択された`<option>`内のコンテンツを`<button>`に表示する」という仕様すらないのですが、どうしてCSEを実現する上で`<selectedcontent>`が必要となり、仕様策定されることになったのでしょうか？
 
 ### `<selectedcontent>`の背景
 
@@ -94,7 +94,7 @@ MSでCSEの初期Explainerが提案された時代、`<select>`コントロー�
 - [Hooking up native controller code to user-provided UI parts - MSEdgeExplainers/ControlUICustomization/explainer.md at main · MicrosoftEdge/MSEdgeExplainers](https://github.com/MicrosoftEdge/MSEdgeExplainers/blob/main/ControlUICustomization/explainer.md#hooking-up-native-controller-code-to-user-provided-ui-parts)
 
 `part`属性はShadow DOMの仕様であり、`::part()`はCSS Shadow Partsとして既に提案されています。
-また、`slot`属性はShadow DOMの仕様であり、今回特に新しく定義されたものというわけではありません。
+また、`slot`属性もShadow DOMの仕様であり、今回特に新しく定義されたものというわけではありません。
 
 端的にいうと、`part`属性はShadow DOMにスタイルを適用するための属性で、`::part()`を使用して、Shadow DOMにスタイルを適用することができます。
 また、`slot`属性はShadow Root内の特定の`<slot>`に、特定のLight DOMを挿入するための手法です。
@@ -116,7 +116,7 @@ MSでCSEの初期Explainerが提案された時代、`<select>`コントロー�
 </template> 
 ```
 
-しかし、この`part`属性と`slot`属性を使用することには問題がありました。
+しかし、この`part`属性と`slot`属性を使用する仕様には問題がありました。
 
 ***
 
