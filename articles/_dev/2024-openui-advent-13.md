@@ -30,9 +30,9 @@ Ep.11からは、`<selectedcontent>`が、どうして仕様に入ることに�
 
 `<selectedcontent>`は、現在選択されている`<option>`のテキストを含む要素です。ユーザーがオプションを選択するたびに、ブラウザは`<selectedcontent>`の子要素を、新しく選択された `<option>` で `cloneNode()` を呼び出した結果に置き換えます。
 
-`<selectedcontent>` を使用すると、選択された `<option>` のコンテンツを宣言的にボタンに複製することができます。これによって、`<selectedcontent>`内には、`<option>`内部コンテンツとは別のレンダリング方法を設定できます。
+`<selectedcontent>` を使用すると、選択された `<option>` のコンテンツを宣言的にボタンに複製することができます。これによって、`<selectedcontent>`内には、`<option>`内部コンテンツとは別のスタイリング・DOM操作を適用できます。
 
-以下の使用例では、`<option>`内部コンテンツを異なる方法でレンダリングしています。
+以下の使用例では、`<selectedcontent>`内のコンテンツに、`<option>`内部コンテンツとは異なる方法のスタイリングを適用しています。
 
 ```html
 <select>
@@ -48,6 +48,11 @@ Ep.11からは、`<selectedcontent>`が、どうして仕様に入ることに�
 select {
   &::picker(select) {
     appearance: base-select;
+  }
+  selectedcontent {
+    .label {
+      display: none;
+    }
   }
   img {
     width: 80px;
