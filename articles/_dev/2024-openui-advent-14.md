@@ -56,7 +56,7 @@ CSSで`my-custom-select::part(button)`というセレクタを使用すると、
 
 - [[Enabling Custom Control UI] The use of "part" clashes with custom elements containing <selectmenu> · Issue #483 · MicrosoftEdge/MSEdgeExplainers](https://github.com/MicrosoftEdge/MSEdgeExplainers/issues/483)
 
-この問題を解決するために、`part`属性ではい別の属性名の立案が求められ、Open UI内での議論へ波及します。
+この問題を解決するために、`part`属性ではない別の属性名の立案が求められ、Open UI内での議論へ波及します。
 
 ### Rename `part` to `behavior`
 
