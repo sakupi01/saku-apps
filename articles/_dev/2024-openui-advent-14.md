@@ -82,13 +82,15 @@ https://github.com/openui/open-ui/issues/354#issuecomment-954161227
 
 ### 要素をCloneしてカスタマイズ可能にする`<selectedcontent>`の提案
 
-さて、ここまでで、[`<selectedcontent>`の背景]()で述べたIssue提案時の状態になりました。
+さて、ここまでで、[`<selectedcontent>`の背景](http://localhost:3000/dev/articles/2024-openui-advent-13#selectedcontentの背景)で述べたIssue提案時の状態になりました。
 
 - [[select] Should the inner HTML & styles of the selected option be copied into selected-value? · Issue #571 · openui/open-ui](https://github.com/openui/open-ui/issues/571)
 
 Issueの期待は、「選択された`<option>`のスタイルが、`<select>`自体のスタイルよりも優先されて表示されるようにするべき」というものだったのに対し、`behavior`属性と`slot`属性を用いると、`<selectmenu>`内の要素をカスタマイズ可能にすることができます。
 
-その際に問題なのが、「選択された`<option>`をどう`<select>`自体のスタイルよりも優先させるか」つまり、「`<option>`の内部をどう`<select>`のボタンに持ってくるか」という部分でしたが、Gregによると、`<option>`要素が選択された際に、`slot="selected-value"`の`<slot>`に、選択された`<option>`のvalueを反映することでカスタマイズを可能にするというワークアラウンドが考えられているということでした。
+その際に問題なのが、「選択された`<option>`をどう`<select>`自体のスタイルよりも優先させるか」つまり、「`<option>`の内部をどう`<select>`のボタンに持ってくるか」という部分でした。
+
+仮に、「`<option>`の内部」を「選択された`<option>`のvalueのみ」というスコープに留めると、`<option>`要素が選択された際に、`<slot name="selected-value">`に、選択された`<option>`のvalueを反映することでカスタマイズを可能にする、というワークアラウンドが考えられている、とGregは述べています。
 
 ```html
 <selectmenu>
@@ -116,7 +118,11 @@ s.addEventListener('change', () => {
 });
 ```
 
-しかし、`<option>`に任意のコンテンツ/スタイルを設定できるようになったため、すべてのコンテンツを複製して反映するのか、複製するとしたらデフォルトなのか、オプトインなのか、それとも複製せずにvalueだけを反映するのか、このIssueを皮切りに議論が展開されていくことになります。
+しかし、上記は単なるワークアラウンドに過ぎず、`<select>`のボタン部分に反映できるのは、選択された`<option>`の**valueのみ**です。
+
+もともとこのIssueを出した人が、「選択された`<option>`のスタイルが、`<select>`自体のスタイルよりも優先されて表示されるようにするべき」の達成期待値をどこまで持っていたかは不明ですが、その時点での`<selectmenu>`では、`<option>`に任意のコンテンツ/スタイルを設定できるように仕様が固まりつつあったため、「`<select>`のボタン部分には、選択された`<option>`のvalueに限らず、`<option>`内のコンテンツを反映できる方法を考えるべきか？」と、Gregから、Issueの返信として意見が募られます。
+
+すべてのコンテンツを複製して反映するのか、複製するとしたらデフォルトなのか、オプトインなのか、それとも複製せずにvalueだけを反映するのか、このIssueを皮切りに議論が展開されていくことになります。
 
 ***
 
