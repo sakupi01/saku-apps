@@ -24,7 +24,7 @@ status: 'published'
 
 Ep.11では、`<selectedcontent>`とはどんな要素なのか、その契機となったIssueの紹介、`part`属性と`slot`属性についてお話ししました。
 
-### `part`属性と`slot`属性を使用することの問題
+### `part`属性を使用することの問題
 
 [Ep.11](https://blog.sakupi01.com/dev/articles/2024-openui-advent-13)でも述べたように、`<selectmenu>`内の`<slot>`で置き換える要素をカスタマイズ可能にしたい場合、その要素に`part`属性を追加する必要があります。これは、`::part()`を使用して、Shadow DOMにスタイルを適用するためです。
 
@@ -82,7 +82,7 @@ https://github.com/openui/open-ui/issues/354#issuecomment-954161227
 
 ### 要素をCloneしてカスタマイズ可能にする`<selectedcontent>`の提案
 
-さて、ここまでで、[`<selectedcontent>`の背景](http://localhost:3000/dev/articles/2024-openui-advent-13#selectedcontentの背景)で述べたIssue提案時の状態になりました。
+さて、ここまでで、[`<selectedcontent>`の背景](https://blog.sakupi01.com/dev/articles/2024-openui-advent-13#selectedcontentの背景)で述べたIssue提案時の状態になりました。
 
 - [[select] Should the inner HTML & styles of the selected option be copied into selected-value? · Issue #571 · openui/open-ui](https://github.com/openui/open-ui/issues/571)
 
@@ -118,7 +118,7 @@ s.addEventListener('change', () => {
 });
 ```
 
-しかし、上記は単なるワークアラウンドに過ぎず、`<select>`のボタン部分に反映できるのは、選択された`<option>`の**valueのみ**です。
+しかし、上記は単なる限定的な範囲でのワークアラウンドに過ぎず、`<select>`のボタン部分に反映できるのは、選択された`<option>`の**valueのみ**です。
 
 もともとこのIssueを出した人が、「選択された`<option>`のスタイルが、`<select>`自体のスタイルよりも優先されて表示されるようにするべき」の達成期待値をどこまで持っていたかは不明ですが、その時点での`<selectmenu>`では、`<option>`に任意のコンテンツ/スタイルを設定できるように仕様が固まりつつあったため、「`<select>`のボタン部分には、選択された`<option>`のvalueに限らず、`<option>`内のコンテンツを反映できる方法を考えるべきか？」と、Gregから、Issueの返信として意見が募られます。
 
