@@ -322,6 +322,8 @@ HTMLではなくCSSを使用する方法も考えられています。HTML属性
 .card a:nth-child(1) { pointer-area: expand; }
 ```
 
+この方法では、事前に与えられたHTMLの構造にCSSを適用することでクリッカブルな領域が決定されます。つまり、動的にHTML構造が変更された場合は対応が複雑になる可能性があります。
+
 ### 4. Use Invokers
 
 現在、Open UIで別Proposalとして検討が進んでいる、[Invoker Commands](https://open-ui.org/components/invokers.explainer/)を使用する方法も提案されています。
