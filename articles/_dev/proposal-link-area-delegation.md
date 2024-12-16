@@ -1,10 +1,10 @@
 ---
 title: "Cardのマークアップでもう悩まない！NestedでClickableなUIを実現する、Link Area Delegationとは"
-excerpt: "Customizable Select Elementの関連仕様: `<selectedcontent>`"
+excerpt: "本エントリでは、インタラクティブな要素がネストされたUIを、標準的な方法で実現しようという「Link Area Delegation」Proposalについて紹介します。"
 date: "2024-12-16"
-beginColor: 'from-red-500'
-middleColor: 'via-lime-500'
-endColor: 'to-green-700'
+beginColor: 'from-purple-300'
+middleColor: 'via-pink-200'
+endColor: 'to-orange-300'
 category: 'dev'
 tags: ['openui', 'a11y advent calendar', 'web accessibility', 'a11y']
 status: 'published'
