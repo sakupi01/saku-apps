@@ -31,7 +31,7 @@ status: 'published'
 
 innerHTMLのクローンに関する[議論](https://github.com/openui/open-ui/issues/571)が一旦収束し、`<selectmenu>`では、`slot`属性と`behavior`属性を使用してカスタマイズする方針に固まった後、別Issueとして、Domenincから`slot`属性と`behavior`属性使用への疑念が提示されます。
 
-これは、`slot`属性と`behavior`属性の使用方法がHTMLの慣習に合っていないことを問題として、指摘したものでした。
+これは、`slot`属性と`behavior`属性の使用方法がHTMLの慣習に合っていないことを、問題として指摘したものでした。
 
 - [[select] Don't reuse slot="" and ::part(); behavior="" is also strange · Issue #702 · openui/open-ui](https://github.com/openui/open-ui/issues/702)
 
