@@ -42,7 +42,7 @@ Link Area Delegation（= リンク領域の委譲）Proposal は、コンテナ�
 
 歴史的背景から、`<a>`や`<button>`のような[インタラクティブな要素](https://html.spec.whatwg.org/multipage/dom.html#interactive-content-2)をネストしたUIを実装することは、開発者にとって難しい課題でした。
 
-インタラクティブな要素とインタラクティブな要素を子孫関係におくことができない旨は仕様に明記されており、例えば`<a>`のContent Modelであれば以下のように定義されています。
+インタラクティブな要素同士を子孫関係におくことができない旨は仕様に明記されており、例えば`<a>`のContent Modelであれば以下のように定義されています。
 
 > Transparent, but there must be no interactive content descendant, a element descendant, or descendant with the tabindex attribute specified.
 > ***
@@ -116,9 +116,9 @@ Link Area Delegation（= リンク領域の委譲）Proposal は、コンテナ�
 }
 ```
 
-しかし、CSSのSubgridが全てのブラウザされたのは2023/9/15と比較的最近で、それ以前はさまざまなワークアラウンドが取られてました。
+しかし、CSSのSubgridが全てのブラウザで実装されたのは2023/9/15と比較的最近で、それ以前はさまざまなワークアラウンドが取られてました。
 
-このSubgridの例も含め、HTMLのバリデーションを通過するようにしつつ、CSSやJavaScriptを使ってリンクやボタンのクリッカブルな領域を拡張するHackyな方法は、標準化された方法ではなく、UXやアクセシビリティの観点からさまざまな問題を引き起こす可能性があります。
+このSubgridの例も含め、HTMLのバリデーションを通過するようにしつつ、CSSやJavaScriptを使ってリンクやボタンのクリッカブルな領域を拡張する方法はさまざまにあります。こうしたHackyな方法は、標準化された方法ではなく、UXやアクセシビリティの観点からさまざまな問題を引き起こす可能性があります。
 
 ### 既存方法とその問題
 
