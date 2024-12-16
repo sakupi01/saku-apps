@@ -31,7 +31,7 @@ status: 'published'
 
 innerHTMLのクローンに関する[議論](https://github.com/openui/open-ui/issues/571)が一旦収束し、`<selectmenu>`では、`slot`属性と`behavior`属性を使用してカスタマイズする方針に固まった後、別Issueとして、Domenincから`slot`属性と`behavior`属性使用への疑念が提示されます。
 
-これは、`slot`属性と`behavior`属性の使用方法がHTMLの慣習に合っていないことを問題として指摘したものでした。
+これは、`slot`属性と`behavior`属性の使用方法がHTMLの慣習に合っていないことを問題として、指摘したものでした。
 
 - [[select] Don't reuse slot="" and ::part(); behavior="" is also strange · Issue #702 · openui/open-ui](https://github.com/openui/open-ui/issues/702)
 
@@ -68,7 +68,7 @@ Open UI側の主張：
 
 - `<selectmenu>`は、Shadow DOMを持ち、それを扱う方法が明確に定義された最初のネイティブHTML要素になる
 - slotを利用することで、意味的に適切な要素（例えば、`<button>`や`<input>`）を直接使用できる
-- `::part()`は、そもそも、Webコンポーネント技術を採用しようとしたためにMSで提案された。`::part()`や`slot`を使用することで、ネイティブHTML要素を使用しながら、Web Componentに触れてもらえるきっかけになる
+- `::part()`は、そもそも、Web Components技術を採用しようとしたためにMSで提案された。`::part()`や`slot`を使用することで、ネイティブHTML要素を使用しながら、Web Componentに触れてもらえるきっかけになる
 
 Domenicの主張：
 
