@@ -180,6 +180,7 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/element
 - Light tree: Shadow Rootのhostとなるツリー
 - [**Flat tree**](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/renderer/core/dom/README.md#flat-tree): Shadow treeを含む、複合的なツリーをフラット化して、単一のNode Treeにしたもの。
 ![Tree Flattening](/tree-flattening.png)
+*Tree Flattening - 出典: chromium.googlesource.com /[DOM](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/renderer/core/dom/README.md#flat-tree)*
 - **Layout tree**: LayoutObjectをNodeとして構成されるNode tree。Viewport内でのNodeの正確な位置やサイズなどが計算された、Paintのinputとなるツリー。つまり、ブラウザレンダリングフェーズの中でも、Layoutフェーズ時に構築される。
 
 :::
