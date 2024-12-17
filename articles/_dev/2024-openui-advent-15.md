@@ -1,6 +1,6 @@
 ---
 title: "🎄Open UI Advent Calendar: Day 15 / Customizable Select Element Ep.13"
-excerpt: "Customizable Select Elementの関連仕様: `<selectedcontent>`"
+excerpt: "Customizable Select Elementの関連仕様: `<selectedcontent>` / 選択された要素をクローンしてカスタマイズ可能にするための初期議論"
 date: "2024-12-15"
 beginColor: 'from-red-500'
 middleColor: 'via-lime-500'
