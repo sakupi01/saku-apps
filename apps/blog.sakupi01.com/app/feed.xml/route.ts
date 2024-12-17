@@ -21,7 +21,7 @@ export async function GET() {
       guid: `${HOST}/${article.category}/articles/${article.slug}`,
       url: `${HOST}/${article.category}/articles/${article.slug}`,
       date: article.date,
-      description: await markdownToHtml(article.excerpt),
+      description: await markdownToHtml(article.content),
       author: "sakupi01",
       categories: article.tags.map((tag) => tag) || [],
     });
