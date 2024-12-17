@@ -213,31 +213,43 @@ code[data-line-numbers] > span[data-line]::before {
 }
 
 .warning {
-  @apply flex flex-col p-4 my-5 text-red-800 rounded-lg bg-red-50;
+  @apply p-4 my-5 text-red-800 rounded-lg bg-red-50;
 }
 .warning p{
   @apply  text-red-800;
 }
+.warning p:first-child{
+  @apply  text-red-800 text-base font-semibold text-left my-5;
+}
 
 .message {
-  @apply flex flex-col p-4 my-5 text-green-800 rounded-lg bg-green-50;
+  @apply p-4 my-5 text-green-800 rounded-lg bg-green-50;
 }
 .message p{
   @apply  text-green-800;
 }
+.message p:first-child{
+  @apply  text-green-800 text-base font-semibold text-left my-5;
+}
 
 .info {
-  @apply flex flex-col p-4 my-5 text-blue-800 rounded-md bg-blue-50;
+  @apply p-4 my-5 text-blue-800 rounded-md bg-blue-50;
 }
 .info p{
   @apply  text-blue-800;
 }
+.info p:first-child{
+  @apply  text-blue-800 text-base font-semibold text-left my-5;
+}
 
 .memo {
-  @apply flex flex-col p-4 my-5 text-gray-700 rounded-md bg-gray-200;
+  @apply p-4 my-5 text-gray-700 rounded-md bg-gray-200;
 }
 .memo p{
   @apply  text-gray-700;
+}
+.memo p:first-child{
+  @apply  text-gray-700 text-base font-semibold text-left my-5;
 }
 
 .markdown details{

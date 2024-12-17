@@ -1,7 +1,7 @@
 ---
 title: "🎄Open UI Advent Calendar: Day 16 / Customizable Select Element Ep.14"
-excerpt: "Customizable Select Elementの関連仕様: `<selectedcontent>`"
-date: "2024-12-15"
+excerpt: "Customizable Select Elementの関連仕様: `<selectedcontent>` / `slot`属性と`behavior`属性使用の廃止へ"
+date: "2024-12-16"
 beginColor: 'from-red-500'
 middleColor: 'via-lime-500'
 endColor: 'to-green-700'

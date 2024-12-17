@@ -27,7 +27,7 @@ Link Area Delegation（= リンク領域の委譲）Proposal は、コンテナ�
 
 例えば、提案されている手法のひとつである、**`linkarea`属性**と **`defaultlink`属性**を使用すると、Link Area Delegationは以下のように表現されます。
 
-以下の例では、`linkarea`属性のつく`<div>`をClickすることで、`defaultlink`属性を持つ最初の子孫要素、つまりこの場合は、**`<div>`をClickすることで最初の`<a>`が活性化**されます。
+以下の例では、`linkarea`属性のつく`<div>`をClickすることで、`defaultlink`属性を持つ最初の子孫要素、つまりこの場合は、**最初の`<a>`が活性化**されます。
 
 ```html
 <div class="card" linkarea>
@@ -268,7 +268,7 @@ HTMLで表現する方法の一つとして、`linkarea`属性と`defaultlink`�
 </section>
 ```
 
-この提案が採用された場合、ARIA in HTML仕様に新しいルールを追加し、この属性が使用される要素に許可される役割を制限する必要があるかもしれません。例えば、<div role=button linkarea>のような場合、現在ではdivに任意のARIAロールを設定できますが、このインスタンスでは何らかの検証メッセージを生成するべきだと述べられています。
+この提案が採用された場合、ARIA in HTML仕様に新しいルールを追加し、この属性が使用される要素に許可される役割を制限する必要があるかもしれません。例えば、`<div role=button linkarea>`のような場合、現在ではdivに任意のARIAロールを設定できますが、このインスタンスでは何らかの検証メッセージを生成するべきだと述べられています。
 
 ### 2. `<linkarea>` Element
 

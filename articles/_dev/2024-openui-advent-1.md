@@ -62,6 +62,7 @@ Telecon（電話会議）が毎週午前11時（PST）にDiscordの#teleconferen
 
 :::note{.memo}
 e.g.）
+
 [openui/meetings/telecon/2024-11-14.md](https://github.com/openui/open-ui/blob/main/meetings/telecon/2024-11-14.md)のMinutesを参照したい場合は、https://www.w3.org/2024/11/14-openui-minutes.html を開く。
 :::
 
@@ -84,6 +85,7 @@ https://www.w3.org/ja/email/
 
 :::note{.memo}
 e.g.）
+
 Open UIのパブリックメーリングリストから「select」のキーワードを含むメールを検索したい場合は、以下のように検索オプションを設定することができます。
 https://www.w3.org/Search/Mail/Public/search?lists=public-open-ui&keywords=select
 :::
@@ -92,6 +94,7 @@ https://www.w3.org/Search/Mail/Public/search?lists=public-open-ui&keywords=selec
 
 :::note{.memo}
 e.g.）
+
 たとえば、`message-id`が`<CADhPm3v0ZqQdc_+nTxFsrAraPuxrXnkWRpfyJw+43BCPc85w-g@mail.gmail.com>`のメールを検索したい場合は、https://www.w3.org/mid/CADhPm3v0ZqQdc_+nTxFsrAraPuxrXnkWRpfyJw+43BCPc85w-g@mail.gmail.com となります。
 ![message-idはメールヘッダーから確認できる](/message-id.png)
 *message-idはメールヘッダーから確認できる*
