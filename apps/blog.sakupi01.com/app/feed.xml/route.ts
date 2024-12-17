@@ -1,4 +1,5 @@
 import { getAllArticles } from "@/libs/getApi";
+import markdownToHtml from "@/libs/markdownToHtml";
 import RSS from "rss";
 
 const HOST = "https://blog.sakupi01.com";
@@ -14,17 +15,18 @@ export async function GET() {
     image_url: `${HOST}/icon.svg`,
   });
   const articles = getAllArticles();
-  articles.map((article) => {
+  const promises = articles.map(async (article) => {
     feed.item({
       title: article.title,
       guid: `${HOST}/${article.category}/articles/${article.slug}`,
       url: `${HOST}/${article.category}/articles/${article.slug}`,
       date: article.date,
-      description: article.content,
+      description: await markdownToHtml(article.excerpt),
       author: "sakupi01",
       categories: article.tags.map((tag) => tag) || [],
     });
   });
+  await Promise.all(promises);
   return new Response(feed.xml({ indent: true }), {
     headers: {
       "Content-Type": "application/atom+xml; charset=utf-8",
