@@ -145,6 +145,16 @@ Jarjarのコメントが非常によくまとまっているので、この節�
 - クローン/追加中にスクリプトが同期的に実行されないようにするために、[Side effects due to tree insertion or removal (script, iframe) #808](https://github.com/whatwg/dom/issues/808)を解決する必要があるかもしれません。
 
 :::note{.memo}
+📝 Light DOM
+
+Shadow RootがアタッチされているHostがLight treeと呼ばれることから、Light treeを構成するNodeは一般的にLight DOMと呼ばれます。
+>
+> - The node tree of a shadow root’s host is sometimes referred to as the **light tree**.
+> [DOM - Shadow Tree](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/renderer/core/dom/README.md#shadow-tree)
+
+:::
+
+:::note{.memo}
 📝 Conformance Error
 
 Conformance Errorとは、仕様に従っていない状態を指します。HTMLやCSSなどの仕様には、どのように要素や属性を使用すべきかが定義されていますが、これに従わない場合、Conformance Errorとなります。例えば、以下のようなサイトでチェックすることができます。
@@ -217,18 +227,27 @@ selectlist.addEventListener('change', () => {
 
 このように、一口にクローンすると言ってもさまざまな手法が考えられ、それぞれにpros/consがあることがわかります。単にクローンするにしてもLight DOMにクローンするのか、Shadow DOMにクローンするのかに判断の余地があったり、ミラーリングは実装やDOM的な懸念があったりします。
 
-これに対して、Domenicは、クローンによるLight DOMの変更というのは前例のないことではあるが、このユースケースを達成するための唯一の合理的な選択肢であると考えているとフィードバックします。
+これに対して、Domenicは、クローンによるLight DOMの変更というのは前例のないことではあるが、このユースケースを達成するための唯一の合理的な選択肢であると考えている、とフィードバックします。
 
-さらに、要素が自身のLight DOMを変更するという新しい技術は、他の長年のHTML機能に対するリクエストを解決するためにも必要かもしれないと述べています。
+Light DOMに別の要素のLight DOMをクローンすると、`<selectedoption>`は具体的には以下のような挙動をすることになります。
 
-例えば、以下の提案は、要素が自身のLight DOMを変更することを許可することで実現できるかもしれません:
+以下の図では、選択された`<option>`の子Nodeが、`<selectedoption>`の**Light DOM**にクローンされる様子を示しています。
+Light DOMに直接挿入されるため、クローンされた要素は、Author Style Sheetの適用が可能となります。
 
-- [Client side include feature for HTML · Issue #2791 · whatwg/html](https://github.com/whatwg/html/issues/2791)
-- コンテンツをフォーマットするための提案
+![UAによってLight DOMにクローンされたNodeが直接挿入される様子](/insert-to-light-dom.png)
+*UAによってLight DOMにクローンされたNodeが直接挿入される様子*
+
+こうした、要素が自身のLight DOMを変更するという挙動は、他の長年のHTML機能に対するリクエストを解決するためにも必要かもしれないとDomenicは述べます。
+
+例えば、上記のように、UA が Light DOM を変更して良いのであれば、これまで実現できなかった以下のようなユースケースもカバーできるようになるかもしれません:
+
+- `<include src="foo.html"></include>` のように、foo.htmlの内容が`<include>`のLight DOM内に入るようにする機能
+  - [Client side include feature for HTML · Issue #2791 · whatwg/html](https://github.com/whatwg/html/issues/2791)
+- `<relativetime>2023-08-28T00:00:00Z</relativetime>`のように、Author側からのinputに対して、UAが内部的に日時を計算し、動的にLight DOMを変更することで結果を表示する機能。`<p>`のように、Authorのinputがそのまま表示されるのではなく、UAが能動的にLight DOMを変更する必要があるのがポイント。
   - [Proposal: measurement or number or quantity semantic HTML tag · Issue #9294 · whatwg/html](https://github.com/whatwg/html/issues/9294)
   - [A tag to display date and/or time to the user in his preferred format. · Issue #2404 · whatwg/html](https://github.com/whatwg/html/issues/2404)
 
-Domenicは、この実装によって、プラットフォームは長年苦しんできた「Light DOMは完全にAuthorの領域であり、UAスクリプトによって変更されるべきではない」という制約に対して、今回意識的にその境界を越えることができれば、今後の新しい選択肢が開けるかもしれないという証拠を提供したい、と述べています。
+Domenicは、この実装によって、プラットフォームが長年苦しんできた「Light DOMは完全にAuthorの領域であり、UAスクリプトによって変更されるべきではない」という制約に対して、今回意識的にその境界を越えることができれば、今後の新しい選択肢が開けるかもしれないという証拠を提供したい、と述べています。
 
 - [comment](https://github.com/openui/open-ui/issues/571#issuecomment-1696744818)
 
