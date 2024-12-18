@@ -26,7 +26,7 @@ status: 'published'
 
 「Light DOMはAuthorの領域であり、UAによって変更されるべきではない」という制約に対して、今回その境界を越える提案が可決されたことによって、HTML史上初となる、UAからLight DOMへの変更を加える実装がなされていきます。
 
-こうした、その初の試みとなる`<selectedoption>`は、もちろん実装上の課題も多く、その解決策を模索する議論が続いています。
+その初の試みとなる`<selectedoption>`は、もちろん実装上の課題も多く、その解決策を模索する議論が続いています。
 今回からは、その関連Issueを中心に、`<selectedoption>`の実装に関する議論の現状を追っていきます。
 
 ***
@@ -53,7 +53,7 @@ status: 'published'
 5. [select: clarifying what should be used as the chosen value · Issue #1117 · openui/open-ui](https://github.com/openui/open-ui/issues/1117)
 6. [select: Should `<selectedoption>` update when selecting the already-selected option · Issue #1119 · openui/open-ui](https://github.com/openui/open-ui/issues/1119)
 
-これらの中でも、筆者が特に注目している1~4のIssueをピックアップして、その内容について深ぼっていきます。
+これらの中でも、筆者が特に注目している1~4のIssueをピックアップして、その内容について深掘っていきます。
 
 ## How to implement and shape API for `<selectedoption>` element for `<select>`
 
@@ -61,19 +61,17 @@ status: 'published'
 
 Open UIでの議論は、WHATWGの見解をもとにLight DOM実装でいくという[議論結果](https://github.com/openui/open-ui/issues/571)となりました。しかし、Light DOMで実装するか、Shadow DOMで実装するかで、CSSの受ける影響が大きいため、CSSWGからの意見を募るIssueが持ちかけられたということです。
 
-現在進行形で`appearance: base;`の仕様策定に取り組んでいるCSSWGにとって、具体的に以下のような影響があります。
-
 :::note{.info}
 👍🏻 この時点で固まっている仕様
 
 - 選択された`<option>`で、`cloneNode()`をCallする
 - 選択された`<option>`の、`<option>`を除く`<option>`内の全てのDOMをクローンする
-- `<selectedoption>`を用いて、宣言的な方法で、クローンされたDOMを`<selectedoption>`内に追加する
-- 選択された`<option>`が変更されるたびに、`<selectedoption>`内のDOMを更新する
+- `<selectedcontent>`を用いて、宣言的な方法で、クローンされたDOMを`<selectedcontent>`内に追加する
+- 選択された`<option>`が変更されるたびに、`<selectedcontent>`内のDOMを更新する
 
 :::
 
-上記の使用を実現するために、以下のようなマークアップになることが固まっています。
+上記の仕様を実現するために、以下のようなマークアップになることが固まっています。
 
 ```html
 <select>
@@ -93,29 +91,29 @@ Open UIでの議論は、WHATWGの見解をもとにLight DOM実装でいくと�
 </select>
 ```
 
-未確定なのが、「クローンされたDOMを`<selectedoption>`内に追加する」という部分です。これには2通りの実装方法が考えられます。
+未確定なのが、「クローンされたDOMを`<selectedcontent>`内に追加する実装」の部分です。これには2通りの実装方法が考えられます。
 
-### `<selectedoption>`をLight DOMで実装した場合
+### `<selectedcontent>`をLight DOMで実装した場合
 
-WHATWGの見解に従い、`<selectedoption>`をLight DOMとし、その子Nodeを`cloneNode()`の結果で置換する方法です。
+WHATWGの見解に従い、`<selectedcontent>`をLight DOMとし、その子Nodeを`cloneNode()`の結果で置換する方法です。
 
-この方法であれば、Authorは`selectedoption`セレクタを直接利用できるため、`<option>`と`<selectedoption>`を別々にスタイルできます。
+この方法であれば、Authorは`selectedcontent`セレクタを直接利用できるため、`<option>`と`<selectedcontent>`を別々にスタイルできます。
 全てがLight DOMの管理下のため、UAでのCSS追加実装は不要です。
 
 ```css
-selectedoption > span {
+selectedcontent > span {
   display: none;
 }
 ```
 
-### `<selectedoption>`をShadow DOMで実装した場合
+### `<selectedcontent>`をShadow DOMで実装した場合
 
-Shadow DOMで実装する場合、`<selectedoption>`をUA Shadow Rootとし、その子Nodeを`cloneNode()`の結果で置換する方法です。
+Shadow DOMで実装する場合、`<selectedcontent>`をUA Shadow Rootとし、その子Nodeを`cloneNode()`の結果で置換する方法です。
 
 UA Shadow Rootの中は、（`<input>`の内部`<div>`はスタイルできない、など）Authorスタイルシートからアクセスできないため、新しい擬似要素を定義してAuthorにスタイリングする術を提供する必要があります。そのため、CSSに新しいシンタックスを追加する必要が出てきます。
 
 ```css
-selectedoption::selectedoption-content > span {
+selectedcontent::selectedcontent-content > span {
   display:none;
 }
 ```
@@ -139,7 +137,7 @@ Light DOMで実装する場合に、主に「クローンのタイミング」�
 :::note{.memo}
 📝マイクロタスク
 
-マイクロタスクは、マイクロタスクを呼び出す関数が実行された後にコールスタックが空になった後にのみ実行される短い関数です。Mutation Observer API や Promise の then() メソッドなどの引数に渡すコールバック関数がマイクロタスクとして扱われます。
+マイクロタスクは、マイクロタスクを呼び出す関数が実行された後にコールスタックが空になった後にのみ実行される短い関数です。MutationObserver API や Promise の then() メソッドなどの引数に渡すコールバック関数がマイクロタスクとして扱われます。
 
 （参考）
 > A microtask is a short function which is executed after the function or program which created it exits and only if the JavaScript execution stack is empty, but before returning control to the event loop being used by the user agent to drive the script's execution environment.
@@ -150,7 +148,7 @@ Light DOMで実装する場合に、主に「クローンのタイミング」�
 
 非同期的に変更検知を行うMutationObserverでは、Layout Flash時に同期的に変更を検知することができません。つまり、Layout treeとの整合性を保つためには、同期的なMutationObserverが必要になります。
 
-Mozillaの[Emillio](https://github.com/emilio)は、Geckoは、独自の同期的なMutationObserverを持っているので、Layout Flash時の変更を検知してクローンできると主張します。しかし、他のブラウザエンジンがそれを実装するにはMutation Observerのポリフィルが必要です。
+Mozillaの[Emillio](https://github.com/emilio)は、Geckoは、独自の同期的なMutationObserverを持っているので、Layout Flash時の変更を検知してクローンできると主張します。しかし、他のブラウザエンジンがそれを実装するにはMutationObserverのポリフィルが必要です。
 
 この議論により、Light DOMでの仕様策定が一旦は決行されることになりましたが、具体的なクローン・再クローンのタイミングは未だ決まっておらず、議論結果によってはLight DOMでの実装が見直される可能性もあるという結論に至りました。
 
